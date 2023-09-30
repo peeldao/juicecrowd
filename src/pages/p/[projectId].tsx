@@ -1,3 +1,8 @@
+import {
+  JBProjectProvider,
+  useJBContractContext,
+  useJbProjectsOwnerOf,
+} from "juice-hooks";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -5,7 +10,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   //   variables: { where: { pv: PV_V2 } },
   // });
 
-  const projects = [{ projectId: 1 }];
+  const projects = [{ projectId: 1 }]; // TODO update with real data
+
   const paths = projects.map(({ projectId }) => ({
     params: { projectId: String(projectId) },
   }));
@@ -26,8 +32,26 @@ export const getStaticProps: GetStaticProps<{ projectId: number }> = async (
   };
 };
 
+function _ProjectPage() {
+  const { projectId } = useJBContractContext();
+  const { data: address } = useJbProjectsOwnerOf({
+    args: [BigInt(projectId)],
+  });
+
+  return (
+    <div>
+      Project owner:
+      {address && <div>{address}</div>}
+    </div>
+  );
+}
+
 export default function ProjectPage({
   projectId,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  return <>Hello {projectId}</>;
+  return (
+    <JBProjectProvider projectId={1n}>
+      <_ProjectPage />
+    </JBProjectProvider>
+  );
 }

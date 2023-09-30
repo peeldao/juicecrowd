@@ -1,11 +1,11 @@
+import { Layout } from "@/components/layout/Layout";
 import { AppProps } from "next/app";
-import { Providers } from "./providers";
 import "../styles/globals.css";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
   return (
-    <Providers>
+    <Layout>
       <Component {...pageProps} />
-    </Providers>
+    </Layout>
   );
 }

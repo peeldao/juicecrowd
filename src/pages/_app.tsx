@@ -49,10 +49,11 @@ const beatrice = localFont({
 export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
   return (
     <Layout>
-      <Component
-        {...pageProps}
+      <div
         className={`${agrandirWide.variable} ${agrandir.variable} ${beatrice.variable}`}
-      />
+      >
+        <Component {...pageProps} />
+      </div>
     </Layout>
   );
 }

@@ -1,1 +1,1 @@
-export { ConnectKitButton } from "connectkit";
+export { ConnectKitButton } from 'connectkit'

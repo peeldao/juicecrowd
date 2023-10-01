@@ -1,10 +1,10 @@
-import { ConnectKitButton } from "@/components/ConnectKitButton";
-import Link from "next/link";
+import { ConnectKitButton } from '@/components/ConnectKitButton'
+import Link from 'next/link'
 
 export function Navbar() {
   return (
     <nav>
-      <div className="flex justify-between items-center container py-3">
+      <div className="container flex items-center justify-between py-3">
         <Link href="/" className="italic">
           Juicecrowd
         </Link>
@@ -12,5 +12,5 @@ export function Navbar() {
         <ConnectKitButton />
       </div>
     </nav>
-  );
+  )
 }

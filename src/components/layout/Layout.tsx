@@ -1,6 +1,6 @@
-import { Navbar } from "./Navbar";
-import { Footer } from "./Footer";
-import { AppProvider } from "./AppProvider";
+import { AppProvider } from './AppProvider'
+import { Footer } from './Footer'
+import { Navbar } from './Navbar'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,5 +9,5 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
       <Footer />
     </AppProvider>
-  );
+  )
 }

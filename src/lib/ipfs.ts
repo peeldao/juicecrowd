@@ -1,3 +1,6 @@
+import axios from 'axios'
+import round from 'lodash/round'
+
 const IPFS_URL_REGEX = /ipfs:\/\/(.+)/
 
 // This is an open gateway. It exposes any ipfs content, not just the content we pin.
@@ -60,4 +63,44 @@ export function isIpfsCid(cid: string) {
   return (
     cid.startsWith('Qm') || cid.startsWith('bafy') || cid.startsWith('bafk')
   )
+}
+
+export interface UploadProgressEvent extends Partial<ProgressEvent> {
+  percent?: number
+}
+
+export type InfuraPinResponse = {
+  Hash: string
+}
+
+export const pinFile = async (
+  image: File | Blob | string,
+  onProgress?: (e: UploadProgressEvent) => void,
+  options?: { signal?: AbortSignal },
+) => {
+  const formData = new FormData()
+  formData.append('file', image)
+
+  const res = await axios.post<InfuraPinResponse>(
+    'https://api.juicebox.money/api/ipfs/file',
+    formData,
+    {
+      signal: options?.signal,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      onUploadProgress: (progress: UploadProgressEvent) => {
+        onProgress?.(progress)
+      },
+    },
+  )
+
+  return res.data
+}
+
+export function percentFromUploadProgressEvent(e: UploadProgressEvent) {
+  if (typeof e.loaded !== 'number' || typeof e.total !== 'number') return 0
+
+  const percent = (e.loaded / e.total) * 100
+  return round(percent, 0)
 }

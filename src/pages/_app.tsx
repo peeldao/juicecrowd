@@ -1,4 +1,5 @@
-import { Layout } from '@/components/layout/Layout'
+import { AppProvider } from '@/components/layout/AppProvider'
+import { Footer } from '@/components/layout/Footer'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
 import '../styles/globals.css'
@@ -23,7 +24,7 @@ const agrandir = localFont({
   src: [
     {
       path: '../../public/assets/fonts/PPAgrandir-Medium.woff2',
-      weight: '400',
+      weight: '500',
       style: 'normal',
     },
   ],
@@ -48,12 +49,13 @@ const beatrice = localFont({
 
 export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <div
-        className={`${agrandirWide.variable} ${agrandir.variable} ${beatrice.variable}`}
+    <AppProvider>
+      <main
+        className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
       >
         <Component {...pageProps} />
-      </div>
-    </Layout>
+      </main>
+      <Footer />
+    </AppProvider>
   )
 }

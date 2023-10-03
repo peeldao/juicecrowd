@@ -1,6 +1,6 @@
 import { Tab } from '@headlessui/react'
 import { CreateTab } from './components/CreateTab'
-import { BasicsPanel } from './components/panels/BasicsPanel'
+import { BasicsPanel, FundingPanel } from './components/panels'
 import { Navbar } from '../layout/Navbar'
 
 const CreatePage: React.FC = () => {
@@ -21,7 +21,9 @@ const CreatePage: React.FC = () => {
             <Tab.Panel key={0}>
               <BasicsPanel />
             </Tab.Panel>
-            <Tab.Panel key={1}>so</Tab.Panel>
+            <Tab.Panel key={1}>
+              <FundingPanel />
+            </Tab.Panel>
             <Tab.Panel key={2}>back!</Tab.Panel>
             <Tab.Panel key={3}>L</Tab.Panel>
             <Tab.Panel key={4}>F</Tab.Panel>

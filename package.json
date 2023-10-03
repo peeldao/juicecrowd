@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.4",
+    "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "axios": "^1.5.1",
     "connectkit": "^1.4.0",

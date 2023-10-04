@@ -1,7 +1,12 @@
 import { Tab } from '@headlessui/react'
 import { CreateTab } from './components/CreateTab'
 import { Navbar } from '../layout/Navbar'
-import { BasicsPanel, DetailsPanel, FundingPanel } from './components/panels'
+import {
+  BasicsPanel,
+  DetailsPanel,
+  FundingPanel,
+  RewardsPanel,
+} from './components/panels'
 
 const CreatePage: React.FC = () => {
   return (
@@ -27,7 +32,9 @@ const CreatePage: React.FC = () => {
             <Tab.Panel key={2}>
               <DetailsPanel />
             </Tab.Panel>
-            <Tab.Panel key={3}>L</Tab.Panel>
+            <Tab.Panel key={3}>
+              <RewardsPanel />
+            </Tab.Panel>
             <Tab.Panel key={4}>F</Tab.Panel>
           </Tab.Panels>
         </Tab.Group>

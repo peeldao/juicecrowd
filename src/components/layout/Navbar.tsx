@@ -1,16 +1,32 @@
-import { ConnectKitButton } from '@/components/ConnectKitButton'
-import Link from 'next/link'
+import React from 'react'
+import { twMerge } from 'tailwind-merge'
+import { CoinLogo } from '../icon/CoinLogo'
+import { ConnectKitButton } from '../ConnectKitButton'
 
-export function Navbar() {
+type NavbarProps = {
+  className?: string
+  title?: string
+  separator?: boolean
+}
+
+export const Navbar: React.FC<NavbarProps> = ({
+  className,
+  title = 'Juicecrowd',
+  separator,
+}) => {
   return (
-    <nav>
-      <div className="container flex items-center justify-between py-3">
-        <Link href="/" className="italic">
-          Juicecrowd
-        </Link>
-
-        <ConnectKitButton />
+    <div
+      className={twMerge(
+        'flex items-center justify-between gap-5 border-gray-100 px-12 py-6',
+        separator && 'border-b',
+        className,
+      )}
+    >
+      <div className="flex gap-3">
+        <CoinLogo className="h-[26px] w-[23px]" />
+        <span className="font-agrandir text-lg font-medium">{title}</span>
       </div>
-    </nav>
+      <ConnectKitButton />
+    </div>
   )
 }

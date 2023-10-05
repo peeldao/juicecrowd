@@ -1,12 +1,7 @@
-import { Navbar } from '@/components/layout/Navbar'
+import LandingPage from '@/components/Landing'
 
 export function Page() {
-  return (
-    <>
-      <Navbar />
-      <h1 className="font-heading text-7xl font-bold underline">Juicecrowd</h1>
-    </>
-  )
+  return <LandingPage />
 }
 
 export default Page

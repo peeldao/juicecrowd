@@ -1,6 +1,11 @@
+import { Navbar } from '@/components/layout/Navbar'
+
 export function Page() {
   return (
-    <h1 className="font-heading text-7xl font-bold underline">Juicecrowd</h1>
+    <>
+      <Navbar />
+      <h1 className="font-heading text-7xl font-bold underline">Juicecrowd</h1>
+    </>
   )
 }
 

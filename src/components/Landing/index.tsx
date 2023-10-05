@@ -4,6 +4,7 @@ import { TechCrowdCTA } from './components/TechCrowdCTA'
 import { PropsWithChildren } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Button } from '../Button'
+import { StayInLoopSection } from './components/StayInLoopSection'
 
 export default function LandingPage() {
   return (
@@ -112,6 +113,7 @@ export default function LandingPage() {
           width={1010}
         />
       </div>
+      <StayInLoopSection />
     </>
   )
 }

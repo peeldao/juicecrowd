@@ -5,6 +5,7 @@ import { PropsWithChildren } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Button } from '../Button'
 import { StayInLoopSection } from './components/StayInLoopSection'
+import { YourProjectSection } from './components/YourProjectSection'
 
 export default function LandingPage() {
   return (
@@ -112,6 +113,7 @@ export default function LandingPage() {
           height={616}
           width={1010}
         />
+        <YourProjectSection />
       </div>
       <StayInLoopSection />
     </>

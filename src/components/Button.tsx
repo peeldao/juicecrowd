@@ -1,32 +1,25 @@
 import { PropsWithChildren } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Spinner } from './Spinner'
+import React from 'react'
 
-type ButtonProps = {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
-  onClick?: () => void
-  disabled?: boolean
   loading?: boolean
-  type?: 'button' | 'submit' | 'reset'
 }
 
-export const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
-  className,
-  children,
-  onClick,
-  disabled,
-  loading,
-  type = 'button',
-}) => {
+const Button = React.forwardRef<
+  HTMLButtonElement,
+  PropsWithChildren<ButtonProps>
+>(({ className, children, loading, ...props }, ref) => {
   return (
     <button
       className={twMerge(
-        'flex bg-blue-500 items-center justify-center rounded-lg px-6 py-3 text-base text-white font-medium focus:outline-none',
+        'flex items-center justify-center rounded-lg bg-blue-500 px-6 py-3 text-base font-medium text-white focus:outline-none',
         className,
       )}
-      onClick={onClick}
-      disabled={disabled}
-      type={type}
+      {...props}
+      ref={ref}
     >
       {loading && (
         <div className="mr-2">
@@ -36,4 +29,8 @@ export const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
       {children}
     </button>
   )
-}
+})
+
+Button.displayName = 'Button'
+
+export { Button }

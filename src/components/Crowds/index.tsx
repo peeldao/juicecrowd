@@ -8,7 +8,7 @@ export const CrowdsPage: React.FC = () => {
   return (
     <>
       <Navbar />
-      <div className="mt-32 flex flex-col px-5 text-base">
+      <div className="mx-auto mt-32 flex max-w-5xl flex-col px-5 text-base">
         <Breadcrumbs />
         <h1 className="mt-16 font-heading text-3xl font-medium">
           Tech crowd 01 (TC01) submissions open!

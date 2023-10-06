@@ -1,0 +1,110 @@
+import { LinkColProps, LinkColumn } from './LinkColumn'
+import { Link } from '@/components/Link'
+import DiscordLogo, { JB_DISCORD_INVITE_URL } from '@/components/icon/DiscordLogo'
+import { JB_X_URL, XLogo } from '@/components/icon/XLogo'
+import Logo from '@/components/Logo'
+
+const ImageButtons = [
+  {
+    name: 'discord',
+    image: <DiscordLogo size={18} className="text-gray-400" />,
+    link: JB_DISCORD_INVITE_URL,
+  },
+  {
+    name: 'twitter',
+    image: <XLogo />,
+    link: JB_X_URL,
+  },
+]
+
+export function Footer() {
+
+  const LinkCols: LinkColProps[] = [
+    {
+      title: 'Juicecrowd',
+      items: [
+        {
+          title: 'Crowds',
+          link: '/crowds',
+        },
+        {
+          title: 'Submit your project',
+          link: '/submit',
+        },
+      ]
+    },
+    {
+      title: 'Resources',
+      items: [
+        {
+          title: 'Docs',
+          link: 'https://docs.juicebox.money',
+        },
+        {
+          title: 'Contact',
+          link: '/contact',
+        },
+      ],
+    },
+    {
+      title: 'Socials',
+      items: [
+        {
+          title: 'Discord',
+          link: JB_DISCORD_INVITE_URL,
+        },
+        {
+          title: 'X (Twitter)',
+          link: JB_X_URL,
+        },
+      ],
+    },
+    {
+      title: 'Legal',
+      items: [
+        {
+          title: 'Privacy Policy',
+          link: '/privacy',
+        },
+        {
+          title: 'Terms of Service',
+          link: '/tos',
+        },
+      ],
+    },
+  ]
+
+  return (
+    <footer className="bg-slate-900 px-5 pt-12 text-sm md:px-12">
+      <div className="m-auto max-w-6xl">
+        <div className="flex flex-col gap-y-10 md:grid md:grid-cols-6 md:items-start md:gap-x-10">
+          <div className="flex flex-col gap-y-5 text-gray-400 md:col-span-2 md:items-start">
+            <Logo theme='dark' />
+            Made with 🤍 on Ethereum, by a community of amazing & talented contributors.
+          </div>
+          {LinkCols.map((props, i) => (
+            <LinkColumn key={i} {...props} />
+          ))}
+        </div>
+
+        <div className="mt-32 flex justify-between border-t border-gray-800 pb-16 pt-5">
+          <span className="text-gray-500">© Juicecrowd 2023 | All rights reserved</span>
+
+          <div className="flex gap-x-7">
+            <div className="flex gap-x-4 ">
+              {ImageButtons.map(({ name, image, link }) => (
+                <Link
+                  key={name}
+                  className="text-lg leading-none text-gray-400"
+                  href={link}
+                >
+                  {image}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

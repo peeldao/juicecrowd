@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Navbar } from '../layout/Navbar'
 import { TechCrowdCTA } from './components/TechCrowdCTA'
-import { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Button } from '../Button'
 import { StayInLoopSection } from './components/StayInLoopSection'
@@ -97,10 +97,41 @@ export default function LandingPage() {
           height={616}
           width={1010}
         />
+
         <YourProjectSection />
+        <PoweredByTheBestSection />
       </div>
       <StayInLoopSection />
     </>
+  )
+}
+
+const PoweredByTheBestSection: React.FC = ({}) => {
+  return (
+    // TODO: Should be bg-gray-25
+    <div className="flex w-full max-w-6xl flex-col items-center gap-16 rounded-xl border border-gray-100 bg-gray-50 px-28 py-16 text-center">
+      <div className="max-w-3xl">
+        <h2 className="text-center font-heading text-3xl font-bold">
+          Powered by the best ⚡️
+        </h2>
+        <div className="mt-5 text-lg">
+          Brought to you by the team at Juicebox, responsible for helping over
+          1,200 projects raise over{' '}
+          <span className="font-semibold">US$177,000,000</span>.
+        </div>
+        <Image
+          className="mt-16"
+          src="/assets/images/powered-by-the-best.png"
+          alt="Successful Juicebox Projects"
+          width={966}
+          height={376}
+        />
+
+        <Button className="m-auto mt-16 w-fit border border-gray-300 bg-white text-black drop-shadow">
+          Visit Juicebox
+        </Button>
+      </div>
+    </div>
   )
 }
 

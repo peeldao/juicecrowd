@@ -7,6 +7,7 @@ import { Button } from '../Button'
 import { StayInLoopSection } from './components/StayInLoopSection'
 import { YourProjectSection } from './components/YourProjectSection'
 import { HeroSection } from './components/HeroSection'
+import { Link } from '../Link'
 
 export default function LandingPage() {
   return (
@@ -127,9 +128,11 @@ const PoweredByTheBestSection: React.FC = ({}) => {
           height={376}
         />
 
-        <Button className="m-auto mt-16 w-fit border border-gray-300 bg-white text-black drop-shadow">
-          Visit Juicebox
-        </Button>
+        <Link href="https://juicebox.money">
+          <Button className="m-auto mt-16 w-fit border border-gray-300 bg-white text-black drop-shadow">
+            Visit Juicebox
+          </Button>
+        </Link>
       </div>
     </div>
   )

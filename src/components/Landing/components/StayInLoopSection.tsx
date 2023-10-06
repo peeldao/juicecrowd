@@ -1,9 +1,18 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
+import { twMerge } from 'tailwind-merge'
 
-export const StayInLoopSection: React.FC = () => {
+export type StayInLoopSectionProps = {
+  className?: string
+}
+
+export const StayInLoopSection: React.FC<StayInLoopSectionProps> = ({
+  className,
+}) => {
   return (
-    <div className="bg-gray-800 px-5 py-12 text-sm md:px-12">
+    <div
+      className={twMerge('bg-gray-800 px-5 py-12 text-sm md:px-12', className)}
+    >
       <div className="m-auto flex max-w-6xl flex-col items-start justify-between gap-7 md:flex-row md:items-center md:gap-5">
         <div>
           <h3 className="pb-2 font-heading text-2xl font-medium text-white">

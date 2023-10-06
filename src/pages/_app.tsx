@@ -1,5 +1,5 @@
 import { AppProvider } from '@/components/layout/AppProvider'
-import { Footer } from '@/components/layout/Footer/Footer'
+import { Footer } from '@/components/layout/Footer'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
 import '../styles/globals.css'

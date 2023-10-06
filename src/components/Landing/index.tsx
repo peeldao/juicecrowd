@@ -6,30 +6,14 @@ import { twMerge } from 'tailwind-merge'
 import { Button } from '../Button'
 import { StayInLoopSection } from './components/StayInLoopSection'
 import { YourProjectSection } from './components/YourProjectSection'
+import { HeroSection } from './components/HeroSection'
 
 export default function LandingPage() {
   return (
     <>
       <Navbar />
       <div className="mt-32 flex flex-col items-center px-5 text-base">
-        <h1 className="max-w-xl font-heading text-6xl font-bold">
-          Stand out from the crowd. Get funded.
-        </h1>
-        <div className="mt-4 max-w-3xl text-center text-lg text-gray-700">
-          Unlock funding to take your project to the next level. Learn how to
-          tell your story and tap into your audience to build lasting support
-          communities.
-        </div>
-
-        <TechCrowdCTA className="mt-14" />
-
-        <Image
-          className="mt-16"
-          src="/assets/images/powered-by-juicebox.png"
-          alt="Powered by Juicebox"
-          width={250}
-          height={30}
-        />
+        <HeroSection />
 
         <h2 className="mt-32 font-heading text-3xl font-bold">How it works</h2>
         <div className="mt-12 flex max-w-5xl flex-col gap-12">

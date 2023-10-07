@@ -1,5 +1,5 @@
-import { Button } from '@/components/Button';
-import { Input } from '@/components/Input';
+import { Button } from '@/components/Button'
+import { Input } from '@/components/Input'
 
 export const StayInLoopSection: React.FC = () => {
   return (
@@ -22,5 +22,5 @@ export const StayInLoopSection: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  )
 }

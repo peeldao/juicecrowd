@@ -49,11 +49,11 @@ export const CrowdsPage: React.FC = () => {
             projects in this crowd. &apos;Top&apos; projects are determined on
             the total funds raised by the project, and will be split
             accordingly. For example:
-            <span className="mt-8 block">
-              #1 project raises 7 ETH (Receives 70% of prize pool) #2 project
-              raises 2 ETH (Receives 20% of prize pool) #3 project raises 1 ETH
-              ((Receives 10% of prize pool)
-            </span>
+            <ul className="mt-8 block">
+              <li>#1 project raises 7 ETH (Receives 70% of prize pool)</li>
+              <li>#2 project raises 2 ETH (Receives 20% of prize pool)</li>
+              <li>#3 project raises 1 ETH ((Receives 10% of prize pool)</li>
+            </ul>
           </HeaderParagraph>
         </div>
 

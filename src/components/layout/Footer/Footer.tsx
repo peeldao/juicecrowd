@@ -96,7 +96,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
           ))}
         </div>
 
-        <div className="mt-32 flex justify-between border-t border-gray-800 pb-16 pt-5">
+        <div className="mt-8 flex flex-col justify-between gap-5 border-t border-gray-800 pb-8 pt-5 md:mt-32 md:flex-row md:pb-16">
           <span className="text-gray-500">
             © Juicecrowd 2023 | All rights reserved
           </span>

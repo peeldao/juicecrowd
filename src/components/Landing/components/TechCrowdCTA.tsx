@@ -13,7 +13,7 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
     <div
       className={twMerge(
         className,
-        'flex max-w-5xl flex-col items-center justify-between gap-10 rounded-xl border border-gray-100 px-11 py-10 shadow-sm md:flex-row',
+        'flex max-w-5xl flex-col items-center justify-between gap-10 rounded-xl border border-gray-100 bg-white px-11 py-10 shadow-sm md:flex-row',
       )}
     >
       <div className="flex flex-col items-center gap-8 md:flex-row">

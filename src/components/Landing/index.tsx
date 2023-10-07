@@ -1,44 +1,50 @@
+import { BoltIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
-import { Navbar } from '../layout/Navbar'
-import { TechCrowdCTA } from './components/TechCrowdCTA'
-import React, { PropsWithChildren, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Button } from '../Button'
+import { Link } from '../Link'
+import { JuiceboxLogo } from '../icon/JuiceboxLogo'
+import { Navbar } from '../layout/Navbar'
+import { HeroSection } from './components/HeroSection'
+import { HowItWorksSection } from './components/HowItWorksSection'
 import { StayInLoopSection } from './components/StayInLoopSection'
 import { YourProjectSection } from './components/YourProjectSection'
-import { HeroSection } from './components/HeroSection'
-import { Link } from '../Link'
-import { BoltIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
-import { JuiceboxLogo } from '../icon/JuiceboxLogo'
-import { HowItWorksSection } from './components/HowItWorksSection'
+import { GradientBackground } from './components/GradientBackground'
 
 export default function LandingPage() {
   return (
     <>
       <Navbar />
-      <div className="mt-14 flex flex-col items-center px-4 text-base md:mt-32 md:px-5">
+      <div className="relative mt-14 flex flex-col items-center px-4 text-base md:mt-32 md:px-5">
+        <GradientBackground className="absolute left-1/2 top-0 -translate-x-1/2" />
+        <GradientBackground className="absolute left-1/2 top-1/2 -translate-x-1/2" />
+        <GradientBackground className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-full" />
+
         <HeroSection />
 
         <HowItWorksSection className="mt-20 md:mt-32" />
 
-        <Image
-          className="mt-24 md:hidden"
-          src="/assets/images/example-sm.png"
-          alt="Project page example"
-          height={868}
-          width={300}
-        />
-        <Image
-          className="mt-24 hidden md:block"
-          src="/assets/images/example-md.png"
-          alt="Project page example"
-          height={616}
-          width={1010}
-        />
+        <div className="relative">
+          <Image
+            className="mt-24 md:hidden"
+            src="/assets/images/example-sm.png"
+            alt="Project page example"
+            height={868}
+            width={300}
+          />
+          <Image
+            className="mt-24 hidden md:block"
+            src="/assets/images/example-md.png"
+            alt="Project page example"
+            height={616}
+            width={1010}
+          />
+        </div>
 
         <YourProjectSection />
         <PoweredByTheBestSection />
-        <div className="mt-20 flex flex-col gap-12 md:mt-32 md:flex-row md:gap-8">
+        <div className="mb-28 mt-20 flex flex-col gap-12 md:mb-44 md:mt-32 md:flex-row md:gap-8">
           <EndStatement icon={<ShieldCheckIcon className="h-7 w-7" />}>
             Secured by audited smart contracts
           </EndStatement>
@@ -50,7 +56,7 @@ export default function LandingPage() {
           </EndStatement>
         </div>
       </div>
-      <StayInLoopSection className="mt-28 md:mt-44" />
+      <StayInLoopSection />
     </>
   )
 }

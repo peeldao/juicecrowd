@@ -56,7 +56,9 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
             </div>
             <div className="mt-6 flex flex-wrap gap-x-1 gap-y-1.5">
               {CROWD_BADGES.map(badge => (
-                <Badge key={badge}>{badge}</Badge>
+                <Badge key={badge} type="crowd">
+                  {badge}
+                </Badge>
               ))}
             </div>
           </div>
@@ -104,7 +106,9 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
             </div>
             <div className="mt-4 flex flex-wrap gap-x-1 gap-y-1.5">
               {SUPPORT_BADGES.map(badge => (
-                <Badge key={badge}>{badge}</Badge>
+                <Badge key={badge} type="support">
+                  {badge}
+                </Badge>
               ))}
             </div>
           </div>
@@ -116,16 +120,22 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
 
 type BadgeProps = {
   className?: string
+  type: 'crowd' | 'support'
 }
 
 const Badge: React.FC<PropsWithChildren<BadgeProps>> = ({
   children,
   className,
+  type,
 }) => {
   return (
     <div
       className={twMerge(
-        'w-fit rounded-full bg-gray-100 px-2 py-1.5 text-sm font-medium text-gray-600',
+        'w-fit text-sm font-medium leading-5',
+        type === 'crowd' &&
+          'rounded-full bg-gray-100 px-2 py-1.5 text-gray-600',
+        type === 'support' &&
+          'rounded-md border border-gray-300 bg-white px-2.5 py-1 text-gray-700',
         className,
       )}
     >

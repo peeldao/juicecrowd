@@ -16,7 +16,7 @@ export default function LandingPage() {
   return (
     <>
       <Navbar />
-      <div className="relative mt-14 flex flex-col items-center px-4 text-base md:mt-32 md:px-5">
+      <div className="relative mt-14 flex flex-col items-center overflow-hidden px-4 text-base md:mt-32 md:px-5">
         <GradientBackground className="absolute left-1/2 top-0 -translate-x-1/2" />
         <GradientBackground className="absolute left-1/2 top-1/2 -translate-x-1/2" />
         <GradientBackground className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-full" />

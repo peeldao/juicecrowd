@@ -1,3 +1,4 @@
+import { twMerge } from 'tailwind-merge'
 import { CardWithIcon } from './CardWithIcon'
 import {
   CubeIcon,
@@ -6,9 +7,15 @@ import {
   BanknotesIcon,
 } from '@heroicons/react/24/outline'
 
-export const YourProjectSection: React.FC = () => {
+export type YourProjectSectionProps = {
+  className?: string
+}
+
+export const YourProjectSection: React.FC<YourProjectSectionProps> = ({
+  className,
+}) => {
   return (
-    <div className="m-auto max-w-6xl py-20 text-center">
+    <div className={twMerge('m-auto max-w-6xl py-20 text-center', className)}>
       <h2 className="mb-5 font-heading text-3xl font-bold">
         Your project, your way
       </h2>

@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 export const CardWithIcon: React.FC<{
-  children?: ReactNode;
-  title: ReactNode;
-  icon: ReactNode;
+  children?: ReactNode
+  title: ReactNode
+  icon: ReactNode
 }> = ({ title, icon, children }) => {
   return (
     <div className="flex flex-col items-center justify-center gap-5 text-center">
@@ -13,9 +13,9 @@ export const CardWithIcon: React.FC<{
         </div>
       </div>
       <div className="flex flex-col items-center justify-center gap-2">
-        <div className="text-xl font-heading">{title}</div>
+        <div className="font-heading text-xl">{title}</div>
         <div className="text-base text-gray-700">{children}</div>
       </div>
     </div>
-  );
-};
+  )
+}

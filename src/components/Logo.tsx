@@ -11,18 +11,11 @@ export default function Logo({
   className?: string
   theme?: 'dark' | 'light'
 }) {
-  const imgSrc =
-    theme === 'dark'
-      ? DARK_JUICE_LOGO
-      : LIGHT_JUICE_LOGO
+  const imgSrc = theme === 'dark' ? DARK_JUICE_LOGO : LIGHT_JUICE_LOGO
 
   return (
     <div className={twMerge('relative flex w-36 md:w-36', className)}>
-      <Image
-        src={imgSrc}
-        alt="Juicecrowd logo"
-        className='w-full h-auto'
-      />
+      <Image src={imgSrc} alt="Juicecrowd logo" className="h-auto w-full" />
     </div>
   )
 }

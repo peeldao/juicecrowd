@@ -1,6 +1,8 @@
 import { LinkColProps, LinkColumn } from './LinkColumn'
 import { Link } from '@/components/Link'
-import DiscordLogo, { JB_DISCORD_INVITE_URL } from '@/components/icon/DiscordLogo'
+import DiscordLogo, {
+  JB_DISCORD_INVITE_URL,
+} from '@/components/icon/DiscordLogo'
 import { JB_X_URL, XLogo } from '@/components/icon/XLogo'
 import Logo from '@/components/Logo'
 
@@ -18,7 +20,6 @@ const ImageButtons = [
 ]
 
 export function Footer() {
-
   const LinkCols: LinkColProps[] = [
     {
       title: 'Juicecrowd',
@@ -31,7 +32,7 @@ export function Footer() {
           title: 'Submit your project',
           link: '/submit',
         },
-      ]
+      ],
     },
     {
       title: 'Resources',
@@ -79,8 +80,9 @@ export function Footer() {
       <div className="m-auto max-w-6xl">
         <div className="flex flex-col gap-y-10 md:grid md:grid-cols-6 md:items-start md:gap-x-10">
           <div className="flex flex-col gap-y-5 text-gray-400 md:col-span-2 md:items-start">
-            <Logo theme='dark' />
-            Made with 🤍 on Ethereum, by a community of amazing & talented contributors.
+            <Logo theme="dark" />
+            Made with 🤍 on Ethereum, by a community of amazing & talented
+            contributors.
           </div>
           {LinkCols.map((props, i) => (
             <LinkColumn key={i} {...props} />
@@ -88,7 +90,9 @@ export function Footer() {
         </div>
 
         <div className="mt-32 flex justify-between border-t border-gray-800 pb-16 pt-5">
-          <span className="text-gray-500">© Juicecrowd 2023 | All rights reserved</span>
+          <span className="text-gray-500">
+            © Juicecrowd 2023 | All rights reserved
+          </span>
 
           <div className="flex gap-x-7">
             <div className="flex gap-x-4 ">

@@ -5,6 +5,7 @@ import DiscordLogo, {
 } from '@/components/icon/DiscordLogo'
 import { JB_X_URL, XLogo } from '@/components/icon/XLogo'
 import Logo from '@/components/Logo'
+import { twMerge } from 'tailwind-merge'
 
 const ImageButtons = [
   {
@@ -19,7 +20,11 @@ const ImageButtons = [
   },
 ]
 
-export function Footer() {
+export type FooterProps = {
+  className?: string
+}
+
+export const Footer: React.FC<FooterProps> = ({ className }) => {
   const LinkCols: LinkColProps[] = [
     {
       title: 'Juicecrowd',
@@ -76,7 +81,9 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-slate-900 px-5 pt-12 text-sm md:px-12">
+    <footer
+      className={twMerge('bg-slate-900 px-5 pt-12 text-sm md:px-12', className)}
+    >
       <div className="m-auto max-w-6xl">
         <div className="flex flex-col gap-y-10 md:grid md:grid-cols-6 md:items-start md:gap-x-10">
           <div className="flex flex-col gap-y-5 text-gray-400 md:col-span-2 md:items-start">

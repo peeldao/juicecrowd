@@ -22,10 +22,10 @@ export const StayInLoopSection: React.FC<StayInLoopSectionProps> = ({
             Be the first to know about new crowds, features and launches.
           </div>
         </div>
-        <div className="flex flex-1 justify-end gap-3">
+        <div className="flex w-full flex-1 flex-col justify-end gap-3 md:flex-row">
           <Input
             placeholder="Enter your email"
-            className="max-w-xs border-gray-500 bg-transparent text-base text-white outline-2"
+            className="border-gray-500 bg-transparent text-base text-white outline-2 md:max-w-xs"
           />
           <Button>Subscribe</Button>
         </div>

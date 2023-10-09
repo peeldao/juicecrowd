@@ -10,92 +10,27 @@ import { HeroSection } from './components/HeroSection'
 import { Link } from '../Link'
 import { BoltIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import { JuiceboxLogo } from '../icon/JuiceboxLogo'
+import { HowItWorksSection } from './components/HowItWorksSection'
 
 export default function LandingPage() {
   return (
     <>
       <Navbar />
-      <div className="mt-32 flex flex-col items-center px-5 text-base">
+      <div className="mt-14 flex flex-col items-center px-4 text-base md:mt-32 md:px-5">
         <HeroSection />
 
-        <h2 className="mt-32 font-heading text-3xl font-bold">How it works</h2>
-        <div className="mt-12 flex max-w-5xl flex-col gap-12">
-          <div className="flex items-center gap-16">
-            <Image
-              src="/assets/images/how-it-works1.png"
-              alt="Find your crowd"
-              width={400}
-              height={400}
-            />
-            <div className="flex flex-col">
-              <h3 className="font-heading text-2xl font-medium">
-                Find your crowd
-              </h3>
-              <div className="mt-4 text-gray-700">
-                Around here, things run in &apos;crowds&apos;. They&apos;re
-                essentially targeted cohorts. Each crowd has a theme. Keep an
-                eye out for crowds that suit your project!
-              </div>
-              <div className="mt-6 flex flex-wrap gap-x-1 gap-y-1.5">
-                {CROWD_BADGES.map(badge => (
-                  <Badge key={badge}>{badge}</Badge>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-row-reverse items-center gap-16">
-            <Image
-              src="/assets/images/how-it-works2.png"
-              alt="Submit your project"
-              width={400}
-              height={400}
-            />
-            <div className="flex flex-col">
-              <h3 className="font-heading text-2xl font-medium">
-                Submit your project
-              </h3>
-              <div className="mt-4 text-gray-700">
-                Once your crowd pops up, you&apos;ll need to submit your
-                project. The community will vote on their favourite projects,
-                and if you make it in, we&apos;re off to the races!
-              </div>
-              {/* Hardcoded TC01 */}
-              <Button className="mt-6 w-fit">Submit to TC01</Button>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-16">
-            <Image
-              src="/assets/images/how-it-works3.png"
-              alt="Get crowdfunding support"
-              width={400}
-              height={400}
-            />
-            <div className="flex flex-col">
-              <h3 className="font-heading text-2xl font-medium">
-                Get crowdfunding support
-              </h3>
-              <div className="mt-4 text-gray-700">
-                Our team will help you polish your campaign, promote it and
-                provide 360° support from start the finish. So you can get the
-                very most our of your crowdfund campaign.
-              </div>
-              <div className="mt-6 text-base font-medium">
-                Help where you need it most ♥
-              </div>
-              <div className="mt-4 flex flex-wrap gap-x-1 gap-y-1.5">
-                {SUPPORT_BADGES.map(badge => (
-                  <Badge key={badge}>{badge}</Badge>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <HowItWorksSection className="mt-20 md:mt-32" />
 
         <Image
-          className="mt-24"
-          src="/assets/images/how-it-works4.png"
+          className="mt-24 md:hidden"
+          src="/assets/images/example-sm.png"
+          alt="Project page example"
+          height={868}
+          width={300}
+        />
+        <Image
+          className="mt-24 hidden md:block"
+          src="/assets/images/example-md.png"
           alt="Project page example"
           height={616}
           width={1010}
@@ -103,7 +38,7 @@ export default function LandingPage() {
 
         <YourProjectSection />
         <PoweredByTheBestSection />
-        <div className="mt-32 flex gap-8">
+        <div className="mt-20 flex flex-col gap-12 md:mt-32 md:flex-row md:gap-8">
           <EndStatement icon={<ShieldCheckIcon className="h-7 w-7" />}>
             Secured by audited smart contracts
           </EndStatement>
@@ -115,7 +50,7 @@ export default function LandingPage() {
           </EndStatement>
         </div>
       </div>
-      <StayInLoopSection className="mt-44" />
+      <StayInLoopSection className="mt-28 md:mt-44" />
     </>
   )
 }
@@ -123,26 +58,33 @@ export default function LandingPage() {
 const PoweredByTheBestSection: React.FC = ({}) => {
   return (
     // TODO: Should be bg-gray-25
-    <div className="flex w-full max-w-6xl flex-col items-center gap-16 rounded-xl border border-gray-100 bg-gray-50 px-28 py-16 text-center">
+    <div className="flex w-full max-w-6xl flex-col items-center gap-16 rounded-xl border border-gray-100 bg-gray-50 px-4 pb-12 pt-8 text-center md:px-28 md:py-16">
       <div className="max-w-3xl">
-        <h2 className="text-center font-heading text-3xl font-bold">
+        <h2 className="text-center font-heading text-2xl font-bold md:text-3xl">
           Powered by the best ⚡️
         </h2>
-        <div className="mt-5 text-lg">
+        <div className="mt-5 text-base md:text-lg">
           Brought to you by the team at Juicebox, responsible for helping over
           1,200 projects raise over{' '}
           <span className="font-semibold">US$177,000,000</span>.
         </div>
         <Image
-          className="mt-16"
-          src="/assets/images/powered-by-the-best.png"
+          className="mt-12 md:hidden"
+          src="/assets/images/powered-by-the-best-sm.png"
+          alt="Successful Juicebox Projects"
+          width={295}
+          height={290}
+        />
+        <Image
+          className="mt-16 hidden md:block"
+          src="/assets/images/powered-by-the-best-md.png"
           alt="Successful Juicebox Projects"
           width={966}
           height={376}
         />
 
         <Link href="https://juicebox.money">
-          <Button className="m-auto mt-16 w-fit border border-gray-300 bg-white text-black drop-shadow">
+          <Button className="m-auto mt-12 w-fit border border-gray-300 bg-white text-black drop-shadow md:mt-16">
             Visit Juicebox
           </Button>
         </Link>
@@ -176,49 +118,6 @@ const BlackWhiteBorderIcon: React.FC<{ icon: ReactNode }> = ({ icon }) => {
   return (
     <div className="h-fit w-fit rounded-xl border-4 border-white bg-black p-1.5 text-white">
       {icon}
-    </div>
-  )
-}
-
-// hardcoded for now
-const CROWD_BADGES = [
-  'Art',
-  'Film & photography',
-  'Games',
-  'Impact & causes',
-  'Music',
-  'Design & technology',
-  'Health & wellness',
-]
-
-// harcoded for now
-const SUPPORT_BADGES = [
-  'Story telling',
-  'Branding & imagery',
-  'Offers & rewards',
-  'Partnerships',
-  'Target & duration',
-  'Community',
-  'Marketing',
-  'Much more',
-]
-
-type BadgeProps = {
-  className?: string
-}
-
-const Badge: React.FC<PropsWithChildren<BadgeProps>> = ({
-  children,
-  className,
-}) => {
-  return (
-    <div
-      className={twMerge(
-        'w-fit rounded-full bg-gray-100 px-2 py-1.5 text-sm font-medium text-gray-600',
-        className,
-      )}
-    >
-      {children}
     </div>
   )
 }

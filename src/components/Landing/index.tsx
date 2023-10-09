@@ -1,13 +1,15 @@
 import Image from 'next/image'
 import { Navbar } from '../layout/Navbar'
 import { TechCrowdCTA } from './components/TechCrowdCTA'
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Button } from '../Button'
 import { StayInLoopSection } from './components/StayInLoopSection'
 import { YourProjectSection } from './components/YourProjectSection'
 import { HeroSection } from './components/HeroSection'
 import { Link } from '../Link'
+import { BoltIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
+import { JuiceboxLogo } from '../icon/JuiceboxLogo'
 
 export default function LandingPage() {
   return (
@@ -101,8 +103,19 @@ export default function LandingPage() {
 
         <YourProjectSection />
         <PoweredByTheBestSection />
+        <div className="mt-32 flex gap-8">
+          <EndStatement icon={<ShieldCheckIcon className="h-7 w-7" />}>
+            Secured by audited smart contracts
+          </EndStatement>
+          <EndStatement icon={<JuiceboxLogo className="h-7 w-7 fill-white" />}>
+            Powered by Juicebox, built on Ethereum
+          </EndStatement>
+          <EndStatement icon={<BoltIcon className="h-7 w-7" />}>
+            Enabling fast, borderless funding
+          </EndStatement>
+        </div>
       </div>
-      <StayInLoopSection />
+      <StayInLoopSection className="mt-44" />
     </>
   )
 }
@@ -134,6 +147,35 @@ const PoweredByTheBestSection: React.FC = ({}) => {
           </Button>
         </Link>
       </div>
+    </div>
+  )
+}
+
+type EndStatementProps = {
+  className?: string
+  icon: ReactNode
+  children: ReactNode
+}
+
+const EndStatement: React.FC<EndStatementProps> = ({
+  className,
+  icon,
+  children,
+}) => {
+  return (
+    <div className={twMerge('flex items-center gap-5', className)}>
+      <BlackWhiteBorderIcon icon={icon} />
+      <span className="max-w-[208px] font-medium text-gray-800">
+        {children}
+      </span>
+    </div>
+  )
+}
+
+const BlackWhiteBorderIcon: React.FC<{ icon: ReactNode }> = ({ icon }) => {
+  return (
+    <div className="h-fit w-fit rounded-xl border-4 border-white bg-black p-1.5 text-white">
+      {icon}
     </div>
   )
 }

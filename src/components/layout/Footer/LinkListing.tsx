@@ -10,7 +10,7 @@ export const LinkListing: React.FC<{ items: LinkItem[] }> = ({ items }) => (
   <>
     {items.map(({ title, link }, i) => (
       <div key={i}>
-        <Link className="text-white hover:text-blue-500" href={link}>
+        <Link className="hover:text-bluebs-500 text-white" href={link}>
           {title}
         </Link>
       </div>

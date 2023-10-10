@@ -81,7 +81,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
     <>
       <Navbar />
       <div className="mx-auto mb-56 flex max-w-xl flex-col items-center px-5 pt-14 text-base md:pt-20">
-        <h1 className="font-medium text-blue-600">Contact us</h1>
+        <h1 className="text-bluebs-600 font-medium">Contact us</h1>
         <h1 className="mt-3 font-heading text-5xl font-bold">Get in touch</h1>
         <div className="mt-6 text-center">
           Got a question or need help with your project? Fill out the form below

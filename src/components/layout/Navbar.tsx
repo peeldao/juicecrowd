@@ -4,6 +4,7 @@ import { CoinLogo } from '../icon/CoinLogo'
 import { Link } from '../Link'
 import { Button } from '../Button'
 import { Bars3Icon } from '@heroicons/react/24/solid'
+import Logo from '../Logo'
 
 type NavbarProps = {
   className?: string
@@ -13,7 +14,7 @@ type NavbarProps = {
 
 export const Navbar: React.FC<NavbarProps> = ({
   className,
-  title = 'Juicecrowd',
+  title,
   separator,
 }) => {
   return (
@@ -25,8 +26,14 @@ export const Navbar: React.FC<NavbarProps> = ({
       )}
     >
       <Link className="flex gap-1 text-black hover:text-black" href="/">
-        <CoinLogo className="h-[26px] w-[23px]" />
-        <span className="font-agrandir text-lg font-medium">{title}</span>
+        {title ? (
+          <>
+            <CoinLogo className="h-[26px] w-[23px]" />
+            <span className="font-agrandir text-lg font-medium">{title}</span>
+          </>
+        ) : (
+          <Logo />
+        )}
       </Link>
       <div className="hidden items-center gap-8 md:flex">
         <Link className="text-gray-700" href="/#TODO">

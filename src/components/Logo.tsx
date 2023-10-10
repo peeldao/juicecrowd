@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useContext } from 'react'
 import { twMerge } from 'tailwind-merge'
 import LIGHT_JUICE_LOGO from '/public/assets/images/brand/juicecrowd-logo-full_black.webp'
 import DARK_JUICE_LOGO from '/public/assets/images/brand/juicecrowd-logo-full_white.webp'

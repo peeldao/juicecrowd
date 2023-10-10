@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Navbar } from '../layout/Navbar'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { PropsWithChildren, use, useCallback } from 'react'
+import { PropsWithChildren, use, useCallback, useReducer } from 'react'
 import {
   Form,
   FormControl,
@@ -15,6 +15,7 @@ import {
 import { Input } from '../Input'
 import { Button } from '../Button'
 import { Textarea } from '../ui/Textarea'
+import axios from 'axios'
 
 const formSchema = z.object({
   name: z
@@ -37,6 +38,11 @@ export type ContactPageProps = {
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
+  const [state, dispatch] = useReducer(submitReducer, {
+    loading: false,
+    error: null,
+  })
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,8 +53,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
     },
   })
 
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
-    console.log(values)
+  const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
+    dispatch({ type: 'submit' })
+    try {
+      await axios.post('/api/contact', values)
+      dispatch({ type: 'success' })
+      // todo: show success notification
+    } catch (e: any) {
+      dispatch({ type: 'error', error: e.message })
+      // todo: show error notification
+    }
   }, [])
 
   return (
@@ -105,7 +119,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
               />
             </div>
 
-            <Button className="mt-8 w-full" type="submit">
+            <Button
+              className="mt-8 w-full"
+              loading={state.loading}
+              type="submit"
+            >
               Send message
             </Button>
           </form>
@@ -135,4 +153,30 @@ const ContactFormItem: React.FC<PropsWithChildren<ContactFormItemProps>> = ({
       <FormMessage />
     </FormItem>
   )
+}
+
+type submitReducerState = {
+  loading: boolean
+  error: string | null
+}
+
+type submitReducerAction =
+  | { type: 'submit' }
+  | { type: 'success' }
+  | { type: 'error'; error: string }
+
+function submitReducer(
+  state: submitReducerState,
+  action: submitReducerAction,
+): submitReducerState {
+  switch (action.type) {
+    case 'submit':
+      return { loading: true, error: null }
+    case 'success':
+      return { loading: false, error: null }
+    case 'error':
+      return { loading: false, error: action.error }
+    default:
+      return state
+  }
 }

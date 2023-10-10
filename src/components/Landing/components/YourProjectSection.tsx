@@ -15,7 +15,12 @@ export const YourProjectSection: React.FC<YourProjectSectionProps> = ({
   className,
 }) => {
   return (
-    <div className={twMerge('m-auto max-w-6xl py-20 text-center', className)}>
+    <div
+      className={twMerge(
+        'm-auto max-w-6xl bg-white py-20 text-center',
+        className,
+      )}
+    >
       <h2 className="mb-5 font-heading text-3xl font-bold">
         Your project, your way
       </h2>

@@ -43,7 +43,7 @@ export default function LandingPage() {
         </div>
 
         <YourProjectSection />
-        <PoweredByTheBestSection />
+        <PoweredByTheBestSection className="mt-20" />
         <div className="mb-28 mt-20 flex flex-col gap-12 md:mb-44 md:mt-32 md:flex-row md:gap-8">
           <EndStatement icon={<ShieldCheckIcon className="h-7 w-7" />}>
             Secured by audited smart contracts
@@ -61,10 +61,21 @@ export default function LandingPage() {
   )
 }
 
-const PoweredByTheBestSection: React.FC = ({}) => {
+type PoweredByTheBestSectionProps = {
+  className?: string
+}
+
+const PoweredByTheBestSection: React.FC<PoweredByTheBestSectionProps> = ({
+  className,
+}) => {
   return (
     // TODO: Should be bg-gray-25
-    <div className="flex w-full max-w-6xl flex-col items-center gap-16 rounded-xl border border-gray-100 bg-gray-50 px-4 pb-12 pt-8 text-center md:px-28 md:py-16">
+    <div
+      className={twMerge(
+        'flex w-full max-w-6xl flex-col items-center gap-16 rounded-xl border border-gray-100 bg-gray-50 px-4 pb-12 pt-8 text-center md:px-28 md:py-16',
+        className,
+      )}
+    >
       <div className="max-w-3xl">
         <h2 className="text-center font-heading text-2xl font-bold md:text-3xl">
           Powered by the best ⚡️

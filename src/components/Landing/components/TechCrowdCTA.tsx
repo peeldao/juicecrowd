@@ -33,11 +33,13 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
           <PrizePoolFlair className="mt-3 md:mt-4" prizePool={5} />
         </div>
       </div>
-      <div className="flex flex-col items-center gap-5">
+      <div className="flex flex-col items-center gap-4">
         <Button className="whitespace-nowrap px-7 py-4">
           Submit your project
         </Button>
-        <Link href="#TODO">Learn more</Link>
+        <div className="text-xs text-gray-400">
+          Submissions close 26 October 2023
+        </div>
       </div>
     </div>
   )

@@ -18,7 +18,7 @@ export const ConnectKitButton = () => {
 
         return (
           <Button
-            className="bg-blue-50 px-4 py-2.5 text-blue-700"
+            className="bg-bluebs-50 text-bluebs-700 px-4 py-2.5"
             onClick={show}
           >
             {buttonText}

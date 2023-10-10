@@ -12,7 +12,8 @@ type Props = {
 }
 
 export const Link = ({ href, children, className }: Props) => {
-  const classNameDefault = 'text-blue-600 hover:text-blue-400 transition-colors'
+  const classNameDefault =
+    'text-bluebs-600 hover:text-bluebs-400 transition-colors'
   if (isExternal(href)) {
     return (
       <a

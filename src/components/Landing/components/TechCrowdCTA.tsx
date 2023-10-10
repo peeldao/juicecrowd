@@ -61,8 +61,8 @@ const PrizePoolFlair: React.FC<PrizePoolFlairProps> = ({
         className,
       )}
     >
-      <div className="flex items-center justify-center rounded-full bg-blue-50 p-1">
-        <EthereumIconFilled className="h-5 w-5 text-blue-500" />
+      <div className="bg-bluebs-50 flex items-center justify-center rounded-full p-1">
+        <EthereumIconFilled className="text-bluebs-500 h-5 w-5" />
       </div>
       <div className="text-base font-medium text-gray-800">
         {prizePool} ETH prize pool

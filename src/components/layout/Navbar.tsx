@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <Link className="text-gray-700" href="/#TODO">
           Learn more
         </Link>
-        <Link className="text-gray-700" href="/#TODO">
+        <Link className="text-gray-700" href="/contact">
           Contact
         </Link>
       </div>

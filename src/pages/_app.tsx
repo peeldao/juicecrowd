@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
 import '../styles/globals.css'
+import { Toaster } from '@/components/ui/Toaster'
 
 const agrandirWide = localFont({
   src: [
@@ -58,6 +59,11 @@ export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
       <Footer
         className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
       />
+      <div
+        className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
+      >
+        <Toaster />
+      </div>
     </AppProvider>
   )
 }

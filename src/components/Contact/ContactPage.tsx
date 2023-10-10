@@ -1,8 +1,3 @@
-import { useForm } from 'react-hook-form'
-import { Navbar } from '../layout/Navbar'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { PropsWithChildren, use, useCallback, useReducer } from 'react'
 import {
   Form,
   FormControl,
@@ -12,10 +7,16 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/Form'
-import { Input } from '../Input'
-import { Button } from '../Button'
-import { Textarea } from '../ui/Textarea'
+import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
+import { PropsWithChildren, useCallback, useReducer } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { Button } from '../Button'
+import { Input } from '../Input'
+import { Navbar } from '../layout/Navbar'
+import { Textarea } from '../ui/Textarea'
+import { useToast } from '../ui/useToast'
 
 const formSchema = z.object({
   name: z
@@ -42,6 +43,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
     loading: false,
     error: null,
   })
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,17 +55,27 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
     },
   })
 
-  const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
-    dispatch({ type: 'submit' })
-    try {
-      await axios.post('/api/contact', values)
-      dispatch({ type: 'success' })
-      // todo: show success notification
-    } catch (e: any) {
-      dispatch({ type: 'error', error: e.message })
-      // todo: show error notification
-    }
-  }, [])
+  const onSubmit = useCallback(
+    async (values: z.infer<typeof formSchema>) => {
+      dispatch({ type: 'submit' })
+      try {
+        await axios.post('/api/contact', values)
+        dispatch({ type: 'success' })
+        toast({
+          title: 'Message sent',
+          description: 'We will get back to you as soon as possible.',
+        })
+      } catch (e: any) {
+        dispatch({ type: 'error', error: e.message })
+        toast({
+          title: 'Error',
+          description: e.message,
+          variant: 'destructive',
+        })
+      }
+    },
+    [toast],
+  )
 
   return (
     <>

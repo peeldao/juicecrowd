@@ -60,6 +60,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
       dispatch({ type: 'submit' })
       try {
         await axios.post('/api/contact', values)
+        form.reset()
         dispatch({ type: 'success' })
         toast({
           title: 'Message sent',
@@ -74,7 +75,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
         })
       }
     },
-    [toast],
+    [form, toast],
   )
 
   return (

@@ -10,12 +10,14 @@ export type BreadcrumbsProps = {
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
   const path = usePathname()
   const crumbs = path
-    .split('/')
-    .filter(Boolean)
-    .map(decodeURIComponent)
-    .map(crumb => {
-      return crumb[0].toUpperCase() + crumb.slice(1)
-    })
+    ? path
+        .split('/')
+        .filter(Boolean)
+        .map(decodeURIComponent)
+        .map(crumb => {
+          return crumb[0].toUpperCase() + crumb.slice(1)
+        })
+    : []
 
   return (
     <div className={twMerge('flex', className)}>

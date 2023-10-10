@@ -13,13 +13,17 @@
   "dependencies": {
     "@apollo/client": "^3.8.4",
     "@heroicons/react": "^2.0.18",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "connectkit": "^1.4.0",
     "graphql": "^16.8.1",
     "juice-hooks": "^5.0.16-beta",
+    "lucide-react": "^0.284.0",
     "next": "^13.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7",
     "viem": "~0.3.36",
     "wagmi": "^1.0.6"
   },

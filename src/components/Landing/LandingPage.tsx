@@ -16,44 +16,53 @@ export function LandingPage() {
   return (
     <>
       <Navbar />
-      <div className="relative mt-14 flex flex-col items-center overflow-hidden px-4 text-base md:mt-32 md:px-5">
+      <div className="relative mt-14 overflow-hidden text-base md:mt-32 ">
         <GradientBackground className="absolute left-1/2 top-0 -translate-x-1/2" />
         <GradientBackground className="absolute left-1/2 top-1/2 -translate-x-1/2" />
         <GradientBackground className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-full" />
 
-        <HeroSection />
+        <div className="flex flex-col items-center px-4 md:px-5">
+          <HeroSection />
 
-        <HowItWorksSection className="mt-20 md:mt-32" />
+          <HowItWorksSection className="mt-20 md:mt-32" />
 
-        <div className="relative">
-          <Image
-            className="mt-24 md:hidden"
-            src="/assets/images/example-sm.png"
-            alt="Project page example"
-            height={868}
-            width={300}
-          />
-          <Image
-            className="mt-24 hidden md:block"
-            src="/assets/images/example-md.png"
-            alt="Project page example"
-            height={616}
-            width={1010}
-          />
+          <div className="relative">
+            <Image
+              className="mt-24 md:hidden"
+              src="/assets/images/example-sm.png"
+              alt="Project page example"
+              height={868}
+              width={300}
+            />
+            <Image
+              className="mt-24 hidden md:block"
+              src="/assets/images/example-md.png"
+              alt="Project page example"
+              height={616}
+              width={1010}
+            />
+          </div>
         </div>
 
-        <YourProjectSection />
-        <PoweredByTheBestSection className="mt-20" />
-        <div className="mb-28 mt-20 flex flex-col gap-12 md:mb-44 md:mt-32 md:flex-row md:gap-8">
-          <EndStatement icon={<ShieldCheckIcon className="h-7 w-7" />}>
-            Secured by audited smart contracts
-          </EndStatement>
-          <EndStatement icon={<JuiceboxLogo className="h-7 w-7 fill-white" />}>
-            Powered by Juicebox, built on Ethereum
-          </EndStatement>
-          <EndStatement icon={<BoltIcon className="h-7 w-7" />}>
-            Enabling fast, borderless funding
-          </EndStatement>
+        <div className="px-4 md:px-0">
+          <YourProjectSection />
+        </div>
+
+        <div className="flex flex-col items-center px-4 md:px-5">
+          <PoweredByTheBestSection className="mt-20" />
+          <div className="mb-28 mt-20 flex flex-col gap-12 md:mb-44 md:mt-32 md:flex-row md:gap-8">
+            <EndStatement icon={<ShieldCheckIcon className="h-7 w-7" />}>
+              Secured by audited smart contracts
+            </EndStatement>
+            <EndStatement
+              icon={<JuiceboxLogo className="h-7 w-7 fill-white" />}
+            >
+              Powered by Juicebox, built on Ethereum
+            </EndStatement>
+            <EndStatement icon={<BoltIcon className="h-7 w-7" />}>
+              Enabling fast, borderless funding
+            </EndStatement>
+          </div>
         </div>
       </div>
       <StayInLoopSection />
@@ -72,7 +81,7 @@ const PoweredByTheBestSection: React.FC<PoweredByTheBestSectionProps> = ({
     // TODO: Should be bg-gray-25
     <div
       className={twMerge(
-        'flex w-full max-w-6xl flex-col items-center gap-16 rounded-xl border border-gray-100 bg-gray-50 px-4 pb-12 pt-8 text-center md:px-28 md:py-16',
+        'flex w-full flex-col items-center gap-16 rounded-xl border border-gray-100 bg-gray-50 px-4 pb-12 pt-8 text-center md:px-28 md:py-16',
         className,
       )}
     >

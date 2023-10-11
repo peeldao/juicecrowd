@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react'
 import { Breadcrumbs } from '../Breadcrumbs'
+import { Button } from '../Button'
 import { StayInLoopSection } from '../Landing/components/StayInLoopSection'
 import { Navbar } from '../layout/Navbar'
-import { Button } from '../Button'
 
 export const CrowdsPage: React.FC = () => {
   return (

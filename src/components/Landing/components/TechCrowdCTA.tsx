@@ -34,9 +34,11 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
         </div>
       </div>
       <div className="flex flex-col items-center gap-4">
-        <Button className="whitespace-nowrap px-7 py-4">
-          Submit your project
-        </Button>
+        <Link href="/crowds">
+          <Button className="whitespace-nowrap px-7 py-4">
+            Submit your project
+          </Button>
+        </Link>
         <div className="text-xs text-gray-400">
           Submissions close 26 October 2023
         </div>

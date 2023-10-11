@@ -1,4 +1,5 @@
 import { Button } from '@/components/Button'
+import { Link } from '@/components/Link'
 import Image from 'next/image'
 import { PropsWithChildren } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -80,8 +81,10 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
               The community will vote on their favourite projects, and if you
               make it in, we&apos;re off to the races!
             </div>
-            {/* Hardcoded TC01 */}
-            <Button className="mt-6 w-fit">Submit to TC01</Button>
+            <Link href="/crowds">
+              {/* Hardcoded TC01 */}
+              <Button className="mt-6 w-fit">Submit to TC01</Button>
+            </Link>
           </div>
         </div>
 

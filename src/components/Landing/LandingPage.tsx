@@ -76,7 +76,7 @@ const PoweredByTheBestSection: React.FC<PoweredByTheBestSectionProps> = ({
         className,
       )}
     >
-      <div className="max-w-3xl">
+      <div className="flex max-w-3xl flex-col items-center">
         <h2 className="text-center font-heading text-2xl font-bold md:text-3xl">
           Powered by the best ⚡️
         </h2>

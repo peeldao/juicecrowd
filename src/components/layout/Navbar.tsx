@@ -38,7 +38,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           )}
         </Link>
         <div className="hidden items-center gap-8 md:flex">
-          <Link className="text-gray-700" href="/#TODO">
+          <Link className="text-gray-700" href="https://docs.juicecrowd.gg">
             Learn more
           </Link>
           <Link className="text-gray-700" href="/contact">
@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           mobileToggle ? 'flex' : 'hidden',
         )}
       >
-        <Link className="text-gray-700" href="/#TODO">
+        <Link className="text-gray-700" href="https://docs.juicecrowd.gg">
           Learn more
         </Link>
         <Link className="text-gray-700" href="/contact">

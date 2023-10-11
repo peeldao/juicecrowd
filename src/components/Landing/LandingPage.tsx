@@ -72,7 +72,7 @@ const PoweredByTheBestSection: React.FC<PoweredByTheBestSectionProps> = ({
     // TODO: Should be bg-gray-25
     <div
       className={twMerge(
-        'flex w-full max-w-6xl flex-col items-center gap-16 rounded-xl border border-gray-100 bg-gray-50 px-4 pb-12 pt-8 text-center md:px-28 md:py-16',
+        'flex w-full max-w-6xl flex-col items-center gap-16 rounded-xl border border-gray-100 bg-white bg-opacity-30 px-4 pb-12 pt-8 text-center md:px-28 md:py-16',
         className,
       )}
     >

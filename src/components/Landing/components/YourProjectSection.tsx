@@ -24,7 +24,7 @@ export const YourProjectSection: React.FC<YourProjectSectionProps> = ({
       <h2 className="mb-5 font-heading text-3xl font-bold">
         Your project, your way
       </h2>
-      <p className="m-auto max-w-3xl text-base text-gray-700">
+      <p className="m-auto max-w-3xl text-gray-700 md:text-lg">
         As part of the crowd, you get your very own project page that you can
         share with your network and community. Equipped with thoughtful features
         to help you grow.

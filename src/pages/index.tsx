@@ -1,4 +1,4 @@
-import LandingPage from '@/components/Landing'
+import { LandingPage } from '@/components/Landing'
 
 export function Page() {
   return <LandingPage />

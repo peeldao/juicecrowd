@@ -28,6 +28,11 @@ const agrandir = localFont({
       weight: '500',
       style: 'normal',
     },
+    {
+      path: '../../public/assets/fonts/PPAgrandir-Bold.woff',
+      weight: '700',
+      style: 'normal',
+    },
   ],
   variable: '--font-agrandir',
 })

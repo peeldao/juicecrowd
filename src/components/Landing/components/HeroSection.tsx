@@ -4,7 +4,7 @@ import { TechCrowdCTA } from './TechCrowdCTA'
 export const HeroSection: React.FC = () => {
   return (
     <>
-      <h1 className="max-w-xl text-center font-heading text-3xl font-bold md:text-6xl">
+      <h1 className="max-w-xl text-center font-heading text-4xl font-bold md:text-6xl">
         Stand out from the crowd. Get funded.
       </h1>
       <div className="mt-4 max-w-3xl text-center text-base text-gray-700 md:text-lg">

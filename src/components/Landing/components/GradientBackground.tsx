@@ -10,7 +10,10 @@ export type GradientBackgroundProps = {
 export const GradientBackground: React.FC<GradientBackgroundProps> = ({
   className,
 }) => {
-  className = twMerge('-z-10 h-auto w-[120%] max-w-[1725px]', className)
+  className = twMerge(
+    '-z-10 h-auto md:w-[120%] w-[165%] max-w-[1725px]',
+    className,
+  )
 
   return (
     <>

@@ -15,7 +15,7 @@ const Button = React.forwardRef<
   return (
     <button
       className={twMerge(
-        'bg-bluebs-500 flex items-center justify-center rounded-lg px-6 py-3 text-base font-medium text-white focus:outline-none',
+        'bg-bluebs-500 hover:bg-bluebs-600 flex items-center justify-center rounded-lg px-6 py-3 text-base font-medium text-white transition-colors focus:outline-none',
         className,
       )}
       {...props}

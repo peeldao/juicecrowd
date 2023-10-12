@@ -1,7 +1,7 @@
 import { apiWrapper } from '@/lib/backend/api/apiWrapper'
 import { NextResponse } from 'next/server'
 import * as z from 'zod'
-import { addEmailSubscription } from '@/lib/backend/emailSubscriptions.ts/addEmailSubscription'
+import { addEmailSubscription } from '@/lib/backend/emailSubscriptions/addEmailSubscription'
 import { JuiceCrowdError } from '@/lib/error'
 
 const emailSubscriptionsSchema = z.object({

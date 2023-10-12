@@ -25,12 +25,12 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
           height={115}
         />
         <div className="flex flex-col items-center text-center md:items-start md:text-start">
-          <div className="text-lg font-semibold">Tech Crowd 01 (TC01)</div>
+          <div className="text-lg font-semibold">Juice Crowd 01 (JC01)</div>
           <div className="mt-1.5 text-base text-gray-600">
             Submissions now open for all technology-focused projects in the web3
             space.
           </div>
-          <PrizePoolFlair className="mt-3 md:mt-4" prizePool={5} />
+          <PrizePoolFlair className="mt-3 md:mt-4" prizePool={3} />
         </div>
       </div>
       <div className="flex flex-col items-center gap-4">
@@ -63,8 +63,8 @@ const PrizePoolFlair: React.FC<PrizePoolFlairProps> = ({
         className,
       )}
     >
-      <div className="bg-bluebs-50 flex items-center justify-center rounded-full p-1">
-        <EthereumIconFilled className="text-bluebs-500 h-5 w-5" />
+      <div className="flex items-center justify-center rounded-full bg-bluebs-50 p-1">
+        <EthereumIconFilled className="h-5 w-5 text-bluebs-500" />
       </div>
       <div className="text-base font-medium text-gray-800">
         {prizePool} ETH prize pool

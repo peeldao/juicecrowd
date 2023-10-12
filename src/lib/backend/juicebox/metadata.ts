@@ -11,7 +11,7 @@ import { publicClient } from '../../viem/publicClient'
 
 const PROJECT_METADATA_DOMAIN = 0n
 
-export const getProjectMetadata = async (projectId: bigint) => {
+export const getProjectMetadata = async (projectId: number) => {
   const metadataCid = await getMetadataCidFromContract(BigInt(projectId))
   const res = await axios.get<JBProjectMetadata>(ipfsGatewayUrl(metadataCid))
   return res.data

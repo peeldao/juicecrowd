@@ -41,7 +41,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
       <div className="mt-5 flex max-w-5xl flex-col gap-14 md:mt-12 md:gap-12">
         <div className="flex flex-col items-center md:flex-row md:gap-16">
           <Image
-            src="/assets/images/how-it-works1.png"
+            src="/assets/images/how-it-works-1.png"
             alt="Find your crowd"
             width={400}
             height={400}
@@ -67,7 +67,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
 
         <div className="flex flex-col items-center gap-8 md:flex-row-reverse md:gap-16">
           <Image
-            src="/assets/images/how-it-works2.png"
+            src="/assets/images/how-it-works-2.png"
             alt="Submit your project"
             width={400}
             height={400}
@@ -90,7 +90,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
 
         <div className="flex flex-col items-center gap-8 md:flex-row md:gap-16">
           <Image
-            src="/assets/images/how-it-works3.png"
+            src="/assets/images/how-it-works-3.png"
             alt="Get crowdfunding support"
             width={400}
             height={400}

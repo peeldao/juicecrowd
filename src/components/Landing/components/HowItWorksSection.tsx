@@ -82,8 +82,8 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
               make it in, we&apos;re off to the races!
             </div>
             <Link href="/crowds">
-              {/* Hardcoded TC01 */}
-              <Button className="mt-6 w-fit">Submit to TC01</Button>
+              {/* Hardcoded JC01 */}
+              <Button className="mt-6 w-fit">Submit to JC01</Button>
             </Link>
           </div>
         </div>

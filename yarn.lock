@@ -4990,10 +4990,10 @@ jsonparse@^1.2.0:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
-juice-hooks@^5.0.16-beta:
-  version "5.0.16-beta"
-  resolved "https://registry.yarnpkg.com/juice-hooks/-/juice-hooks-5.0.16-beta.tgz#e52d524a08eb9404e5ec261a7c1cd05d1ccf758b"
-  integrity sha512-mWf6Oc7cmWiWgbaHCPxxLHUVAfFCT36Ig/nYacraYb87toolcjMQlnHG8EkSwrdwi9C+Mmbf9z+o+/wn1eGa8Q==
+juice-hooks@5.0.19-beta:
+  version "5.0.19-beta"
+  resolved "https://registry.yarnpkg.com/juice-hooks/-/juice-hooks-5.0.19-beta.tgz#4edd220384f3f9eb85fcd55b08523f4ce21ce875"
+  integrity sha512-AmwJxMytpdFgoMhtt+p578vo6EgzjCbBWtdvgE2T9mHzwY3QbaxYndOQB3Cb1x2j0MzFlP/aR7QP0yFZ/87S5w==
   dependencies:
     fpnum "^0.0.13"
     react "^18.2.0"

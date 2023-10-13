@@ -2,8 +2,13 @@ import { ProjectPage } from '@/components/Project'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
 import { JBProjectMetadataContext } from '@/contexts/ProjectMetadata'
-import { getProjectMetadata } from '@/lib/backend/juicebox/metadata'
-import { JBProjectMetadata, JBProjectProvider } from 'juice-hooks'
+import { OPEN_IPFS_GATEWAY_HOSTNAME } from '@/lib/ipfs'
+import { publicClient } from '@/lib/viem/publicClient'
+import {
+  JBProjectMetadata,
+  JBProjectProvider,
+  getProjectMetadata,
+} from 'juice-hooks'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 
 export interface ProjectPageProps {
@@ -30,7 +35,16 @@ export const getStaticProps: GetStaticProps<
 
   const projectId = parseInt(context.params.projectId as string)
   try {
-    const metadata = await getProjectMetadata(projectId)
+    const metadata = await getProjectMetadata(
+      publicClient,
+      {
+        projectId: BigInt(projectId),
+        domain: 0n,
+      },
+      {
+        ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
+      },
+    )
     if (!metadata) {
       return { notFound: true }
     }

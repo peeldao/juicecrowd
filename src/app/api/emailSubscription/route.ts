@@ -13,7 +13,7 @@ export const POST = apiWrapper(emailSubscriptionsSchema, async data => {
     await addEmailSubscription(data.email)
   } catch (e) {
     console.error('Failed to subscribe email', e)
-    throw new JuiceCrowdError(e as string)
+    throw new JuiceCrowdError('Unkown error occurred - contact support')
   }
   return NextResponse.json({ success: true })
 })

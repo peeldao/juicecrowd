@@ -52,10 +52,14 @@ export const CrowdsPage: React.FC = () => {
 
           <HeaderParagraph header="Requirements">
             <ul className="ml-4 list-inside list-disc">
-              <li>Technology-focused (e.g. trading bot, etc.)</li>
-              <li>Uses web3 technology or is for web3 users in some way</li>
-              <li>Lorem ipsum dolor sit amet</li>
-              <li>Lorem ipsum dolor sit amet</li>
+              <li>Project must already exist or have proof of prior work</li>
+              <li>
+                Project must use web3 or blockchain technology in some way
+              </li>
+              <li>
+                Team must have capacity to work on their crowdfunding campaign
+                during specified dates
+              </li>
             </ul>
           </HeaderParagraph>
 

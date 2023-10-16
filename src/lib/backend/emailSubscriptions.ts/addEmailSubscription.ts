@@ -1,3 +1,4 @@
+import { JuiceCrowdError } from '@/lib/error'
 import { google } from 'googleapis'
 
 const GOOGLE_SHEET_ID = '1_OpoitLq1pLQIqsdDGh6SbRrdtmABXdIXuJD6HMAVCo'
@@ -45,7 +46,7 @@ export async function addEmailSubscription(emailAddress: string) {
 
       // Ensure email is not already added
       if (existingEmails.includes(emailAddress)) {
-        reject(new Error('Email already exists'))
+        reject(new JuiceCrowdError('Email already exists', 409))
         return
       }
 

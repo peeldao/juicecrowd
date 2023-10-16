@@ -35,7 +35,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
         },
         {
           title: 'Submit your project',
-          link: '/submit',
+          link: 'https://form.typeform.com/to/LfNmNKVe',
         },
       ],
     },

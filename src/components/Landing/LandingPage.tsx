@@ -2,7 +2,6 @@ import { BoltIcon, ShieldCheckIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 import React, { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Button } from '../Button'
 import { Link } from '../Link'
 import { JuiceboxLogo } from '../icon/JuiceboxLogo'
 import { Navbar } from '../layout/Navbar'
@@ -11,6 +10,7 @@ import { HowItWorksSection } from './components/HowItWorksSection'
 import { StayInLoopSection } from './components/StayInLoopSection'
 import { YourProjectSection } from './components/YourProjectSection'
 import { GradientBackground } from './components/GradientBackground'
+import { Button } from '../ui/Button'
 
 export function LandingPage() {
   return (
@@ -107,7 +107,10 @@ const PoweredByTheBestSection: React.FC<PoweredByTheBestSectionProps> = ({
         />
 
         <Link href="https://juicebox.money">
-          <Button className="m-auto mt-12 w-fit border border-gray-300 bg-white text-black drop-shadow md:mt-16">
+          <Button
+            variant="outline"
+            className="m-auto mt-12 text-foreground drop-shadow-sm md:mt-16"
+          >
             Visit Juicebox
           </Button>
         </Link>

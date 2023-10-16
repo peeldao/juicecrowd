@@ -1,6 +1,6 @@
 import { ConnectKitButton as _ConnectKitButton } from 'connectkit'
-import { Button } from './Button'
 import { useMemo } from 'react'
+import { Button } from './ui/Button'
 
 export const ConnectKitButton = () => {
   return (
@@ -18,7 +18,8 @@ export const ConnectKitButton = () => {
 
         return (
           <Button
-            className="bg-bluebs-50 text-bluebs-700 px-4 py-2.5"
+            // TODO: Fit in with ui button variants
+            className="bg-bluebs-50 px-4 py-2.5 text-bluebs-700"
             onClick={show}
           >
             {buttonText}

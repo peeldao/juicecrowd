@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react'
 import { Breadcrumbs } from '../Breadcrumbs'
-import { Button } from '../Button'
 import { StayInLoopSection } from '../Landing/components/StayInLoopSection'
 import { Navbar } from '../layout/Navbar'
 import { Link } from '../Link'
+import { Button } from '../ui/Button'
 
 const DATE = {
   SUBMISSIONS_CLOSE: '01 November 2023',
@@ -118,7 +118,9 @@ export const CrowdsPage: React.FC = () => {
         </div>
 
         <Link href="https://form.typeform.com/to/LfNmNKVe">
-          <Button className="mt-16 w-fit">Submit your project</Button>
+          <Button size="lg" className="mt-16">
+            Submit your project
+          </Button>
         </Link>
 
         <div className="mt-10 text-sm text-gray-500">

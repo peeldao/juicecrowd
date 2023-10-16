@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button'
+import { Button } from '@/components/ui/Button'
 import { Link } from '@/components/Link'
 import Image from 'next/image'
 import { PropsWithChildren } from 'react'
@@ -83,7 +83,7 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
             </div>
             <Link href="/crowds">
               {/* Hardcoded JC01 */}
-              <Button className="mt-6 w-fit">Submit to JC01</Button>
+              <Button className="mt-6">Submit to JC01</Button>
             </Link>
           </div>
         </div>

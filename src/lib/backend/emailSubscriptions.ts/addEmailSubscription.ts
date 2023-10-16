@@ -1,25 +1,32 @@
+import { JuiceCrowdError } from '@/lib/error'
 import { google } from 'googleapis'
 
-if (!process.env.GOOGLE_SHEETS_SERVICE_ACCOUNT) {
-  throw new Error('GOOGLE_SHEETS_SERVICE_ACCOUNT is not set in .env');
-}
-
-const GOOGLE_SHEETS_SERVICE_ACCOUNT = JSON.parse(
-  process.env.GOOGLE_SHEETS_SERVICE_ACCOUNT ?? '',
-)
 const GOOGLE_SHEET_ID = '1_OpoitLq1pLQIqsdDGh6SbRrdtmABXdIXuJD6HMAVCo'
 
-const jwtClient = new google.auth.JWT(
-  GOOGLE_SHEETS_SERVICE_ACCOUNT.client_email,
-  undefined,
-  GOOGLE_SHEETS_SERVICE_ACCOUNT.private_key,
-  ['https://www.googleapis.com/auth/spreadsheets'],
-)
 /**
  * Append an email address to the Google sheet which lists email subscriptions for JuiceCrowd
  * @param emailAddress
  */
 export async function addEmailSubscription(emailAddress: string) {
+  const GoogleSheetsServiceAccountRaw =
+    process.env.GOOGLE_SHEETS_SERVICE_ACCOUNT
+  if (!GoogleSheetsServiceAccountRaw) {
+    throw new Error('GOOGLE_SHEETS_SERVICE_ACCOUNT is not set in .env')
+  }
+  const GoogleSheetsServiceAccount = JSON.parse(
+    GoogleSheetsServiceAccountRaw,
+  ) as {
+    client_email: string
+    private_key: string
+  }
+
+  const jwtClient = new google.auth.JWT(
+    GoogleSheetsServiceAccount.client_email,
+    undefined,
+    GoogleSheetsServiceAccount.private_key,
+    ['https://www.googleapis.com/auth/spreadsheets'],
+  )
+
   return new Promise<void>((resolve, reject) => {
     jwtClient.authorize(async err => {
       if (err) {
@@ -39,7 +46,7 @@ export async function addEmailSubscription(emailAddress: string) {
 
       // Ensure email is not already added
       if (existingEmails.includes(emailAddress)) {
-        reject(new Error('Email already exists'))
+        reject(new JuiceCrowdError('Email already exists', 409))
         return
       }
 

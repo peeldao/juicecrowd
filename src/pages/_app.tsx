@@ -58,21 +58,19 @@ export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head />
-      <AppProvider>
-        <main
-          className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
-        >
-          <Component {...pageProps} />
-        </main>
-        <Footer
-          className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
-        />
-        <div
-          className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
-        >
-          <Toaster />
-        </div>
-      </AppProvider>
+      <main
+        className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
+      >
+        <Component {...pageProps} />
+      </main>
+      <Footer
+        className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
+      />
+      <div
+        className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
+      >
+        <Toaster />
+      </div>
     </>
   )
 }

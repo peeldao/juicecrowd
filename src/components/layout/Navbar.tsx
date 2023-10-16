@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { CoinLogo } from '../icon/CoinLogo'
 import { Link } from '../Link'
-import { Button } from '../Button'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import Logo from '../Logo'
+import { Button } from '../ui/Button'
 
 type NavbarProps = {
   className?: string
@@ -47,7 +47,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         <Button
-          className="bg-transparent p-0 text-gray-900 md:hidden"
+          variant="ghost"
+          className="p-0 text-gray-900 md:hidden"
           onClick={() => setMobileToggle(t => !t)}
         >
           {mobileToggle ? (

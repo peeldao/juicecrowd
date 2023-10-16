@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge'
 import Image from 'next/image'
-import { Button } from '@/components/Button'
+import { Button } from '@/components/ui/Button'
 import { Link } from '@/components/Link'
 import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
 
@@ -35,7 +35,7 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
       </div>
       <div className="flex flex-col items-center gap-4">
         <Link href="/crowds">
-          <Button className="whitespace-nowrap px-7 py-4">
+          <Button size="lg" className="whitespace-nowrap">
             Submit your project
           </Button>
         </Link>

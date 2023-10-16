@@ -12,11 +12,11 @@ import axios from 'axios'
 import { PropsWithChildren, useCallback, useReducer } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
-import { Button } from '../Button'
 import { Input } from '../Input'
 import { Navbar } from '../layout/Navbar'
 import { Textarea } from '../ui/Textarea'
 import { useToast } from '../ui/useToast'
+import { LoadingButton } from '../LoadingButton'
 
 const formSchema = z.object({
   name: z
@@ -82,7 +82,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
     <>
       <Navbar />
       <div className="mx-auto mb-56 flex max-w-xl flex-col items-center px-5 pt-14 text-base md:pt-20">
-        <h1 className="text-bluebs-600 font-medium">Contact us</h1>
+        <h1 className="font-medium text-bluebs-600">Contact us</h1>
         <h1 className="mt-3 font-heading text-5xl font-bold">Get in touch</h1>
         <div className="mt-6 text-center">
           Got a question or need help with your project? Fill out the form below
@@ -132,13 +132,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
               />
             </div>
 
-            <Button
+            <LoadingButton
               className="mt-8 w-full"
               loading={state.loading}
               type="submit"
             >
               Send message
-            </Button>
+            </LoadingButton>
           </form>
         </Form>
       </div>

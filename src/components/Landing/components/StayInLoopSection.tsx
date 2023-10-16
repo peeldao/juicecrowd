@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { twMerge } from 'tailwind-merge'
 import axios from 'axios'
@@ -8,6 +7,7 @@ import { Form, FormField, FormMessage } from '@/components/ui/Form'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useToast } from '@/components/ui/useToast'
+import { LoadingButton } from '@/components/LoadingButton'
 
 export type StayInLoopSectionProps = {
   className?: string
@@ -84,13 +84,13 @@ export const StayInLoopSection: React.FC<StayInLoopSectionProps> = ({
                 </>
               )}
             />
-            <Button
+            <LoadingButton
               className="row-start-3 md:col-start-2 md:row-start-1 md:w-min"
               type="submit"
               loading={submitEmailLoading}
             >
               Subscribe
-            </Button>
+            </LoadingButton>
           </form>
         </Form>
       </div>

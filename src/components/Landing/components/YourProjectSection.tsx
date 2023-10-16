@@ -33,7 +33,7 @@ export const YourProjectSection: React.FC<YourProjectSectionProps> = ({
             Showcase your brand, history and future.
           </CardWithIcon>
           <CardWithIcon title="Collect payments" icon={<BanknotesIcon />}>
-            Accepting crypto payment methods including Ethereum.
+            Accepting crypto payment methods including ether.
           </CardWithIcon>
           <CardWithIcon title="Offer NFTs & rewards" icon={<CubeIcon />}>
             Build compelling offers for early supporters.

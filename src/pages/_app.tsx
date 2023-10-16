@@ -4,6 +4,7 @@ import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
 import '../styles/globals.css'
 import { Toaster } from '@/components/ui/Toaster'
+import { Head } from '@/components/Head'
 
 const agrandirWide = localFont({
   src: [
@@ -56,6 +57,7 @@ const beatrice = localFont({
 export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
   return (
     <AppProvider>
+      <Head />
       <main
         className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
       >

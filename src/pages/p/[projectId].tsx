@@ -1,3 +1,4 @@
+import { SEO } from '@/components/SEO'
 import {
   JBProjectProvider,
   useJBContractContext,
@@ -50,8 +51,13 @@ export default function ProjectPage({
   projectId,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <JBProjectProvider projectId={1n}>
-      <_ProjectPage />
-    </JBProjectProvider>
+    <>
+      {/* // TODO: port over project seo from juicebox? */}
+      <SEO title="Project" description="Project description" />
+      {/* // TODO: Move this to a component for the ProjectPage */}
+      <JBProjectProvider projectId={1n}>
+        <_ProjectPage />
+      </JBProjectProvider>
+    </>
   )
 }

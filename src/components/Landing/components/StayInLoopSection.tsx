@@ -56,8 +56,8 @@ export const StayInLoopSection: React.FC<StayInLoopSectionProps> = ({
     <div
       className={twMerge('bg-gray-800 px-5 py-12 text-sm md:px-12', className)}
     >
-      <div className="m-auto flex max-w-6xl flex-col items-start justify-between gap-7 md:flex-row md:items-center md:gap-5">
-        <div>
+      <div className="m-auto flex max-w-6xl flex-col items-start justify-between gap-10 md:flex-row md:items-start md:gap-5">
+        <div className="w-full">
           <h3 className="pb-2 font-heading text-2xl font-medium text-white">
             Want to stay in the loop?
           </h3>
@@ -66,30 +66,32 @@ export const StayInLoopSection: React.FC<StayInLoopSectionProps> = ({
           </div>
         </div>
         <Form {...form}>
-          <div className="flex w-full flex-1 flex-col justify-end gap-3 md:flex-row">
+          <form
+            className="grid w-full auto-cols-min grid-cols-1 items-end justify-end gap-4 md:grid-cols-[320px_min-content]"
+            onSubmit={form.handleSubmit(handleSubmit)}
+          >
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
-                <div className="relative flex w-full flex-col items-start md:max-w-xs">
+                <>
                   <Input
-                    className="h-12 border-gray-500 bg-transparent text-base text-white outline-2"
+                    className="h-12 border-gray-500 bg-transparent text-base text-white outline-2 md:max-w-xs"
                     placeholder="Enter your email"
                     {...field}
                   />
-                  <FormMessage className="absolute -bottom-6" />
-                </div>
+                  <FormMessage className="row-start-2" />
+                </>
               )}
             />
-            <div className="relative">
-              <Button
-                onClick={form.handleSubmit(handleSubmit)}
-                loading={submitEmailLoading}
-              >
-                Subscribe
-              </Button>
-            </div>
-          </div>
+            <Button
+              className="row-start-3 md:col-start-2 md:row-start-1 md:w-min"
+              type="submit"
+              loading={submitEmailLoading}
+            >
+              Subscribe
+            </Button>
+          </form>
         </Form>
       </div>
     </div>

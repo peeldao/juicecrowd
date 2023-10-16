@@ -147,7 +147,7 @@ const HeaderParagraph: React.FC<HeaderParagraphProps> = ({
 }) => {
   return (
     <div className={className}>
-      <h2 className="mb-4 font-semibold">{header}</h2>
+      <h2 className="mb-4 text-lg font-semibold">{header}</h2>
       <div className="space-y-6">{children}</div>
     </div>
   )

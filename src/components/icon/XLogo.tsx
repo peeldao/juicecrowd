@@ -1,6 +1,7 @@
 import Image, { ImageProps } from 'next/image'
 
-export const JB_X_URL = 'https://x.com/juiceboxETH'
+// TODO: move this
+export const JB_X_URL = 'https://twitter.com/Juicebox_Money'
 
 export const XLogo: React.FC<Omit<ImageProps, 'src' | 'alt'>> = ({
   className,

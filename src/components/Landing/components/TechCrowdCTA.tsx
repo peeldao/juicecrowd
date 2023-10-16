@@ -25,7 +25,7 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
           height={115}
         />
         <div className="flex flex-col items-center text-center md:items-start md:text-start">
-          <div className="text-lg font-semibold">Juice Crowd 01 (JC01)</div>
+          <div className="text-lg font-semibold">Juicecrowd 01 (JC01)</div>
           <div className="mt-1.5 text-base text-gray-600">
             Submissions now open for all technology-focused projects in the web3
             space.
@@ -40,7 +40,8 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
           </Button>
         </Link>
         <div className="text-xs text-gray-400">
-          Submissions close 26 October 2023
+          {/* TODO: lets use a global somewhere for dates */}
+          Submissions close 1 November 2023
         </div>
       </div>
     </div>

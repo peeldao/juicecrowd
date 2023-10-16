@@ -65,19 +65,6 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
         },
       ],
     },
-    {
-      title: 'Legal',
-      items: [
-        {
-          title: 'Privacy Policy',
-          link: '/privacy',
-        },
-        {
-          title: 'Terms of Service',
-          link: '/tos',
-        },
-      ],
-    },
   ]
 
   return (
@@ -85,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
       className={twMerge('bg-slate-900 px-5 pt-12 text-sm md:px-12', className)}
     >
       <div className="m-auto max-w-6xl">
-        <div className="flex flex-col gap-y-10 md:grid md:grid-cols-6 md:items-start md:gap-x-10">
+        <div className="flex flex-col gap-y-10 md:grid md:grid-cols-5 md:items-start md:gap-x-10">
           <div className="flex flex-col gap-y-5 text-gray-400 md:col-span-2 md:items-start">
             <Logo theme="dark" />
             Made with 🤍 on Ethereum, by a community of amazing & talented

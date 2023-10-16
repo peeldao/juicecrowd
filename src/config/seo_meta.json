@@ -1,0 +1,12 @@
+{
+  "title": "Juicecrowd | Web3's crowdfunding program",
+  "titleTemplate": "%s | Juicecrowd",
+  "description": "Submit your project to the next Juicecrowd, and get support on your crowdfunding campaign. From the creators of Juicebox.money.",
+  "twitter": {
+    "handle": "@Juicebox_Money",
+    "site": "https://juicecrowd.gg",
+    "creator": "@Juicebox_Money",
+    "cardType": "summary_large_image",
+    "image": "https://juicecrowd.gg/assets/images/unfurl-banner.png"
+  }
+}

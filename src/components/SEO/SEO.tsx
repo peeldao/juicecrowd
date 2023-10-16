@@ -76,7 +76,7 @@ export const SEO: FC<React.PropsWithChildren<SEOProps>> = ({
           src:
             (process.env.NEXT_PUBLIC_BASE_URL
               ? process.env.NEXT_PUBLIC_BASE_URL
-              : '/') + 'assets/JBM-Unfurl-banner.png',
+              : '/') + 'assets/images/unfurl-banner.png',
           type: 'image/png',
           width: '1136',
           height: '497',

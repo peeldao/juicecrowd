@@ -25,7 +25,7 @@ export const CrowdsPage: React.FC = () => {
           Juicecrowd (JC01) submissions open!
         </h1>
 
-        <div className="font-xl mt-10 flex flex-col gap-8">
+        <div className="font-xl mt-10 flex flex-col gap-12">
           <HeaderParagraph header="About">
             <p>
               Calling all build00rs! The very first, official Juicecrowd program
@@ -49,7 +49,7 @@ export const CrowdsPage: React.FC = () => {
           </HeaderParagraph>
 
           <HeaderParagraph header="Requirements">
-            <ul className="ml-4 list-inside list-disc">
+            <ul className="ml-4 list-inside list-disc space-y-1">
               <li>Project must already exist or have proof of prior work</li>
               <li>
                 Project must use web3 or blockchain technology in some way
@@ -147,7 +147,7 @@ const HeaderParagraph: React.FC<HeaderParagraphProps> = ({
 }) => {
   return (
     <div className={className}>
-      <h2 className="mb-8 font-semibold">{header}</h2>
+      <h2 className="mb-4 text-lg font-semibold">{header}</h2>
       <div className="space-y-6">{children}</div>
     </div>
   )

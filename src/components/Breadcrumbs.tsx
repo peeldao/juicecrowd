@@ -20,7 +20,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
     : []
 
   return (
-    <div className={twMerge('flex', className)}>
+    <div className={twMerge('flex text-sm text-gray-700', className)}>
       <Link href="/">Home</Link>
       {crumbs.slice(0, -1).map((crumb, i) => (
         <React.Fragment key={crumb}>

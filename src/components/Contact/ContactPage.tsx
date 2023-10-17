@@ -13,10 +13,9 @@ import { PropsWithChildren, useCallback, useReducer } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { Input } from '../Input'
-import { Navbar } from '../layout/Navbar'
+import { LoadingButton } from '../LoadingButton'
 import { Textarea } from '../ui/Textarea'
 import { useToast } from '../ui/useToast'
-import { LoadingButton } from '../LoadingButton'
 
 const formSchema = z.object({
   name: z
@@ -79,70 +78,67 @@ export const ContactPage: React.FC<ContactPageProps> = ({ className }) => {
   )
 
   return (
-    <>
-      <Navbar />
-      <div className="mx-auto mb-56 flex max-w-xl flex-col items-center px-5 pt-14 text-base md:pt-20">
-        <h1 className="font-medium text-bluebs-600">Contact us</h1>
-        <h1 className="mt-3 font-heading text-5xl font-bold">Get in touch</h1>
-        <div className="mt-6 text-center">
-          Got a question or need help with your project? Fill out the form below
-          and we&apos;ll get back to you as soon as possible.
-        </div>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="mt-10 w-full md:mt-14"
-          >
-            <div className="space-y-6 md:space-y-8">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <ContactFormItem label="Your name">
-                    <Input placeholder="First name" {...field} />
-                  </ContactFormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <ContactFormItem label="Email">
-                    <Input placeholder="you@company.com" {...field} />
-                  </ContactFormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="subject"
-                render={({ field }) => (
-                  <ContactFormItem label="Subject">
-                    <Input placeholder="Project submission" {...field} />
-                  </ContactFormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <ContactFormItem label="Message">
-                    <Textarea placeholder="Leave us a message..." {...field} />
-                  </ContactFormItem>
-                )}
-              />
-            </div>
-
-            <LoadingButton
-              className="mt-8 w-full"
-              loading={state.loading}
-              type="submit"
-            >
-              Send message
-            </LoadingButton>
-          </form>
-        </Form>
+    <div className="mx-auto mb-56 flex max-w-xl flex-col items-center px-5 pt-14 text-base md:pt-20">
+      <h1 className="font-medium text-bluebs-600">Contact us</h1>
+      <h1 className="mt-3 font-heading text-5xl font-bold">Get in touch</h1>
+      <div className="mt-6 text-center">
+        Got a question or need help with your project? Fill out the form below
+        and we&apos;ll get back to you as soon as possible.
       </div>
-    </>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="mt-10 w-full md:mt-14"
+        >
+          <div className="space-y-6 md:space-y-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <ContactFormItem label="Your name">
+                  <Input placeholder="First name" {...field} />
+                </ContactFormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <ContactFormItem label="Email">
+                  <Input placeholder="you@company.com" {...field} />
+                </ContactFormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="subject"
+              render={({ field }) => (
+                <ContactFormItem label="Subject">
+                  <Input placeholder="Project submission" {...field} />
+                </ContactFormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <ContactFormItem label="Message">
+                  <Textarea placeholder="Leave us a message..." {...field} />
+                </ContactFormItem>
+              )}
+            />
+          </div>
+
+          <LoadingButton
+            className="mt-8 w-full"
+            loading={state.loading}
+            type="submit"
+          >
+            Send message
+          </LoadingButton>
+        </form>
+      </Form>
+    </div>
   )
 }
 

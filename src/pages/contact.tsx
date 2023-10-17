@@ -1,6 +1,6 @@
 import { ContactPage } from '@/components/Contact'
 import { SEO } from '@/components/SEO'
-import { AppProvider } from '@/components/layout/AppProvider'
+import { Layout } from '@/components/layout'
 
 export function Page() {
   return (
@@ -9,9 +9,9 @@ export function Page() {
         title="Contact"
         description="Contact us for more information about our services and products. We are here to help you with your business needs."
       />
-      <AppProvider>
+      <Layout>
         <ContactPage />
-      </AppProvider>
+      </Layout>
     </>
   )
 }

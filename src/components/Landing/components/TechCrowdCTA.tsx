@@ -27,8 +27,14 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
         <div className="flex flex-col items-center text-center md:items-start md:text-start">
           <div className="text-lg font-semibold">Juicecrowd 01 (JC01)</div>
           <div className="mt-1.5 text-base text-gray-600">
-            Submissions now open for all technology-focused projects in the web3
-            space.
+            Submissions now open for all projects in the blockchain & web3
+            space.{' '}
+            <Link
+              className="text-gray-600 underline"
+              href="https://docs.juicecrowd.gg"
+            >
+              Learn more
+            </Link>
           </div>
           <PrizePoolFlair className="mt-3 md:mt-4" prizePool={3} />
         </div>
@@ -41,7 +47,7 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
         </Link>
         <div className="text-xs text-gray-400">
           {/* TODO: lets use a global somewhere for dates */}
-          Submissions close 1 November 2023
+          Submissions close 26 October 2023
         </div>
       </div>
     </div>

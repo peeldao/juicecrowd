@@ -26,12 +26,18 @@ export const CrowdsPage: React.FC = () => {
         <div className="font-xl mt-10 flex flex-col gap-12">
           <HeaderParagraph header="About">
             <p>
-              Juicecrowd is an all new dApp brought to you by the creators of
-              Juicebox - helping creators launch and grow successful
-              crowdfunding campaigns. We run things in crowds - like small
-              cohorts. Each crowd will accept up to ten projects and offer them
-              support, guidance, and infrastructure to raise funds in a
-              crowdfunding format.
+              Juicecrowd is an all new dApp brought to you by the creators of{' '}
+              <Link
+                href="https://juicebox.money/about"
+                className="text-foreground underline"
+              >
+                Juicebox
+              </Link>{' '}
+              - helping creators launch and grow successful crowdfunding
+              campaigns. We run things in crowds - like small cohorts. Each
+              crowd will accept up to ten projects and offer them support,
+              guidance, and infrastructure to raise funds in a crowdfunding
+              format.
             </p>
             <p>
               Juicecrowd 01 (JC01) is our very first crowd. We&apos;re looking
@@ -60,13 +66,15 @@ export const CrowdsPage: React.FC = () => {
 
           <HeaderParagraph header="How it works">
             <p>
-              Juicecrowd works in *crowds* which are cohorts unified by a theme.
-              Up to ten projects will be selected for each crowd.
+              Juicecrowd works in <span className="italic">crowds</span> which
+              are cohorts unified by a theme. Up to ten projects will be
+              selected for each crowd.
             </p>
             <ul className="ml-4 list-inside list-decimal">
               <li>Carefully read the crowd requirements above</li>
               <li>
-                Submit your project using the *Submit your project* button below
+                Submit your project using the &apos;Submit your project&apos;
+                button below
               </li>
               <li>
                 If selected, you&apos;ll work with the Juicebox team to refine

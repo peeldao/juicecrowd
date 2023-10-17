@@ -7,7 +7,7 @@ export function Page() {
     <>
       <SEO
         title="JC01 Submission"
-        description="JC01 Crowd submission is now open! Submit your project to be part of the JC01 Crowd."
+        description="Submit your project to be part of Juicecrowd's crypto crowdfunding program"
       />
       <Layout>
         <CrowdsPage />

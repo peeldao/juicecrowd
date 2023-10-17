@@ -7,7 +7,7 @@ export function Page() {
     <>
       <SEO
         title="Contact"
-        description="Contact us to learn more about how Juicecrowd can help your crypto crowdfunding campaign"
+        description="Contact us to learn more about how Juicecrowd can help your crypto crowdfunding campaign."
       />
       <Layout>
         <ContactPage />

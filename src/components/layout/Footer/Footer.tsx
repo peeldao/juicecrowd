@@ -15,7 +15,7 @@ const ImageButtons = [
   },
   {
     name: 'twitter',
-    image: <XLogo />,
+    image: <XLogo className="h-5 w-5 fill-gray-400" />,
     link: JB_X_URL,
   },
 ]

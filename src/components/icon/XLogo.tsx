@@ -1,20 +1,19 @@
-import Image, { ImageProps } from 'next/image'
-
 // TODO: move this
 export const JB_X_URL = 'https://twitter.com/Juicebox_Money'
 
-export const XLogo: React.FC<Omit<ImageProps, 'src' | 'alt'>> = ({
-  className,
-  width = 20,
-  height = 20,
-}) => {
+export type XLogoProps = {
+  className?: string
+}
+
+export const XLogo: React.FC<XLogoProps> = ({ className }) => {
   return (
-    <Image
-      src="/assets/images/x-logo.webp"
-      alt="X (Twitter) logo"
-      width={width}
-      height={height}
+    <svg
       className={className}
-    />
+      viewBox="0 0 300 300"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M178.57 127.15 290.27 0h-26.46l-97.03 110.38L89.34 0H0l117.13 166.93L0 300.25h26.46l102.4-116.59 81.8 116.59h89.34M36.01 19.54H76.66l187.13 262.13h-40.66" />
+    </svg>
   )
 }

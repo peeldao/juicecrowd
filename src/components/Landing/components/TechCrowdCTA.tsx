@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { Link } from '@/components/Link'
 import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
+import { JC01_DATES } from '@/lib/constants/crowds'
 
 export type TechCrowdCTAProps = {
   className?: string
@@ -46,8 +47,7 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
           </Button>
         </Link>
         <div className="text-xs text-gray-400">
-          {/* TODO: lets use a global somewhere for dates */}
-          Submissions close 26 October 2023
+          Submissions close {JC01_DATES.SUBMISSIONS_CLOSE}
         </div>
       </div>
     </div>

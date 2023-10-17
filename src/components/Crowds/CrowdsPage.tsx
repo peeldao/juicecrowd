@@ -45,14 +45,14 @@ export const CrowdsPage: React.FC = () => {
           <HeaderParagraph header="Requirements">
             <ul className="ml-4 list-inside list-disc space-y-1">
               <li>
-                Your project must already exist or have proof of prior work
+                Your project must already exist or have proof of prior work.
               </li>
               <li>
-                Your project must use web3 or blockchain technology in some way
+                Your project must use web3 or blockchain technology in some way.
               </li>
               <li>
                 Your team must have capacity to work on your crowdfunding
-                campaign during specified dates (see below)
+                campaign during specified dates (see below).
               </li>
             </ul>
           </HeaderParagraph>
@@ -84,17 +84,34 @@ export const CrowdsPage: React.FC = () => {
           <HeaderParagraph header="Dates">
             <p>Please see important dates for Juicecrowd 01 (JC 01) below:</p>
             <ul className="ml-4 list-inside list-disc">
-              <li>Submissions close {JC01_DATES.SUBMISSIONS_CLOSE}</li>
+              <li>
+                Submissions close{' '}
+                <span className="font-medium">
+                  {JC01_DATES.SUBMISSIONS_CLOSE}
+                </span>
+              </li>
               <li>
                 Successful applicants selected by{' '}
-                {JC01_DATES.SUCCESSFUL_APPLICANTS_SELECTED}
+                <span className="font-medium">
+                  {JC01_DATES.SUCCESSFUL_APPLICANTS_SELECTED}
+                </span>
               </li>
-              <li>Projects launch on {JC01_DATES.PROJECTS_LAUNCH} </li>
+              <li>
+                Projects launch on
+                <span className="font-medium">
+                  {JC01_DATES.PROJECTS_LAUNCH}
+                </span>
+              </li>
               <li>
                 Project campaigns run for 30 days, ending on{' '}
-                {JC01_DATES.PROJECTS_RUN}
+                <span className="font-medium">{JC01_DATES.PROJECTS_RUN}</span>
               </li>
-              <li>Prize pool awarded on {JC01_DATES.PRIZE_POOL_AWARDED}</li>
+              <li>
+                Prize pool awarded on{' '}
+                <span className="font-medium">
+                  {JC01_DATES.PRIZE_POOL_AWARDED}
+                </span>
+              </li>
             </ul>
           </HeaderParagraph>
 

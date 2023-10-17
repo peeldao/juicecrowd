@@ -24,7 +24,7 @@ export const CrowdsPage: React.FC = () => {
                 href="https://juicebox.money/about"
                 className="text-foreground underline"
               >
-                Juicebox
+                juicebox.money
               </Link>{' '}
               - helping creators launch and grow successful crowdfunding
               campaigns. We run things in crowds - like small cohorts. Each
@@ -45,14 +45,14 @@ export const CrowdsPage: React.FC = () => {
           <HeaderParagraph header="Requirements">
             <ul className="ml-4 list-inside list-disc space-y-1">
               <li>
-                Your project must already exist or have proof of prior work
+                Your project must already exist or have proof of prior work.
               </li>
               <li>
-                Your project must use web3 or blockchain technology in some way
+                Your project must use web3 or blockchain technology in some way.
               </li>
               <li>
                 Your team must have capacity to work on your crowdfunding
-                campaign during specified dates (see below)
+                campaign during specified dates (see below).
               </li>
             </ul>
           </HeaderParagraph>
@@ -63,51 +63,68 @@ export const CrowdsPage: React.FC = () => {
               are cohorts unified by a theme. Up to ten projects will be
               selected for each crowd.
             </p>
-            <ul className="ml-4 list-inside list-decimal">
-              <li>Carefully read the crowd requirements above</li>
+            <ol className="ml-4 list-inside list-decimal">
+              <li>Read the requirements above carefully.</li>
               <li>
                 Submit your project using the &apos;Submit your project&apos;
-                button below
+                button below.
               </li>
               <li>
                 If selected, you&apos;ll work with the Juicebox team to refine
-                your crowdfunding campaign before launch
+                your crowdfunding campaign before launch.
               </li>
-              <li>Launch your campaign on Juicecrowd and crowdfund in ETH</li>
-              <li>
-                The top 3 projects by amount raised will receive a proportionate
-                share of the 3 ETH prize pool
-              </li>
-            </ul>
+              <li>Launch your campaign on Juicecrowd and crowdfund in ETH.</li>
+            </ol>
+            <p className="mt-5">
+              The top 3 projects by amount raised will be awarded from the 3 ETH
+              prize pool.
+            </p>
           </HeaderParagraph>
 
           <HeaderParagraph header="Dates">
             <p>Please see important dates for Juicecrowd 01 (JC 01) below:</p>
             <ul className="ml-4 list-inside list-disc">
-              <li>Submissions close {JC01_DATES.SUBMISSIONS_CLOSE}</li>
+              <li>
+                Submissions close{' '}
+                <span className="font-medium">
+                  {JC01_DATES.SUBMISSIONS_CLOSE}
+                </span>
+              </li>
               <li>
                 Successful applicants selected by{' '}
-                {JC01_DATES.SUCCESSFUL_APPLICANTS_SELECTED}
+                <span className="font-medium">
+                  {JC01_DATES.SUCCESSFUL_APPLICANTS_SELECTED}
+                </span>
               </li>
-              <li>Projects launch on {JC01_DATES.PROJECTS_LAUNCH} </li>
+              <li>
+                Projects launch on
+                <span className="font-medium">
+                  {JC01_DATES.PROJECTS_LAUNCH}
+                </span>
+              </li>
               <li>
                 Project campaigns run for 30 days, ending on{' '}
-                {JC01_DATES.PROJECTS_RUN}
+                <span className="font-medium">{JC01_DATES.PROJECTS_RUN}</span>
               </li>
-              <li>Prize pool awarded on {JC01_DATES.PRIZE_POOL_AWARDED}</li>
+              <li>
+                Prize pool awarded on{' '}
+                <span className="font-medium">
+                  {JC01_DATES.PRIZE_POOL_AWARDED}
+                </span>
+              </li>
             </ul>
           </HeaderParagraph>
 
           <HeaderParagraph header="Prize pool">
             Juicebox has provided{' '}
             <span className="font-semibold">{PRIZE_POOL_ETH} ETH</span> to be
-            awarded to the top 3 projects in this crowd. &apos;Top&apos;
-            projects are determined on the total funds raised by the project,
-            and will be split accordingly. For example:
+            awarded to the top 3 projects in this crowd. Winning projects are
+            determined by each project's total funds raised: first place is
+            awarded to the project who raises the most.
             <ul className="mt-8 block">
-              <li>#1 project raises 1.5 ETH</li>
-              <li>#2 project raises 1.0 ETH</li>
-              <li>#3 project raises 0.5 ETH</li>
+              <li>🥇 First place project receives 1.5 ETH</li>
+              <li>🥈 Second place project receives 1 ETH</li>
+              <li>🥉 Third place project receives 0.5 ETH</li>
             </ul>
           </HeaderParagraph>
         </div>

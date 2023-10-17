@@ -10,7 +10,7 @@ import { twMerge } from 'tailwind-merge'
 const ImageButtons = [
   {
     name: 'discord',
-    image: <DiscordLogo size={18} className="text-gray-400" />,
+    image: <DiscordLogo className="h-6 w-6 text-gray-400" />,
     link: JB_DISCORD_INVITE_URL,
   },
   {
@@ -89,7 +89,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
           </span>
 
           <div className="flex gap-x-7">
-            <div className="flex gap-x-4 ">
+            <div className="flex items-center gap-x-4 ">
               {ImageButtons.map(({ name, image, link }) => (
                 <Link
                   key={name}

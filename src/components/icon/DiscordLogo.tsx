@@ -1,18 +1,8 @@
 export const JB_DISCORD_INVITE_URL = 'https://discord.com/invite/wFTh4QnDzk'
 
-export default function DiscordLogo({
-  size,
-  className,
-}: {
-  size?: number
-  className?: string
-}) {
-  const widthToHeight = 71 / 55
-  const height = size ?? 55
-
+export default function DiscordLogo({ className }: { className?: string }) {
   return (
     <svg
-      style={{ height, width: widthToHeight * height }}
       className={className}
       width="71"
       height="55"

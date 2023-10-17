@@ -8,9 +8,8 @@ export const HeroSection: React.FC = () => {
         Stand out from the crowd. Get funded.
       </h1>
       <div className="mt-4 max-w-3xl text-center text-base text-gray-700 md:text-lg">
-        Unlock funding to take your project to the next level. Learn how to tell
-        your story and tap into your audience to build lasting support
-        communities.
+        Unlock funding to take your project to the next level. Tell your story
+        and tap into your audience to build lasting support communities.
       </div>
 
       <TechCrowdCTA className="mt-10 md:mt-14" />

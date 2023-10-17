@@ -26,61 +26,64 @@ export const CrowdsPage: React.FC = () => {
         <div className="font-xl mt-10 flex flex-col gap-12">
           <HeaderParagraph header="About">
             <p>
-              Calling all build00rs! The very first, official Juicecrowd program
-              is underway - where we support (and fund a little) early-stage
-              projects looking to raise funds in the web3/blockchain space.
+              Juicecrowd is an all new dApp brought to you by the creators of{' '}
+              <Link
+                href="https://juicebox.money/about"
+                className="text-foreground underline"
+              >
+                Juicebox
+              </Link>{' '}
+              - helping creators launch and grow successful crowdfunding
+              campaigns. We run things in crowds - like small cohorts. Each
+              crowd will accept up to ten projects and offer them support,
+              guidance, and infrastructure to raise funds in a crowdfunding
+              format.
             </p>
             <p>
-              Juicecrowd is an all-new program brought to you by the creators of
-              Juicebox, designed to take up to 10 projects (per crowd), offering
-              them support, funding and infrastructure to help you raise funds
-              to achieve your goals in a crowdfunding format.
-            </p>
-            <p>
-              This program is designed to take 10 existing projects (per crowd),
-              offering further support, funding and infrastructure to raise
-              funds in a crowdfunding format.
-            </p>
-            <p>
-              Plus, we have an additional prize pool of 3 ETH up for grabs 🎉
+              Juicecrowd 01 (JC01) is our very first crowd. We&apos;re looking
+              for early-stage projects in the web3/blockchain space that are
+              actively raising funds. In addition to support and guidance for
+              selected projects, we also have a{' '}
+              <span className="text-bold">3 ETH prize pool</span> up for grabs
+              🎉
             </p>
           </HeaderParagraph>
 
           <HeaderParagraph header="Requirements">
             <ul className="ml-4 list-inside list-disc space-y-1">
-              <li>Project must already exist or have proof of prior work</li>
               <li>
-                Project must use web3 or blockchain technology in some way
+                Your project must already exist or have proof of prior work
               </li>
               <li>
-                Team must have capacity to work on their crowdfunding campaign
-                during specified dates
+                Your project must use web3 or blockchain technology in some way
+              </li>
+              <li>
+                Your team must have capacity to work on your crowdfunding
+                campaign during specified dates (see below)
               </li>
             </ul>
           </HeaderParagraph>
 
           <HeaderParagraph header="How it works">
             <p>
-              Juicecrowd works in &apos;crowds&apos;, which are like cohorts. Up
-              to 10 projects will be selected each crowd.
+              Juicecrowd works in <span className="italic">crowds</span> which
+              are cohorts unified by a theme. Up to ten projects will be
+              selected for each crowd.
             </p>
             <ul className="ml-4 list-inside list-decimal">
-              <li>Read up on the crowd requirements above</li>
+              <li>Carefully read the crowd requirements above</li>
               <li>
-                Submit your project details using the &apos;submit your
-                project&apos; button below If selected, you&apos;ll work with
-                the Juicebox team to refine your crowdfunding campaign
+                Submit your project using the &apos;Submit your project&apos;
+                button below
               </li>
               <li>
                 If selected, you&apos;ll work with the Juicebox team to refine
-                your crowdfunding campaign
+                your crowdfunding campaign before launch
               </li>
+              <li>Launch your campaign on Juicecrowd and crowdfund in ETH</li>
               <li>
-                Launch your campaign on Juicecrowd and crowdfund it in ETH
-              </li>
-              <li>
-                The top 3 projects will receive a proportionate share of the 3
-                ETH prize pool
+                The top 3 projects by amount raised will receive a proportionate
+                share of the 3 ETH prize pool
               </li>
             </ul>
           </HeaderParagraph>
@@ -108,9 +111,9 @@ export const CrowdsPage: React.FC = () => {
             projects are determined on the total funds raised by the project,
             and will be split accordingly. For example:
             <ul className="mt-8 block">
-              <li>#1 project raises 2.1 ETH (Receives 70% of prize pool)</li>
-              <li>#2 project raises 0.6 ETH (Receives 20% of prize pool)</li>
-              <li>#3 project raises 0.3 ETH ((Receives 10% of prize pool)</li>
+              <li>#1 project raises 1.5 ETH</li>
+              <li>#2 project raises 1.0 ETH</li>
+              <li>#3 project raises 0.5 ETH</li>
             </ul>
           </HeaderParagraph>
         </div>
@@ -124,7 +127,9 @@ export const CrowdsPage: React.FC = () => {
         <div className="mt-10 text-sm text-gray-500">
           By submitting your project, you acknowledge that your personal and
           project information will be collected by the Juicebox team and used
-          for planning and selection purposes.
+          for planning and selection purposes. This information will never be
+          shared. Note that there is a 2.5% incurred withdrawal fee for
+          projects.
         </div>
       </div>
       <StayInLoopSection className="mt-32" />

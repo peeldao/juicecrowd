@@ -51,9 +51,9 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
               Find your crowd
             </h3>
             <div className="mt-4 text-gray-700">
-              Around here, things run in &apos;crowds&apos;. They&apos;re
-              essentially targeted cohorts. Each crowd has a theme. Keep an eye
-              out for crowds that suit your project!
+              Around here, things run in *crowds*. Each crowd is a small cohort
+              of projects unified by a theme. Keep an eye out for crowds that
+              suit your project!
             </div>
             <div className="mt-6 flex flex-wrap gap-x-1 gap-y-1.5">
               {CROWD_BADGES.map(badge => (
@@ -77,9 +77,9 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
               Submit your project
             </h3>
             <div className="mt-4 text-gray-700">
-              Once your crowd pops up, you&apos;ll need to submit your project.
-              The community will vote on their favourite projects, and if you
-              make it in, we&apos;re off to the races!
+              If you vibe with a crowd&apos;s theme, submit your project for the
+              chance to join a tight-knit cohort of builders and creators.If
+              you&apos;re accepted, then we&apos;re off to the races!
             </div>
             <Link href="/crowds">
               {/* Hardcoded JC01 */}
@@ -100,9 +100,9 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
               Get crowdfunding support
             </h3>
             <div className="mt-4 text-gray-700">
-              Our team will help you polish your campaign, promote it and
-              provide 360° support from start the finish. So you can get the
-              very most our of your crowdfund campaign.
+              Our team will help you polish your campaign, promote it, and
+              provide support from start to finish. Let&apos;s work together to
+              get the most out of your crowdfunding campaign.
             </div>
             <div className="mt-6 text-base font-medium">
               Help where you need it most ♥

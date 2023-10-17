@@ -21,25 +21,24 @@ export const YourProjectSection: React.FC<YourProjectSectionProps> = ({
           Your project, your way
         </h2>
         <p className="m-auto max-w-3xl text-gray-700 md:text-lg">
-          As part of the crowd, you get your very own project page that you can
-          share with your network and community. Equipped with thoughtful
-          features to help you grow.
+          As part of the crowd, you get your own fully customizable project page
+          to share with your community, pull in supporters, and build momentum.
         </p>
         <div className="bg-swatch-50 flex w-full flex-col justify-center gap-8 pt-16 md:flex-row md:gap-12">
           <CardWithIcon
             title="Tell your story"
             icon={<ChatBubbleBottomCenterIcon />}
           >
-            Showcase your brand, history and future.
+            Introduce your project team, vision, and goals.
           </CardWithIcon>
           <CardWithIcon title="Collect payments" icon={<BanknotesIcon />}>
-            Accepting crypto payment methods including ether.
+            Accept global payments instantly with ETH.
           </CardWithIcon>
           <CardWithIcon title="Offer NFTs & rewards" icon={<CubeIcon />}>
-            Build compelling offers for early supporters.
+            Build compelling perks for early supporters.
           </CardWithIcon>
           <CardWithIcon title="Engage your community" icon={<HeartIcon />}>
-            Send updates, interact and chat with your community.
+            Send updates and interact with your community.
           </CardWithIcon>
         </div>
       </div>

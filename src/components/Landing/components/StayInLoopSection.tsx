@@ -62,7 +62,7 @@ export const StayInLoopSection: React.FC<StayInLoopSectionProps> = ({
             Want to stay in the loop?
           </h3>
           <div className="text-gray-400">
-            Be the first to know about new crowds, features and launches.
+            Be the first to know about new Crowds, features and launches.
           </div>
         </div>
         <Form {...form}>

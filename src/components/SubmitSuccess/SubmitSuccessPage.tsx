@@ -22,7 +22,7 @@ export const SubmitJc01SuccessPage = () => {
         Congratulations!
       </div>
       <div className="mt-4 text-base font-normal text-gray-600 md:text-lg">
-        Your project was successfully submitted to Juicecrowd 01.
+        Your project was successfully submitted to JC01.
       </div>
       <Link href={DISCORD_INVITE_URL}>
         <Button

@@ -21,7 +21,7 @@ export const YourProjectSection: React.FC<YourProjectSectionProps> = ({
           Your project, your way
         </h2>
         <p className="m-auto max-w-3xl text-gray-700 md:text-lg">
-          As part of the crowd, you get your own fully customizable project page
+          As part of the Crowd, you get your own fully customizable project page
           to share with your community, pull in supporters, and build momentum.
         </p>
         <div className="bg-swatch-50 flex w-full flex-col justify-center gap-8 pt-16 md:flex-row md:gap-12">

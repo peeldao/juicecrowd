@@ -48,12 +48,12 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
           />
           <div className="flex flex-col">
             <h3 className="font-heading text-2xl font-medium">
-              Find your crowd
+              Find your Crowd
             </h3>
             <div className="mt-4 text-gray-700">
-              Around here, things run in *crowds*. Each crowd is a small cohort
-              of projects unified by a theme. Keep an eye out for crowds that
-              suit your project!
+              Around here, things run in Crowds. Each Crowd is a small cohort of
+              projects unified by a theme. Keep an eye out for Crowds that suit
+              your project!
             </div>
             <div className="mt-6 flex flex-wrap gap-x-1 gap-y-1.5">
               {CROWD_BADGES.map(badge => (
@@ -77,8 +77,8 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
               Submit your project
             </h3>
             <div className="mt-4 text-gray-700">
-              If you vibe with a crowd&apos;s theme, submit your project for the
-              chance to join a tight-knit cohort of builders and creators.If
+              If you vibe with a Crowd&apos;s theme, submit your project for the
+              chance to join a tight-knit cohort of builders and creators. If
               you&apos;re accepted, then we&apos;re off to the races!
             </div>
             <Link href="/crowds">

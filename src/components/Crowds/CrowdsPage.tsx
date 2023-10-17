@@ -27,17 +27,17 @@ export const CrowdsPage: React.FC = () => {
                 juicebox.money
               </Link>{' '}
               - helping creators launch and grow successful crowdfunding
-              campaigns. We run things in crowds - like small cohorts. Each
-              crowd will accept up to ten projects and offer them support,
+              campaigns. We run things in Crowds - like small cohorts. Each
+              Crowd will accept up to ten projects and offer them support,
               guidance, and infrastructure to raise funds in a crowdfunding
               format.
             </p>
             <p>
-              Juicecrowd 01 (JC01) is our very first crowd. We&apos;re looking
+              Juicecrowd 01 (JC01) is our very first Crowd. We&apos;re looking
               for early-stage projects in the web3/blockchain space that are
               actively raising funds. In addition to support and guidance for
               selected projects, we also have a{' '}
-              <span className="text-bold">3 ETH prize pool</span> up for grabs
+              <span className="font-medium">3 ETH prize pool</span> up for grabs
               🎉
             </p>
           </HeaderParagraph>
@@ -59,9 +59,9 @@ export const CrowdsPage: React.FC = () => {
 
           <HeaderParagraph header="How it works">
             <p>
-              Juicecrowd works in <span className="italic">crowds</span> which
-              are cohorts unified by a theme. Up to ten projects will be
-              selected for each crowd.
+              Juicecrowd works in <span className="font-medium">Crowds</span>{' '}
+              which are cohorts unified by a theme. Up to ten projects will be
+              selected for each Crowd.
             </p>
             <ol className="ml-4 list-inside list-decimal">
               <li>Read the requirements above carefully.</li>
@@ -118,7 +118,7 @@ export const CrowdsPage: React.FC = () => {
           <HeaderParagraph header="Prize pool">
             Juicebox has provided{' '}
             <span className="font-semibold">{PRIZE_POOL_ETH} ETH</span> to be
-            awarded to the top 3 projects in this crowd. Winning projects are
+            awarded to the top 3 projects in this Crowd. Winning projects are
             determined by each project's total funds raised: first place is
             awarded to the project who raises the most.
             <ul className="mt-8 block">

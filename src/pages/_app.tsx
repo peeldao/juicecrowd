@@ -1,5 +1,4 @@
 import { Head } from '@/components/Head'
-import { Footer } from '@/components/layout/Footer'
 import { Toaster } from '@/components/ui/Toaster'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'

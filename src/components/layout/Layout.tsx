@@ -5,17 +5,21 @@ import { Navbar } from './Navbar'
 
 export type LayoutProps = {
   footer?: 'default' | 'none'
+  navbar?: 'default' | 'minimal'
 }
 
 export const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({
   children,
   footer: footerStyle,
+  navbar,
 }) => {
   footerStyle = footerStyle || 'default'
+  navbar = navbar || 'default'
+
   return (
     <AppProvider>
       <div className="min-h-screen">
-        <Navbar />
+        <Navbar type={navbar} />
         <main>{children}</main>
       </div>
       {footerStyle === 'default' ? <Footer /> : null}

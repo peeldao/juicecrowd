@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import { XLogo } from '../icon/XLogo'
+import { Link } from '../Link'
+import DiscordLogo from '../icon/DiscordLogo'
 import { Button } from '../ui/Button'
 import DeploySuccessHero from '/public/assets/images/create-success-hero.webp'
-import DiscordLogo from '../icon/DiscordLogo'
-import { Link } from '../Link'
+import { DISCORD_INVITE_URL } from '../layout/Footer'
 
 export const SubmitJc01SuccessPage = () => {
   return (
@@ -24,7 +24,7 @@ export const SubmitJc01SuccessPage = () => {
       <div className="mt-4 text-base font-normal text-gray-600 md:text-lg">
         Your project was successfully submitted to Juicecrowd 01.
       </div>
-      <Link href="/#TODO">
+      <Link href={DISCORD_INVITE_URL}>
         <Button
           size="lg"
           className="mt-8 flex w-auto items-center gap-3 fill-white text-white"

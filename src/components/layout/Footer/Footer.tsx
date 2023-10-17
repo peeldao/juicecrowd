@@ -1,17 +1,17 @@
-import { LinkColProps, LinkColumn } from './LinkColumn'
 import { Link } from '@/components/Link'
-import DiscordLogo, {
-  JB_DISCORD_INVITE_URL,
-} from '@/components/icon/DiscordLogo'
-import { JB_X_URL, XLogo } from '@/components/icon/XLogo'
 import Logo from '@/components/Logo'
+import DiscordLogo from '@/components/icon/DiscordLogo'
+import { JB_X_URL, XLogo } from '@/components/icon/XLogo'
 import { twMerge } from 'tailwind-merge'
+import { LinkColProps, LinkColumn } from './LinkColumn'
+
+export const DISCORD_INVITE_URL = 'https://discord.gg/NFTvc93bf6'
 
 const ImageButtons = [
   {
     name: 'discord',
     image: <DiscordLogo className="h-6 w-6 text-gray-400" />,
-    link: JB_DISCORD_INVITE_URL,
+    link: DISCORD_INVITE_URL,
   },
   {
     name: 'twitter',
@@ -57,7 +57,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
       items: [
         {
           title: 'Discord',
-          link: JB_DISCORD_INVITE_URL,
+          link: DISCORD_INVITE_URL,
         },
         {
           title: 'X (Twitter)',

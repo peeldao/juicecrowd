@@ -5,8 +5,10 @@ import { Navbar } from './Navbar'
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <AppProvider>
-      <Navbar />
-      <main>{children}</main>
+      <div className="min-h-screen">
+        <Navbar />
+        <main>{children}</main>
+      </div>
       <Footer />
     </AppProvider>
   )

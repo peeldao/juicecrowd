@@ -57,11 +57,11 @@ export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head />
-      <main
+      <div
         className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
       >
         <Component {...pageProps} />
-      </main>
+      </div>
       <div
         className={`${beatrice.variable} ${agrandir.variable} ${agrandirWide.variable} font-body text-base md:text-sm`}
       >

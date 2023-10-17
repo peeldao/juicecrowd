@@ -1,10 +1,7 @@
+import { ProjectPage } from '@/components/Project'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
-import {
-  JBProjectProvider,
-  useJBContractContext,
-  useJbProjectsOwnerOf,
-} from 'juice-hooks'
+import { JBProjectProvider } from 'juice-hooks'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -34,21 +31,7 @@ export const getStaticProps: GetStaticProps<{
   }
 }
 
-function _ProjectPage() {
-  const { projectId } = useJBContractContext()
-  const { data: address } = useJbProjectsOwnerOf({
-    args: [BigInt(projectId)],
-  })
-
-  return (
-    <div>
-      Project owner:
-      {address && <div>{address}</div>}
-    </div>
-  )
-}
-
-export default function ProjectPage({
+export default function Page({
   projectId,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
@@ -57,8 +40,7 @@ export default function ProjectPage({
       <SEO title="Project" description="Project description" />
       <Layout>
         <JBProjectProvider projectId={1n}>
-          {/* // TODO: Move this to a component for the ProjectPage */}
-          <_ProjectPage />
+          <ProjectPage />
         </JBProjectProvider>
       </Layout>
     </>

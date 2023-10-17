@@ -97,7 +97,7 @@ export const CrowdsPage: React.FC = () => {
                 </span>
               </li>
               <li>
-                Projects launch on
+                Projects launch on{' '}
                 <span className="font-medium">
                   {JC01_DATES.PROJECTS_LAUNCH}
                 </span>

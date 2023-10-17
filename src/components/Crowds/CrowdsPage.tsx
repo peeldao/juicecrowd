@@ -3,14 +3,7 @@ import { Breadcrumbs } from '../Breadcrumbs'
 import { StayInLoopSection } from '../Landing/components/StayInLoopSection'
 import { Link } from '../Link'
 import { Button } from '../ui/Button'
-
-const DATE = {
-  SUBMISSIONS_CLOSE: '01 November 2023',
-  SUCCESSFUL_APPLICANTS_SELECTED: '08 November 2023',
-  PROJECTS_LAUNCH: '14 November 2023',
-  PROJECTS_RUN: '14 December 2023',
-  PRIZE_POOL_AWARDED: '15 December 2023',
-}
+import { JC01_DATES } from '@/lib/constants/crowds'
 
 const PRIZE_POOL_ETH = 3
 
@@ -91,16 +84,17 @@ export const CrowdsPage: React.FC = () => {
           <HeaderParagraph header="Dates">
             <p>Please see important dates for Juicecrowd 01 (JC 01) below:</p>
             <ul className="ml-4 list-inside list-disc">
-              <li>Submissions close {DATE.SUBMISSIONS_CLOSE}</li>
+              <li>Submissions close {JC01_DATES.SUBMISSIONS_CLOSE}</li>
               <li>
                 Successful applicants selected by{' '}
-                {DATE.SUCCESSFUL_APPLICANTS_SELECTED}
+                {JC01_DATES.SUCCESSFUL_APPLICANTS_SELECTED}
               </li>
-              <li>Projects launch on {DATE.PROJECTS_LAUNCH} </li>
+              <li>Projects launch on {JC01_DATES.PROJECTS_LAUNCH} </li>
               <li>
-                Project campaigns run for 30 days, ending on {DATE.PROJECTS_RUN}
+                Project campaigns run for 30 days, ending on{' '}
+                {JC01_DATES.PROJECTS_RUN}
               </li>
-              <li>Prize pool awarded on {DATE.PRIZE_POOL_AWARDED}</li>
+              <li>Prize pool awarded on {JC01_DATES.PRIZE_POOL_AWARDED}</li>
             </ul>
           </HeaderParagraph>
 

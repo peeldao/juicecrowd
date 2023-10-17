@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import { Breadcrumbs } from '../Breadcrumbs'
 import { StayInLoopSection } from '../Landing/components/StayInLoopSection'
-import { Navbar } from '../layout/Navbar'
 import { Link } from '../Link'
 import { Button } from '../ui/Button'
 
@@ -18,7 +17,6 @@ const PRIZE_POOL_ETH = 3
 export const CrowdsPage: React.FC = () => {
   return (
     <>
-      <Navbar />
       <div className="mx-auto flex max-w-5xl flex-col px-5 pt-14 text-base md:pt-20">
         <Breadcrumbs />
         <h1 className="mt-16 font-heading text-3xl font-medium">

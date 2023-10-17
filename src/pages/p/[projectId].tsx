@@ -1,5 +1,5 @@
 import { SEO } from '@/components/SEO'
-import { AppProvider } from '@/components/layout/AppProvider'
+import { Layout } from '@/components/layout'
 import {
   JBProjectProvider,
   useJBContractContext,
@@ -55,12 +55,12 @@ export default function ProjectPage({
     <>
       {/* // TODO: port over project seo from juicebox? */}
       <SEO title="Project" description="Project description" />
-      <AppProvider>
+      <Layout>
         <JBProjectProvider projectId={1n}>
           {/* // TODO: Move this to a component for the ProjectPage */}
           <_ProjectPage />
         </JBProjectProvider>
-      </AppProvider>
+      </Layout>
     </>
   )
 }

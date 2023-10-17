@@ -4,18 +4,16 @@ import React, { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Link } from '../Link'
 import { JuiceboxLogo } from '../icon/JuiceboxLogo'
-import { Navbar } from '../layout/Navbar'
+import { Button } from '../ui/Button'
+import { GradientBackground } from './components/GradientBackground'
 import { HeroSection } from './components/HeroSection'
 import { HowItWorksSection } from './components/HowItWorksSection'
 import { StayInLoopSection } from './components/StayInLoopSection'
 import { YourProjectSection } from './components/YourProjectSection'
-import { GradientBackground } from './components/GradientBackground'
-import { Button } from '../ui/Button'
 
 export function LandingPage() {
   return (
     <>
-      <Navbar />
       <div className="relative mt-14 flex flex-col items-center overflow-hidden text-base md:mt-32">
         <GradientBackground className="absolute left-1/2 top-0 -translate-x-1/2" />
         <GradientBackground className="absolute left-1/2 top-1/2 -translate-x-1/2" />

@@ -4,7 +4,7 @@ import { Footer } from './Footer/'
 import { Navbar } from './Navbar'
 
 export type LayoutProps = {
-  footer?: 'default' | 'none'
+  footer?: 'default' | 'minimal' | 'none'
   navbar?: 'default' | 'minimal'
 }
 
@@ -22,7 +22,7 @@ export const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({
         <Navbar type={navbar} />
         <main>{children}</main>
       </div>
-      {footerStyle === 'default' ? <Footer /> : null}
+      {footerStyle !== 'none' ? <Footer type={footerStyle} /> : null}
     </AppProvider>
   )
 }

@@ -38,7 +38,7 @@ export default function Page({
     <>
       {/* // TODO: port over project seo from juicebox? */}
       <SEO title="Project" description="Project description" />
-      <Layout navbar="minimal">
+      <Layout navbar="minimal" footer="minimal">
         <JBProjectProvider projectId={1n}>
           <ProjectPage />
         </JBProjectProvider>

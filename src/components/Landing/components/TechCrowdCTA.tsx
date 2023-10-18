@@ -19,11 +19,10 @@ export const TechCrowdCTA: React.FC<TechCrowdCTAProps> = ({ className }) => {
     >
       <div className="flex flex-col items-center gap-8 md:flex-row">
         <Image
-          className="max-h-28"
           src="/assets/images/tech-crowd-cta.png"
           alt="Two squares, one with a schematic eye, and another with a stylized lightning bolt"
-          width={195}
-          height={115}
+          width={215}
+          height={139}
         />
         <div className="flex flex-col items-center text-center md:items-start md:text-start">
           <div className="text-lg font-semibold">Juicecrowd 01 (JC01)</div>

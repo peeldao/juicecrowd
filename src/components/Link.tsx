@@ -8,12 +8,14 @@ const isExternal = (href: string) => {
 type Props = {
   href: string
   className?: string
+  noStyle?: boolean
   children: React.ReactNode
 }
 
-export const Link = ({ href, children, className }: Props) => {
-  const classNameDefault =
-    'text-bluebs-600 hover:text-bluebs-400 transition-colors'
+export const Link = ({ href, children, noStyle, className }: Props) => {
+  const classNameDefault = !noStyle
+    ? 'text-bluebs-600 hover:text-bluebs-400 transition-colors'
+    : undefined
   if (isExternal(href)) {
     return (
       <a

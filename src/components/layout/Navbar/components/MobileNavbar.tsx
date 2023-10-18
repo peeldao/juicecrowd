@@ -1,30 +1,29 @@
-import React, { useState } from 'react'
+import { Link } from '@/components/Link'
+import Logo from '@/components/Logo'
+import { CoinLogo } from '@/components/icon/CoinLogo'
+import { Button } from '@/components/ui/Button'
+import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/solid'
+import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { CoinLogo } from '../icon/CoinLogo'
-import { Link } from '../Link'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
-import Logo from '../Logo'
-import { Button } from '../ui/Button'
 
-type NavbarProps = {
+export type MobileNavbarProps = {
   className?: string
   title?: string
   separator?: boolean
 }
 
-export const Navbar: React.FC<NavbarProps> = ({
+export const MobileNavbar: React.FC<MobileNavbarProps> = ({
   className,
   title,
   separator,
 }) => {
   const [mobileToggle, setMobileToggle] = useState(false)
   return (
-    <div className="flex flex-col gap-5 py-7 md:py-6">
+    <div className={twMerge('flex flex-col gap-5 py-7', className)}>
       <div
         className={twMerge(
-          'flex flex-1 items-center justify-between gap-5 border-gray-100 px-4 md:px-12',
+          'flex flex-1 items-center justify-between gap-5 border-gray-100 px-4',
           separator && 'border-b',
-          className,
         )}
       >
         <Link className="flex gap-1 text-black hover:text-black" href="/">
@@ -37,18 +36,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Logo />
           )}
         </Link>
-        <div className="hidden items-center gap-8 md:flex">
-          <Link className="text-gray-700" href="https://docs.juicecrowd.gg">
-            Learn more
-          </Link>
-          <Link className="text-gray-700" href="/contact">
-            Contact
-          </Link>
-        </div>
 
         <Button
           variant="ghost"
-          className="p-0 text-gray-900 md:hidden"
+          className="p-0 text-gray-900"
           onClick={() => setMobileToggle(t => !t)}
         >
           {mobileToggle ? (
@@ -60,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
       <div
         className={twMerge(
-          'flex-col items-center gap-4 border-t border-gray-200 px-4 py-9 text-base font-medium shadow md:hidden',
+          'flex-col items-center gap-4 border-t border-gray-200 px-4 py-9 text-base font-medium shadow',
           mobileToggle ? 'flex' : 'hidden',
         )}
       >

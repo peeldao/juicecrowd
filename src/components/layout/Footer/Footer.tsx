@@ -44,7 +44,7 @@ export const Footer: React.FC<FooterProps> = ({ className }) => {
       items: [
         {
           title: 'Docs',
-          link: 'https://docs.juicebox.money',
+          link: 'https://docs.juicecrowd.gg',
         },
         {
           title: 'Contact',

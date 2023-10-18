@@ -1,8 +1,12 @@
 import { ConnectKitButton as _ConnectKitButton } from 'connectkit'
-import { useMemo } from 'react'
-import { Button } from './ui/Button'
+import { Button, buttonVariants } from './ui/Button'
+import { VariantProps } from 'class-variance-authority'
 
-export const ConnectKitButton = () => {
+export type ConnectKitButtonProps = {
+  size?: VariantProps<typeof buttonVariants>['size']
+}
+
+export const ConnectKitButton: React.FC<ConnectKitButtonProps> = ({ size }) => {
   return (
     <_ConnectKitButton.Custom>
       {({ isConnected, isConnecting, show, address, ensName }) => {
@@ -18,8 +22,8 @@ export const ConnectKitButton = () => {
 
         return (
           <Button
-            // TODO: Fit in with ui button variants
-            className="bg-bluebs-50 px-4 py-2.5 text-bluebs-700"
+            size={size}
+            className="bg-bluebs-50 text-bluebs-700"
             onClick={show}
           >
             {buttonText}

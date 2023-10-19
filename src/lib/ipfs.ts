@@ -1,8 +1,11 @@
+import { JuiceCrowdError } from './error'
+
 const IPFS_URL_REGEX = /ipfs:\/\/(.+)/
 
 // This is an open gateway. It exposes any ipfs content, not just the content we pin.
 // Use when fetching public content (like images).
-const OPEN_IPFS_GATEWAY_HOSTNAME = process.env.NEXT_PUBLIC_INFURA_IPFS_HOSTNAME
+export const OPEN_IPFS_GATEWAY_HOSTNAME =
+  process.env.NEXT_PUBLIC_INFURA_IPFS_HOSTNAME
 
 const PUBLIC_IPFS_GATEWAY_HOSTNAME = 'ipfs.io'
 
@@ -13,6 +16,10 @@ const PUBLIC_IPFS_GATEWAY_HOSTNAME = 'ipfs.io'
  * not just the content we have pinned.
  */
 export const ipfsGatewayUrl = (cid: string | undefined): string => {
+  if (!OPEN_IPFS_GATEWAY_HOSTNAME)
+    throw new JuiceCrowdError(
+      'No IPFS gateway hostname (OPEN_IPFS_GATEWAY_HOSTNAME) set',
+    )
   return `https://${OPEN_IPFS_GATEWAY_HOSTNAME}/ipfs/${cid}`
 }
 

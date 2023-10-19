@@ -6,9 +6,11 @@ import { ActivityTab } from './components/ActivityTab'
 import { Stats } from './components/Stats'
 import { TitleBlock } from './components/TitleBlock'
 import { RewardsPanel } from './components/RewardsPanel'
+import { useJBProjectMetadata } from '@/contexts/ProjectMetadata'
 
 export const ProjectPage = () => {
   const { projectId } = useJBContractContext()
+  const { name } = useJBProjectMetadata()
   const { data: address } = useJbProjectsOwnerOf({
     args: [BigInt(projectId)],
   })

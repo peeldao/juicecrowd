@@ -1,18 +1,28 @@
-import { useJBContractContext, useJbProjectsOwnerOf } from 'juice-hooks'
+import { useJBProjectMetadata } from '@/contexts/ProjectMetadata'
+import { OPEN_IPFS_GATEWAY_HOSTNAME } from '@/lib/ipfs'
+import {
+  useJBContractContext,
+  useJBFundingCycleContext,
+  useJb721DelegateTiers,
+  useJbProjectsOwnerOf,
+} from 'juice-hooks'
 import { twMerge } from 'tailwind-merge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/Tabs'
 import { AboutTab } from './components/AboutTab'
 import { ActivityTab } from './components/ActivityTab'
+import { RewardsPanel } from './components/RewardsPanel'
 import { Stats } from './components/Stats'
 import { TitleBlock } from './components/TitleBlock'
-import { RewardsPanel } from './components/RewardsPanel'
-import { useJBProjectMetadata } from '@/contexts/ProjectMetadata'
 
 export const ProjectPage = () => {
   const { projectId } = useJBContractContext()
   const { name } = useJBProjectMetadata()
   const { data: address } = useJbProjectsOwnerOf({
     args: [BigInt(projectId)],
+  })
+  const { fundingCycleMetadata } = useJBFundingCycleContext()
+  const nfts = useJb721DelegateTiers(fundingCycleMetadata?.data?.dataSource, {
+    ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
   })
 
   return (

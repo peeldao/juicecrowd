@@ -21,10 +21,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
   //   variables: { where: { pv: PV_V2 } },
   // });
 
+  const projects = [
+    {
+      projectId: 578, // a project with NFTS
+    },
+  ]
+
   // TODO: Disable for now
-  // const paths = projects.map(({ projectId }) => ({
-  //   params: { projectId: String(projectId) },
-  // }))
+  const paths = projects.map(({ projectId }) => ({
+    params: { projectId: String(projectId) },
+  }))
   return { paths: [], fallback: 'blocking' }
 }
 

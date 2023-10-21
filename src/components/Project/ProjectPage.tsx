@@ -15,6 +15,7 @@ import { Stats } from './components/Stats'
 import { TitleBlock } from './components/TitleBlock'
 import ProjectLogo from '../ProjectLogo'
 import { useJbProject } from '@/hooks/useJbProject'
+import { CoverPhoto } from './components/CoverPhoto'
 
 export const ProjectPage = () => {
   const { logoUri, name, projectId } = useJbProject()
@@ -25,8 +26,7 @@ export const ProjectPage = () => {
 
   return (
     <>
-      {/* Cover image */}
-      <div className={twMerge('relative h-72 max-h-72 w-full bg-orange-200')} />
+      <CoverPhoto />
 
       {/* Page Outer Body */}
       <div className="relative mb-40 px-4 md:px-6">

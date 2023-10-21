@@ -1,4 +1,5 @@
 import { cidFromUrl, ipfsGatewayUrl, ipfsUriToGatewayUrl } from '@/lib/ipfs'
+import Image from 'next/image'
 import { useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -53,7 +54,8 @@ export default function ProjectLogo({
       )}
     >
       {validImg ? (
-        <img
+        <Image
+          fill
           className="h-full w-full object-cover object-center"
           src={imageSrc}
           alt={name + ' logo'}

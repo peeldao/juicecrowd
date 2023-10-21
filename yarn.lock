@@ -5002,10 +5002,9 @@ jsonparse@^1.2.0:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
-juice-hooks@5.1.3-beta:
+"juice-hooks@git+https://github.com/peeldao/juice-hooks.git":
   version "5.1.3-beta"
-  resolved "https://registry.yarnpkg.com/juice-hooks/-/juice-hooks-5.1.3-beta.tgz#6dacca2230e9e538341ff04f2dc140ad95fed20e"
-  integrity sha512-D+dvnHVOpMwAx2qmivkwXNrF4kmbQtFFNT2E6MFvic5Q0LhtuzLmfK0eFuab/zzLBvXIMv4YCZwKAuxfO+AIqg==
+  resolved "git+https://github.com/peeldao/juice-hooks.git#738c976ac628c5f5941f3652a447a6dfa778567d"
   dependencies:
     bs58 "^5.0.0"
     fpnum "^0.0.13"

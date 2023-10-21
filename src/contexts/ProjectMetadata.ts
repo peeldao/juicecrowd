@@ -4,10 +4,6 @@ import { createContext, useContext } from 'react'
 export const JBProjectMetadataContext = createContext<
   JBProjectMetadata & {
     // TODO: Remove once added to juice-hooks
-    coverImageUri: string | undefined
-    twitter: string | undefined
-    discord: string | undefined
-    telegram: string | undefined
     infoUri: string | undefined
   }
 >({

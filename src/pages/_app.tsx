@@ -2,7 +2,7 @@ import { Head } from '@/components/Head'
 import { Toaster } from '@/components/ui/Toaster'
 import { AppProps } from 'next/app'
 import localFont from 'next/font/local'
-import '../styles/globals.css'
+import '../styles/globals.scss'
 
 const agrandirWide = localFont({
   src: [

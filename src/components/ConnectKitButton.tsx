@@ -23,7 +23,7 @@ export const ConnectKitButton: React.FC<ConnectKitButtonProps> = ({ size }) => {
         return (
           <Button
             size={size}
-            className="bg-bluebs-50 text-bluebs-700"
+            variant={isConnected ? 'secondary' : 'outline-primary'}
             onClick={show}
           >
             {buttonText}

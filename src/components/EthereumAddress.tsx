@@ -37,10 +37,11 @@ export const EthereumAddress: React.FC<EthereumAddressProps> = ({
   }, [address, ensDisabled, ensName, truncateTo])
 
   return (
-    <TooltipProvider>
+    <TooltipProvider delayDuration={100}>
       <Tooltip>
         <TooltipTrigger
           className={twMerge(
+            'hover:underline',
             showEnsLoading && isLoading && 'animate-pulse',
             className,
           )}

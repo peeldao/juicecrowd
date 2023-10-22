@@ -8,6 +8,8 @@ export type UseJbProjectProps = {
   projectId?: number | bigint
 }
 
+export type SocialLink = 'twitter' | 'discord' | 'telegram' | 'website'
+
 /**
  * Returns the project metadata for a given project ID.
  *
@@ -57,12 +59,41 @@ export const useJbProject = ({
     args: [BigInt(projectId)],
   })
 
+  const socialLinks: Record<SocialLink, string | undefined> = useMemo(() => {
+    return {
+      twitter:
+        metadata?.twitter && metadata.twitter.length
+          ? `https://twitter.com/${metadata.twitter}`
+          : undefined,
+      discord: linkOrUndefined(metadata?.discord),
+      telegram: linkOrUndefined(metadata?.telegram),
+      website: linkOrUndefined(metadata?.infoUri),
+    }
+  }, [
+    metadata?.discord,
+    metadata?.infoUri,
+    metadata?.telegram,
+    metadata.twitter,
+  ])
+
   return {
     ...(pick(_graphqlProject, ['handle', 'contributorsCount']) ?? {}),
     ...metadata,
+    socialLinks,
     projectId,
     createdAt,
     owner,
     _metadata: metadata,
   }
+}
+
+const linkOrUndefined = (link: string | undefined) => {
+  if (!link || !link.length) return undefined
+  return linkUrl(link)
+}
+const linkUrl = (url: string) => {
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url
+  }
+  return 'https://' + url
 }

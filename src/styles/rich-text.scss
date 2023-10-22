@@ -1,0 +1,36 @@
+#rich-text {
+  p,
+  li {
+    @apply m-0;
+    @apply text-base;
+  }
+  a {
+    @apply text-primary;
+    @apply hover:text-primary-hover;
+  }
+  h1 {
+    @apply font-heading;
+    @apply text-2xl;
+  }
+  h2 {
+    @apply font-heading;
+    @apply text-xl;
+  }
+  blockquote {
+    @apply my-1 border-l-4 border-gray-300 pl-4;
+  }
+  ol {
+    @apply ml-2;
+    @apply list-inside list-decimal;
+  }
+  ul {
+    @apply ml-2;
+    @apply list-inside list-disc;
+  }
+  pre {
+    @apply my-2;
+    @apply p-2;
+    @apply bg-gray-100;
+    @apply rounded-lg;
+  }
+}

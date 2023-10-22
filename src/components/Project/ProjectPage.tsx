@@ -13,13 +13,11 @@ import { ActivityTab } from './components/ActivityTab'
 import { RewardsPanel } from './components/RewardsPanel'
 import { Stats } from './components/Stats'
 import { TitleBlock } from './components/TitleBlock'
+import ProjectLogo from '../ProjectLogo'
+import { useJbProject } from '@/hooks/useJbProject'
 
 export const ProjectPage = () => {
-  const { projectId } = useJBContractContext()
-  const { name } = useJBProjectMetadata()
-  const { data: address } = useJbProjectsOwnerOf({
-    args: [BigInt(projectId)],
-  })
+  const { logoUri, name, projectId } = useJbProject()
   const { fundingCycleMetadata } = useJBFundingCycleContext()
   const nfts = useJb721DelegateTiers(fundingCycleMetadata?.data?.dataSource, {
     ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
@@ -33,22 +31,16 @@ export const ProjectPage = () => {
       {/* Page Outer Body */}
       <div className="relative mb-40 px-4 md:px-6">
         {/* Project Logo */}
-        <div
-          className={twMerge(
-            'absolute left-1/2 top-0 h-24 w-24 -translate-x-1/2 -translate-y-[calc(100%-20px)] rounded-xl border-[6px] border-white bg-red-400',
-          )}
+        <ProjectLogo
+          className="absolute left-1/2 top-0 h-28 w-28 -translate-x-1/2 -translate-y-[calc(100%-26px)] rounded-xl border-[6px] border-white bg-red-400"
+          projectId={projectId}
+          uri={logoUri}
+          name={name}
         />
 
         {/* Page Inner Body (Container)  */}
         <div className="mx-auto flex max-w-6xl flex-col items-center">
-          <TitleBlock
-            className="mt-10"
-            // TODO: Real data
-            title="A Trip To Transformation Documentary"
-            subtitle="Support a groundbreaking documentary on psychedelic medicine."
-            owner="xavierrous.eth"
-            created={new Date()}
-          />
+          <TitleBlock className="mt-10" />
 
           {/* Content */}
           <div className="mt-10 flex w-full gap-x-28">

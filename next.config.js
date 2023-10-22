@@ -14,6 +14,12 @@ module.exports = {
         port: '',
         pathname: '/ipfs/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.stamp.fyi',
+        port: '',
+        pathname: '/avatar/**',
+      },
     ],
   },
 }

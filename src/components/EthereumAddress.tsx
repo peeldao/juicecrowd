@@ -1,13 +1,12 @@
 import { truncateEthAddress } from '@/lib/address/format'
+import { ensAvatarUrlForAddress } from '@/lib/ens'
+import Image from 'next/image'
 import { useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { useEnsName } from 'wagmi'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from './ui/Tooltip'
+import { Link } from './Link'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/HoverCard'
+import { Skeleton } from './ui/Skeleton'
 
 export type EthereumAddressProps = {
   className?: string
@@ -37,21 +36,45 @@ export const EthereumAddress: React.FC<EthereumAddressProps> = ({
   }, [address, ensDisabled, ensName, truncateTo])
 
   return (
-    <TooltipProvider delayDuration={100}>
-      <Tooltip>
-        <TooltipTrigger
-          className={twMerge(
-            'hover:underline',
-            showEnsLoading && isLoading && 'animate-pulse',
-            className,
+    <HoverCard openDelay={150}>
+      <HoverCardTrigger
+        className={twMerge(
+          'hover:underline',
+          showEnsLoading && isLoading && 'animate-pulse',
+          className,
+        )}
+      >
+        {formattedAddress}
+      </HoverCardTrigger>
+      <HoverCardContent className="text-start">
+        <div className="flex items-center gap-5">
+          {address ? (
+            <Image
+              src={ensAvatarUrlForAddress(address, { size: 80 })}
+              height={40}
+              width={40}
+              className={twMerge('h-10 w-10 rounded-full')}
+              alt={`Avatar for ${ensName ?? address}`}
+              loading="lazy"
+            />
+          ) : (
+            <Skeleton className="h-10 w-10 rounded-full" />
           )}
-        >
-          {formattedAddress}
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>{address}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+          <div className="space-y-1 font-medium">
+            <div>{ensName}</div>
+            <div>
+              <Link
+                className="text-gray-500"
+                href={`https://etherscan.io/address/${address}`}
+              >
+                {address
+                  ? truncateEthAddress({ address, truncateTo: 8 })
+                  : undefined}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   )
 }

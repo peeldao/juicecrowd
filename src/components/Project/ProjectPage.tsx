@@ -32,7 +32,7 @@ export const ProjectPage = () => {
       <div className="relative mb-40 px-4 md:px-6">
         {/* Project Logo */}
         <ProjectLogo
-          className="absolute left-1/2 top-0 h-28 w-28 -translate-x-1/2 -translate-y-[calc(100%-26px)] rounded-xl border-[6px] border-white bg-red-400"
+          className="absolute left-1/2 top-0 h-28 w-28 -translate-x-1/2 -translate-y-[calc(100%-26px)] rounded-xl border-[6px] border-white"
           projectId={projectId}
           uri={logoUri}
           name={name}

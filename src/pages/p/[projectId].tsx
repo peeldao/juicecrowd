@@ -14,9 +14,6 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 export interface ProjectPageProps {
   metadata: JBProjectMetadata & {
     // TODO: add to juice-hooks
-    twitter: string
-    discord: string
-    telegram: string
     infoUri: string
   }
   projectId: number

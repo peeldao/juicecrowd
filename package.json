@@ -29,7 +29,7 @@
     "dotenv": "^16.3.1",
     "googleapis": "^126.0.1",
     "graphql": "^16.8.1",
-    "juice-hooks": "5.1.3-beta",
+    "juice-hooks": "5.1.7-beta",
     "lodash": "^4.17.21",
     "lucide-react": "^0.284.0",
     "next": "^13.4.0",

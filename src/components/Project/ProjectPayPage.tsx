@@ -10,7 +10,8 @@ export const ProjectPayPage = () => {
   const { name, nfts } = useJbProject()
   return (
     <div className="block md:flex">
-      <div className="mt-32 flex-1 px-4 pb-14 md:mt-10">
+      {/* Left panel */}
+      <div className="mt-32 flex-1 px-4 pb-14 md:mt-10 md:px-8">
         <div className="md:mx-auto md:max-w-lg">
           <BackButton className="hidden md:flex" />
           <div className="md:mt-12">
@@ -30,7 +31,8 @@ export const ProjectPayPage = () => {
         </div>
       </div>
 
-      <div className="flex-1 bg-gray-50 px-4 pb-24 pt-12 md:pt-[148px]">
+      {/* Right panel */}
+      <div className="flex-1 bg-gray-50 px-4 pb-24 pt-12 md:px-8 md:pt-[148px]">
         <ProjectPayForm className="md:max-w-lg" />
       </div>
     </div>

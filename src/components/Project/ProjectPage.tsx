@@ -101,9 +101,9 @@ export type ContentDesktopProps = {
 
 const ContentDesktop: React.FC<ContentDesktopProps> = ({ className }) => {
   return (
-    <div className={twMerge('w-full gap-x-28', className)}>
+    <div className={twMerge('w-full gap-x-20', className)}>
       {/* Left column */}
-      <div className="max-w-xl flex-1">
+      <div className="max-w-2xl flex-1">
         <HeroVideo />
 
         <Tabs defaultValue="about" className="mt-20">
@@ -121,7 +121,7 @@ const ContentDesktop: React.FC<ContentDesktopProps> = ({ className }) => {
       </div>
 
       {/* Right column */}
-      <div className="mt-12 flex-1">
+      <div className="mt-12 max-w-[400px] flex-1">
         <Stats />
         <RewardsPanel className="mt-28" />
       </div>

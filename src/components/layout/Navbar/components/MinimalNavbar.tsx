@@ -12,7 +12,7 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
   return (
     <div
       className={twMerge(
-        'absolute right-12 top-5 z-10 flex w-fit items-center gap-6 rounded-lg border-gray-300 bg-white px-4 py-3 shadow',
+        'absolute right-4 top-5 z-10 flex w-fit items-center gap-6 rounded-lg border-gray-300 bg-white px-4 py-3 shadow md:right-12',
         className,
       )}
     >

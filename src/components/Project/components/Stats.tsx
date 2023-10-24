@@ -16,33 +16,35 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
       <div>
         <Progress className="h-1.5" value={64} />
         <div className="mt-5 flex items-center gap-3">
-          <span className="font-heading text-2xl font-medium">
+          <span className="font-heading text-xl font-medium md:text-2xl">
             {/* // TODO: Replace real */}
             $64,976
           </span>
-          <span className="text-gray-500">
+          <span className="text-sm text-gray-500">
             {/* // TODO: Replace real */}
             raised of $100,000 flexible goal
           </span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="flex h-12 space-x-6">
+      <div className="flex w-full flex-wrap items-center justify-between gap-y-8 md:flex-nowrap">
+        <div className="flex h-12 w-full flex-shrink-0 space-x-6 md:flex-shrink">
           <StatBlock title="Time left" value="12 days" />
           <Separator orientation="vertical" />
           <StatBlock title="Supporters" value="227" />
         </div>
 
-        <div>
-          <Button variant="outline" className="flex gap-2">
+        <div className="w-full md:w-fit">
+          <Button variant="outline" className="flex h-14 w-full gap-2 md:h-fit">
             <ShareIcon className="h-5 w-5" />
             Share
           </Button>
         </div>
       </div>
 
-      <Button className="w-full">Support this project</Button>
+      <Button className="-mt-8 w-full flex-1 flex-shrink-0 md:mt-0">
+        Support this project
+      </Button>
     </div>
   )
 }
@@ -57,7 +59,9 @@ const StatBlock: React.FC<StatBlockProps> = ({ className, title, value }) => {
   return (
     <div className={twMerge('flex flex-col', className)}>
       <div className="text-sm text-gray-500">{title}</div>
-      <div className="text-xl font-medium text-gray-900">{value}</div>
+      <div className="text-lg font-medium text-gray-900 md:text-xl">
+        {value}
+      </div>
     </div>
   )
 }

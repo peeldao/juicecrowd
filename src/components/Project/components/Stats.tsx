@@ -1,7 +1,9 @@
+import { Link } from '@/components/Link'
 import { ShareIcon } from '@/components/icon/ShareIcon'
 import { Button } from '@/components/ui/Button'
 import { Progress } from '@/components/ui/Progress'
 import { Separator } from '@/components/ui/Separator'
+import { useJbProject } from '@/hooks/useJbProject'
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -10,6 +12,7 @@ export type StatsProps = {
 }
 
 export const Stats: React.FC<StatsProps> = ({ className }) => {
+  const { projectId } = useJbProject()
   return (
     <div className={twMerge('flex flex-col gap-12', className)}>
       {/* // TODO: Hook up */}
@@ -42,9 +45,9 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
         </div>
       </div>
 
-      <Button className="-mt-8 w-full flex-1 flex-shrink-0 md:mt-0">
-        Support this project
-      </Button>
+      <Link href={`/p/${projectId}/pay`} className="-mt-8 md:mt-0">
+        <Button className="w-full">Support this project</Button>
+      </Link>
     </div>
   )
 }

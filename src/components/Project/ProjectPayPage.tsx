@@ -1,13 +1,13 @@
 import { useJbProject } from '@/hooks/useJbProject'
-import { PayRewardCard } from './components/PayRewardCard'
-import { ProjectPayForm } from './components/ProjectPayForm'
-import { Button } from '../ui/Button'
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
-import { twMerge } from 'tailwind-merge'
 import Link from 'next/link'
+import { twMerge } from 'tailwind-merge'
+import { Button } from '../ui/Button'
+import { ProjectPayForm } from './components/ProjectPayForm'
+import { ProjectPayRewards } from './components/ProjectPayRewards'
 
 export const ProjectPayPage = () => {
-  const { name, nfts } = useJbProject()
+  const { name } = useJbProject()
   return (
     <div className="block md:flex">
       {/* Left panel */}
@@ -24,9 +24,7 @@ export const ProjectPayPage = () => {
               Select a reward
             </h3>
 
-            <div className="mt-5 flex flex-col gap-3">
-              {nfts?.map(nft => <PayRewardCard key={nft.id} nft={nft} />)}
-            </div>
+            <ProjectPayRewards className="mt-5" />
           </div>
         </div>
       </div>

@@ -10,10 +10,13 @@ import {
   FormMessage,
 } from '@/components/ui/Form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { PropsWithChildren, useCallback } from 'react'
+import { PropsWithChildren, useCallback, useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
+import { useProjectPay } from '../providers/ProjectPayContext'
+import { useJbProject } from '@/hooks/useJbProject'
+import { formatEther } from 'juice-hooks'
 
 const WEI = 1e-18
 
@@ -34,6 +37,9 @@ export type ProjectPayFormProps = {
 export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
   className,
 }) => {
+  const { nfts } = useJbProject()
+  const { nftRewardIds } = useProjectPay()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,12 +50,23 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     },
   })
 
+  const totalNftSelectionPrice = useMemo(
+    () =>
+      nftRewardIds.reduce((acc, nftId) => {
+        if (!nfts) return acc
+        const nft = nfts.find(nft => nft.id === nftId)
+        if (!nft) return acc
+        return acc + nft.price
+      }, 0n),
+    [nftRewardIds, nfts],
+  )
+
   const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
     console.log(values)
   }, [])
 
   // TODO
-  const total = 0
+  const total = totalNftSelectionPrice
 
   return (
     <Form {...form}>
@@ -105,7 +122,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
 
         <div className="mt-6 flex justify-between font-medium">
           <div>Total to pay</div>
-          <div>{total} ETH</div>
+          <div>{formatEther(total)} ETH</div>
         </div>
 
         <Button className="mt-2 h-14 w-full" type="submit">

@@ -14,7 +14,9 @@ import { useJbProject } from '@/hooks/useJbProject'
 import {
   ChevronDownIcon,
   EnvelopeIcon,
+  PhotoIcon,
   QuestionMarkCircleIcon,
+  XCircleIcon,
 } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { formatEther } from 'juice-hooks'
@@ -24,6 +26,9 @@ import { twMerge } from 'tailwind-merge'
 import { parseEther } from 'viem'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
+import { useIpfsFilePicker } from '@/hooks/useIpfsFilePicker/useIpfsFilePicker'
+import { Link } from '@/components/Link'
+import Image from 'next/image'
 
 const WEI = 1e-18
 
@@ -60,6 +65,8 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
   // TODO: Use proper currency formatting from juice_hooks when available
   // for now, 1n == eth, 2n == usd
   const [currency, setCurrency] = useState<1n | 2n>(1n)
+
+  const [attachedUrl, setAttachedUrl] = useState<string | undefined>(undefined)
 
   const totalNftSelectionPrice = useMemo(
     () =>
@@ -143,7 +150,26 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           name="message"
           render={({ field }) => (
             <ProjectPayFormItem label="Message (Optional)">
-              <Input {...field} />
+              <ProjectPayMessageInput
+                attachedUrl={attachedUrl}
+                setAttachedUrl={setAttachedUrl}
+                {...field}
+              />
+              {/* <Input
+                className="text-sm"
+                placeholder="Attach an on-chain message to this payment"
+                suffix={
+                  <Button
+                    size="child"
+                    variant="link"
+                    // TODO: Call useIpfsUpload hook
+                    onClick={() => window.alert('TODO')}
+                  >
+                    <PhotoIcon className="h-6 w-6 text-bluebs-500" />
+                  </Button>
+                }
+                {...field}
+              /> */}
             </ProjectPayFormItem>
           )}
         />
@@ -231,5 +257,100 @@ const ProjectPayAmountInput: React.FC<ProjectPayAmountInputProps> = ({
       }
       {...props}
     />
+  )
+}
+
+type ProjectPayMessageInputProps = {
+  attachedUrl: string | undefined
+  setAttachedUrl: (url: string | undefined) => void
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'>
+
+const ProjectPayMessageInput: React.FC<ProjectPayMessageInputProps> = ({
+  className,
+  attachedUrl,
+  setAttachedUrl,
+  ...props
+}) => {
+  const acceptedFileTypes =
+    'image/jpeg,image/png,image/gif,video/mp4,video/quicktime,video/x-m4v,video/webm'
+  const {
+    uploadedUrl,
+    isUploading,
+    selectedFile,
+    uploadProgress,
+    FileInput,
+    openFilePicker,
+    cancelUpload,
+    removeFile,
+  } = useIpfsFilePicker({
+    accept: acceptedFileTypes,
+    onFileUrlChange: url => setAttachedUrl(url),
+  })
+  return (
+    <>
+      {FileInput}
+      <Input
+        className="text-sm"
+        placeholder="Attach an on-chain message to this payment"
+        suffix={
+          <Button
+            type="button"
+            size="child"
+            variant="link"
+            // TODO: Call useIpfsUpload hook
+            onClick={openFilePicker}
+          >
+            <PhotoIcon className="h-6 w-6 text-bluebs-500" />
+          </Button>
+        }
+        {...props}
+      />
+
+      {isUploading ? (
+        <div>
+          <div className="mt-2 flex items-center justify-between">
+            <div className="h-1 flex-1">
+              <div
+                role="progressbar"
+                className="relative h-full w-full overflow-hidden rounded-lg bg-gray-200"
+              >
+                <div
+                  className="absolute left-0 top-0 h-full bg-bluebs-500"
+                  style={{ width: `${uploadProgress}%` }}
+                />
+              </div>
+            </div>
+            <button
+              type="button"
+              className="h-fit p-0"
+              onClick={cancelUpload}
+              aria-label="Cancel upload"
+            >
+              <XCircleIcon className="ml-4 h-5 w-5 flex-none text-gray-400" />
+            </button>
+          </div>
+        </div>
+      ) : (
+        uploadedUrl &&
+        selectedFile && (
+          <div className="mt-4 flex">
+            <div className="relative h-12 w-12 overflow-hidden rounded-md">
+              <Image fill src={uploadedUrl} alt={selectedFile.name} />
+            </div>
+            <button
+              type="button"
+              className="h-fit p-0"
+              onClick={removeFile}
+              aria-label="Remove attached file"
+            >
+              <XCircleIcon className="ml-2 h-5 w-5 flex-none text-gray-400" />
+            </button>
+            <span className="ml-8 max-w-xs truncate text-xs text-gray-500">
+              Uploaded to: <Link href={uploadedUrl}>{uploadedUrl}</Link>
+            </span>
+          </div>
+        )
+      )}
+    </>
   )
 }

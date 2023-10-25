@@ -14,12 +14,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     { className, prefix, prefixSeparator, suffix, suffixSeparator, ...props },
     ref,
   ) => {
-    if (prefix) {
+    if (prefix || suffix) {
       return (
         <div className="flex items-center rounded-lg border border-gray-300 bg-white outline-2 focus-within:outline focus-within:outline-bluebs-500">
           <div
             className={twMerge(
-              'h-full py-2 pl-3 text-base leading-6 text-gray-500',
+              'flex h-full items-center justify-center py-2 pl-3 text-base leading-6 text-gray-500',
               prefixSeparator ? 'border-r border-gray-300 pr-3' : '',
             )}
           >
@@ -37,7 +37,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           <div
             className={twMerge(
-              'h-full py-2 pr-3 text-base leading-6 text-gray-500',
+              'flex h-full items-center justify-center py-2 pr-3 text-base leading-6 text-gray-500',
               suffixSeparator ? 'border-l border-gray-300 pl-3' : '',
             )}
           >

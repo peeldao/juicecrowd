@@ -58,7 +58,6 @@ export const useJbProject = ({
   const metadata = useJBProjectMetadata()
   const { fundingCycleMetadata } = useJBFundingCycleContext()
 
-  console.log('fundingCycleMetadata', fundingCycleMetadata)
   const nfts: JB721DelegateTierTier[] | undefined = useJb721DelegateTiers(
     fundingCycleMetadata?.data?.dataSource,
     {

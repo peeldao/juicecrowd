@@ -5,13 +5,18 @@ interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   prefix?: ReactNode
   prefixSeparator?: boolean
+  suffix?: ReactNode
+  suffixSeparator?: boolean
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, prefix, prefixSeparator, ...props }, ref) => {
+  (
+    { className, prefix, prefixSeparator, suffix, suffixSeparator, ...props },
+    ref,
+  ) => {
     if (prefix) {
       return (
-        <div className="focus-within:outline-bluebs-500 flex items-center rounded-lg border border-gray-300 outline-2 focus-within:outline">
+        <div className="flex items-center rounded-lg border border-gray-300 bg-white outline-2 focus-within:outline focus-within:outline-bluebs-500">
           <div
             className={twMerge(
               'h-full py-2 pl-3 text-base leading-6 text-gray-500',
@@ -20,6 +25,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           >
             {prefix}
           </div>
+
           <input
             ref={ref}
             className={twMerge(
@@ -28,6 +34,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             )}
             {...props}
           />
+
+          <div
+            className={twMerge(
+              'h-full py-2 pr-3 text-base leading-6 text-gray-500',
+              suffixSeparator ? 'border-l border-gray-300 pl-3' : '',
+            )}
+          >
+            {suffix}
+          </div>
         </div>
       )
     }
@@ -36,7 +51,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         className={twMerge(
-          'focus:outline-bluebs-500 w-full rounded-lg border border-gray-300 px-3 py-2 text-base text-gray-900 placeholder:text-gray-400',
+          'w-full rounded-lg border border-gray-300 px-3 py-2 text-base text-gray-900 placeholder:text-gray-400 focus:outline-bluebs-500',
           className,
         )}
         {...props}

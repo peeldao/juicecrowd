@@ -155,21 +155,6 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
                 setAttachedUrl={setAttachedUrl}
                 {...field}
               />
-              {/* <Input
-                className="text-sm"
-                placeholder="Attach an on-chain message to this payment"
-                suffix={
-                  <Button
-                    size="child"
-                    variant="link"
-                    // TODO: Call useIpfsUpload hook
-                    onClick={() => window.alert('TODO')}
-                  >
-                    <PhotoIcon className="h-6 w-6 text-bluebs-500" />
-                  </Button>
-                }
-                {...field}
-              /> */}
             </ProjectPayFormItem>
           )}
         />
@@ -297,7 +282,6 @@ const ProjectPayMessageInput: React.FC<ProjectPayMessageInputProps> = ({
             type="button"
             size="child"
             variant="link"
-            // TODO: Call useIpfsUpload hook
             onClick={openFilePicker}
           >
             <PhotoIcon className="h-6 w-6 text-bluebs-500" />

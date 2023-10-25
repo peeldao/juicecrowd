@@ -10,18 +10,22 @@ import {
   FormMessage,
 } from '@/components/ui/Form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { PropsWithChildren, useCallback, useMemo } from 'react'
+import { PropsWithChildren, useCallback, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
 import { useJbProject } from '@/hooks/useJbProject'
-import { formatEther } from 'juice-hooks'
+import { Ether, formatEther } from 'juice-hooks'
+import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { parseEther } from 'viem'
+import { isNumber } from 'lodash'
 
 const WEI = 1e-18
 
 const formSchema = z.object({
-  paymentAmount: z
+  paymentAmount: z.coerce
     .number()
     .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
   // TODO: make more robust for eth addresses / ENS
@@ -50,6 +54,10 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     },
   })
 
+  // TODO: Use proper currency formatting from juice_hooks when available
+  // for now, 1n == eth, 2n == usd
+  const [currency, setCurrency] = useState<1n | 2n>(1n)
+
   const totalNftSelectionPrice = useMemo(
     () =>
       nftRewardIds.reduce((acc, nftId) => {
@@ -65,8 +73,14 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     console.log(values)
   }, [])
 
-  // TODO
-  const total = totalNftSelectionPrice
+  const paymentAmount = form.watch('paymentAmount')
+
+  // TODO - Account for usd conversion
+  const total =
+    totalNftSelectionPrice +
+    (paymentAmount && !isNaN(paymentAmount)
+      ? parseEther(`${paymentAmount}`)
+      : 0n)
 
   return (
     <Form {...form}>
@@ -79,7 +93,12 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           name="paymentAmount"
           render={({ field }) => (
             <ProjectPayFormItem label="Payment amount">
-              <Input {...field} />
+              <ProjectPayAmountInput
+                currency={currency}
+                setCurrency={setCurrency}
+                placeholder="0"
+                {...field}
+              />
             </ProjectPayFormItem>
           )}
         />
@@ -156,5 +175,52 @@ const ProjectPayFormItem: React.FC<
       </FormDescription>
       <FormMessage />
     </FormItem>
+  )
+}
+
+type ProjectPayAmountInputProps = {
+  currency: 1n | 2n
+  setCurrency: (currency: 1n | 2n) => void
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'>
+
+const ProjectPayAmountInput: React.FC<ProjectPayAmountInputProps> = ({
+  className,
+  currency,
+  setCurrency,
+  ...props
+}) => {
+  const isEth = currency === 1n
+  const toggleCurrency = useCallback(() => {
+    setCurrency(isEth ? 2n : 1n)
+  }, [isEth, setCurrency])
+
+  return (
+    <Input
+      prefix={
+        isEth ? (
+          <EthereumIconFilled className="h-7 w-7 rounded-full bg-bluebs-50 fill-bluebs-500 p-1" />
+        ) : (
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-green-100 text-green-600">
+            $
+          </div>
+        )
+      }
+      suffix={
+        <Button
+          type="button"
+          size="child"
+          variant="secondary"
+          className={twMerge(
+            'flex gap-1 rounded-sm py-1.5 pl-1 pr-2 text-xs',
+            !isEth && 'bg-green-100 text-green-600',
+          )}
+          onClick={toggleCurrency}
+        >
+          <ChevronDownIcon className="h-4 w-4" />
+          {isEth ? 'ETH' : 'USD'}
+        </Button>
+      }
+      {...props}
+    />
   )
 }

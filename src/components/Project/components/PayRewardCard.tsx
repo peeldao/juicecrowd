@@ -46,12 +46,14 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
         </div>
         <div className="flex h-5 gap-4 text-sm">
           <RewardDialog nft={nft}>
-            <Button size="child" variant="link">
+            <Button className="whitespace-nowrap" size="child" variant="link">
               View details
             </Button>
           </RewardDialog>
           <Separator orientation="vertical" />
-          <span className="text-gray-400">{remaining} remaining</span>
+          <span className="whitespace-nowrap text-gray-400">
+            {remaining} remaining
+          </span>
         </div>
       </div>
 

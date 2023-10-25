@@ -26,8 +26,9 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
   return (
     <div
       className={twMerge(
-        'flex cursor-pointer rounded-[10px] border border-gray-200 p-3 shadow-sm',
-        isSelected && '-m-[1px] border-2 border-bluebs-500',
+        'flex cursor-pointer rounded-[10px] border border-gray-200 p-3 shadow-sm transition-all hover:border-gray-300 hover:shadow-md',
+        isSelected &&
+          '-m-[1px] border-2 border-bluebs-500 shadow-md hover:border-bluebs-500',
         className,
       )}
       onClick={onClick}

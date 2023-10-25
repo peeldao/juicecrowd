@@ -1,4 +1,5 @@
 import { Input } from '@/components/Input'
+import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
 import { Button } from '@/components/ui/Button'
 import {
   Form,
@@ -9,18 +10,20 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/Form'
+import { useJbProject } from '@/hooks/useJbProject'
+import {
+  ChevronDownIcon,
+  EnvelopeIcon,
+  QuestionMarkCircleIcon,
+} from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { formatEther } from 'juice-hooks'
 import { PropsWithChildren, useCallback, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
+import { parseEther } from 'viem'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
-import { useJbProject } from '@/hooks/useJbProject'
-import { Ether, formatEther } from 'juice-hooks'
-import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
-import { parseEther } from 'viem'
-import { isNumber } from 'lodash'
 
 const WEI = 1e-18
 
@@ -124,7 +127,13 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
               label="Email"
               description="Enter email to receive confirmation & updates"
             >
-              <Input {...field} />
+              <Input
+                prefix={<EnvelopeIcon className="h-5 w-5 text-gray-500" />}
+                suffix={
+                  <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" />
+                }
+                {...field}
+              />
             </ProjectPayFormItem>
           )}
         />

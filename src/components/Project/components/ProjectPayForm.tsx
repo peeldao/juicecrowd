@@ -1,4 +1,5 @@
 import { Input } from '@/components/Input'
+import { Link } from '@/components/Link'
 import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
 import { Button } from '@/components/ui/Button'
 import {
@@ -10,25 +11,37 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/Form'
+import { useIpfsFilePicker } from '@/hooks/useIpfsFilePicker/useIpfsFilePicker'
 import { useJbProject } from '@/hooks/useJbProject'
 import {
   ChevronDownIcon,
   EnvelopeIcon,
+  PencilSquareIcon,
   PhotoIcon,
   QuestionMarkCircleIcon,
   XCircleIcon,
 } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { formatEther } from 'juice-hooks'
-import { PropsWithChildren, useCallback, useMemo, useState } from 'react'
+import Image from 'next/image'
+import {
+  ChangeEventHandler,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
-import { parseEther } from 'viem'
+import { isAddress, parseEther } from 'viem'
+import { useAccount, useEnsAddress, useEnsName } from 'wagmi'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
-import { useIpfsFilePicker } from '@/hooks/useIpfsFilePicker/useIpfsFilePicker'
-import { Link } from '@/components/Link'
-import Image from 'next/image'
+import { publicClient } from '@/lib/viem/publicClient'
+import { Spinner } from '@/components/Spinner'
+import { truncateEthAddress } from '@/lib/address/format'
 
 const WEI = 1e-18
 
@@ -37,7 +50,13 @@ const formSchema = z.object({
     .number()
     .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
   // TODO: make more robust for eth addresses / ENS
-  beneficiary: z.string().min(2, 'Beneficiary must be at least 2 characters'),
+  beneficiary: z
+    .string()
+    .optional()
+    .refine(value => {
+      if (!value) return true
+      return isAddress(value)
+    }, 'Invalid wallet address'),
   email: z.string().email('Invalid email address').optional(),
   message: z.string().optional(),
 })
@@ -121,7 +140,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
               className="mt-6"
               label="NFTs and rewards will be sent to"
             >
-              <Input {...field} />
+              <ProjectPayBeneficiaryInput {...field} />
             </ProjectPayFormItem>
           )}
         />
@@ -135,6 +154,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
               description="Enter email to receive confirmation & updates"
             >
               <Input
+                placeholder="banny@juicebox.com"
                 prefix={<EnvelopeIcon className="h-5 w-5 text-gray-500" />}
                 suffix={
                   <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" />
@@ -337,4 +357,101 @@ const ProjectPayMessageInput: React.FC<ProjectPayMessageInputProps> = ({
       )}
     </>
   )
+}
+
+type ProjectPayBeneficiaryInputProps = {} & Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'prefix'
+>
+
+const ProjectPayBeneficiaryInput: React.FC<ProjectPayBeneficiaryInputProps> = ({
+  className,
+  onChange: _onChange,
+  ...props
+}) => {
+  const { address: ownerAddress } = useAccount()
+
+  const currentAddress = useMemo(() => {
+    if (!props.value) return ownerAddress
+    if (!isAddress(props.value as string)) return ownerAddress
+
+    return props.value as `0x${string}`
+  }, [ownerAddress, props.value])
+
+  const { data: currentEnsFromAddress } = useEnsName({
+    address: currentAddress,
+  })
+  const [isEditing, setIsEditing] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  /**
+   * hijacks the onChange event to check if the value is an ENS name or address
+   */
+  const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    async e => {
+      const value = e.target.value
+      _onChange?.(e)
+      if (isEnsName(value)) {
+        setIsLoading(true)
+        try {
+          const ensAddress = await publicClient.getEnsAddress({ name: value })
+          if (!ensAddress) return
+          _onChange?.({ ...e, target: { ...e.target, value: ensAddress } })
+          setIsEditing(false)
+        } catch (e) {
+          console.error(e)
+        } finally {
+          setIsLoading(false)
+        }
+      }
+    },
+    [_onChange],
+  )
+
+  useEffect(() => {
+    if (!isEditing) return
+    inputRef.current?.focus()
+  }, [isEditing])
+
+  if (!isEditing) {
+    return (
+      <div className="flex h-11 justify-between gap-5 overflow-hidden rounded-lg border border-gray-200 bg-muted px-[14px] py-3 text-base leading-none">
+        <div className="">
+          {currentEnsFromAddress ||
+            (currentAddress
+              ? truncateEthAddress({ address: currentAddress })
+              : undefined)}
+        </div>
+        <Button
+          size="child"
+          variant="ghost"
+          className="p-0"
+          onClick={() => setIsEditing(true)}
+        >
+          <PencilSquareIcon className="h-4 w-4" />
+        </Button>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      <Input
+        {...props}
+        onChange={onChange}
+        ref={inputRef}
+        disabled={isLoading}
+        suffix={
+          isLoading ? <Spinner className="h-5 w-5 text-gray-900" /> : null
+        }
+        onBlur={() => setIsEditing(false)}
+      />
+    </>
+  )
+}
+
+const isEnsName = (value: string) => {
+  return value.endsWith('.eth')
 }

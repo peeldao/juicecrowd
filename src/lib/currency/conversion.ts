@@ -14,7 +14,10 @@ import { fetchEthInUsd } from './fetch'
  * @returns The amount of USD equivalent to the provided ETH
  */
 export const ethToUsd = async (eth: bigint, ethInUsd?: bigint) => {
-  ethInUsd = ethInUsd || Ether.parse((await fetchEthInUsd()).toString(), 18).val
+  ethInUsd =
+    ethInUsd !== undefined
+      ? ethInUsd
+      : Ether.parse((await fetchEthInUsd()).toString(), 18).val
   return ethToUsdSync(eth, ethInUsd)
 }
 
@@ -26,6 +29,10 @@ export const ethToUsd = async (eth: bigint, ethInUsd?: bigint) => {
  * @returns The amount of USD equivalent to the provided ETH
  */
 export const ethToUsdSync = (eth: bigint, ethInUsd: bigint) => {
+  if (eth < 0n || ethInUsd < 0n) {
+    console.error('ethToUsd: eth and ethInUsd must be positive', eth, ethInUsd)
+    throw new Error('eth and ethInUsd must be positive')
+  }
   const ethNormalized = parseFloat(formatEther(eth))
   if (isNaN(ethNormalized)) {
     console.error('ethToUsd: eth is NaN', eth)
@@ -52,7 +59,10 @@ export const ethToUsdSync = (eth: bigint, ethInUsd: bigint) => {
  * @returns The amount of ETH equivalent to the provided USD
  */
 export const usdToEth = async (usd: bigint, ethInUsd?: bigint) => {
-  ethInUsd = ethInUsd || Ether.parse((await fetchEthInUsd()).toString(), 18).val
+  ethInUsd =
+    ethInUsd !== undefined
+      ? ethInUsd
+      : Ether.parse((await fetchEthInUsd()).toString(), 18).val
   return usdToEthSync(usd, ethInUsd)
 }
 
@@ -64,6 +74,10 @@ export const usdToEth = async (usd: bigint, ethInUsd?: bigint) => {
  * @returns The amount of ETH equivalent to the provided USD
  */
 export const usdToEthSync = (usd: bigint, ethInUsd: bigint) => {
+  if (usd < 0n || ethInUsd < 0n) {
+    console.error('ethToUsd: eth and ethInUsd must be positive', usd, ethInUsd)
+    throw new Error('eth and ethInUsd must be positive')
+  }
   const usdNormalized = parseFloat(formatEther(usd))
   if (isNaN(usdNormalized)) {
     console.error('usdToEth: usd is NaN', usd)
@@ -73,11 +87,6 @@ export const usdToEthSync = (usd: bigint, ethInUsd: bigint) => {
   const ethInUsdNum = parseFloat(formatEther(ethInUsd))
   if (!usdNormalized || !ethInUsdNum) return 0n
   const converted = usdNormalized * (1 / ethInUsdNum)
-  console.log('wraeth', {
-    converted: converted.toString(),
-    usdNormalized,
-    ethInUsdNum,
-  })
 
   return Ether.parse(converted.toString(), 18).val
 }

@@ -1,5 +1,7 @@
+import { EthereumAddress } from '@/components/EthereumAddress'
 import { Input } from '@/components/Input'
 import { Link } from '@/components/Link'
+import { Spinner } from '@/components/Spinner'
 import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
 import { Button } from '@/components/ui/Button'
 import {
@@ -13,6 +15,7 @@ import {
 } from '@/components/ui/Form'
 import { useIpfsFilePicker } from '@/hooks/useIpfsFilePicker/useIpfsFilePicker'
 import { useJbProject } from '@/hooks/useJbProject'
+import { publicClient } from '@/lib/viem/publicClient'
 import {
   ChevronDownIcon,
   EnvelopeIcon,
@@ -36,12 +39,9 @@ import {
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { isAddress, parseEther } from 'viem'
-import { useAccount, useEnsAddress, useEnsName } from 'wagmi'
+import { useAccount, useEnsName } from 'wagmi'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
-import { publicClient } from '@/lib/viem/publicClient'
-import { Spinner } from '@/components/Spinner'
-import { truncateEthAddress } from '@/lib/address/format'
 
 const WEI = 1e-18
 
@@ -405,6 +405,8 @@ const ProjectPayBeneficiaryInput: React.FC<ProjectPayBeneficiaryInputProps> = ({
         } finally {
           setIsLoading(false)
         }
+      } else if (isAddress(value)) {
+        setIsEditing(false)
       }
     },
     [_onChange],
@@ -418,12 +420,11 @@ const ProjectPayBeneficiaryInput: React.FC<ProjectPayBeneficiaryInputProps> = ({
   if (!isEditing) {
     return (
       <div className="flex h-11 justify-between gap-5 overflow-hidden rounded-lg border border-gray-200 bg-muted px-[14px] py-3 text-base leading-none">
-        <div className="">
-          {currentEnsFromAddress ||
-            (currentAddress
-              ? truncateEthAddress({ address: currentAddress })
-              : undefined)}
-        </div>
+        {currentAddress ? (
+          <EthereumAddress showEnsIcon address={currentAddress} />
+        ) : (
+          <>Payer's address</>
+        )}
         <Button
           size="child"
           variant="ghost"

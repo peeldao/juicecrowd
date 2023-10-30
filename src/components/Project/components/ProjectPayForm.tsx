@@ -1,3 +1,4 @@
+import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { EthereumAddress } from '@/components/EthereumAddress'
 import { Input } from '@/components/Input'
 import { Link } from '@/components/Link'
@@ -25,7 +26,6 @@ import {
   XCircleIcon,
 } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { formatEther } from 'juice-hooks'
 import Image from 'next/image'
 import {
   ChangeEventHandler,
@@ -181,7 +181,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
 
         <div className="mt-6 flex justify-between font-medium">
           <div>Total to pay</div>
-          <div>{formatEther(total)} ETH</div>
+          <CurrencyAmount amount={total} />
         </div>
 
         <Button className="mt-2 h-14 w-full" type="submit">

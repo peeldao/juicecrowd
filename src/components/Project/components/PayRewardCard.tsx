@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/Separator'
 import React from 'react'
 import { CheckIcon } from '@heroicons/react/24/solid'
 import { Dialog, DialogTrigger } from '@/components/ui/Dialog'
+import { CurrencyAmount } from '@/components/CurrencyAmount'
 
 export type PayRewardCardProps = {
   className?: string
@@ -35,18 +36,12 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
         )}
         onClick={onClick}
       >
-        <RewardImage
-          className="h-14 w-14 rounded-lg"
-          src={nft.metadata.image}
-          alt={nft.metadata.name}
-        />
-
         <div className="ml-4 flex flex-1 flex-col gap-3">
           <div className="font-medium">{nft.metadata.name}</div>
-          <div className="flex items-center font-medium">
-            <EthereumIconFilled className="inline-block h-5 w-5 text-bluebs-500" />
-            {formatEther(nft.price)}
-          </div>
+          <CurrencyAmount
+            className="text-base font-medium"
+            amount={nft.price}
+          />
           <div className="flex h-5 gap-4 text-sm">
             <DialogTrigger onClick={e => e.stopPropagation()}>
               <Button className="whitespace-nowrap" size="child" variant="link">

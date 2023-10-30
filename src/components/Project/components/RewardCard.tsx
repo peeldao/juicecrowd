@@ -25,7 +25,10 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
         <div className="flex flex-col gap-4 p-4 pb-5">
           <div className="text-base font-medium">{nft.metadata.name}</div>
           <div className="flex items-center justify-between gap-5">
-            <CurrencyAmount amount={nft.price} />
+            <CurrencyAmount
+              className="text-xl font-medium"
+              amount={nft.price}
+            />
             <div className="text-gray-400">
               {nft.remainingQuantity.toString()} remaining
             </div>

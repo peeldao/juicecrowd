@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
 } from './ui/Tooltip'
 import { formatEth, formatUsd } from '@/lib/currency/format'
+import { twMerge } from 'tailwind-merge'
 
 /**
  * Available currencies of {@link JB_CURRENCIES}
@@ -17,6 +18,7 @@ import { formatEth, formatUsd } from '@/lib/currency/format'
 type Currency = 1n | 2n
 
 export type CurrencyAmountProps = {
+  className?: string
   amount: bigint
   currency?: Currency
 }
@@ -30,6 +32,7 @@ export type CurrencyAmountProps = {
  * @requires {@link EthUsdPriceProvider}
  */
 export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
+  className,
   amount,
   currency = JB_CURRENCIES.ETH,
 }) => {
@@ -71,7 +74,9 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
   return (
     <TooltipProvider delayDuration={150}>
       <Tooltip>
-        <TooltipTrigger className="flex items-center text-xl font-medium">
+        <TooltipTrigger
+          className={twMerge('flex w-fit items-center', className)}
+        >
           {currencyIcon}
           {formattedAmounts[0]}
         </TooltipTrigger>

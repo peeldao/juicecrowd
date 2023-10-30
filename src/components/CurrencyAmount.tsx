@@ -30,7 +30,7 @@ export type CurrencyAmountProps = {
  */
 export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
   amount,
-  currency = JB_CURRENCIES.USD,
+  currency = JB_CURRENCIES.ETH,
 }) => {
   const { ethToUsd, usdToEth } = useEthUsdPrice()
 

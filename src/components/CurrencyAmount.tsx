@@ -9,6 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './ui/Tooltip'
+import { formatEth, formatUsd } from '@/lib/currency/format'
 
 /**
  * Available currencies of {@link JB_CURRENCIES}
@@ -34,24 +35,23 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
 }) => {
   const { ethToUsd, usdToEth } = useEthUsdPrice()
 
-  const currencyStrings = useMemo(
-    () => (currency === JB_CURRENCIES.ETH ? ['ETH', 'USD'] : ['USD', 'ETH']),
-    [currency],
-  )
-
   const formattedAmounts = useMemo(() => {
     const amounts = []
     // The primary amount needs no extra calculation
-    amounts.push(formatEther(amount))
+    if (currency === JB_CURRENCIES.ETH) {
+      amounts.push(formatEth(amount))
+    } else {
+      amounts.push(formatUsd(amount))
+    }
 
     if (currency === JB_CURRENCIES.ETH) {
       // The secondary amount is the primary amount converted to USD
       const usd = ethToUsd(amount)
-      amounts.push(formatEther(usd, { decimals: 2 }))
+      amounts.push(formatUsd(usd))
     } else {
       // The secondary amount is the primary amount converted to ETH
       const eth = usdToEth(amount)
-      amounts.push(formatEther(eth, { decimals: 8 }))
+      amounts.push(formatEth(eth))
     }
 
     return amounts
@@ -61,14 +61,11 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
     const ethIcon = (
       <EthereumIconFilled className="inline-block h-5 w-5 text-bluebs-500" />
     )
-    const usdIcon = (
-      <CurrencyDollarIcon className="mr-0.5 inline-block h-5 w-5 text-green-600" />
-    )
     if (currency === JB_CURRENCIES.ETH) {
       return ethIcon
     }
 
-    return usdIcon
+    return null
   }, [currency])
 
   return (
@@ -76,10 +73,10 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
       <Tooltip>
         <TooltipTrigger className="flex items-center text-xl font-medium">
           {currencyIcon}
-          {formattedAmounts[0]} {currencyStrings[0]}
+          {formattedAmounts[0]}
         </TooltipTrigger>
         <TooltipContent className="flex items-center">
-          {formattedAmounts[1]} {currencyStrings[1]}
+          {formattedAmounts[1]}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

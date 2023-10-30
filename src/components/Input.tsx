@@ -16,33 +16,41 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     if (prefix || suffix) {
       return (
-        <div className="flex items-center rounded-lg border border-gray-300 bg-white outline-2 focus-within:outline focus-within:outline-bluebs-500">
-          <div
-            className={twMerge(
-              'flex h-full items-center justify-center py-2 pl-3 text-base leading-6 text-gray-500',
-              prefixSeparator ? 'border-r border-gray-300 pr-3' : '',
-            )}
-          >
-            {prefix}
-          </div>
+        <div
+          className={twMerge(
+            'flex items-center rounded-lg border border-gray-300 bg-white outline-2 focus-within:outline focus-within:outline-bluebs-500',
+            className,
+          )}
+        >
+          {prefix && (
+            <div
+              className={twMerge(
+                'flex h-full items-center justify-center py-2 pl-3 text-base leading-6 text-gray-500',
+                prefixSeparator ? 'border-r border-gray-300 pr-3' : '',
+              )}
+            >
+              {prefix}
+            </div>
+          )}
 
           <input
             ref={ref}
             className={twMerge(
               'w-full bg-transparent py-2 pl-2 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none',
-              className,
             )}
             {...props}
           />
 
-          <div
-            className={twMerge(
-              'flex h-full items-center justify-center py-2 pr-3 text-base leading-6 text-gray-500',
-              suffixSeparator ? 'border-l border-gray-300 pl-3' : '',
-            )}
-          >
-            {suffix}
-          </div>
+          {suffix && (
+            <div
+              className={twMerge(
+                'flex h-full items-center justify-center py-2 pr-3 text-base leading-6 text-gray-500',
+                suffixSeparator ? 'border-l border-gray-300 pl-3' : '',
+              )}
+            >
+              {suffix}
+            </div>
+          )}
         </div>
       )
     }

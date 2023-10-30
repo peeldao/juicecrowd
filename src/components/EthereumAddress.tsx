@@ -11,6 +11,7 @@ import { Skeleton } from './ui/Skeleton'
 export type EthereumAddressProps = {
   className?: string
   address: `0x${string}` | undefined
+  showEnsIcon?: boolean
   showEnsLoading?: boolean
   ensDisabled?: boolean
   truncateTo?: number
@@ -19,6 +20,7 @@ export type EthereumAddressProps = {
 export const EthereumAddress: React.FC<EthereumAddressProps> = ({
   className,
   address,
+  showEnsIcon,
   ensDisabled = false,
   showEnsLoading = false,
   truncateTo,
@@ -35,28 +37,42 @@ export const EthereumAddress: React.FC<EthereumAddressProps> = ({
     return truncateEthAddress({ address, truncateTo })
   }, [address, ensDisabled, ensName, truncateTo])
 
+  const ensAvatarIcon = useMemo(
+    () =>
+      address ? (
+        <Image
+          src={ensAvatarUrlForAddress(address, { size: 80 })}
+          fill
+          className="rounded-full"
+          alt={`Avatar for ${ensName ?? address}`}
+          loading="lazy"
+        />
+      ) : null,
+    [address, ensName],
+  )
+
   return (
     <HoverCard openDelay={150}>
       <HoverCardTrigger
         className={twMerge(
-          'hover:underline',
+          'inline-flex items-center gap-2',
           showEnsLoading && isLoading && 'animate-pulse',
           className,
         )}
       >
+        {showEnsIcon && ensAvatarIcon ? (
+          <div className="relative h-7 w-7 rounded-full bg-gray-100">
+            {ensAvatarIcon}
+          </div>
+        ) : null}
         {formattedAddress}
       </HoverCardTrigger>
-      <HoverCardContent className="text-start">
+      <HoverCardContent className="w-fit text-start">
         <div className="flex items-center gap-5">
-          {address ? (
-            <Image
-              src={ensAvatarUrlForAddress(address, { size: 80 })}
-              height={40}
-              width={40}
-              className={twMerge('h-10 w-10 rounded-full')}
-              alt={`Avatar for ${ensName ?? address}`}
-              loading="lazy"
-            />
+          {ensAvatarIcon ? (
+            <div className="relative h-10 w-10 rounded-full bg-gray-100">
+              {ensAvatarIcon}
+            </div>
           ) : (
             <Skeleton className="h-10 w-10 rounded-full" />
           )}

@@ -3,8 +3,9 @@ import { Button } from '@/components/ui/Button'
 import { JB721DelegateTierTier } from '@/hooks/useJbProject'
 import { formatEther } from 'juice-hooks'
 import { twMerge } from 'tailwind-merge'
-import { RewardDialog } from './RewardDialog'
+import { RewardDialogContent } from './RewardDialogContent'
 import { RewardImage } from './RewardImage'
+import { DialogTrigger, Dialog } from '@/components/ui/Dialog'
 
 export type RewardCardProps = {
   className?: string
@@ -13,13 +14,15 @@ export type RewardCardProps = {
 
 export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
   return (
-    <RewardDialog nft={nft}>
+    <Dialog>
       <div className={twMerge('w-72 rounded-lg shadow', className)}>
-        <RewardImage
-          className="rounded-t-lg"
-          src={nft.metadata.image}
-          alt={nft.metadata.name}
-        />
+        <DialogTrigger className="w-72 rounded-lg">
+          <RewardImage
+            className="rounded-t-lg"
+            src={nft.metadata.image}
+            alt={nft.metadata.name}
+          />
+        </DialogTrigger>
         <div className="flex flex-col gap-4 p-4 pb-5">
           <div className="text-base font-medium">{nft.metadata.name}</div>
           <div className="flex items-center justify-between gap-5">
@@ -41,6 +44,8 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
           </Button>
         </div>
       </div>
-    </RewardDialog>
+
+      <RewardDialogContent nft={nft} />
+    </Dialog>
   )
 }

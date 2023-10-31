@@ -12,12 +12,16 @@ import {
 } from '@/components/ui/Dialog'
 import { useCallback, useState } from 'react'
 
-export const ShareButton: React.FC = () => {
+export type ShareButtonProps = {
+  className?: string
+}
+
+export const ShareButton: React.FC<ShareButtonProps> = ({ className }) => {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild className={className}>
         <Button variant="outline" className="flex h-14 w-full gap-2 md:h-fit">
           <ShareIcon className="h-5 w-5" />
           Share

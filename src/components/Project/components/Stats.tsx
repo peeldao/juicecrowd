@@ -39,13 +39,11 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
           <StatBlock title="Supporters" value="227" />
         </div>
 
-        <div className="w-full md:w-fit">
-          <ShareButton />
-        </div>
+        <ShareButton className="h-14 w-full md:h-12 md:w-fit" />
       </div>
 
       <Link href={`/p/${projectId}/pay`} className="-mt-8 md:mt-0">
-        <Button className="w-full">Support this project</Button>
+        <Button className="h-14 w-full md:h-12">Support this project</Button>
       </Link>
     </div>
   )

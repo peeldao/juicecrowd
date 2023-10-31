@@ -17,7 +17,7 @@ const COMMA_REGEX = /(\d)(?=(\d{3})+(?!\d))/g
  */
 export const formatUsd = (usd: bigint) => {
   // 1234.57
-  let unformatted = formatEther(usd, { decimals: 2 })
+  let unformatted = formatEther(usd, { fractionDigits: 2 })
   if (!unformatted.includes('.')) {
     // 1234 => 1234.00
     unformatted += '.00'
@@ -44,7 +44,7 @@ export const formatUsd = (usd: bigint) => {
  * @returns The formatted number.
  */
 export const formatEth = (eth: bigint) => {
-  let unformatted = formatEther(eth, { decimals: 8 })
+  let unformatted = formatEther(eth, { fractionDigits: 8 })
   const [int, dec] = unformatted.split('.')
   let formatted = int.replace(COMMA_REGEX, '$1,')
   if (dec) {

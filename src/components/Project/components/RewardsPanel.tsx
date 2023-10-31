@@ -1,6 +1,5 @@
-import { twMerge } from 'tailwind-merge'
-import { RewardCard } from './RewardCard'
 import { useJbProject } from '@/hooks/useJbProject'
+import { twMerge } from 'tailwind-merge'
 import { Rewards } from './Rewards'
 
 export type RewardsPanelProps = {
@@ -8,7 +7,12 @@ export type RewardsPanelProps = {
 }
 
 export const RewardsPanel: React.FC<RewardsPanelProps> = ({ className }) => {
-  const { nfts } = useJbProject()
+  const { nftData } = useJbProject()
+
+  if (!nftData.isLoading && !nftData.data?.length) {
+    return null
+  }
+
   return (
     <div
       className={twMerge(

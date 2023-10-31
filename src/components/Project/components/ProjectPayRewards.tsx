@@ -11,7 +11,9 @@ export type ProjectPayRewardsProps = {
 export const ProjectPayRewards: React.FC<ProjectPayRewardsProps> = ({
   className,
 }) => {
-  const { nfts } = useJbProject()
+  const {
+    nftData: { data: nfts },
+  } = useJbProject()
   const { dispatch, nftRewardIds: selectedNftIds } = useProjectPay()
 
   const isSelected = useCallback(

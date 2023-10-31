@@ -72,7 +72,7 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
     }
 
     return null
-  }, [currency])
+  }, [currency, hideCurrencyIcon])
 
   return (
     <TooltipProvider delayDuration={150}>

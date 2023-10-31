@@ -71,7 +71,10 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
 }) => {
   const router = useRouter()
 
-  const { nfts, projectId } = useJbProject()
+  const {
+    nftData: { data: nfts },
+    projectId,
+  } = useJbProject()
   const { nftRewardIds } = useProjectPay()
 
   const form = useForm<z.infer<typeof formSchema>>({

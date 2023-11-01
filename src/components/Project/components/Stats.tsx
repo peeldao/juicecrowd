@@ -1,11 +1,13 @@
 import { Link } from '@/components/Link'
 import { ShareIcon } from '@/components/icon/ShareIcon'
 import { Button } from '@/components/ui/Button'
+import { Dialog } from '@/components/ui/Dialog'
 import { Progress } from '@/components/ui/Progress'
 import { Separator } from '@/components/ui/Separator'
 import { useJbProject } from '@/hooks/useJbProject'
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { ShareButton } from './ShareButton'
 
 export type StatsProps = {
   className?: string
@@ -37,16 +39,11 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
           <StatBlock title="Supporters" value="227" />
         </div>
 
-        <div className="w-full md:w-fit">
-          <Button variant="outline" className="flex h-14 w-full gap-2 md:h-fit">
-            <ShareIcon className="h-5 w-5" />
-            Share
-          </Button>
-        </div>
+        <ShareButton className="h-14 w-full md:h-12 md:w-fit" />
       </div>
 
       <Link href={`/p/${projectId}/pay`} className="-mt-8 md:mt-0">
-        <Button className="w-full">Support this project</Button>
+        <Button className="h-14 w-full md:h-12">Support this project</Button>
       </Link>
     </div>
   )

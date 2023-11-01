@@ -42,6 +42,7 @@ import { isAddress, parseEther } from 'viem'
 import { useAccount, useEnsName } from 'wagmi'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
+import { useRouter } from 'next/router'
 
 const WEI = 1e-18
 
@@ -68,7 +69,9 @@ export type ProjectPayFormProps = {
 export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
   className,
 }) => {
-  const { nfts } = useJbProject()
+  const router = useRouter()
+
+  const { nfts, projectId } = useJbProject()
   const { nftRewardIds } = useProjectPay()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -98,9 +101,13 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     [nftRewardIds, nfts],
   )
 
-  const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
-    console.log(values)
-  }, [])
+  const onSubmit = useCallback(
+    async (values: z.infer<typeof formSchema>) => {
+      console.log(values)
+      router.push(`/p/${projectId.toString()}/pay/success`)
+    },
+    [projectId, router],
+  )
 
   const paymentAmount = form.watch('paymentAmount')
 

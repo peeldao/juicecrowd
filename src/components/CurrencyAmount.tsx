@@ -1,6 +1,7 @@
-import { CurrencyDollarIcon } from '@heroicons/react/24/outline'
-import { JB_CURRENCIES, formatEther } from 'juice-hooks'
+import { formatEth, formatUsd } from '@/lib/currency/format'
+import { JB_CURRENCIES } from 'juice-hooks'
 import { useMemo } from 'react'
+import { twMerge } from 'tailwind-merge'
 import { useEthUsdPrice } from './EthUsdPriceProvider'
 import { EthereumIconFilled } from './icon/EthereumIconFilled'
 import {
@@ -9,8 +10,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './ui/Tooltip'
-import { formatEth, formatUsd } from '@/lib/currency/format'
-import { twMerge } from 'tailwind-merge'
 
 /**
  * Available currencies of {@link JB_CURRENCIES}
@@ -21,6 +20,7 @@ export type CurrencyAmountProps = {
   className?: string
   amount: bigint
   currency?: Currency
+  hideCurrencyIcon?: boolean
 }
 
 /**
@@ -35,6 +35,7 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
   className,
   amount,
   currency = JB_CURRENCIES.ETH,
+  hideCurrencyIcon,
 }) => {
   const { ethToUsd, usdToEth } = useEthUsdPrice()
 
@@ -61,6 +62,8 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
   }, [amount, currency, ethToUsd, usdToEth])
 
   const currencyIcon = useMemo(() => {
+    if (hideCurrencyIcon) return null
+
     const ethIcon = (
       <EthereumIconFilled className="inline-block h-5 w-5 text-bluebs-500" />
     )
@@ -75,7 +78,7 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
     <TooltipProvider delayDuration={150}>
       <Tooltip>
         <TooltipTrigger
-          className={twMerge('flex w-fit items-center', className)}
+          className={twMerge('inline-flex w-fit items-center', className)}
         >
           {currencyIcon}
           {formattedAmounts[0]}

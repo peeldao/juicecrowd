@@ -1,7 +1,6 @@
-import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
+import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { Button } from '@/components/ui/Button'
 import { JB721DelegateTierTier } from '@/hooks/useJbProject'
-import { formatEther } from 'juice-hooks'
 import { twMerge } from 'tailwind-merge'
 import { RewardDialogContent } from './RewardDialogContent'
 import { RewardImage } from './RewardImage'
@@ -26,10 +25,10 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
         <div className="flex flex-col gap-4 p-4 pb-5">
           <div className="text-base font-medium">{nft.metadata.name}</div>
           <div className="flex items-center justify-between gap-5">
-            <div className="flex items-center text-xl font-medium">
-              <EthereumIconFilled className="inline-block h-5 w-5 text-bluebs-500" />
-              {formatEther(nft.price)}
-            </div>
+            <CurrencyAmount
+              className="text-xl font-medium"
+              amount={nft.price}
+            />
             <div className="text-gray-400">
               {nft.remainingQuantity.toString()} remaining
             </div>

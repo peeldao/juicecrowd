@@ -1,3 +1,4 @@
+import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { ProjectPayPage } from '@/components/Project/ProjectPayPage'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
@@ -22,11 +23,13 @@ export function Page({
       {/* // TODO: port over project seo from juicebox? */}
       <SEO title="Pay project" description="Pay project description" />
       <Layout footer="none" navbar="minimal">
-        <JBProjectProvider projectId={pid}>
-          <JBProjectMetadataContext.Provider value={metadata}>
-            <ProjectPayPage />
-          </JBProjectMetadataContext.Provider>
-        </JBProjectProvider>
+        <EthUsdPriceProvider>
+          <JBProjectProvider projectId={pid}>
+            <JBProjectMetadataContext.Provider value={metadata}>
+              <ProjectPayPage />
+            </JBProjectMetadataContext.Provider>
+          </JBProjectProvider>
+        </EthUsdPriceProvider>
       </Layout>
     </>
   )

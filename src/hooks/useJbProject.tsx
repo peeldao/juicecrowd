@@ -9,6 +9,7 @@ import {
   useJb721DelegateTiers,
   useJbProjectsOwnerOf,
 } from 'juice-hooks'
+import { AsyncData } from 'juice-hooks/dist/react/contexts/types'
 import pick from 'lodash/pick'
 import { useMemo } from 'react'
 import { ReadContractResult } from 'wagmi/dist/actions'
@@ -58,7 +59,7 @@ export const useJbProject = ({
   const metadata = useJBProjectMetadata()
   const { fundingCycleMetadata } = useJBFundingCycleContext()
 
-  const nfts: JB721DelegateTierTier[] | undefined = useJb721DelegateTiers(
+  const nftData: AsyncData<JB721DelegateTierTier[]> = useJb721DelegateTiers(
     fundingCycleMetadata?.data?.dataSource,
     {
       ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
@@ -128,7 +129,8 @@ export const useJbProject = ({
     projectId,
     createdAt,
     owner,
-    nfts,
+    // TODO: Remove ! after upgrade
+    nftData: nftData!,
     _metadata: metadata,
   }
 }

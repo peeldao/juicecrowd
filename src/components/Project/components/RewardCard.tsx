@@ -5,6 +5,7 @@ import { twMerge } from 'tailwind-merge'
 import { RewardDialogContent } from './RewardDialogContent'
 import { RewardImage } from './RewardImage'
 import { DialogTrigger, Dialog } from '@/components/ui/Dialog'
+import { Skeleton } from '@/components/ui/Skeleton'
 
 export type RewardCardProps = {
   className?: string
@@ -46,5 +47,21 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
 
       <RewardDialogContent nft={nft} />
     </Dialog>
+  )
+}
+
+export const RewardCardSkeleton: React.FC = () => {
+  return (
+    <div className="w-72 rounded-lg shadow">
+      <Skeleton className="h-72 rounded-t-lg" />
+      <div className="flex flex-col gap-4 p-4 pb-5">
+        <Skeleton className="h-4 w-2/3 font-medium" />
+        <div className="flex items-center justify-between gap-5">
+          <Skeleton className="h-6 w-3/12 font-medium" />
+          <Skeleton className="h-4 w-6/12 text-gray-400" />
+        </div>
+        <Skeleton className="h-9 w-full" />
+      </div>
+    </div>
   )
 }

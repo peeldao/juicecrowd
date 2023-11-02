@@ -4,11 +4,11 @@ import {
   DialogDescription,
   DialogHeader,
 } from '@/components/ui/Dialog'
-import { JB721DelegateTierTier } from '@/hooks/useJbProject'
 import { RewardImage } from './RewardImage'
+import { JB721DelegateTier } from 'juice-hooks'
 
 export type RewardDialogProps = {
-  nft: JB721DelegateTierTier
+  nft: JB721DelegateTier
 }
 
 /**

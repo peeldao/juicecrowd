@@ -1,15 +1,15 @@
 import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { Button } from '@/components/ui/Button'
-import { JB721DelegateTierTier } from '@/hooks/useJbProject'
 import { twMerge } from 'tailwind-merge'
 import { RewardDialogContent } from './RewardDialogContent'
 import { RewardImage } from './RewardImage'
 import { DialogTrigger, Dialog } from '@/components/ui/Dialog'
 import { Skeleton } from '@/components/ui/Skeleton'
+import { JB721DelegateTier } from 'juice-hooks'
 
 export type RewardCardProps = {
   className?: string
-  nft: JB721DelegateTierTier
+  nft: JB721DelegateTier
 }
 
 export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {

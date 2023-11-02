@@ -1,15 +1,6 @@
 import { useJBProjectMetadata } from '@/contexts/ProjectMetadata'
 import { useProjectsQuery } from '@/lib/graphql/hooks'
-import { OPEN_IPFS_GATEWAY_HOSTNAME } from '@/lib/ipfs'
-import {
-  AsyncData,
-  JB721DelegateTier,
-  PV2,
-  useJBContractContext,
-  useJBFundingCycleContext,
-  useJb721DelegateTiers,
-  useJbProjectsOwnerOf,
-} from 'juice-hooks'
+import { PV2, useJBContractContext, useJbProjectsOwnerOf } from 'juice-hooks'
 import pick from 'lodash/pick'
 import { useMemo } from 'react'
 
@@ -27,15 +18,7 @@ export type SocialLink = 'twitter' | 'discord' | 'telegram' | 'website'
 export const useJbProject = ({
   projectId: inputProjectId,
 }: UseJbProjectProps = {}) => {
-  const metadata = useJBProjectMetadata()
-  const { fundingCycleMetadata } = useJBFundingCycleContext()
-
-  const nftData: AsyncData<JB721DelegateTier[]> = useJb721DelegateTiers(
-    fundingCycleMetadata?.data?.dataSource,
-    {
-      ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
-    },
-  )
+  const { nftData, ...metadata } = useJBProjectMetadata()
 
   const { projectId: ctxProjectId } = useJBContractContext()
   const projectId = useMemo(() => {

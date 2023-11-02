@@ -1,9 +1,8 @@
 import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
-import { ProjectPayPage } from '@/components/Project/ProjectPayPage'
 import { ProjectPaySuccessPage } from '@/components/Project/ProjectPaySuccessPage'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
-import { JBProjectMetadataContext } from '@/contexts/ProjectMetadata'
+import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
   projectGetStaticProps,
@@ -29,9 +28,9 @@ export function Page({
       <Layout footer="none" navbar="minimal">
         <EthUsdPriceProvider>
           <JBProjectProvider projectId={pid}>
-            <JBProjectMetadataContext.Provider value={metadata}>
+            <JBProjectMetadataProvider metadata={metadata}>
               <ProjectPaySuccessPage />
-            </JBProjectMetadataContext.Provider>
+            </JBProjectMetadataProvider>
           </JBProjectProvider>
         </EthUsdPriceProvider>
       </Layout>

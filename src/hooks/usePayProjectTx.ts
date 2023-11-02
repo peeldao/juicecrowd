@@ -1,18 +1,5 @@
-import {
-  DEFAULT_MEMO,
-  JB_ETHER_ADDRESS,
-  useJBContractContext,
-  usePayEthPaymentTerminal,
-  usePrepareJbethPaymentTerminal3_1_2Pay,
-} from 'juice-hooks'
-import {
-  Address,
-  UsePrepareContractWriteConfig,
-  useAccount,
-  useContractWrite,
-} from 'wagmi'
+import { useJBContractContext, usePayEthPaymentTerminal } from 'juice-hooks'
 import { useJbProject } from './useJbProject'
-import { Abi } from 'viem'
 
 export type UsePayProjectTxProps = {
   projectId?: bigint
@@ -27,7 +14,6 @@ export const usePayProjectTx = ({
   beneficiaryAddress,
   memo,
 }: UsePayProjectTxProps) => {
-  const { address: defaultBeneficiaryAddress } = useAccount()
   const { projectId: currentProjectId } = useJbProject()
   projectId = projectId ?? currentProjectId
   const {

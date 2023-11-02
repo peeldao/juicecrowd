@@ -16,18 +16,16 @@ import {
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useJBContractContext, usePayEthPaymentTerminal } from 'juice-hooks'
 import { useRouter } from 'next/router'
 import { PropsWithChildren, useCallback, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { isAddress, parseEther } from 'viem'
-import { useAccount } from 'wagmi'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
 import { ProjectPayAmountInput } from './ProjectPayAmountInput'
-import { ProjectPayMessageInput } from './ProjectPayMessageInput'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
+import { ProjectPayMessageInput } from './ProjectPayMessageInput'
 
 const WEI = 1e-18
 

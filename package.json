@@ -32,7 +32,7 @@
     "dotenv": "^16.3.1",
     "googleapis": "^126.0.1",
     "graphql": "^16.8.1",
-    "juice-hooks": "7.0.3-beta",
+    "juice-hooks": "10.0.0-beta",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.284.0",
@@ -43,8 +43,8 @@
     "sass": "^1.69.4",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
-    "viem": "~0.3.36",
-    "wagmi": "^1.0.6",
+    "viem": "^1.18.2",
+    "wagmi": "^1.4.5",
     "zod": "^3.22.4"
   },
   "devDependencies": {

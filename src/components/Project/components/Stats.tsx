@@ -44,10 +44,14 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
     return Ether.parse('1', 18).val
   }, [])
 
+  const progress = useMemo(() => {
+    return Number((Number(totalRaised) / Number(flexibleGoal)) * 100)
+  }, [totalRaised, flexibleGoal])
+
   return (
     <div className={twMerge('flex flex-col gap-12', className)}>
       <div>
-        <Progress className="h-1.5" value={64} />
+        <Progress className="h-1.5" value={progress} />
         <div className="mt-5 flex items-center gap-3">
           <span className="font-heading text-xl font-medium md:text-2xl">
             <CurrencyAmount amount={totalRaised} />

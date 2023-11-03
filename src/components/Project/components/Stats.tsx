@@ -1,3 +1,5 @@
+import { CURRENCY_USD, CurrencyAmount } from '@/components/CurrencyAmount'
+import { useEthUsdPrice } from '@/components/EthUsdPriceProvider'
 import { Link } from '@/components/Link'
 import { Button } from '@/components/ui/Button'
 import { Progress } from '@/components/ui/Progress'
@@ -6,15 +8,14 @@ import { useJbProject } from '@/hooks/useJbProject'
 import { ReactNode, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ShareButton } from './ShareButton'
-import { CurrencyAmount } from '@/components/CurrencyAmount'
-import { Ether } from 'juice-hooks'
 
 export type StatsProps = {
   className?: string
 }
 
 export const Stats: React.FC<StatsProps> = ({ className }) => {
-  const { projectId, payEventsData } = useJbProject()
+  const { projectId, payEventsData, softTarget } = useJbProject()
+  const { ethToUsd } = useEthUsdPrice()
 
   const contributorAmounts = useMemo(() => {
     return payEventsData.data?.payEvents.reduce(
@@ -33,20 +34,20 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
   }, [contributorAmounts])
 
   const totalRaised = useMemo(() => {
-    return Object.values(contributorAmounts || {}).reduce(
+    const totalInWei = Object.values(contributorAmounts || {}).reduce(
       (acc, amount) => acc + amount,
       0n,
     )
-  }, [contributorAmounts])
-
-  const flexibleGoal = useMemo(() => {
-    // TODO: Replace real
-    return Ether.parse('1', 18).val
-  }, [])
+    if (softTarget.currency === CURRENCY_USD) {
+      return ethToUsd(totalInWei)
+    }
+    return totalInWei
+  }, [contributorAmounts, ethToUsd, softTarget.currency])
 
   const progress = useMemo(() => {
-    return Number((Number(totalRaised) / Number(flexibleGoal)) * 100)
-  }, [totalRaised, flexibleGoal])
+    if (!softTarget.amount) return 100
+    return Number((Number(totalRaised) / Number(softTarget.amount)) * 100)
+  }, [totalRaised, softTarget])
 
   return (
     <div className={twMerge('flex flex-col gap-12', className)}>
@@ -54,10 +55,18 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
         <Progress className="h-1.5" value={progress} />
         <div className="mt-5 flex items-center gap-3">
           <span className="font-heading text-xl font-medium md:text-2xl">
-            <CurrencyAmount amount={totalRaised} />
+            <CurrencyAmount
+              currency={softTarget.currency}
+              amount={totalRaised}
+            />
           </span>
           <span className="flex items-center gap-1 text-sm text-gray-500">
-            raised of <CurrencyAmount amount={flexibleGoal} /> flexible goal
+            raised of{' '}
+            <CurrencyAmount
+              currency={softTarget.currency}
+              amount={softTarget.amount}
+            />{' '}
+            flexible goal
           </span>
         </div>
       </div>

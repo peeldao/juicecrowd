@@ -1,6 +1,12 @@
+import { CURRENCY_USD, Currency } from '@/components/CurrencyAmount'
 import { useJBProjectMetadata } from '@/contexts/ProjectMetadata'
 import { useProjectsQuery } from '@/lib/graphql/hooks'
-import { PV2, useJBContractContext, useJbProjectsOwnerOf } from 'juice-hooks'
+import {
+  Ether,
+  PV2,
+  useJBContractContext,
+  useJbProjectsOwnerOf,
+} from 'juice-hooks'
 import pick from 'lodash/pick'
 import { useMemo } from 'react'
 
@@ -76,9 +82,25 @@ export const useJbProject = ({
     metadata.twitter,
   ])
 
+  const softTarget = useMemo(() => {
+    if (metadata.softTargetAmount) {
+      return {
+        amount: Ether.parse(metadata.softTargetAmount, 0).val,
+        currency: metadata.softTargetCurrency
+          ? (BigInt(metadata.softTargetCurrency) as Currency)
+          : CURRENCY_USD,
+      }
+    }
+    return {
+      amount: 0n,
+      currency: CURRENCY_USD,
+    }
+  }, [metadata.softTargetAmount, metadata.softTargetCurrency])
+
   return {
     ...(pick(_graphqlProject, ['handle', 'contributorsCount']) ?? {}),
     ...metadata,
+    softTarget,
     socialLinks,
     projectId,
     createdAt,

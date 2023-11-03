@@ -14,7 +14,9 @@ import {
 /**
  * Available currencies of {@link JB_CURRENCIES}
  */
-type Currency = 1n | 2n
+export type Currency = 1n | 2n
+export const CURRENCY_USD: Currency = 2n
+export const CURRENCY_ETH: Currency = 1n
 
 export type CurrencyAmountProps = {
   className?: string

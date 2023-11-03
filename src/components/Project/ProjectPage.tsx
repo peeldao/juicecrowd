@@ -13,13 +13,10 @@ import { Stats } from './components/Stats'
 import { TitleBlock } from './components/TitleBlock'
 import { useEffect } from 'react'
 import React from 'react'
+import { YouTubeEmbed } from '../YouTubeEmbed'
 
 export const ProjectPage = () => {
   const { logoUri, name, projectId } = useJbProject()
-  const { fundingCycleMetadata } = useJBFundingCycleContext()
-  const nfts = useJb721DelegateTiers(fundingCycleMetadata?.data?.dataSource, {
-    ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
-  })
 
   return (
     <>
@@ -72,8 +69,8 @@ export const ContentMobile: React.FC<ContentMobileProps> = ({ className }) => {
 
   return (
     <div className={twMerge('w-full', className)}>
-      <HeroVideo className="h-56" />
-      <Stats className="mt-9" />
+      <HeroVideo className="mb-9" />
+      <Stats />
 
       <Tabs defaultValue="about" className="mt-14">
         <TabsList ref={tabRef} className="w-full bg-white">
@@ -104,9 +101,9 @@ const ContentDesktop: React.FC<ContentDesktopProps> = ({ className }) => {
     <div className={twMerge('w-full gap-x-20', className)}>
       {/* Left column */}
       <div className="max-w-2xl flex-1">
-        <HeroVideo />
+        <HeroVideo className="mb-8" />
 
-        <Tabs defaultValue="about" className="mt-20">
+        <Tabs defaultValue="about" className="mt-12">
           <TabsList className="w-full">
             <TabsTrigger value="about">About</TabsTrigger>
             <TabsTrigger value="activity">Activity</TabsTrigger>
@@ -134,9 +131,7 @@ type HeroVideoProps = {
 }
 
 const HeroVideo: React.FC<HeroVideoProps> = ({ className }) => {
-  return (
-    <div
-      className={twMerge('h-96 w-full rounded-lg bg-orange-200', className)}
-    />
-  )
+  const { introVideoUrl } = useJbProject()
+  if (!introVideoUrl) return null
+  return <YouTubeEmbed className={className} url={introVideoUrl} />
 }

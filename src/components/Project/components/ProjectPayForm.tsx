@@ -1,15 +1,7 @@
 import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { Input } from '@/components/Input'
 import { LoadingButton } from '@/components/LoadingButton'
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/Form'
+import { Form, FormField } from '@/components/ui/Form'
 import { useToast } from '@/components/ui/useToast'
 import { useJbProject } from '@/hooks/useJbProject'
 import { usePayProjectTx } from '@/hooks/usePayProjectTx'
@@ -17,33 +9,25 @@ import {
   EnvelopeIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
-import { useForm } from 'react-hook-form'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { isAddress, parseEther } from 'viem'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
-import { ProjectPayAmountInput } from './ProjectPayAmountInput'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
+import { ProjectPayFormItem } from './ProjectPayFormItem'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
 
 const WEI = 1e-18
 
-const formSchema = z.object({
+export const ProjectPayFormSchema = z.object({
   paymentAmount: z.coerce
     .number({
       errorMap: () => ({ message: 'Invalid payment' }),
     })
     .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
-  // TODO: make more robust for eth addresses / ENS
   beneficiary: z
     .string()
     .optional()
@@ -68,45 +52,9 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     projectId,
   } = useJbProject()
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      paymentAmount: '' as any as number,
-      beneficiary: '',
-      email: undefined,
-      message: '',
-    },
-  })
-
-  const paymentAmount = form.watch('paymentAmount')
-  //TODO: Do we need to include nft price in payment amount?
-  const etherPayment = useMemo(() => {
-    if (!paymentAmount || isNaN(paymentAmount)) return 0n
-    return parseEther(`${paymentAmount}`)
-  }, [paymentAmount])
-
-  const [attachedUrl, setAttachedUrl] = useState<string | undefined>(undefined)
-  const formMessage = form.watch('message')
-
-  const memo = useMemo(() => {
-    let memo = formMessage ?? ''
-    memo += attachedUrl ? `\n${attachedUrl}` : ''
-    // TODO: Add NFTs
-    return memo
-  }, [attachedUrl, formMessage])
-
-  const { prepare, contractWrite, transaction } = usePayProjectTx({
-    amountWei: etherPayment,
-    memo,
-  })
-
-  const { toast } = useToast()
+  const form = useFormContext<z.infer<typeof ProjectPayFormSchema>>()
 
   const { nftRewardIds } = useProjectPay()
-
-  // TODO: Use proper currency formatting from juice_hooks when available
-  // for now, 1n == eth, 2n == usd
-  const [currency, setCurrency] = useState<1n | 2n>(1n)
 
   const totalNftSelectionPrice = useMemo(
     () =>
@@ -119,12 +67,36 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     [nftRewardIds, nfts],
   )
 
-  const total = useMemo(() => {
+  const paymentAmount = form.watch('paymentAmount')
+  //TODO: Do we need to include nft price in payment amount?
+  const etherPayment = useMemo(() => {
+    if (!paymentAmount || isNaN(paymentAmount)) return 0n
+    return parseEther(`${paymentAmount}`)
+  }, [paymentAmount])
+
+  const totalPayment = useMemo(() => {
     return totalNftSelectionPrice + etherPayment
   }, [etherPayment, totalNftSelectionPrice])
 
+  const [attachedUrl, setAttachedUrl] = useState<string | undefined>(undefined)
+  const formMessage = form.watch('message')
+
+  const memo = useMemo(() => {
+    let memo = formMessage ?? ''
+    memo += attachedUrl ? `\n${attachedUrl}` : ''
+    // TODO: Add NFTs
+    return memo
+  }, [attachedUrl, formMessage])
+
+  const { prepare, contractWrite, transaction } = usePayProjectTx({
+    amountWei: totalPayment,
+    memo,
+  })
+
+  const { toast } = useToast()
+
   const onSubmit = useCallback(
-    async (values: z.infer<typeof formSchema>) => {
+    async (values: z.infer<typeof ProjectPayFormSchema>) => {
       // TODO: Send email although maybe after transaction successful
       contractWrite.write?.()
     },
@@ -161,21 +133,6 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
         className={twMerge('mx-auto flex flex-col gap-6', className)}
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <FormField
-          control={form.control}
-          name="paymentAmount"
-          render={({ field }) => (
-            <ProjectPayFormItem label="Payment amount">
-              <ProjectPayAmountInput
-                currency={currency}
-                setCurrency={setCurrency}
-                placeholder="0"
-                {...field}
-              />
-            </ProjectPayFormItem>
-          )}
-        />
-
         <FormField
           control={form.control}
           name="beneficiary"
@@ -225,13 +182,15 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
 
         <div className="mt-6 flex justify-between font-medium">
           <div>Total to pay</div>
-          <CurrencyAmount amount={total} />
+          <CurrencyAmount amount={totalPayment} />
         </div>
 
         <LoadingButton
           className="mt-2 h-14 w-full"
           type="submit"
-          disabled={!form.formState.isValid || prepare.isError}
+          disabled={
+            !form.formState.isValid || prepare.isError || totalPayment === 0n
+          }
           loading={
             prepare.isLoading ||
             transaction.isLoading ||
@@ -252,26 +211,5 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
         </div>
       </form>
     </Form>
-  )
-}
-
-type ProjectPayFormItemProps = {
-  className?: string
-  label: string
-  description?: string
-}
-
-const ProjectPayFormItem: React.FC<
-  PropsWithChildren<ProjectPayFormItemProps>
-> = ({ className, label, description, children }) => {
-  return (
-    <FormItem className={className}>
-      <FormLabel className="text-gray-700">{label}</FormLabel>
-      <FormControl>{children}</FormControl>
-      <FormDescription className="text-xs text-gray-500">
-        {description}
-      </FormDescription>
-      <FormMessage />
-    </FormItem>
   )
 }

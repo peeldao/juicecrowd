@@ -65,7 +65,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
         </div>
       </div>
 
-      <RichNote note={event.note} />
+      {event.note ? <RichNote note={event.note} /> : null}
     </div>
   )
 }

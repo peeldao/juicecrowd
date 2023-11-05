@@ -1,6 +1,6 @@
 import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { Input } from '@/components/Input'
-import { Button } from '@/components/ui/Button'
+import { LoadingButton } from '@/components/LoadingButton'
 import {
   Form,
   FormControl,
@@ -10,14 +10,22 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/Form'
+import { useToast } from '@/components/ui/useToast'
 import { useJbProject } from '@/hooks/useJbProject'
+import { usePayProjectTx } from '@/hooks/usePayProjectTx'
 import {
   EnvelopeIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
-import { PropsWithChildren, useCallback, useMemo, useState } from 'react'
+import {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { isAddress, parseEther } from 'viem'
@@ -31,7 +39,9 @@ const WEI = 1e-18
 
 const formSchema = z.object({
   paymentAmount: z.coerce
-    .number()
+    .number({
+      errorMap: () => ({ message: 'Invalid payment' }),
+    })
     .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
   // TODO: make more robust for eth addresses / ENS
   beneficiary: z
@@ -41,8 +51,8 @@ const formSchema = z.object({
       if (!value) return true
       return isAddress(value)
     }, 'Invalid wallet address'),
-  email: z.string().email('Invalid email address').optional(),
-  message: z.string().optional(),
+  email: z.string().email('Invalid email address').optional().or(z.literal('')),
+  message: z.string().max(256).optional(),
 })
 
 export type ProjectPayFormProps = {
@@ -53,28 +63,50 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
   className,
 }) => {
   const router = useRouter()
-
   const {
     nftData: { data: nfts },
     projectId,
   } = useJbProject()
-  const { nftRewardIds } = useProjectPay()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      paymentAmount: undefined,
+      paymentAmount: '' as any as number,
       beneficiary: '',
-      email: '',
+      email: undefined,
       message: '',
     },
   })
 
+  const paymentAmount = form.watch('paymentAmount')
+  //TODO: Do we need to include nft price in payment amount?
+  const etherPayment = useMemo(() => {
+    if (!paymentAmount || isNaN(paymentAmount)) return 0n
+    return parseEther(`${paymentAmount}`)
+  }, [paymentAmount])
+
+  const [attachedUrl, setAttachedUrl] = useState<string | undefined>(undefined)
+  const formMessage = form.watch('message')
+
+  const memo = useMemo(() => {
+    let memo = formMessage ?? ''
+    memo += attachedUrl ? `\n${attachedUrl}` : ''
+    // TODO: Add NFTs
+    return memo
+  }, [attachedUrl, formMessage])
+
+  const { prepare, contractWrite, transaction } = usePayProjectTx({
+    amountWei: etherPayment,
+    memo,
+  })
+
+  const { toast } = useToast()
+
+  const { nftRewardIds } = useProjectPay()
+
   // TODO: Use proper currency formatting from juice_hooks when available
   // for now, 1n == eth, 2n == usd
   const [currency, setCurrency] = useState<1n | 2n>(1n)
-
-  const [attachedUrl, setAttachedUrl] = useState<string | undefined>(undefined)
 
   const totalNftSelectionPrice = useMemo(
     () =>
@@ -87,22 +119,41 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     [nftRewardIds, nfts],
   )
 
+  const total = useMemo(() => {
+    return totalNftSelectionPrice + etherPayment
+  }, [etherPayment, totalNftSelectionPrice])
+
   const onSubmit = useCallback(
     async (values: z.infer<typeof formSchema>) => {
-      console.log(values)
-      router.push(`/p/${projectId.toString()}/pay/success`)
+      // TODO: Send email although maybe after transaction successful
+      contractWrite.write?.()
     },
-    [projectId, router],
+    [contractWrite],
   )
 
-  const paymentAmount = form.watch('paymentAmount')
+  /**************
+   * Use Effects
+   **************/
 
-  // TODO - Account for usd conversion
-  const total =
-    totalNftSelectionPrice +
-    (paymentAmount && !isNaN(paymentAmount)
-      ? parseEther(`${paymentAmount}`)
-      : 0n)
+  /**
+   * Determines if the transaction is successful and redirects to success page.
+   */
+  useEffect(() => {
+    if (!transaction.isSuccess) return
+    router.push(`/p/${projectId.toString()}/pay/success`)
+  }, [transaction.isSuccess, projectId, router])
+
+  /**
+   * Displays error toast if contract write fails or is terminated.
+   */
+  useEffect(() => {
+    if (!contractWrite.error || !contractWrite.isError) return
+    toast({
+      title: 'Error',
+      description: (contractWrite.error?.cause as any)?.shortMessage,
+      variant: 'destructive',
+    })
+  }, [toast, contractWrite.error, contractWrite.isError])
 
   return (
     <Form {...form}>
@@ -177,9 +228,23 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           <CurrencyAmount amount={total} />
         </div>
 
-        <Button className="mt-2 h-14 w-full" type="submit">
+        <LoadingButton
+          className="mt-2 h-14 w-full"
+          type="submit"
+          disabled={!form.formState.isValid || prepare.isError}
+          loading={
+            prepare.isLoading ||
+            transaction.isLoading ||
+            contractWrite.isLoading
+          }
+        >
           Pay project
-        </Button>
+        </LoadingButton>
+        {prepare.error && (
+          <div className="text-red-500">
+            {(prepare.error as any).cause.shortMessage}
+          </div>
+        )}
 
         <div className="text-center text-xs leading-5 text-gray-400 md:mt-8">
           All transactions are paid in Ethereum (ETH). Payments are

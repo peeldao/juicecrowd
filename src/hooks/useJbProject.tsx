@@ -18,7 +18,7 @@ export type SocialLink = 'twitter' | 'discord' | 'telegram' | 'website'
 export const useJbProject = ({
   projectId: inputProjectId,
 }: UseJbProjectProps = {}) => {
-  const { nftData, ...metadata } = useJBProjectMetadata()
+  const { nftData, payEventsData, ...metadata } = useJBProjectMetadata()
 
   const { projectId: ctxProjectId } = useJBContractContext()
   const projectId = useMemo(() => {
@@ -83,8 +83,8 @@ export const useJbProject = ({
     projectId,
     createdAt,
     owner,
-    // TODO: Remove ! after upgrade
-    nftData: nftData!,
+    nftData: nftData,
+    payEventsData,
     _metadata: metadata,
   }
 }

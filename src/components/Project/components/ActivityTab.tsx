@@ -1,13 +1,16 @@
 import { usePayEvents } from '@/hooks/usePayEvents'
 import { twMerge } from 'tailwind-merge'
 import { ActivityCard, ActivityCardSkeleton } from './ActivityCard'
+import { useJbProject } from '@/hooks/useJbProject'
 
 export type ActivityTabProps = {
   className?: string
 }
 
 export const ActivityTab: React.FC<ActivityTabProps> = ({ className }) => {
-  const { data, isLoading } = usePayEvents()
+  const {
+    payEventsData: { data, loading: isLoading },
+  } = useJbProject()
 
   if (isLoading) {
     return (

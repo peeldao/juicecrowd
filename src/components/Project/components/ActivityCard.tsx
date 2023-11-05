@@ -10,6 +10,7 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 import { Skeleton } from '@/components/ui/Skeleton'
+import { RichNote } from '@/components/RichNote'
 
 type ActivityEvent = Pick<
   PayEvent,
@@ -64,8 +65,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
         </div>
       </div>
 
-      {/* // TODO: A little bit more work required for images in note to load properly */}
-      {event.note && <div>{event.note}</div>}
+      <RichNote note={event.note} />
     </div>
   )
 }

@@ -1,10 +1,9 @@
-import { truncateEthAddress } from '@/lib/address/format'
+import { useFormatEthAddress } from '@/hooks/useFormatAddress'
 import { CrowdPageProject } from '@/lib/backend/static/crowds'
 import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
-import { useEnsName } from 'wagmi'
+import { useState } from 'react'
 
 export function ProjectCard({
   id,
@@ -13,14 +12,8 @@ export function ProjectCard({
   logoUri,
 }: CrowdPageProject) {
   const [imgError, setImgError] = useState<boolean>(false)
-  const { data: ensName } = useEnsName({
-    address: ownerAddress,
-  })
 
-  const formattedOwnerAddress = useMemo(() => {
-    if (ensName) return ensName
-    return truncateEthAddress({ address: ownerAddress })
-  }, [ensName, ownerAddress])
+  const { data: formattedOwnerAddress } = useFormatEthAddress(ownerAddress)
 
   return (
     <Link href={`/p/${id}`}>

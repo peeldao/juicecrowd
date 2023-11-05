@@ -32,7 +32,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
         {/* Mobile */}
         <div className="block md:hidden">
           <div className="ml-4 flex flex-1 flex-col gap-3">
-            <div className="font-medium">{nft.metadata.name}</div>
+            <div className="text-base font-medium">{nft.metadata.name}</div>
             <CurrencyAmount
               className="text-base font-medium"
               amount={nft.price}
@@ -58,7 +58,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
         {/* Desktop */}
         <div className="hidden flex-1 md:flex">
           <div className="ml-4 flex flex-1 flex-col gap-3">
-            <div className="font-medium">{nft.metadata.name}</div>
+            <div className="text-base font-medium">{nft.metadata.name}</div>
             <div className="flex h-5 gap-4 text-sm">
               <DialogTrigger onClick={e => e.stopPropagation()}>
                 <Button

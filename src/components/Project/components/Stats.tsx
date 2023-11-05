@@ -63,6 +63,7 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
           <span className="flex items-center gap-1 text-sm text-gray-500">
             raised of{' '}
             <CurrencyAmount
+              hideCurrencyIcon
               currency={softTarget.currency}
               amount={softTarget.amount}
             />{' '}
@@ -99,9 +100,7 @@ const StatBlock: React.FC<StatBlockProps> = ({ className, title, value }) => {
   return (
     <div className={twMerge('flex flex-col', className)}>
       <div className="text-sm text-gray-500">{title}</div>
-      <div className="text-lg font-medium text-gray-900 md:text-xl">
-        {value}
-      </div>
+      <div className="text-lg font-medium text-gray-900">{value}</div>
     </div>
   )
 }

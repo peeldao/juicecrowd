@@ -7,6 +7,9 @@ interface ProjectPageProps {
   metadata: JBProjectMetadata & {
     // TODO: add to juice-hooks
     infoUri: string
+    introVideoUrl: string | undefined
+    softTargetAmount: string | undefined
+    softTargetCurrency: string | undefined
   }
   projectId: number
 }

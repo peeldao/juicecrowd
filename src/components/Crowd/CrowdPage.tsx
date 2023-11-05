@@ -10,11 +10,11 @@ export function CrowdPage({
   projects: CrowdPageProject[]
 }) {
   return (
-    <div className="mb-64 mt-14 text-center">
-      <h1 className="mb-3 font-heading text-4xl font-medium text-gray-900">
+    <div className="mb-64 mt-14">
+      <h1 className="mb-3 text-center font-heading text-4xl font-medium text-gray-900">
         {crowd.name}
       </h1>
-      <p className="mb-14 text-gray-700">{crowd.description}</p>
+      <p className="mb-14 text-center text-gray-700">{crowd.description}</p>
       <div className="flex flex-wrap justify-center gap-6">
         {projects.map(project => (
           <ProjectCard {...project} key={project.id} />

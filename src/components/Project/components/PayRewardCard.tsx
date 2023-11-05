@@ -2,14 +2,14 @@ import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { Button } from '@/components/ui/Button'
 import { Dialog, DialogTrigger } from '@/components/ui/Dialog'
 import { Separator } from '@/components/ui/Separator'
-import { JB721DelegateTierTier } from '@/hooks/useJbProject'
 import Image from 'next/image'
 import React from 'react'
 import { RewardDialogContent } from './RewardDialogContent'
 import { PayCardBaseProps, PayCardBase } from './PayCardBase'
+import { JB721DelegateTier } from 'juice-hooks'
 
 export interface PayRewardCardProps extends PayCardBaseProps {
-  nft: JB721DelegateTierTier
+  nft: JB721DelegateTier
 }
 
 export const PayRewardCard: React.FC<PayRewardCardProps> = ({

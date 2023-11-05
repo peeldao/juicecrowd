@@ -2,7 +2,7 @@ import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { ProjectPage } from '@/components/Project'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
-import { JBProjectMetadataContext } from '@/contexts/ProjectMetadata'
+import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
   projectGetStaticProps,
@@ -25,9 +25,9 @@ export default function Page({
       <Layout navbar="minimal" footer="minimal">
         <EthUsdPriceProvider>
           <JBProjectProvider projectId={pid}>
-            <JBProjectMetadataContext.Provider value={metadata}>
+            <JBProjectMetadataProvider metadata={metadata}>
               <ProjectPage />
-            </JBProjectMetadataContext.Provider>
+            </JBProjectMetadataProvider>
           </JBProjectProvider>
         </EthUsdPriceProvider>
       </Layout>

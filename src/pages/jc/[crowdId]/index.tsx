@@ -11,14 +11,14 @@ export const getStaticPaths = crowdGetStaticPaths
 export const getStaticProps = crowdGetStaticProps
 
 export default function Page({
-  crowdId,
+  crowd,
   projects,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <SEO title="Project" description="Project description" />
-      <Layout navbar="minimal" footer="minimal">
-        <CrowdPage crowdId={crowdId} projects={projects} />
+      <Layout>
+        <CrowdPage crowd={crowd} projects={projects} />
       </Layout>
     </>
   )

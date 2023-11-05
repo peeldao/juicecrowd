@@ -1,4 +1,4 @@
-interface Crowd {
+export interface Crowd {
   id: number
   name: string
   projectIds: number[]
@@ -8,9 +8,9 @@ interface Crowd {
 export const CROWDS: Crowd[] = [
   {
     id: 1,
-    name: 'JC01',
+    name: 'Juicecrowd 01',
     description:
-      "Introducing JC01, Juicecrowd's first cohort focussed on web3 and blockchain projects",
-    projectIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "Introducing JC01, Juicecrowd's first cohort focused on web3 and blockchain projects.",
+    projectIds: [590, 589, 588, 587, 586, 585, 584, 583, 582, 581],
   },
 ]

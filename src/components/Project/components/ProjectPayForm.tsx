@@ -23,11 +23,14 @@ import { ProjectPayMessageInput } from './ProjectPayMessageInput'
 const WEI = 1e-18
 
 export const ProjectPayFormSchema = z.object({
-  paymentAmount: z.coerce
-    .number({
-      errorMap: () => ({ message: 'Invalid payment' }),
-    })
-    .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
+  paymentAmount: z.union([
+    z.coerce
+      .number({
+        errorMap: () => ({ message: 'Invalid payment' }),
+      })
+      .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
+    z.literal(''),
+  ]),
   beneficiary: z
     .string()
     .optional()

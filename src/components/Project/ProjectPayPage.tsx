@@ -16,8 +16,6 @@ import { ProjectPayRewards } from './components/ProjectPayRewards'
 import { ProjectPayContext } from './providers/ProjectPayContext'
 import { projectPayReducer } from './providers/projectPayReducer'
 
-const WEI = 1e-18
-
 export const ProjectPayPage = () => {
   const { name } = useJbProject()
   const [state, dispatch] = React.useReducer(projectPayReducer, {
@@ -28,7 +26,7 @@ export const ProjectPayPage = () => {
   const form = useForm<z.infer<typeof ProjectPayFormSchema>>({
     resolver: zodResolver(ProjectPayFormSchema),
     defaultValues: {
-      paymentAmount: '' as any as number,
+      paymentAmount: '',
       beneficiary: '',
       email: undefined,
       message: '',

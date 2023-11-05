@@ -6,7 +6,7 @@ import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
   projectGetStaticProps,
-} from '@/lib/backend/projects/static'
+} from '@/lib/backend/static/projects'
 import { JBProjectProvider } from 'juice-hooks'
 import { InferGetStaticPropsType } from 'next'
 

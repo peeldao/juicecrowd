@@ -1,4 +1,4 @@
-import { AsyncData, formatEthAddress } from 'juice-hooks'
+import { formatEthAddress } from 'juice-hooks'
 import { useMemo } from 'react'
 import { Address, useEnsName } from 'wagmi'
 
@@ -18,7 +18,7 @@ export function useFormattedEthAddress(
     enableEns = true,
     truncateTo,
   }: { enableEns: boolean; truncateTo?: number } = { enableEns: true },
-): AsyncData<string | null> {
+): { isLoading: boolean; data: string | null } {
   const { data: ensName, isLoading } = useEnsName({
     address: enableEns ? address : undefined,
     enabled: enableEns,

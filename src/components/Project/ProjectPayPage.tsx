@@ -15,6 +15,7 @@ import {
 import { ProjectPayRewards } from './components/ProjectPayRewards'
 import { ProjectPayContext } from './providers/ProjectPayContext'
 import { projectPayReducer } from './providers/projectPayReducer'
+import { CURRENCY_ETH } from '../CurrencyAmount'
 
 export const ProjectPayPage = () => {
   const { name } = useJbProject()
@@ -27,6 +28,7 @@ export const ProjectPayPage = () => {
     resolver: zodResolver(ProjectPayFormSchema),
     defaultValues: {
       paymentAmount: '',
+      paymentCurrency: CURRENCY_ETH,
       beneficiary: '',
       email: undefined,
       message: '',

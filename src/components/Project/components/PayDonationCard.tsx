@@ -1,10 +1,13 @@
+import { Currency } from '@/components/CurrencyAmount'
 import { FormField } from '@/components/ui/Form'
-import { PayCardBaseProps, PayCardBase } from './PayCardBase'
+import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
-import { ProjectPayAmountInput } from './ProjectPayAmountInput'
-import { ProjectPayFormItem } from './ProjectPayFormItem'
-import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { z } from 'zod'
+import { PayCardBase, PayCardBaseProps } from './PayCardBase'
+import { ProjectPayAmountInput } from './ProjectPayAmountInput'
+import { ProjectPayFormSchema } from './ProjectPayForm'
+import { ProjectPayFormItem } from './ProjectPayFormItem'
 
 export interface PayDonationCardProps extends PayCardBaseProps {}
 
@@ -12,10 +15,14 @@ export const PayDonationCard: React.FC<PayDonationCardProps> = ({
   className,
   ...props
 }) => {
-  const form = useFormContext()
-  // TODO: Use proper currency formatting from juice_hooks when available
-  // for now, 1n == eth, 2n == usd
-  const [currency, setCurrency] = useState<1n | 2n>(1n)
+  const form = useFormContext<z.infer<typeof ProjectPayFormSchema>>()
+  const currency = form.watch('paymentCurrency')
+  const setCurrency = useCallback(
+    (currency: Currency) => {
+      form.setValue('paymentCurrency', currency)
+    },
+    [form],
+  )
   return (
     <PayCardBase
       className={twMerge('flex-col gap-2 p-2', className)}

@@ -47,20 +47,16 @@ export const usePayProjectTx = ({
     return m
   }, [_memo, tiersToMint])
 
-  console.log('memo', memo)
-
   const { contractWrite, prepare, transaction } = usePayEthPaymentTerminal({
     projectId,
     amountWei,
     terminalAddress: primaryTerminalEth,
     memo,
     beneficiaryAddress,
-    dataSourceArgs:
+    jb721Delegate:
       nftIdsToMint && nftIdsToMint.length > 0
         ? {
-            jb721Delegate: {
-              tierIdsToMint: nftIdsToMint?.map(Number),
-            },
+            tierIdsToMint: nftIdsToMint,
           }
         : undefined,
   })

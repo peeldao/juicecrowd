@@ -91,9 +91,15 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     return memo
   }, [attachedUrl, formMessage])
 
+  const tiersToMint = useMemo(() => {
+    const nftsToMint = nfts?.filter(nft => nftRewardIds.includes(nft.id)) ?? []
+    if (nftsToMint.length) return nftsToMint
+  }, [nftRewardIds, nfts])
+
   const { prepare, contractWrite, transaction } = usePayProjectTx({
     amountWei: totalPayment,
     memo,
+    tiersToMint,
   })
 
   const { toast } = useToast()

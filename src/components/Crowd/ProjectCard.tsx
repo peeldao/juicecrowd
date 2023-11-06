@@ -1,4 +1,4 @@
-import { useFormatEthAddress } from '@/hooks/useFormatAddress'
+import { useFormattedEthAddress } from '@/hooks/useFormattedEthAddress'
 import { CrowdPageProject } from '@/lib/backend/static/crowds'
 import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
 import Image from 'next/image'
@@ -13,7 +13,7 @@ export function ProjectCard({
 }: CrowdPageProject) {
   const [imgError, setImgError] = useState<boolean>(false)
 
-  const { data: formattedOwnerAddress } = useFormatEthAddress(ownerAddress)
+  const { data: formattedOwnerAddress } = useFormattedEthAddress(ownerAddress)
 
   return (
     <Link href={`/p/${id}`}>

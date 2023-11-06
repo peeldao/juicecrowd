@@ -1,5 +1,4 @@
-import { CURRENCY_USD, CurrencyAmount } from '@/components/CurrencyAmount'
-import { useEthUsdPrice } from '@/components/EthUsdPriceProvider'
+import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { Link } from '@/components/Link'
 import { Button } from '@/components/ui/Button'
 import { Progress } from '@/components/ui/Progress'
@@ -8,41 +7,17 @@ import { useJbProject } from '@/hooks/useJbProject'
 import { ReactNode, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ShareButton } from './ShareButton'
+import { useTotalSupporters } from '@/hooks/useTotalSupporters'
+import { useTotalRaised } from '@/hooks/useTotalRaised'
 
 export type StatsProps = {
   className?: string
 }
 
 export const Stats: React.FC<StatsProps> = ({ className }) => {
-  const { projectId, payEventsData, softTarget } = useJbProject()
-  const { ethToUsd } = useEthUsdPrice()
-
-  const contributorAmounts = useMemo(() => {
-    return payEventsData.data?.payEvents.reduce(
-      (acc, event) => {
-        const contributor = event.beneficiary
-        const amount = BigInt(event.amount)
-        const total = acc[contributor] || 0n
-        return { ...acc, [contributor]: total + amount }
-      },
-      {} as Record<string, bigint>,
-    )
-  }, [payEventsData.data?.payEvents])
-
-  const totalSupporters = useMemo(() => {
-    return Object.keys(contributorAmounts || {}).length
-  }, [contributorAmounts])
-
-  const totalRaised = useMemo(() => {
-    const totalInWei = Object.values(contributorAmounts || {}).reduce(
-      (acc, amount) => acc + amount,
-      0n,
-    )
-    if (softTarget.currency === CURRENCY_USD) {
-      return ethToUsd(totalInWei)
-    }
-    return totalInWei
-  }, [contributorAmounts, ethToUsd, softTarget.currency])
+  const { projectId, softTarget } = useJbProject()
+  const totalSupporters = useTotalSupporters()
+  const totalRaised = useTotalRaised()
 
   const progress = useMemo(() => {
     if (!softTarget.amount) return 100

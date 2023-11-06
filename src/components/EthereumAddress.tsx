@@ -1,5 +1,5 @@
-import { truncateEthAddress } from '@/lib/address/format'
 import { ensAvatarUrlForAddress } from '@/lib/ens'
+import { formatEthAddress } from 'juice-hooks'
 import Image from 'next/image'
 import { useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -34,7 +34,7 @@ export const EthereumAddress: React.FC<EthereumAddressProps> = ({
     if (!ensDisabled && ensName) return ensName
     if (!address) return null
 
-    return truncateEthAddress({ address, truncateTo })
+    return formatEthAddress(address, { truncateTo })
   }, [address, ensDisabled, ensName, truncateTo])
 
   const ensAvatarIcon = useMemo(
@@ -84,7 +84,7 @@ export const EthereumAddress: React.FC<EthereumAddressProps> = ({
                 href={`https://etherscan.io/address/${address}`}
               >
                 {address
-                  ? truncateEthAddress({ address, truncateTo: 8 })
+                  ? formatEthAddress(address, { truncateTo: 8 })
                   : undefined}
               </Link>
             </div>

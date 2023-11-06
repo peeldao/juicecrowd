@@ -30,7 +30,7 @@ export function RichNote({
         }
       }
     } catch (e) {
-      console.log('error', e)
+      console.error('error', e)
     }
   }, [formattedMediaLinks])
 
@@ -42,7 +42,7 @@ export function RichNote({
         .filter(isNftEmbedUrl)
       return urls
     } catch (e) {
-      console.log('error', e)
+      console.error('error', e)
     }
   }, [formattedMediaLinks])
 

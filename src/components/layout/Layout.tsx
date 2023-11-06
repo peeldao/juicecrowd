@@ -1,17 +1,19 @@
 import { PropsWithChildren } from 'react'
 import { AppProvider } from './AppProvider'
 import { Footer } from './Footer/'
-import { Navbar } from './Navbar'
+import { NavBarType, Navbar } from './Navbar'
 
 export type LayoutProps = {
   footer?: 'default' | 'minimal' | 'none'
-  navbar?: 'default' | 'minimal'
+  navbar?: NavBarType
+  projectId?: bigint
 }
 
 export const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({
   children,
   footer: footerStyle,
   navbar,
+  projectId,
 }) => {
   footerStyle = footerStyle || 'default'
   navbar = navbar || 'default'
@@ -19,7 +21,7 @@ export const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({
   return (
     <AppProvider>
       <div className="min-h-screen">
-        <Navbar type={navbar} />
+        <Navbar type={navbar} projectId={projectId} />
         <main>{children}</main>
       </div>
       {footerStyle !== 'none' ? <Footer type={footerStyle} /> : null}

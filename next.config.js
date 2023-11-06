@@ -34,7 +34,7 @@ const SCRIPT_SRC = [
 const STYLE_SRC = [
   `'unsafe-inline'`, // NextJS, hotjar
 ]
-
+console.log(process.env.NEXT_PUBLIC_INFURA_IPFS_HOSTNAME)
 const IMG_SRC = [
   'https://*.juicebox.money',
   'https://*.juicecrowd.gg',
@@ -110,6 +110,12 @@ module.exports = {
         hostname: 'cdn.stamp.fyi',
         port: '',
         pathname: '/avatar/**',
+      },
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_INFURA_IPFS_HOSTNAME,
+        port: '',
+        pathname: '/ipfs/**',
       },
       {
         protocol: 'https',

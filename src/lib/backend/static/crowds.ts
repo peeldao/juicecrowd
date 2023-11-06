@@ -1,18 +1,19 @@
-import { CROWDS } from '@/data/crowds'
+import { CROWDS, Crowd } from '@/data/crowds'
 import { OPEN_IPFS_GATEWAY_HOSTNAME } from '@/lib/ipfs'
 import { publicClient } from '@/lib/viem/publicClient'
 import { getProjectMetadata } from 'juice-hooks'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { Address } from 'viem'
 
 export interface CrowdPageProject {
   id: number
   name: string
   logoUri: string
-  owner: string
+  ownerAddress: Address
 }
 
 interface CrowdPageProps {
-  crowdId: number
+  crowd: Crowd
   projects: CrowdPageProject[]
 }
 
@@ -28,15 +29,16 @@ const getStaticProps: GetStaticProps<CrowdPageProps> = async context => {
   if (!context.params) throw new Error('params not supplied')
 
   const crowdId = parseInt(context.params.crowdId as string)
-  const { projectIds } = CROWDS.find(({ id }) => id === crowdId) ?? {}
-  if (!projectIds)
+  const crowd = CROWDS.find(({ id }) => id === crowdId)
+  if (!crowd) {
     return {
       notFound: true,
     }
+  }
 
   const projects = await Promise.all(
-    projectIds.map(async projectId => {
-      const [metadata, owner] = await Promise.all([
+    crowd.projectIds.map(async projectId => {
+      const [metadata, ownerAddress] = await Promise.all([
         getProjectMetadata(
           publicClient,
           {
@@ -48,14 +50,16 @@ const getStaticProps: GetStaticProps<CrowdPageProps> = async context => {
           },
         ),
         // TODO fetch from chain
-        Promise.resolve('todo.eth'),
+        Promise.resolve(
+          '0x0028C35095D34C9C8a3bc84cB8542cB182fcfa8e' as Address,
+        ),
       ])
 
       return {
         id: projectId,
         name: metadata.name,
         logoUri: metadata.logoUri,
-        owner,
+        ownerAddress,
       }
     }),
   )
@@ -63,7 +67,7 @@ const getStaticProps: GetStaticProps<CrowdPageProps> = async context => {
   try {
     return {
       props: {
-        crowdId,
+        crowd,
         projects,
       },
     }

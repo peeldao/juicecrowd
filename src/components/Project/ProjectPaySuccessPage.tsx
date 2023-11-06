@@ -39,7 +39,7 @@ export const ProjectPaySuccessPage = () => {
       <ConfettiBurst />
 
       <div className="rounded-full border-8 border-green-50">
-        <CheckCircleIcon className="h-12 w-12 rounded-full border-8 border-green-100 bg-green-100 text-green-600" />
+        <CheckCircleIcon className="h-24 w-24 rounded-full border-4 border-green-100 bg-green-100 text-green-600" />
       </div>
 
       <h1 className="mt-8 font-heading text-2xl font-medium">

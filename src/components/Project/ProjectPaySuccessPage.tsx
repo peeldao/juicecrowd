@@ -38,8 +38,10 @@ export const ProjectPaySuccessPage = () => {
     <div className="mx-auto flex max-w-lg flex-col items-center justify-center pt-48">
       <ConfettiBurst />
 
-      <div className="rounded-full border-8 border-green-50">
-        <CheckCircleIcon className="h-24 w-24 rounded-full border-4 border-green-100 bg-green-100 text-green-600" />
+      <div className="rounded-full border-[16px] border-green-50">
+        <div className="rounded-full border-[16px] border-green-100 bg-green-100">
+          <CheckCircleIcon className="h-[50px] w-[50px] rounded-full stroke-2 text-green-600" />
+        </div>
       </div>
 
       <h1 className="mt-8 font-heading text-2xl font-medium">

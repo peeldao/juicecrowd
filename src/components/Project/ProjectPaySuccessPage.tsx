@@ -35,7 +35,7 @@ export const ProjectPaySuccessPage = () => {
   }, [ethToUsd])
 
   return (
-    <div className="mx-auto flex max-w-lg flex-col items-center justify-center pt-48">
+    <div className="relative mx-auto flex max-w-lg flex-col items-center justify-center pt-48">
       <ConfettiBurst />
 
       <div className="rounded-full border-[16px] border-green-50">

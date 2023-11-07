@@ -1,6 +1,7 @@
 export type ProjectPayAction =
   | { type: 'addNftReward'; id: bigint }
   | { type: 'removeNftReward'; id: bigint }
+  | { type: 'setNftRewards'; ids: bigint[] }
 
 export type ProjectPayState = {
   nftRewardIds: bigint[]
@@ -20,6 +21,11 @@ export const projectPayReducer = (
       return {
         ...state,
         nftRewardIds: state.nftRewardIds.filter(id => id !== action.id),
+      }
+    case 'setNftRewards':
+      return {
+        ...state,
+        nftRewardIds: action.ids,
       }
     default:
       return state

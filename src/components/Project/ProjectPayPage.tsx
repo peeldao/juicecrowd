@@ -2,7 +2,7 @@ import { useJbProject } from '@/hooks/useJbProject'
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
@@ -19,6 +19,7 @@ import { CURRENCY_ETH } from '../CurrencyAmount'
 
 export const ProjectPayPage = () => {
   const { name } = useJbProject()
+
   const [state, dispatch] = React.useReducer(projectPayReducer, {
     nftRewardIds: [],
   })
@@ -42,6 +43,18 @@ export const ProjectPayPage = () => {
     }
     setDonationSelected(d => !d)
   }, [donationSelected, form])
+
+  // On first render, set (if any) url query params for rewards
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    const rewardIds = url.searchParams.get('nft-reward-ids')
+    if (rewardIds) {
+      dispatch({
+        type: 'setNftRewards',
+        ids: rewardIds.split(',').map(BigInt),
+      })
+    }
+  }, [])
 
   return (
     <ProjectPayContext.Provider value={{ ...state, dispatch }}>

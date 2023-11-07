@@ -45,7 +45,6 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ className }) => {
                 twitterShare(
                   twitterMessage({
                     projectName: 'Project Name',
-                    url: currentUrl,
                   }),
                   currentUrl,
                 )

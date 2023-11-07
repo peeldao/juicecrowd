@@ -6,6 +6,8 @@ import { RewardImage } from './RewardImage'
 import { DialogTrigger, Dialog } from '@/components/ui/Dialog'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { JB721DelegateTier } from 'juice-hooks'
+import { useRouter } from 'next/router'
+import { useCallback } from 'react'
 
 export type RewardCardProps = {
   className?: string
@@ -13,6 +15,17 @@ export type RewardCardProps = {
 }
 
 export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
+  const router = useRouter()
+
+  const goToPayPage = useCallback(() => {
+    router.push({
+      pathname: `${router.pathname}/pay`,
+      query: {
+        ...router.query,
+        'nft-reward-ids': nft.id.toString(),
+      },
+    })
+  }, [nft.id, router])
   return (
     <Dialog>
       <div className={twMerge('w-72 rounded-lg shadow', className)}>
@@ -38,14 +51,17 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
             variant="outline"
             size="xs"
             className="text-gray-700"
-            onClick={e => e.stopPropagation()}
+            onClick={e => {
+              e.stopPropagation()
+              goToPayPage()
+            }}
           >
             Claim reward
           </Button>
         </div>
       </div>
 
-      <RewardDialogContent nft={nft} />
+      <RewardDialogContent showClaimButton nft={nft} />
     </Dialog>
   )
 }

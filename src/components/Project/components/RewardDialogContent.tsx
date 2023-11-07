@@ -6,18 +6,37 @@ import {
 } from '@/components/ui/Dialog'
 import { RewardImage } from './RewardImage'
 import { JB721DelegateTier } from 'juice-hooks'
+import { Button } from '@/components/ui/Button'
+import { useRouter } from 'next/router'
+import React from 'react'
 
 export type RewardDialogProps = {
   nft: JB721DelegateTier
+  showClaimButton?: boolean
 }
 
 /**
  * Reward dialog component.
  * @param nft The nft to display in the dialog.
  */
-export const RewardDialogContent: React.FC<RewardDialogProps> = ({ nft }) => {
+export const RewardDialogContent: React.FC<RewardDialogProps> = ({
+  nft,
+  showClaimButton = false,
+}) => {
   const remaining = nft.remainingQuantity.toString()
   const initialQuantity = nft.initialQuantity.toString()
+
+  const router = useRouter()
+
+  const goToPayPage = React.useCallback(() => {
+    router.push({
+      pathname: `${router.pathname}/pay`,
+      query: {
+        ...router.query,
+        'nft-reward-ids': nft.id.toString(),
+      },
+    })
+  }, [nft.id, router])
 
   return (
     <DialogContent className="py-8" onClick={e => e.stopPropagation()}>
@@ -35,8 +54,15 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({ nft }) => {
       <DialogDescription className="text-base text-gray-600">
         {nft.metadata.description}
       </DialogDescription>
-      <div className="text-sm text-gray-500">
-        Remaining: {remaining}/{initialQuantity}
+      <div className="flex gap-5">
+        <div className="flex-1 text-sm text-gray-500">
+          Remaining: {remaining}/{initialQuantity}
+        </div>
+        {showClaimButton ? (
+          <Button className="flex-1" onClick={goToPayPage}>
+            Claim reward
+          </Button>
+        ) : null}
       </div>
     </DialogContent>
   )

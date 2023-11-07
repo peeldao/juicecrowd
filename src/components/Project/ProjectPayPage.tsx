@@ -89,7 +89,7 @@ export const ProjectPayPage = () => {
           </div>
 
           {/* Right panel */}
-          <div className="flex-1 bg-gray-50 px-4 pb-24 pt-12 md:px-8 md:pt-[148px]">
+          <div className="flex-1 bg-gray-50 px-4 pb-24 pt-12 md:h-screen md:px-8 md:pt-[148px]">
             <ProjectPayForm className="md:max-w-lg" />
           </div>
         </div>

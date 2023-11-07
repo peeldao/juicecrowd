@@ -135,9 +135,9 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     if (!transaction.isSuccess) return
 
     router.push(
-      `/p/${projectId.toString()}/pay/success?amount-eth=${etherPayment}&currency=${paymentCurrency}`,
+      `/p/${projectId.toString()}/pay/success?amount-eth=${totalPayment}&currency=${paymentCurrency}`,
     )
-  }, [transaction.isSuccess, projectId, router, etherPayment, paymentCurrency])
+  }, [transaction.isSuccess, projectId, router, totalPayment, paymentCurrency])
 
   /**
    * Displays error toast if contract write fails or is terminated.

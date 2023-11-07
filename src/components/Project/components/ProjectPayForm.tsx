@@ -87,7 +87,6 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
   const memo = useMemo(() => {
     let memo = formMessage ?? ''
     memo += attachedUrl ? `\n${attachedUrl}` : ''
-    // TODO: Add NFTs
     return memo
   }, [attachedUrl, formMessage])
 

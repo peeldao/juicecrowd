@@ -1,8 +1,9 @@
 import DiscordLogo from '@/components/icon/DiscordLogo'
 import { DISCORD_INVITE_URL } from '../Footer'
-import { JB_X_URL, XLogo } from '@/components/icon/XLogo'
+import { XLogo } from '@/components/icon/XLogo'
 import { Link } from '@/components/Link'
 import { twMerge } from 'tailwind-merge'
+import { JB_X_URL } from '@/lib/constants/urls'
 
 export type CopyrightBannerProps = {
   className?: string

@@ -1,6 +1,3 @@
-// TODO: move this
-export const JB_X_URL = 'https://twitter.com/Juicebox_Money'
-
 export type XLogoProps = {
   className?: string
 }

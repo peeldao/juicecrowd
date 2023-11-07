@@ -1,8 +1,6 @@
 import { FullFooter } from './components/FullFooter'
 import { MinimalFooter } from './components/MinimalFooter'
 
-export const DISCORD_INVITE_URL = 'https://discord.gg/NFTvc93bf6'
-
 export type FooterProps = {
   className?: string
   type?: 'default' | 'minimal'

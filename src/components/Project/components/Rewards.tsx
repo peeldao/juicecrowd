@@ -33,14 +33,8 @@ export const Rewards: React.FC<RewardsProps> = ({ className }) => {
           className,
         )}
       >
-        <Image
-          src="/assets/images/bag-of-eth.png"
-          width={162}
-          height={189}
-          alt="Empty"
-        />
         <div className="font-medium text-gray-400">
-          This project has no rewards
+          This project has no rewards.
         </div>
       </div>
     )

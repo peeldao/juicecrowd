@@ -30,7 +30,7 @@ export const ProjectPayPage = () => {
     defaultValues: {
       paymentAmount: '',
       paymentCurrency: CURRENCY_ETH,
-      beneficiary: '',
+      beneficiary: undefined,
       email: undefined,
       message: '',
     },

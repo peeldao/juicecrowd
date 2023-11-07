@@ -1,8 +1,8 @@
 import { useJbProject } from '@/hooks/useJbProject'
-import { OPEN_IPFS_GATEWAY_HOSTNAME } from '@/lib/ipfs'
-import { useJBFundingCycleContext, useJb721DelegateTiers } from 'juice-hooks'
+import React, { useEffect } from 'react'
 import { twMerge } from 'tailwind-merge'
 import ProjectLogo from '../ProjectLogo'
+import { YouTubeEmbed } from '../YouTubeEmbed'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/Tabs'
 import { AboutTab } from './components/AboutTab'
 import { ActivityTab } from './components/ActivityTab'
@@ -11,9 +11,6 @@ import { Rewards } from './components/Rewards'
 import { RewardsPanel } from './components/RewardsPanel'
 import { Stats } from './components/Stats'
 import { TitleBlock } from './components/TitleBlock'
-import { useEffect } from 'react'
-import React from 'react'
-import { YouTubeEmbed } from '../YouTubeEmbed'
 
 export const ProjectPage = () => {
   const { logoUri, name, projectId } = useJbProject()

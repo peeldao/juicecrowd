@@ -5,6 +5,7 @@ import {
   Ether,
   PV2,
   useJBContractContext,
+  useJBFundingCycleContext,
   useJbProjectsOwnerOf,
 } from 'juice-hooks'
 import pick from 'lodash/pick'
@@ -25,6 +26,7 @@ export const useJbProject = ({
   projectId: inputProjectId,
 }: UseJbProjectProps = {}) => {
   const { nftData, payEventsData, ...metadata } = useJBProjectMetadata()
+  const { fundingCycleData } = useJBFundingCycleContext()
 
   const { projectId: ctxProjectId } = useJBContractContext()
   const projectId = useMemo(() => {
@@ -97,10 +99,21 @@ export const useJbProject = ({
     }
   }, [metadata.softTargetAmount, metadata.softTargetCurrency])
 
+  const endDate = useMemo(() => {
+    if (!fundingCycleData.data) return undefined
+
+    const start = Number(fundingCycleData.data.start)
+    const duration = Number(fundingCycleData.data.duration)
+    if (!start || !duration) return undefined
+
+    return new Date((start + duration) * 1000)
+  }, [fundingCycleData.data])
+
   return {
     ...(pick(_graphqlProject, ['handle', 'contributorsCount']) ?? {}),
     ...metadata,
     softTarget,
+    endDate,
     socialLinks,
     projectId,
     createdAt,

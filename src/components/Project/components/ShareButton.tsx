@@ -1,5 +1,4 @@
 import { Input } from '@/components/Input'
-import DiscordLogo from '@/components/icon/DiscordLogo'
 import { ShareIcon } from '@/components/icon/ShareIcon'
 import { XLogo } from '@/components/icon/XLogo'
 import { Button } from '@/components/ui/Button'
@@ -10,11 +9,15 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/Dialog'
+import { twitterShare } from '@/lib/twitter'
+import { template } from 'lodash'
 import { useCallback, useState } from 'react'
 
 export type ShareButtonProps = {
   className?: string
 }
+
+const twitterMessage = template('Check out <%= projectName %> on Juicecrowd:')
 
 export const ShareButton: React.FC<ShareButtonProps> = ({ className }) => {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
@@ -35,15 +38,21 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ className }) => {
 
         <DialogDescription>
           <div className="flex flex-col gap-4 md:flex-row">
-            {/* // TODO: What to do when clicked? */}
-            <Button variant="secondary" className="flex flex-1 gap-2">
+            <Button
+              variant="secondary"
+              className="flex flex-1 gap-2"
+              onClick={() => {
+                twitterShare(
+                  twitterMessage({
+                    projectName: 'Project Name',
+                    url: currentUrl,
+                  }),
+                  currentUrl,
+                )
+              }}
+            >
               <XLogo className="h-4 w-4" />
               Share on X
-            </Button>
-            {/* // TODO: What to do when clicked? */}
-            <Button variant="secondary" className="flex flex-1 gap-2">
-              <DiscordLogo className="h-4 w-4" />
-              Share on Discord
             </Button>
           </div>
           <div className="mt-8">

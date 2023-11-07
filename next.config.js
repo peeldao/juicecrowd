@@ -18,6 +18,7 @@ const WALLET_CONNECT_URLS = [
   'https://*.walletconnect.org',
   'wss://*.walletconnect.org',
   'wss://*.walletconnect.com',
+  'wss://www.walletlink.org',
 ]
 
 const INFURA_IPFS_URLS = [
@@ -71,6 +72,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const FRAME_SRC = [
+  'https://verify.walletconnect.org/',
   'https://verify.walletconnect.com/',
   'https://www.youtube.com/',
   'https://youtube.com/',

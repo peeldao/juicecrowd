@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "vitest",
     "prettier": "prettier --write src",
+    "prepare": "husky install",
     "gql:build": "graphql-code-generator --config graphql.config.ts -r dotenv/config"
   },
   "dependencies": {
@@ -65,7 +66,9 @@
     "autoprefixer": "^10.4.15",
     "eslint": "^8.15.0",
     "eslint-config-next": "^12.1.6",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
+    "lint-staged": "^15.0.2",
     "postcss": "^8.4.28",
     "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.5.4",

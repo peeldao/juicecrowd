@@ -1,11 +1,16 @@
 import { Head } from '@/components/Head'
 import { Toaster } from '@/components/ui/Toaster'
-import { AppProps } from 'next/app'
-import localFont from 'next/font/local'
-import '../styles/globals.scss'
+import { installJuicecrowdWindowObject } from '@/lib/featureFlags'
 import { fonts } from '@/lib/fonts'
+import { AppProps } from 'next/app'
+import { useEffect } from 'react'
+import '../styles/globals.scss'
 
 export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    installJuicecrowdWindowObject()
+  }, [])
+
   return (
     <>
       <style jsx global>

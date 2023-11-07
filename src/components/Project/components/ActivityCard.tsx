@@ -14,7 +14,7 @@ import { RichNote } from '@/components/RichNote'
 
 type ActivityEvent = Pick<
   PayEvent,
-  'amount' | 'beneficiary' | 'timestamp' | 'note' | 'txHash'
+  'amount' | 'from' | 'timestamp' | 'note' | 'txHash'
 >
 
 export type ActivityCardProps = {
@@ -35,18 +35,15 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
       <div className="flex items-center justify-between gap-5">
         <div className="flex items-center gap-3">
           <Image
-            src={ensAvatarUrlForAddress(event.beneficiary, { size: 80 })}
+            src={ensAvatarUrlForAddress(event.from, { size: 80 })}
             height={40}
             width={40}
             className="rounded-full"
-            alt={`Avatar for ${event.beneficiary}`}
+            alt={`Avatar for ${event.from}`}
             loading="lazy"
           />
           <div className="flex flex-col">
-            <EthereumAddress
-              className="font-medium"
-              address={event.beneficiary}
-            />
+            <EthereumAddress className="font-medium" address={event.from} />
             <Timestamp
               className="text-start text-xs text-gray-500"
               timestamp={event.timestamp}

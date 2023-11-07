@@ -8,16 +8,24 @@ import { CURRENCY_USD, Currency, CurrencyAmount } from '../CurrencyAmount'
 import { useEthUsdPrice } from '../EthUsdPriceProvider'
 import { Link } from '../Link'
 import { Button } from '../ui/Button'
+import { template } from 'lodash'
+import { twitterShare } from '@/lib/twitter'
 
 function getQueryParam(name: string) {
   const params = new URLSearchParams(window.location.search)
   return params.get(name)
 }
 
+const twitterMessage = template(
+  'I just contributed to <%= projectName %> on Juicecrowd:',
+)
+
 export const ProjectPaySuccessPage = () => {
   const { name, projectId } = useJbProject()
 
   const { ethToUsd } = useEthUsdPrice()
+
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   const payAmount = useMemo(() => {
     const amountEthString = getQueryParam('amount-eth')
@@ -59,8 +67,18 @@ export const ProjectPaySuccessPage = () => {
         </p>
       ) : null}
       <div className="mt-12 flex w-full flex-col justify-center gap-3 md:flex-row">
-        {/* // TODO: Replace with share on X button component */}
-        <Button className="flex-1" variant="outline">
+        <Button
+          className="flex-1"
+          variant="outline"
+          onClick={() => {
+            twitterShare(
+              twitterMessage({
+                projectName: name,
+              }),
+              currentUrl,
+            )
+          }}
+        >
           Share on X
         </Button>
         <Link className="flex flex-1" href={`/p/${projectId}`}>

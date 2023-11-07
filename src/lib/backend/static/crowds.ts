@@ -1,7 +1,7 @@
 import { CROWDS, Crowd } from '@/data/crowds'
 import { OPEN_IPFS_GATEWAY_HOSTNAME } from '@/lib/ipfs'
 import { publicClient } from '@/lib/viem/publicClient'
-import { getProjectMetadata } from 'juice-hooks'
+import { getProjectMetadata, readJbProjects } from 'juice-hooks'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { Address } from 'viem'
 
@@ -49,10 +49,11 @@ const getStaticProps: GetStaticProps<CrowdPageProps> = async context => {
             ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
           },
         ),
-        // TODO fetch from chain
-        Promise.resolve(
-          '0x0028C35095D34C9C8a3bc84cB8542cB182fcfa8e' as Address,
-        ),
+        readJbProjects({
+          chainId: publicClient.chain.id,
+          functionName: 'ownerOf',
+          args: [BigInt(projectId)],
+        }),
       ])
 
       return {

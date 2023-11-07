@@ -1,4 +1,4 @@
-import { useFormattedEthAddress } from '@/hooks/useFormattedEthAddress'
+import { useFormattedEthAddress } from 'juice-hooks'
 import { CrowdPageProject } from '@/lib/backend/static/crowds'
 import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
 import Image from 'next/image'

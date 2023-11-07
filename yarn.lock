@@ -2598,9 +2598,9 @@
     "@types/trusted-types" "*"
 
 "@types/http-cache-semantics@*":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@types/http-cache-semantics/-/http-cache-semantics-4.0.4.tgz#b979ebad3919799c979b17c72621c0bc0a31c6c4"
-  integrity sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/http-cache-semantics/-/http-cache-semantics-4.0.3.tgz#a3ff232bf7d5c55f38e4e45693eda2ebb545794d"
+  integrity sha512-V46MYLFp08Wf2mmaBhvgjStM3tPa+2GAdy/iqoX+noX1//zje2x4XmrIU0cAwyClATsTmahbtoQ2EwP7I5WSiA==
 
 "@types/js-yaml@^4.0.0":
   version "4.0.6"
@@ -8724,9 +8724,9 @@ viem@^1.0.0, viem@^1.18.2:
     ws "8.13.0"
 
 viem@^1.5.3:
-  version "1.18.8"
-  resolved "https://registry.yarnpkg.com/viem/-/viem-1.18.8.tgz#3b56a31efb61c4e5c47b79577bbee24735cf4a69"
-  integrity sha512-M7ISKqQlkgm3/mxXGB0t6ohTlU7iSwjidQI51xr4UV169vNUEMVqnGq4aXOn0XuQPJ8lLI/FyOitzD4I27uA8w==
+  version "1.18.6"
+  resolved "https://registry.yarnpkg.com/viem/-/viem-1.18.6.tgz#301d0d9ddd4704cba422d943f06776134ae341ec"
+  integrity sha512-oKkrxF2aqxjJ4pmm0ko7j+ZFRekP6VGIknSroV+6+dF+T31bscltPZwJ0fOJDxCOVhoVtxrKFRTkkasEVDblUA==
   dependencies:
     "@adraffy/ens-normalize" "1.9.4"
     "@noble/curves" "1.2.0"

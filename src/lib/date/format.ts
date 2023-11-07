@@ -45,3 +45,26 @@ export const timestampToDateString = (timestamp: number) => {
     year: 'numeric',
   })
 }
+
+/**
+ * Formats the distance between two dates to a human readable string.
+ * @param date1 The first date
+ * @param date2 The second date
+ */
+export const distanceBetweenDates = (date1: Date, date2: Date) => {
+  const diff = date2.getTime() - date1.getTime()
+  if (diff < MINUTE_MS) {
+    return plural(Math.floor(diff / 1000), 'second')
+  }
+  if (diff < HOUR_MS) {
+    return plural(Math.ceil(diff / MINUTE_MS), 'minute')
+  }
+  if (diff < DAY_MS) {
+    return plural(Math.ceil(diff / HOUR_MS), 'hour')
+  }
+  return plural(Math.ceil(diff / DAY_MS), 'day')
+}
+
+const plural = (count: number, singular: string, plural?: string) => {
+  return `${count} ${count === 1 ? singular : plural || singular + 's'}`
+}

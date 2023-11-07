@@ -18,12 +18,12 @@ export function Page({
   metadata,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const pid = projectId ? BigInt(projectId) : 0n
+  const name = metadata.name ? metadata.name : 'Juicecrowd project'
   return (
     <>
-      {/* // TODO: port over project seo from juicebox? */}
       <SEO
-        title="Project paid successfully!"
-        description="Pay project description"
+        title={`${name} paid successfully`}
+        description={`You have successfully paid ${name}!`}
       />
       <Layout footer="none" navbar="minimal">
         <EthUsdPriceProvider>

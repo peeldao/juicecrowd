@@ -18,10 +18,13 @@ export function Page({
   metadata,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const pid = projectId ? BigInt(projectId) : 0n
+  const name = metadata.name ? metadata.name : 'Juicecrowd project'
   return (
     <>
-      {/* // TODO: port over project seo from juicebox? */}
-      <SEO title="Pay project" description="Pay project description" />
+      <SEO
+        title={`Pay ${name}`}
+        description={`Make a payment to ${name} and get rewards!`}
+      />
       <Layout footer="none" navbar="minimal">
         <EthUsdPriceProvider>
           <JBProjectProvider projectId={pid}>

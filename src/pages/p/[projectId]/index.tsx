@@ -20,8 +20,12 @@ export default function Page({
   const pid = projectId ? BigInt(projectId) : 0n
   return (
     <>
-      {/* // TODO: port over project seo from juicebox? */}
-      <SEO title="Project" description="Project description" />
+      <SEO
+        title={metadata.name ? metadata.name : 'Juicecrowd Project'}
+        description={
+          metadata.description ? metadata.description.slice(0, 160) : ''
+        }
+      />
       <Layout navbar="minimal" footer="minimal">
         <EthUsdPriceProvider>
           <JBProjectProvider projectId={pid}>

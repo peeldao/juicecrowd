@@ -18,18 +18,24 @@ export const MinimalFooter: React.FC<MinimalFooterProps> = ({ className }) => {
         </div>
 
         <div className="flex w-full max-w-xl flex-col justify-end gap-x-12 gap-y-4 text-sm md:flex-row">
-          <Link href="/#TODO" className="font-medium text-gray-600 underline">
+          <span className="text-gray-600">
+            Secured by{' '}
+            <Link
+              href="https://docs.juicebox.money/dev/learn/overview/"
+              className="font-medium text-gray-600 underline"
+            >
+              Smart contracts
+            </Link>
+          </span>
+          <Link href="/" className="font-medium text-gray-600 underline">
             How Juicecrowd works
-          </Link>
-          <Link href="/#TODO" className="font-medium text-gray-600 underline">
-            Smart contract guarantee
           </Link>
           {featureFlagEnabled(FEATURE_FLAGS.CREATE_PROJECT) ? (
             <Link
               href="/create"
               className="font-medium text-gray-600 underline"
             >
-              Launch a campaign
+              Submit your project
             </Link>
           ) : null}
         </div>

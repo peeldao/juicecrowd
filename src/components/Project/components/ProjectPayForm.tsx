@@ -17,7 +17,7 @@ import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
-import { isAddress, parseEther } from 'viem'
+import { Address, isAddress, parseEther } from 'viem'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
@@ -43,7 +43,8 @@ export const ProjectPayFormSchema = z.object({
     .refine(value => {
       if (!value) return true
       return isAddress(value)
-    }, 'Invalid wallet address'),
+    }, 'Invalid wallet address')
+    .transform(value => (value ? (value as Address) : undefined)),
   email: z.string().email('Invalid email address').optional().or(z.literal('')),
   message: z.string().max(256).optional(),
 })
@@ -108,10 +109,13 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     if (nftsToMint.length) return nftsToMint
   }, [nftRewardIds, nfts])
 
+  const beneficiaryAddress = form.watch('beneficiary')
+
   const { prepare, contractWrite, transaction } = usePayProjectTx({
     amountWei: totalPayment,
     memo,
     tiersToMint,
+    beneficiaryAddress,
   })
 
   const { toast } = useToast()

@@ -28,7 +28,7 @@ export const TitleBlock: React.FC<TitleBlockProps> = ({ className }) => {
       <h2 className="mt-2 text-gray-600">{projectTagline}</h2>
       <div className="mt-3 flex justify-center divide-x divide-gray-200 text-xs text-gray-500">
         <span className="py-1 pr-4">
-          Owner: <EthereumAddress address={owner} />
+          Owner: <EthereumAddress address={owner} truncateTo={4} />
         </span>
         <span className="py-1 pl-4">{createdString}</span>
       </div>

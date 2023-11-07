@@ -1,4 +1,8 @@
-import { CurrencyAmount } from '@/components/CurrencyAmount'
+import {
+  CURRENCY_ETH,
+  CURRENCY_USD,
+  CurrencyAmount,
+} from '@/components/CurrencyAmount'
 import { Input } from '@/components/Input'
 import { LoadingButton } from '@/components/LoadingButton'
 import { Form, FormField } from '@/components/ui/Form'
@@ -19,6 +23,7 @@ import { useProjectPay } from '../providers/ProjectPayContext'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
 import { ProjectPayFormItem } from './ProjectPayFormItem'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
+import { useEthUsdPrice } from '@/components/EthUsdPriceProvider'
 
 const WEI = 1e-18
 
@@ -31,6 +36,7 @@ export const ProjectPayFormSchema = z.object({
       .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
     z.literal(''),
   ]),
+  paymentCurrency: z.union([z.literal(CURRENCY_ETH), z.literal(CURRENCY_USD)]),
   beneficiary: z
     .string()
     .optional()
@@ -55,6 +61,8 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     projectId,
   } = useJbProject()
 
+  const { usdToEth } = useEthUsdPrice()
+
   const form = useFormContext<z.infer<typeof ProjectPayFormSchema>>()
 
   const { nftRewardIds } = useProjectPay()
@@ -71,11 +79,16 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
   )
 
   const paymentAmount = form.watch('paymentAmount')
-  //TODO: Do we need to include nft price in payment amount?
+  const paymentCurrency = form.watch('paymentCurrency')
   const etherPayment = useMemo(() => {
     if (!paymentAmount || isNaN(paymentAmount)) return 0n
-    return parseEther(`${paymentAmount}`)
-  }, [paymentAmount])
+    const bigUnitPay = parseEther(`${paymentAmount}`)
+
+    if (paymentCurrency === CURRENCY_ETH) return bigUnitPay
+
+    // payment is in usd so we need to convert to real wei
+    return usdToEth(bigUnitPay)
+  }, [paymentAmount, paymentCurrency, usdToEth])
 
   const totalPayment = useMemo(() => {
     return totalNftSelectionPrice + etherPayment
@@ -120,8 +133,11 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
    */
   useEffect(() => {
     if (!transaction.isSuccess) return
-    router.push(`/p/${projectId.toString()}/pay/success`)
-  }, [transaction.isSuccess, projectId, router])
+
+    router.push(
+      `/p/${projectId.toString()}/pay/success?amount-eth=${totalPayment}&currency=${paymentCurrency}`,
+    )
+  }, [transaction.isSuccess, projectId, router, totalPayment, paymentCurrency])
 
   /**
    * Displays error toast if contract write fails or is terminated.

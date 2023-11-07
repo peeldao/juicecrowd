@@ -24,6 +24,8 @@ import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
 import { ProjectPayFormItem } from './ProjectPayFormItem'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
 import { useEthUsdPrice } from '@/components/EthUsdPriceProvider'
+import { featureFlagEnabled } from '@/lib/featureFlags'
+import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
 
 const WEI = 1e-18
 
@@ -174,25 +176,27 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <ProjectPayFormItem
-              label="Email"
-              description="Enter email to receive confirmation & updates"
-            >
-              <Input
-                placeholder="banny@juicebox.com"
-                prefix={<EnvelopeIcon className="h-5 w-5 text-gray-500" />}
-                suffix={
-                  <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" />
-                }
-                {...field}
-              />
-            </ProjectPayFormItem>
-          )}
-        />
+        {featureFlagEnabled(FEATURE_FLAGS.PROJECT_EMAILS) ? (
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <ProjectPayFormItem
+                label="Email"
+                description="Enter email to receive confirmation & updates"
+              >
+                <Input
+                  placeholder="banny@juicebox.com"
+                  prefix={<EnvelopeIcon className="h-5 w-5 text-gray-500" />}
+                  suffix={
+                    <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" />
+                  }
+                  {...field}
+                />
+              </ProjectPayFormItem>
+            )}
+          />
+        ) : null}
 
         <FormField
           control={form.control}

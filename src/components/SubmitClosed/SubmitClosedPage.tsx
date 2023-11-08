@@ -19,8 +19,7 @@ export const SubmitClosedPage = () => {
         Submissions closed
       </div>
       <div className="mt-4 text-base font-normal text-gray-600 md:text-lg">
-        JC01 submissions are now closed. Subscribe below to be the first to know
-        when JC02 drops.
+        JC01 submissions are now closed, keep your eyes peeled for the launch!
       </div>
       <Link href="/" noStyle>
         <Button

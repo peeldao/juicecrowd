@@ -42,7 +42,7 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
     window.addEventListener('resize', updateWidth)
 
     // Initial width
-    updateWidth()
+    setTimeout(updateWidth, 1000)
 
     return () => {
       window.removeEventListener('resize', updateWidth)

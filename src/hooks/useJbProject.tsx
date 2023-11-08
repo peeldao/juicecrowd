@@ -63,6 +63,10 @@ export const useJbProject = ({
     return new Date(_graphqlProject.createdAt * 1000)
   }, [_graphqlProject])
 
+  const volume = _graphqlProject?.volume
+    ? new Ether(_graphqlProject.volume)
+    : undefined
+
   const { data: owner } = useJbProjectsOwnerOf({
     args: [BigInt(projectId)],
   })
@@ -120,6 +124,7 @@ export const useJbProject = ({
     owner,
     nftData: nftData,
     payEventsData,
+    volume,
     _metadata: metadata,
   }
 }

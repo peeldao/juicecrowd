@@ -1,4 +1,5 @@
 import { CrowdPage } from '@/components/Crowd'
+import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
 import {
@@ -18,7 +19,9 @@ export default function Page({
     <>
       <SEO title="Project" description="Project description" />
       <Layout>
-        <CrowdPage crowd={crowd} projects={projects} />
+        <EthUsdPriceProvider>
+          <CrowdPage crowd={crowd} projects={projects} />
+        </EthUsdPriceProvider>
       </Layout>
     </>
   )

@@ -1,9 +1,23 @@
-query Projects($where: Project_filter, $first: Int, $skip: Int) {
-  projects(where: $where, first: $first, skip: $skip) {
+query Projects(
+  $where: Project_filter
+  $first: Int
+  $skip: Int
+  $orderBy: Project_orderBy
+  $orderDirection: OrderDirection
+) {
+  projects(
+    where: $where
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: $first
+    skip: $skip
+  ) {
     projectId
     metadataUri
     handle
     contributorsCount
     createdAt
+    volume
+    volumeUSD
   }
 }

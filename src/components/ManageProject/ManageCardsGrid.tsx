@@ -4,6 +4,7 @@ import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { useTotalSupporters } from '@/hooks/useTotalSupporters'
 import { ReactNode } from 'react'
 import { ManageCard } from './ManageCard'
+import { useEthTerminalBalance } from 'juice-hooks'
 
 interface CardData {
   name: ReactNode
@@ -12,6 +13,7 @@ interface CardData {
 
 export function ManageCardsGrid() {
   const { softTarget } = useJbProject()
+  const { data: projectBalance } = useEthTerminalBalance()
   const totalSupporters = useTotalSupporters()
   const totalRaised = useProjectVolume()
 
@@ -33,18 +35,20 @@ export function ManageCardsGrid() {
           currency={softTarget.currency}
           amount={totalRaised.val}
         />
-      ) : null,
+      ) : (
+        '-'
+      ),
     },
     {
       name: 'Project balance',
-      value: totalRaised ? (
+      value: projectBalance ? (
         <CurrencyAmount
           currency={softTarget.currency}
-          // TODO: Get real project balance data
-
-          amount={totalRaised.val}
+          amount={projectBalance}
         />
-      ) : null,
+      ) : (
+        '-'
+      ),
     },
     { name: 'Total backers', value: totalSupporters },
     // TODO: Real time data

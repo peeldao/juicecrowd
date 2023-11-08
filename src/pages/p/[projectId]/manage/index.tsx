@@ -6,7 +6,7 @@ import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
   projectGetStaticProps,
-} from '@/lib/backend/projects/static'
+} from '@/lib/backend/static/projects'
 import { JBProjectProvider } from 'juice-hooks'
 import { InferGetStaticPropsType } from 'next'
 
@@ -20,8 +20,10 @@ export default function Page({
   const pid = projectId ? BigInt(projectId) : 0n
   return (
     <>
-      {/* // TODO: port over project seo from juicebox? */}
-      <SEO title="Project" description="Project description" />
+      <SEO
+        title="Manage project"
+        description="Manage your Juicecrowd project"
+      />
       <Layout navbar="none" footer="minimal">
         <EthUsdPriceProvider>
           <JBProjectProvider projectId={pid}>

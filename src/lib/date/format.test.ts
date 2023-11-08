@@ -1,5 +1,9 @@
 import { afterEach, beforeEach, expect, test, vi } from 'vitest'
-import { distanceBetweenDates, timestampToDateString } from './format'
+import {
+  distanceBetweenDates,
+  timestampToDateString,
+  dateToCountdownString,
+} from './format'
 
 beforeEach(() => {
   vi.useFakeTimers()
@@ -48,6 +52,19 @@ test.each`
 `('timestampToDateString($date) === $format', ({ date, format }) => {
   vi.setSystemTime(date)
   expect(timestampToDateString(0)).toBe(format)
+})
+
+test.each`
+  date                     | format
+  ${date({ seconds: 0 })}  | ${'0s'}
+  ${date({ seconds: 1 })}  | ${'1s'}
+  ${date({ seconds: 59 })} | ${'59s'}
+  ${date({ minutes: 1 })}  | ${'1m'}
+  ${date({ minutes: 2 })}  | ${'2m'}
+  ${date({ hours: 1 })}    | ${'1h'}
+`('dateToCountdownString($date1, $date2) === $format', ({ date, format }) => {
+  vi.setSystemTime(new Date(0))
+  expect(dateToCountdownString(date)).toBe(format)
 })
 
 test.each`

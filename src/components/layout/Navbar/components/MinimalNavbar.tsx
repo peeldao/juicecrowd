@@ -95,16 +95,18 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {showManagePageLink ? (
-          <Link href={`/p/${projectId}/manage`} className="mr-3 text-gray-700">
-            <Button size="sm" variant="outline">
-              <Cog6ToothIcon className="mr-2 inline h-4 w-4" />
-              Manage project
-            </Button>
-          </Link>
-        ) : null}
+        <div className="flex items-center gap-3">
+          {showManagePageLink ? (
+            <Link href={`/p/${projectId}/manage`} className="text-gray-700">
+              <Button size="sm" variant="outline">
+                <Cog6ToothIcon className="mr-2 inline h-4 w-4" />
+                Manage project
+              </Button>
+            </Link>
+          ) : null}
 
-        <ConnectKitButton size="sm" />
+          <ConnectKitButton size="sm" />
+        </div>
       </div>
     </>
   )

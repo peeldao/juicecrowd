@@ -53,9 +53,9 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
             width="506.391"
             height="402.875"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -74,9 +74,9 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
             width="527.423"
             height="362.482"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -96,8 +96,8 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
             y2="455.062"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#5168E0" />
-            <stop offset="1" stop-color="#D9CDFF" stop-opacity="0.4" />
+            <stop stopColor="#5168E0" />
+            <stop offset="1" stopColor="#D9CDFF" stopOpacity="0.4" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_4_1061"
@@ -107,8 +107,8 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
             y2="175.764"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#5168E0" />
-            <stop offset="1" stop-color="#D9CDFF" stop-opacity="0.4" />
+            <stop stopColor="#5168E0" />
+            <stop offset="1" stopColor="#D9CDFF" stopOpacity="0.4" />
           </linearGradient>
         </defs>
       </svg>
@@ -149,9 +149,9 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
             width="1369.99"
             height="1089.94"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -170,9 +170,9 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
             width="1426.89"
             height="980.659"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               mode="normal"
               in="SourceGraphic"
@@ -192,8 +192,8 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
             y2="665.628"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#5168E0" />
-            <stop offset="1" stop-color="#D9CDFF" stop-opacity="0.4" />
+            <stop stopColor="#5168E0" />
+            <stop offset="1" stopColor="#D9CDFF" stopOpacity="0.4" />
           </linearGradient>
           <linearGradient
             id="paint1_linear_1_3"
@@ -203,8 +203,8 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
             y2="475.956"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#5168E0" />
-            <stop offset="1" stop-color="#D9CDFF" stop-opacity="0.4" />
+            <stop stopColor="#5168E0" />
+            <stop offset="1" stopColor="#D9CDFF" stopOpacity="0.4" />
           </linearGradient>
         </defs>
       </svg>

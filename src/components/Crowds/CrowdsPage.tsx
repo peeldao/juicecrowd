@@ -4,10 +4,15 @@ import { StayInLoopSection } from '../Landing/components/StayInLoopSection'
 import { Link } from '../Link'
 import { Button } from '../ui/Button'
 import { JC01_DATES } from '@/lib/constants/crowds'
+import { featureFlagEnabled } from '@/lib/featureFlags'
+import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
 
 const PRIZE_POOL_ETH = 3
 
 export const CrowdsPage: React.FC = () => {
+  const submissionsAreLocked = featureFlagEnabled(
+    FEATURE_FLAGS.SUBMISSIONS_LOCKED,
+  )
   return (
     <>
       <div className="mx-auto flex max-w-5xl flex-col px-5 pt-14 text-base md:pt-20">
@@ -129,7 +134,13 @@ export const CrowdsPage: React.FC = () => {
           </HeaderParagraph>
         </div>
 
-        <Link href="https://form.typeform.com/to/LfNmNKVe">
+        <Link
+          href={
+            !submissionsAreLocked
+              ? 'https://form.typeform.com/to/LfNmNKVe'
+              : '/submission-closed'
+          }
+        >
           <Button size="lg" className="mt-16">
             Submit your project
           </Button>

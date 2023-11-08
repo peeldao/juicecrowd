@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { TechCrowdCTA } from './TechCrowdCTA'
+import { JuicecrowdCTA } from './JuicecrowdCTA'
 
 export const HeroSection: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ export const HeroSection: React.FC = () => {
         and tap into your audience to build lasting support communities.
       </div>
 
-      <TechCrowdCTA className="mt-10 md:mt-14" />
+      <JuicecrowdCTA className="mt-10 md:mt-14" />
 
       <Image
         className="mt-14 md:mt-16"

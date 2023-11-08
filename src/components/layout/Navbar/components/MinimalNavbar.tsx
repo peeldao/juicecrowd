@@ -9,13 +9,9 @@ import { useAccount } from 'wagmi'
 
 export type MinimalNavbarProps = {
   className?: string
-  projectId?: bigint
 }
-export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({
-  className,
-  projectId,
-}) => {
-  const { owner } = useJbProject()
+export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
+  const { owner, projectId } = useJbProject()
   const { address } = useAccount()
   const showManagePageLink = projectId && address === owner
 

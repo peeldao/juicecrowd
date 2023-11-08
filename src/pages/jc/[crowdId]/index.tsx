@@ -17,7 +17,7 @@ export default function Page({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <SEO title="Project" description="Project description" />
+      <SEO title={crowd.name} description={crowd.description} />
       <Layout>
         <EthUsdPriceProvider>
           <CrowdPage crowd={crowd} projects={projects} />

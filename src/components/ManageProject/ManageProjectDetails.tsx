@@ -1,6 +1,6 @@
 import ProjectLogo from "@/components/ProjectLogo";
-import { OwnerAndDateCreated } from "../components/OwnerAndDateCreated";
-import { ProgressBadge } from "../components/ProgressBadge";
+import { OwnerAndDateCreated } from "../Project/components/ProjectHeaderMetadata";
+import { ProgressBadge } from "../Project/components/ProgressBadge";
 import { useJbProject } from "@/hooks/useJbProject";
 
 export function ManageProjectDetails() {

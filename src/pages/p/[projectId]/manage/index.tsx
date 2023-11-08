@@ -1,6 +1,5 @@
 import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
-import { ProjectPage } from '@/components/Project'
-import { ManageDashboard } from '@/components/Project/manage/ManageDashboard'
+import { ManageDashboard } from '@/components/ManageProject/ManageDashboard'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
 import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'

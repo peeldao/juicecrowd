@@ -1,16 +1,24 @@
 import { ConnectKitButton } from '@/components/ConnectKitButton'
 import { Link } from '@/components/Link'
-import { LinkToManageButton } from '@/components/Project/components/LinkToManageButton'
 import { Button } from '@/components/ui/Button'
-import { HomeIcon } from '@heroicons/react/24/outline'
+import { useJbProject } from '@/hooks/useJbProject'
+import { Cog6ToothIcon, HomeIcon } from '@heroicons/react/24/outline'
 import { Bars3BottomLeftIcon } from '@heroicons/react/24/solid'
 import { twMerge } from 'tailwind-merge'
+import { useAccount } from 'wagmi'
 
 export type MinimalNavbarProps = {
   className?: string
   projectId?: bigint
 }
-export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className, projectId }) => {
+export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({
+  className,
+  projectId,
+}) => {
+  const { owner } = useJbProject()
+  const { address } = useAccount()
+  const showManagePageLink = projectId && address === owner
+
   return (
     <div
       className={twMerge(
@@ -26,8 +34,16 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className, project
       <Button size="child" variant="ghost">
         <Bars3BottomLeftIcon className="h-5 w-5" />
       </Button>
-      <div className='flex gap-3'>
-        <LinkToManageButton projectId={projectId} />
+      <div className="flex gap-3">
+        {showManagePageLink ? (
+          <Link href={`/p/${projectId}/manage`} className="text-gray-700">
+            <Button size="sm" variant="outline">
+              <Cog6ToothIcon className="mr-2 inline h-4 w-4" />
+              Manage project
+            </Button>
+          </Link>
+        ) : null}
+
         <ConnectKitButton size="sm" />
       </div>
     </div>

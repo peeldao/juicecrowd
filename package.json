@@ -43,6 +43,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
     "sass": "^1.69.4",
+    "sharp": "^0.32.6",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "viem": "^1.18.2",

@@ -16,7 +16,7 @@ export function LinkToManageButton({ projectId }: { projectId?: bigint}) {
       legacyBehavior
     >
       <Button size="sm" variant="outline">
-        <span className="text-grey-700">
+        <span className="text-gray-700">
           <Cog6ToothIcon className="mr-2 inline h-4 w-4" />
           <span>Manage project</span>
         </span>

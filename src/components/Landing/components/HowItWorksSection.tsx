@@ -3,6 +3,9 @@ import { Link } from '@/components/Link'
 import Image from 'next/image'
 import { PropsWithChildren } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { featureFlagEnabled } from '@/lib/featureFlags'
+import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
+import { JC01SubmissionsClosed } from '@/lib/constants'
 
 // hardcoded for now
 const CROWD_BADGES = [
@@ -33,6 +36,7 @@ export type HowItWorksSectionProps = {
 export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
   className,
 }) => {
+  const submissionsAreLocked = JC01SubmissionsClosed()
   return (
     <>
       <h2 className={twMerge('font-heading text-3xl font-bold', className)}>
@@ -81,10 +85,15 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
               chance to join a tight-knit cohort of builders and creators. If
               you&apos;re accepted, then we&apos;re off to the races!
             </div>
-            <Link href="/crowds">
-              {/* Hardcoded JC01 */}
-              <Button className="mt-6">Submit to JC01</Button>
-            </Link>
+            {!submissionsAreLocked ? (
+              <Link href="/crowds">
+                <Button className="mt-6">Submit to JC01</Button>
+              </Link>
+            ) : (
+              <div className="mt-6 w-fit rounded-full bg-split-50 px-3 py-1 text-sm font-medium text-split-800">
+                Submissions closed
+              </div>
+            )}
           </div>
         </div>
 

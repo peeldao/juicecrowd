@@ -3,7 +3,10 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { Link } from '@/components/Link'
 import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
-import { JC01_DATES } from '@/lib/constants/crowds'
+import {
+  JC01SubmissionsClosed,
+  JC01_DATE_STRINGS,
+} from '@/lib/constants/crowds'
 import { featureFlagEnabled } from '@/lib/featureFlags'
 import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
 import { useEffect, useState } from 'react'
@@ -14,9 +17,7 @@ export type JuicecrowdCTAProps = {
 }
 
 export const JuicecrowdCTA: React.FC<JuicecrowdCTAProps> = ({ className }) => {
-  const submissionsAreLocked = featureFlagEnabled(
-    FEATURE_FLAGS.SUBMISSIONS_LOCKED,
-  )
+  const submissionsAreLocked = JC01SubmissionsClosed()
   const [countdownString, setCountdownString] = useState<string | undefined>(
     undefined,
   )
@@ -26,7 +27,7 @@ export const JuicecrowdCTA: React.FC<JuicecrowdCTAProps> = ({ className }) => {
 
     const getAndSetCountdownString = () => {
       const countdown = dateToCountdownString(
-        new Date(JC01_DATES.PROJECTS_LAUNCH),
+        new Date(JC01_DATE_STRINGS.PROJECTS_LAUNCH),
       )
       setCountdownString(countdown)
     }
@@ -91,14 +92,14 @@ export const JuicecrowdCTA: React.FC<JuicecrowdCTAProps> = ({ className }) => {
               </Button>
             </Link>
             <div className="whitespace-nowrap text-center text-xs text-gray-400">
-              Submissions close {JC01_DATES.SUBMISSIONS_CLOSE}
+              Submissions close {JC01_DATE_STRINGS.SUBMISSIONS_CLOSE}
             </div>
           </>
         ) : (
           <>
             <Button
               size="lg"
-              className="w-full min-w-[200px] gap-2 whitespace-nowrap bg-black opacity-100 disabled:bg-black disabled:opacity-100"
+              className="w-full min-w-[200px] gap-2 whitespace-nowrap bg-gray-800 opacity-100 disabled:bg-black disabled:opacity-100"
               disabled
             >
               <span>🚀</span>

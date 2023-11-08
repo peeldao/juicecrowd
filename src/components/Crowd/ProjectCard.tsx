@@ -42,7 +42,7 @@ export function ProjectCard({
             ) : null}
           </div>
           <div className="text-white">
-            <div className="font-medium">{name}</div>
+            <div className="mb-1 font-medium">{name}</div>
             <div className="text-xs opacity-70">{formattedOwnerAddress}</div>
           </div>
         </div>

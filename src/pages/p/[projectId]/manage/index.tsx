@@ -1,5 +1,5 @@
 import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
-import { ProjectPage } from '@/components/Project'
+import { ManageDashboard } from '@/components/ManageProject/ManageDashboard'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
 import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
@@ -21,16 +21,14 @@ export default function Page({
   return (
     <>
       <SEO
-        title={metadata.name ? metadata.name : 'Juicecrowd Project'}
-        description={
-          metadata.description ? metadata.description.slice(0, 160) : ''
-        }
+        title="Manage project"
+        description="Manage your Juicecrowd project"
       />
-      <Layout navbar="minimal" footer="minimal" projectId={pid}>
+      <Layout navbar="none" footer="minimal">
         <EthUsdPriceProvider>
           <JBProjectProvider projectId={pid}>
             <JBProjectMetadataProvider metadata={metadata}>
-              <ProjectPage />
+              <ManageDashboard />
             </JBProjectMetadataProvider>
           </JBProjectProvider>
         </EthUsdPriceProvider>

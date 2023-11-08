@@ -1,3 +1,4 @@
+import { CROWDS } from '@/data/crowds'
 import { OPEN_IPFS_GATEWAY_HOSTNAME } from '@/lib/ipfs'
 import { publicClient } from '@/lib/viem/publicClient'
 import { JBProjectMetadata, getProjectMetadata } from 'juice-hooks'
@@ -15,21 +16,10 @@ interface ProjectPageProps {
 }
 
 const getStaticPaths: GetStaticPaths = async () => {
-  // const projects = await paginateDepleteProjectsQueryCall({
-  //   variables: { where: { pv: PV_V2 } },
-  // });
-
-  const projects = [
-    {
-      projectId: 578, // a project with NFTS
-    },
-  ]
-
-  // TODO: Disable for now
-  const paths = projects.map(({ projectId }) => ({
+  const paths = CROWDS.flatMap(c => c.projectIds).map(projectId => ({
     params: { projectId: String(projectId) },
   }))
-  return { paths: [], fallback: 'blocking' }
+  return { paths, fallback: 'blocking' }
 }
 
 const getStaticProps: GetStaticProps<ProjectPageProps> = async context => {

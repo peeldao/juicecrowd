@@ -44,12 +44,12 @@ export function CrowdPage({
   )
 
   return (
-    <div className="mb-64 mt-14">
+    <div className="mb-36 mt-14 px-2 md:mb-64">
       <h1 className="mb-3 text-center font-heading text-4xl font-medium text-gray-900">
         {crowd.name}
       </h1>
       <p className="mb-14 text-center text-gray-700">{crowd.description}</p>
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex flex-wrap justify-center gap-3 md:gap-6">
         {projectsWithVolume.map(project => (
           <ProjectCard {...project} key={project.id} />
         ))}

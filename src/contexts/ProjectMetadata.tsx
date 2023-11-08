@@ -16,7 +16,7 @@ import {
 } from 'juice-hooks'
 import { PropsWithChildren, createContext, useContext } from 'react'
 
-type _JBProjectMetadata = JBProjectMetadata & {
+export type _JBProjectMetadata = JBProjectMetadata & {
   // TODO: Remove once added to juice-hooks
   infoUri: string | undefined
   introVideoUrl: string | undefined

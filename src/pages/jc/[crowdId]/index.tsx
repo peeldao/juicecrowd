@@ -5,6 +5,8 @@ import {
   crowdGetStaticPaths,
   crowdGetStaticProps,
 } from '@/lib/backend/static/crowds'
+import { useProjectsQuery } from '@/lib/graphql/hooks'
+import { PV2 } from 'juice-hooks'
 import { InferGetStaticPropsType } from 'next'
 
 export const getStaticPaths = crowdGetStaticPaths

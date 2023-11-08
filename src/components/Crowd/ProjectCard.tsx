@@ -1,15 +1,17 @@
 import { CrowdPageProject } from '@/lib/backend/static/crowds'
 import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
-import { useFormattedEthAddress } from 'juice-hooks'
+import { formatEther, useFormattedEthAddress } from 'juice-hooks'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { Badge } from '../ui/badge'
 
 export function ProjectCard({
   id,
   name,
   ownerAddress,
   logoUri,
+  volumeUsd,
 }: CrowdPageProject) {
   const [imgError, setImgError] = useState<boolean>(false)
 
@@ -27,12 +29,18 @@ export function ProjectCard({
             onError={() => setImgError(true)}
           />
         ) : (
-          <div className="absolute h-full w-full bg-bluebs-500" />
+          <div className="absolute h-full w-full bg-bluebs-500 transition-colors group-hover:bg-bluebs-400" />
         )}
 
         <div className="z-10 flex h-full w-full flex-col justify-between bg-gradient-to-t from-[#000000bf] to-transparent p-4">
-          {/* todo current volume here */}
-          <div></div>
+          <div>
+            {typeof volumeUsd !== 'undefined' ? (
+              <Badge variant="secondary">
+                ${formatEther(volumeUsd, { fractionDigits: 2 }).toString()}{' '}
+                raised
+              </Badge>
+            ) : null}
+          </div>
           <div className="text-white">
             <div className="font-medium">{name}</div>
             <div className="text-xs opacity-70">{formattedOwnerAddress}</div>

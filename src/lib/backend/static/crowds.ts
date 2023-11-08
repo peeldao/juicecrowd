@@ -10,6 +10,7 @@ export interface CrowdPageProject {
   name: string
   logoUri: string
   ownerAddress: Address
+  volumeUsd?: bigint
 }
 
 interface CrowdPageProps {

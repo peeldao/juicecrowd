@@ -1,18 +1,18 @@
+import {
+  JC01SubmissionsClosed,
+  JC01_DATES,
+  JC01_DATE_STRINGS,
+} from '@/lib/constants/crowds'
 import React, { ReactNode } from 'react'
 import { Breadcrumbs } from '../Breadcrumbs'
 import { StayInLoopSection } from '../Landing/components/StayInLoopSection'
 import { Link } from '../Link'
 import { Button } from '../ui/Button'
-import { JC01_DATES } from '@/lib/constants/crowds'
-import { featureFlagEnabled } from '@/lib/featureFlags'
-import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
 
 const PRIZE_POOL_ETH = 3
 
 export const CrowdsPage: React.FC = () => {
-  const submissionsAreLocked = featureFlagEnabled(
-    FEATURE_FLAGS.SUBMISSIONS_LOCKED,
-  )
+  const submissionsAreLocked = JC01SubmissionsClosed()
   return (
     <>
       <div className="mx-auto flex max-w-5xl flex-col px-5 pt-14 text-base md:pt-20">
@@ -92,29 +92,31 @@ export const CrowdsPage: React.FC = () => {
               <li>
                 Submissions close{' '}
                 <span className="font-medium">
-                  {JC01_DATES.SUBMISSIONS_CLOSE}
+                  {JC01_DATE_STRINGS.SUBMISSIONS_CLOSE}
                 </span>
               </li>
               <li>
                 Successful applicants selected by{' '}
                 <span className="font-medium">
-                  {JC01_DATES.SUCCESSFUL_APPLICANTS_SELECTED}
+                  {JC01_DATE_STRINGS.SUCCESSFUL_APPLICANTS_SELECTED}
                 </span>
               </li>
               <li>
                 Projects launch on{' '}
                 <span className="font-medium">
-                  {JC01_DATES.PROJECTS_LAUNCH}
+                  {JC01_DATE_STRINGS.PROJECTS_LAUNCH}
                 </span>
               </li>
               <li>
                 Project campaigns run for 30 days, ending on{' '}
-                <span className="font-medium">{JC01_DATES.PROJECTS_RUN}</span>
+                <span className="font-medium">
+                  {JC01_DATE_STRINGS.PROJECTS_RUN}
+                </span>
               </li>
               <li>
                 Prize pool awarded on{' '}
                 <span className="font-medium">
-                  {JC01_DATES.PRIZE_POOL_AWARDED}
+                  {JC01_DATE_STRINGS.PRIZE_POOL_AWARDED}
                 </span>
               </li>
             </ul>

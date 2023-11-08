@@ -5,6 +5,7 @@ import { PropsWithChildren } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { featureFlagEnabled } from '@/lib/featureFlags'
 import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
+import { JC01SubmissionsClosed } from '@/lib/constants'
 
 // hardcoded for now
 const CROWD_BADGES = [
@@ -35,9 +36,7 @@ export type HowItWorksSectionProps = {
 export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
   className,
 }) => {
-  const submissionsAreLocked = featureFlagEnabled(
-    FEATURE_FLAGS.SUBMISSIONS_LOCKED,
-  )
+  const submissionsAreLocked = JC01SubmissionsClosed()
   return (
     <>
       <h2 className={twMerge('font-heading text-3xl font-bold', className)}>

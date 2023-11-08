@@ -4,8 +4,7 @@ import { Button } from '@/components/ui/Button'
 import { Progress } from '@/components/ui/Progress'
 import { Separator } from '@/components/ui/Separator'
 import { useJbProject } from '@/hooks/useJbProject'
-import { useTotalRaised } from '@/hooks/useTotalRaised'
-import { useTotalSupporters } from '@/hooks/useTotalSupporters'
+import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { distanceBetweenDates } from '@/lib/date/format'
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -16,11 +15,10 @@ export type StatsProps = {
 }
 
 export const Stats: React.FC<StatsProps> = ({ className }) => {
-  const { projectId, payEventsData, softTarget, endDate } = useJbProject()
+  const { projectId, contributorsCount, softTarget, endDate } = useJbProject()
   const [now, setNow] = useState(new Date())
 
-  const totalSupporters = useTotalSupporters()
-  const totalRaised = useTotalRaised()
+  const totalRaised = useProjectVolume()
 
   const progress = useMemo(() => {
     if (!softTarget.amount) return 100
@@ -42,10 +40,12 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
         <Progress className="h-1.5" value={progress} />
         <div className="mt-5 flex items-center gap-3">
           <span className="font-heading text-xl font-medium md:text-2xl">
-            <CurrencyAmount
-              currency={softTarget.currency}
-              amount={totalRaised}
-            />
+            {totalRaised ? (
+              <CurrencyAmount
+                currency={softTarget.currency}
+                amount={totalRaised.val}
+              />
+            ) : null}
           </span>
           <span className="flex items-center gap-1 text-sm text-gray-500">
             raised of{' '}
@@ -75,7 +75,7 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
             }
           />
           <Separator orientation="vertical" />
-          <StatBlock title="Supporters" value={totalSupporters} />
+          <StatBlock title="Supporters" value={contributorsCount} />
         </div>
 
         <ShareButton className="h-14 w-full md:h-12 md:w-fit" />

@@ -17,6 +17,7 @@ query Projects(
     handle
     contributorsCount
     createdAt
+    volume
     volumeUSD
   }
 }

@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react'
-import { ManageCard } from './ManageCard'
-import { useJbProject } from '@/hooks/useJbProject'
 import { CurrencyAmount } from '@/components/CurrencyAmount'
+import { useJbProject } from '@/hooks/useJbProject'
+import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { useTotalSupporters } from '@/hooks/useTotalSupporters'
-import { useTotalRaised } from '@/hooks/useTotalRaised'
+import { ReactNode } from 'react'
+import { ManageCard } from './ManageCard'
 
 interface CardData {
   name: ReactNode
@@ -13,39 +13,43 @@ interface CardData {
 export function ManageCardsGrid() {
   const { softTarget } = useJbProject()
   const totalSupporters = useTotalSupporters()
-  const totalRaised = useTotalRaised()
+  const totalRaised = useProjectVolume()
 
   const cardData: CardData[] = [
     {
-      name: "Funding goal",
-      value:
+      name: 'Funding goal',
+      value: (
         <CurrencyAmount
           hideCurrencyIcon
           currency={softTarget.currency}
           amount={softTarget.amount}
         />
+      ),
     },
     {
-      name: "Total funds raised",
-      value:
+      name: 'Total funds raised',
+      value: totalRaised ? (
         <CurrencyAmount
           currency={softTarget.currency}
-          amount={totalRaised}
+          amount={totalRaised.val}
         />
+      ) : null,
     },
     {
-      name: "Project balance",
-      value:
+      name: 'Project balance',
+      value: totalRaised ? (
         <CurrencyAmount
           currency={softTarget.currency}
           // TODO: Get real project balance data
-          amount={totalRaised}
+
+          amount={totalRaised.val}
         />
+      ) : null,
     },
-    { name: "Total backers", value: totalSupporters },
+    { name: 'Total backers', value: totalSupporters },
     // TODO: Real time data
-    { name: "Campaign duration", value: "30 days" },
-    { name: "Time left", value: "12 days" },
+    { name: 'Campaign duration', value: '30 days' },
+    { name: 'Time left', value: '12 days' },
   ]
 
   return (

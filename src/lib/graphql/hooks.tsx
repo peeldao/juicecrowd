@@ -10104,6 +10104,7 @@ export type ProjectsQuery = {
     handle: string | null
     contributorsCount: number
     createdAt: number
+    volume: any
     volumeUSD: any
   }>
 }
@@ -13244,6 +13245,7 @@ export const ProjectsDocument = gql`
       handle
       contributorsCount
       createdAt
+      volume
       volumeUSD
     }
   }

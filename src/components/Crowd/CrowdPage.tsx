@@ -6,6 +6,8 @@ import {
   useProjectsQuery,
 } from '@/lib/graphql/hooks'
 import { PV2 } from 'juice-hooks'
+import { useMemo } from 'react'
+import { useEthUsdPrice } from '../EthUsdPriceProvider'
 import { ProjectCard } from './ProjectCard'
 
 export function CrowdPage({
@@ -15,6 +17,8 @@ export function CrowdPage({
   crowd: Crowd
   projects: CrowdPageProject[]
 }) {
+  const { ethToUsd } = useEthUsdPrice()
+
   const { data } = useProjectsQuery({
     variables: {
       where: { projectId_in: projects.map(p => p.id), pv: PV2 },
@@ -22,15 +26,22 @@ export function CrowdPage({
       orderDirection: OrderDirection.desc,
     },
   })
-  const projectsWithVolume = projects.map((p, idx) => {
-    const volumeUsdRaw = data?.projects[idx]?.volumeUSD
-    const volumeUsd =
-      typeof volumeUsdRaw !== 'undefined' ? BigInt(volumeUsdRaw) : undefined
-    return {
-      ...p,
-      volumeUsd,
-    }
-  })
+  const projectsWithVolume = useMemo(
+    () =>
+      projects.map((p, idx) => {
+        const volumeEth = data?.projects[idx]?.volume
+        const volumeUsd =
+          typeof volumeEth !== 'undefined'
+            ? ethToUsd(BigInt(volumeEth))
+            : undefined
+
+        return {
+          ...p,
+          volumeUsd,
+        }
+      }),
+    [ethToUsd, data, projects],
+  )
 
   return (
     <div className="mb-64 mt-14">

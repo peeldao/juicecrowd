@@ -32,7 +32,7 @@ export function ProjectCard({
           <div className="absolute h-full w-full bg-bluebs-500 transition-colors group-hover:bg-bluebs-400" />
         )}
 
-        <div className="z-10 flex h-full w-full flex-col justify-between bg-gradient-to-t from-[#000000bf] to-transparent p-4">
+        <div className="z-10 flex h-full w-full flex-col justify-between bg-gradient-to-t from-[#000000b1] to-transparent to-40% p-4">
           <div>
             {typeof volumeUsd !== 'undefined' ? (
               <Badge variant="secondary">

@@ -1,8 +1,8 @@
 import { Badge } from '@/components/ui/badge'
+import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
 
 export function ProgressBadge() {
-  // TODO: hook to determine if project is in progress or complete (reuse for Withdraw button)
-  const isComplete = false
+  const { isComplete } = useCampaignEndDate()
 
   return (
     <Badge variant={isComplete ? 'success' : 'warn'}>

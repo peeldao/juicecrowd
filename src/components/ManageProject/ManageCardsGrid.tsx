@@ -5,6 +5,7 @@ import { useTotalSupporters } from '@/hooks/useTotalSupporters'
 import { ReactNode } from 'react'
 import { ManageCard } from './ManageCard'
 import { useEthTerminalBalance } from 'juice-hooks'
+import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
 
 interface CardData {
   name: ReactNode
@@ -16,6 +17,7 @@ export function ManageCardsGrid() {
   const { data: projectBalance } = useEthTerminalBalance()
   const totalSupporters = useTotalSupporters()
   const totalRaised = useProjectVolume()
+  const { timeLeftFormatted } = useCampaignEndDate()
 
   const cardData: CardData[] = [
     {
@@ -51,9 +53,8 @@ export function ManageCardsGrid() {
       ),
     },
     { name: 'Total backers', value: totalSupporters },
-    // TODO: Real time data
-    { name: 'Campaign duration', value: '30 days' },
-    { name: 'Time left', value: '12 days' },
+    { name: 'Campaign duration', value: '3 days' },
+    { name: 'Time left', value: timeLeftFormatted },
   ]
 
   return (

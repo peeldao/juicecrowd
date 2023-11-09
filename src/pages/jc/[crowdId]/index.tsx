@@ -2,6 +2,7 @@ import { CrowdPage } from '@/components/Crowd'
 import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
+import { AppProvider } from '@/components/layout/AppProvider'
 import {
   crowdGetStaticPaths,
   crowdGetStaticProps,
@@ -18,11 +19,11 @@ export default function Page({
   return (
     <>
       <SEO title={crowd.name} description={crowd.description} />
-      <Layout>
-        <EthUsdPriceProvider>
+      <AppProvider>
+        <Layout>
           <CrowdPage crowd={crowd} projects={projects} />
-        </EthUsdPriceProvider>
-      </Layout>
+        </Layout>
+      </AppProvider>
     </>
   )
 }

@@ -1,11 +1,14 @@
 import { LandingPage } from '@/components/Landing'
 import { Layout } from '@/components/layout'
+import { AppProvider } from '@/components/layout/AppProvider'
 
 export function Page() {
   return (
-    <Layout>
-      <LandingPage />
-    </Layout>
+    <AppProvider>
+      <Layout>
+        <LandingPage />
+      </Layout>
+    </AppProvider>
   )
 }
 

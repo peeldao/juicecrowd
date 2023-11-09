@@ -2,6 +2,7 @@ import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { ManageDashboard } from '@/components/ManageProject/ManageDashboard'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
+import { AppProvider } from '@/components/layout/AppProvider'
 import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
@@ -24,15 +25,11 @@ export default function Page({
         title="Manage project"
         description="Manage your Juicecrowd project"
       />
-      <Layout navbar="none" footer="minimal">
-        <EthUsdPriceProvider>
-          <JBProjectProvider projectId={pid}>
-            <JBProjectMetadataProvider metadata={metadata}>
-              <ManageDashboard />
-            </JBProjectMetadataProvider>
-          </JBProjectProvider>
-        </EthUsdPriceProvider>
-      </Layout>
+      <AppProvider projectId={pid} metadata={metadata}>
+        <Layout navbar="none" footer="minimal">
+          <ManageDashboard />
+        </Layout>
+      </AppProvider>
     </>
   )
 }

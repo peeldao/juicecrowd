@@ -2,6 +2,7 @@ import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { ProjectPayPage } from '@/components/Project/ProjectPayPage'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
+import { AppProvider } from '@/components/layout/AppProvider'
 import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
@@ -25,15 +26,11 @@ export function Page({
         title={`Pay ${name}`}
         description={`Make a payment to ${name} and get rewards!`}
       />
-      <Layout footer="none" navbar="minimal">
-        <EthUsdPriceProvider>
-          <JBProjectProvider projectId={pid}>
-            <JBProjectMetadataProvider metadata={metadata}>
-              <ProjectPayPage />
-            </JBProjectMetadataProvider>
-          </JBProjectProvider>
-        </EthUsdPriceProvider>
-      </Layout>
+      <AppProvider projectId={pid} metadata={metadata}>
+        <Layout footer="none" navbar="minimal">
+          <ProjectPayPage />
+        </Layout>
+      </AppProvider>
     </>
   )
 }

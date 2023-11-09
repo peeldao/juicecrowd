@@ -13,18 +13,19 @@ export const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({
   children,
   footer: footerStyle,
   navbar,
+  // TODO: Remove
   projectId,
 }) => {
   footerStyle = footerStyle || 'default'
   navbar = navbar || 'default'
 
   return (
-    <AppProvider>
+    <>
       <div className="min-h-screen">
         <Navbar type={navbar} projectId={projectId} />
         <main>{children}</main>
       </div>
       {footerStyle !== 'none' ? <Footer type={footerStyle} /> : null}
-    </AppProvider>
+    </>
   )
 }

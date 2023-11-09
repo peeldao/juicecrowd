@@ -1,15 +1,16 @@
 import confettiAnimation from '@/data/lottie/confetti-animation.json'
 import { useJbProject } from '@/hooks/useJbProject'
+import { twitterShare } from '@/lib/twitter'
 import { CheckCircleIcon } from '@heroicons/react/24/outline'
+import { JBCurrency, JB_CURRENCIES } from 'juice-hooks'
+import { template } from 'lodash'
 import Lottie from 'lottie-react'
 import { useEffect, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { CURRENCY_USD, Currency, CurrencyAmount } from '../CurrencyAmount'
+import { CurrencyAmount } from '../CurrencyAmount'
 import { useEthUsdPrice } from '../EthUsdPriceProvider'
 import { Link } from '../Link'
 import { Button } from '../ui/Button'
-import { template } from 'lodash'
-import { twitterShare } from '@/lib/twitter'
 
 function getQueryParam(name: string) {
   const params = new URLSearchParams(window.location.search)
@@ -29,11 +30,11 @@ export const ProjectPaySuccessPage = () => {
 
   const payAmount = useMemo(() => {
     const amountEthString = getQueryParam('amount-eth')
-    const currencyString = getQueryParam('currency') || CURRENCY_USD
+    const currencyString = getQueryParam('currency') || JB_CURRENCIES.USD
     if (!amountEthString) return null
-    const currency = BigInt(currencyString) as Currency
+    const currency = BigInt(currencyString) as JBCurrency
     let amount = BigInt(amountEthString)
-    if (currency === CURRENCY_USD) {
+    if (currency === JB_CURRENCIES.USD) {
       amount = ethToUsd(amount)
     }
     return {

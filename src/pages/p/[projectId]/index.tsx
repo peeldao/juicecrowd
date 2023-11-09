@@ -28,7 +28,7 @@ export default function Page({
         }
       />
       <AppProvider projectId={pid} metadata={metadata}>
-        <Layout navbar="minimal" footer="minimal" projectId={pid}>
+        <Layout navbar="minimal" footer="minimal">
           <ProjectPage />
         </Layout>
       </AppProvider>

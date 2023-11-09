@@ -9,6 +9,7 @@ import { JB721DelegateTier } from 'juice-hooks'
 import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
 
 export type RewardDialogProps = {
   nft: JB721DelegateTier
@@ -23,7 +24,7 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
   nft,
   showClaimButton = false,
 }) => {
-  const remaining = nft.remainingQuantity.toString()
+  const { remaining } = useNftRemainingQuantity(nft)
   const initialQuantity = nft.initialQuantity.toString()
 
   const router = useRouter()
@@ -56,7 +57,15 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
       </DialogDescription>
       <div className="flex gap-5">
         <div className="flex-1 text-sm text-gray-500">
-          Remaining: {remaining}/{initialQuantity}
+          {remaining.type === 'soldOut' ? (
+            'Sold out'
+          ) : remaining.type === 'unlimited' ? (
+            'Unlimited'
+          ) : (
+            <>
+              Remaining: {remaining.remaining.toString()}/{initialQuantity}
+            </>
+          )}
         </div>
         {showClaimButton ? (
           <Button className="flex-1" onClick={goToPayPage}>

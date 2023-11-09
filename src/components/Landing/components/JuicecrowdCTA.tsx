@@ -99,7 +99,7 @@ export const JuicecrowdCTA: React.FC<JuicecrowdCTAProps> = ({ className }) => {
           <>
             <Button
               size="lg"
-              className="w-full min-w-[200px] gap-2 whitespace-nowrap bg-gray-800 opacity-100 disabled:bg-black disabled:opacity-100"
+              className="w-full min-w-[200px] gap-2 whitespace-nowrap bg-gray-800 opacity-100 disabled:bg-gray-800 disabled:opacity-100"
               disabled
             >
               <span>🚀</span>

@@ -2,8 +2,10 @@ import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { useJbProject } from '@/hooks/useJbProject'
 import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { useTotalSupporters } from '@/hooks/useTotalSupporters'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import { ManageCard } from './ManageCard'
+import { useJBFundingCycleContext } from 'juice-hooks'
+import { detailedTimeString } from '@/lib/time/formatTime'
 
 interface CardData {
   name: ReactNode
@@ -11,9 +13,16 @@ interface CardData {
 }
 
 export function ManageCardsGrid() {
-  const { softTarget } = useJbProject()
+  const { fundingCycleData: { data }} = useJBFundingCycleContext()
+
+  const [now, setNow] = useState(new Date())
+
+  const { softTarget, endDate } = useJbProject()
   const totalSupporters = useTotalSupporters()
   const totalRaised = useProjectVolume()
+
+  const duration = data?.duration
+  const durationFormatted = duration ? detailedTimeString({ timeSeconds: duration, fullWords: true }) : null
 
   const cardData: CardData[] = [
     {
@@ -47,9 +56,9 @@ export function ManageCardsGrid() {
       ) : null,
     },
     { name: 'Total backers', value: totalSupporters },
-    // TODO: Real time data
-    { name: 'Campaign duration', value: '30 days' },
-    { name: 'Time left', value: '12 days' },
+    { name: 'Campaign duration', value: durationFormatted ?? '-' },
+    // TODO: Get end from jbProjectContext
+    { name: 'Time left', value: '-' },
   ]
 
   return (

@@ -1,3 +1,5 @@
+'use client'
+
 import { ConnectKitButton } from '@/components/ConnectKitButton'
 import { Button } from '@/components/ui/Button'
 import { useJbProject } from '@/hooks/useJbProject'

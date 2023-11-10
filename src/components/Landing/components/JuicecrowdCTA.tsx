@@ -1,14 +1,13 @@
+'use client'
+
 import { Link } from '@/components/Link'
 import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
 import { Button } from '@/components/ui/Button'
 import {
   JC01SubmissionsClosed,
-  JC01_DATES,
   JC01_DATE_STRINGS,
 } from '@/lib/constants/crowds'
-import { dateToCountdownString } from '@/lib/date/format'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export type JuicecrowdCTAProps = {

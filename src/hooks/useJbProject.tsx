@@ -1,8 +1,9 @@
-import { CURRENCY_USD, Currency } from '@/components/CurrencyAmount'
 import { useJBProjectMetadata } from '@/contexts/ProjectMetadata'
 import { useProjectsQuery } from '@/lib/graphql/hooks'
 import {
   Ether,
+  JBCurrency,
+  JB_CURRENCIES,
   PV2,
   useJBContractContext,
   useJBFundingCycleContext,
@@ -93,13 +94,13 @@ export const useJbProject = ({
       return {
         amount: Ether.parse(metadata.softTargetAmount, 0).val,
         currency: metadata.softTargetCurrency
-          ? (BigInt(metadata.softTargetCurrency) as Currency)
-          : CURRENCY_USD,
+          ? (BigInt(metadata.softTargetCurrency) as JBCurrency)
+          : JB_CURRENCIES.USD,
       }
     }
     return {
       amount: 0n,
-      currency: CURRENCY_USD,
+      currency: JB_CURRENCIES.USD,
     }
   }, [metadata.softTargetAmount, metadata.softTargetCurrency])
 

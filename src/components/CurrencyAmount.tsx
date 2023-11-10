@@ -1,5 +1,5 @@
 import { formatEth, formatUsd } from '@/lib/currency/format'
-import { JB_CURRENCIES } from 'juice-hooks'
+import { JBCurrency, JB_CURRENCIES } from 'juice-hooks'
 import { useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { useEthUsdPrice } from './EthUsdPriceProvider'
@@ -12,17 +12,10 @@ import {
 } from './ui/Tooltip'
 import { cnTextHw } from '@/lib/utils'
 
-/**
- * Available currencies of {@link JB_CURRENCIES}
- */
-export type Currency = 1n | 2n
-export const CURRENCY_USD: Currency = 2n
-export const CURRENCY_ETH: Currency = 1n
-
 export type CurrencyAmountProps = {
   className?: string
   amount: bigint
-  currency?: Currency
+  currency?: JBCurrency
   hideCurrencyIcon?: boolean
 }
 

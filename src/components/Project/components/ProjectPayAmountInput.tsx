@@ -2,12 +2,13 @@ import { Input } from '@/components/Input'
 import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
 import { Button } from '@/components/ui/Button'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
+import { JBCurrency, JB_CURRENCIES } from 'juice-hooks'
 import { useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export type ProjectPayAmountInputProps = {
-  currency: 1n | 2n
-  setCurrency: (currency: 1n | 2n) => void
+  currency: JBCurrency
+  setCurrency: (currency: JBCurrency) => void
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'>
 
 export const ProjectPayAmountInput: React.FC<ProjectPayAmountInputProps> = ({
@@ -16,9 +17,9 @@ export const ProjectPayAmountInput: React.FC<ProjectPayAmountInputProps> = ({
   setCurrency,
   ...props
 }) => {
-  const isEth = currency === 1n
+  const isEth = currency === JB_CURRENCIES.ETH
   const toggleCurrency = useCallback(() => {
-    setCurrency(isEth ? 2n : 1n)
+    setCurrency(isEth ? JB_CURRENCIES.USD : JB_CURRENCIES.ETH)
   }, [isEth, setCurrency])
 
   return (

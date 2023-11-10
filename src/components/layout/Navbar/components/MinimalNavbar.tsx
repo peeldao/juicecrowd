@@ -54,7 +54,7 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
       <div
         ref={ref}
         className={twMerge(
-          'absolute right-4 top-5 z-10 flex w-fit items-center gap-6 rounded-lg border-gray-300 bg-white px-4 py-3 shadow md:right-12',
+          'absolute right-4 top-5 z-10 flex w-fit items-center gap-6 rounded-lg border border-gray-100 bg-white px-4 py-3 shadow-nav md:right-12',
           className,
         )}
       >
@@ -62,9 +62,9 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
           <DropdownMenuTrigger>
             <Button size="child" variant="ghost">
               {!open ? (
-                <Bars3BottomLeftIcon className="h-5 w-5" />
+                <Bars3BottomLeftIcon className="h-6 w-6" />
               ) : (
-                <XMarkIcon className="h-5 w-5" />
+                <XMarkIcon className="h-6 w-6" />
               )}
             </Button>
           </DropdownMenuTrigger>
@@ -78,12 +78,12 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
           >
             <Link href="/" noStyle>
               <DropdownMenuItem className="gap-1.5">
-                <HomeIcon className="h-4 w-4" /> Home
+                <HomeIcon className="h-4 w-4 stroke-2" /> Home
               </DropdownMenuItem>
             </Link>
             <Link href="https://docs.juicecrowd.gg/" noStyle>
               <DropdownMenuItem className="gap-1.5">
-                <DocumentTextIcon className="h-4 w-4" /> Docs
+                <DocumentTextIcon className="h-4 w-4 stroke-2" /> Docs
               </DropdownMenuItem>
             </Link>
             <Link href={DISCORD_INVITE_URL} noStyle>
@@ -99,7 +99,7 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
           {showManagePageLink ? (
             <Link href={`/p/${projectId}/manage`} className="text-gray-700">
               <Button size="sm" variant="outline">
-                <Cog6ToothIcon className="mr-2 inline h-4 w-4" />
+                <Cog6ToothIcon className="mr-2 inline h-4 w-4 stroke-2" />
                 Manage project
               </Button>
             </Link>

@@ -7,7 +7,9 @@ import { DialogTrigger, Dialog } from '@/components/ui/Dialog'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { JB721DelegateTier } from 'juice-hooks'
 import { useRouter } from 'next/router'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
+import { NFT_MAX_SUPPLY } from '@/lib/constants/nfts'
+import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
 
 export type RewardCardProps = {
   className?: string
@@ -26,9 +28,17 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
       },
     })
   }, [nft.id, router])
+
+  const { remainingText } = useNftRemainingQuantity(nft)
+
   return (
     <Dialog>
-      <div className={twMerge('w-72 rounded-lg shadow', className)}>
+      <div
+        className={twMerge(
+          'w-72 rounded-lg border border-gray-200 shadow-card',
+          className,
+        )}
+      >
         <DialogTrigger className="w-72 rounded-lg">
           <RewardImage
             className="rounded-t-lg"
@@ -40,12 +50,10 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
           <div className="text-base font-medium">{nft.metadata.name}</div>
           <div className="flex items-center justify-between gap-5">
             <CurrencyAmount
-              className="text-xl font-medium"
+              className="text-base font-medium"
               amount={nft.price}
             />
-            <div className="text-gray-400">
-              {nft.remainingQuantity.toString()} remaining
-            </div>
+            <div className="text-end text-gray-400">{remainingText}</div>
           </div>
           <Button
             variant="outline"

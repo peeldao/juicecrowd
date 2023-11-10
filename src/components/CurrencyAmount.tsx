@@ -10,6 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './ui/Tooltip'
+import { cnTextHw } from '@/lib/utils'
 
 /**
  * Available currencies of {@link JB_CURRENCIES}
@@ -67,14 +68,20 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
     if (hideCurrencyIcon) return null
 
     const ethIcon = (
-      <EthereumIconFilled className="inline-block h-5 w-5 text-bluebs-500" />
+      <EthereumIconFilled
+        className={twMerge(
+          'inline-block text-bluebs-500',
+          'h-5 w-5', // default size
+          ...cnTextHw(className),
+        )}
+      />
     )
     if (currency === JB_CURRENCIES.ETH) {
       return ethIcon
     }
 
     return null
-  }, [currency, hideCurrencyIcon])
+  }, [className, currency, hideCurrencyIcon])
 
   return (
     <TooltipProvider delayDuration={150}>

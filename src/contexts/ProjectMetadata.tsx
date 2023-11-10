@@ -72,6 +72,7 @@ export const JBProjectMetadataProvider: React.FC<
     fundingCycleMetadata?.data?.dataSource,
     {
       ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
+      requestTimeout: 5000,
     },
   )
 

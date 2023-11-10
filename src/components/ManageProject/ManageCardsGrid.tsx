@@ -66,7 +66,7 @@ export function ManageCardsGrid() {
   ]
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
       {cardData.map((cardData, index) => (
         <ManageCard key={index} name={cardData.name} value={cardData.value} />
       ))}

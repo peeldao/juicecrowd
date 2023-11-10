@@ -13,7 +13,7 @@ export type MinimalNavbarProps = {
 export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
   const { owner, projectId } = useJbProject()
   const { address } = useAccount()
-  const showManagePageLink = projectId && address === owner
+  const showManagePageLink = projectId && address && owner && address === owner
 
   return (
     <div

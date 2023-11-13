@@ -8,7 +8,7 @@ import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { ReactNode, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ShareButton } from './ShareButton'
-import { useCampaignEndDate } from '@/hooks/'
+import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
 
 import {
   Tooltip,

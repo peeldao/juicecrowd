@@ -1,10 +1,9 @@
 import { ManageHeader } from './ManageHeader'
-import { Button } from '@/components/ui/Button'
 import { ManageProjectDetails } from './ManageProjectDetails'
 import { ManageCardsGrid } from './ManageCardsGrid'
 import { Link } from '@/components/Link'
-import { DISCORD_INVITE_URL } from '@/components/layout/Footer'
 import { WithdrawButton } from './WithdrawButton'
+import { DISCORD_INVITE_URL } from '@/lib/constants/urls'
 
 export function ManageDashboard() {
   return (

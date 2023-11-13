@@ -1,16 +1,15 @@
-import { twMerge } from 'tailwind-merge'
-import Image from 'next/image'
-import { Button } from '@/components/ui/Button'
 import { Link } from '@/components/Link'
 import { EthereumIconFilled } from '@/components/icon/EthereumIconFilled'
+import { Button } from '@/components/ui/Button'
 import {
   JC01SubmissionsClosed,
+  JC01_DATES,
   JC01_DATE_STRINGS,
 } from '@/lib/constants/crowds'
-import { featureFlagEnabled } from '@/lib/featureFlags'
-import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
-import { useEffect, useState } from 'react'
 import { dateToCountdownString } from '@/lib/date/format'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 export type JuicecrowdCTAProps = {
   className?: string
@@ -27,7 +26,7 @@ export const JuicecrowdCTA: React.FC<JuicecrowdCTAProps> = ({ className }) => {
 
     const getAndSetCountdownString = () => {
       const countdown = dateToCountdownString(
-        new Date(JC01_DATE_STRINGS.PROJECTS_LAUNCH),
+        new Date(JC01_DATES.PROJECTS_LAUNCH),
       )
       setCountdownString(countdown)
     }

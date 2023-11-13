@@ -22,7 +22,7 @@ export type StatsProps = {
 }
 
 export const Stats: React.FC<StatsProps> = ({ className }) => {
-  const { projectId, contributorsCount, softTarget, endDate } = useJbProject()
+  const { projectId, contributorsCount, softTarget } = useJbProject()
 
   const totalRaised = useProjectVolume()
   const { timeLeftFormatted, timeLeftSeconds, isComplete } =
@@ -63,13 +63,14 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
       <div className="flex w-full flex-wrap items-center justify-between gap-y-8 md:flex-nowrap">
         <div className="flex h-12 w-full flex-shrink-0 space-x-6 md:flex-shrink">
           <StatBlock
-            className={
+            className={twMerge(
+              'w-[112px]',
               isComplete
-                ? 'w-[112px] text-green-500'
+                ? 'text-green-500'
                 : lessThanOneMinuteLeft
-                ? 'w-[112px] text-yellow-500'
-                : undefined
-            }
+                ? 'text-yellow-500'
+                : undefined,
+            )}
             title="Time left"
             value={timeLeftFormatted}
           />

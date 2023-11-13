@@ -80,7 +80,12 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
     <TooltipProvider delayDuration={150}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className={twMerge('inline-flex w-fit items-center', className)}>
+          <div
+            className={twMerge(
+              'inline-flex w-fit items-center whitespace-nowrap',
+              className,
+            )}
+          >
             {currencyIcon}
             {formattedAmounts[0]}
           </div>

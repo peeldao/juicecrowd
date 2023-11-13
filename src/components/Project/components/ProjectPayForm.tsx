@@ -213,7 +213,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
         />
 
         <div className="mt-6 flex justify-between font-medium">
-          <div>Total to pay</div>
+          <div className="text-base">Total to pay</div>
           <CurrencyAmount amount={totalPayment} />
         </div>
 

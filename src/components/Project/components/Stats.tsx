@@ -5,10 +5,11 @@ import { Progress } from '@/components/ui/Progress'
 import { Separator } from '@/components/ui/Separator'
 import { useJbProject } from '@/hooks/useJbProject'
 import { useProjectVolume } from '@/hooks/useProjectVolume'
-import { distanceBetweenDates } from '@/lib/date/format'
-import { ReactNode, useEffect, useMemo, useState } from 'react'
+import { ReactNode, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ShareButton } from './ShareButton'
+import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
+
 import {
   Tooltip,
   TooltipContent,
@@ -22,23 +23,17 @@ export type StatsProps = {
 
 export const Stats: React.FC<StatsProps> = ({ className }) => {
   const { projectId, contributorsCount, softTarget, endDate } = useJbProject()
-  const [now, setNow] = useState(new Date())
 
   const totalRaised = useProjectVolume()
+  const { timeLeftFormatted, timeLeftSeconds, isComplete } =
+    useCampaignEndDate()
+
+  const lessThanOneMinuteLeft = timeLeftSeconds && timeLeftSeconds < 60
 
   const progress = useMemo(() => {
     if (!softTarget.amount) return 100
     return Number((Number(totalRaised) / Number(softTarget.amount)) * 100)
   }, [totalRaised, softTarget])
-
-  // Update time every second for optimization
-  useEffect(() => {
-    if (!endDate) return
-    const interval = setInterval(() => {
-      setNow(new Date())
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [endDate])
 
   return (
     <div className={twMerge('flex flex-col gap-12', className)}>
@@ -69,16 +64,14 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
         <div className="flex h-12 w-full flex-shrink-0 space-x-6 md:flex-shrink">
           <StatBlock
             className={
-              endDate && (endDate.getTime() - now.getTime()) / 1000 < 60
+              isComplete
+                ? 'w-[112px] text-green-500'
+                : lessThanOneMinuteLeft
                 ? 'w-[112px] text-yellow-500'
                 : undefined
             }
             title="Time left"
-            value={
-              endDate && endDate.getTime() > now.getTime()
-                ? distanceBetweenDates(now, endDate)
-                : 'No limit'
-            }
+            value={timeLeftFormatted}
           />
           <Separator orientation="vertical" />
           <StatBlock title="Supporters" value={contributorsCount} />

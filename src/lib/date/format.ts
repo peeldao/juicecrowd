@@ -1,3 +1,5 @@
+import { formatDistanceStrict } from 'date-fns'
+
 export const timestampToDate = (timestamp: number) => {
   return new Date(timestamp * 1000)
 }
@@ -99,4 +101,22 @@ export const distanceBetweenDates = (date1: Date, date2: Date) => {
 
 const plural = (count: number, singular: string, plural?: string) => {
   return `${count} ${count === 1 ? singular : plural || singular + 's'}`
+}
+
+/**
+ * Formats a duration in seconds into a human-readable string.
+ * @example
+ * // Returns "1 minute"
+ * formatDuration({ duration: 60 })
+ * @param duration - The duration in seconds to format.
+ * @returns A human-readable string representing the duration.
+ */
+export function formatDuration({ duration }: { duration: bigint | undefined }) {
+  if (!duration) return '-'
+  const durationNumber = parseInt(duration.toString())
+  const base = new Date(0)
+  const dateWithSeconds = new Date(base.getTime() + durationNumber * 1000)
+  return formatDistanceStrict(new Date(0), dateWithSeconds, {
+    roundingMethod: 'round',
+  })
 }

@@ -2,7 +2,7 @@ import NextLink from 'next/link'
 import { twMerge } from 'tailwind-merge'
 
 const isExternal = (href: string) => {
-  return href.startsWith('http')
+  return href?.startsWith('http')
 }
 
 type Props = {

@@ -7,18 +7,29 @@ import {
 } from '@/components/ui/Tooltip'
 import { useToast } from '@/components/ui/useToast'
 import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
+import { useJbProject } from '@/hooks/useJbProject'
 import { useWithdrawTx } from '@/hooks/useWithdrawTx'
-import { useEthTerminalBalance } from 'juice-hooks'
+import { Ether, useEthTerminalBalance, useJBContractContext } from 'juice-hooks'
 import { useCallback, useEffect } from 'react'
 
 export function WithdrawButton() {
   const { isComplete } = useCampaignEndDate()
   const fundingInProgress = !isComplete
 
-  const { data: projectBalance } = useEthTerminalBalance()
+  const { projectId } = useJbProject()
+  const {
+    contracts: { primaryTerminalEth },
+  } = useJBContractContext()
+
+  const { data: projectBalance } = useEthTerminalBalance({
+    projectId,
+    terminalAddress: primaryTerminalEth.data,
+  })
+
+  const _balance = (projectBalance as Ether)?.val
 
   const { prepare, contractWrite, transaction } = useWithdrawTx({
-    amountWei: projectBalance ?? 0n,
+    amountWei: _balance,
   })
 
   const { toast } = useToast()
@@ -45,12 +56,12 @@ export function WithdrawButton() {
   useEffect(() => {
     if (!transaction.isSuccess) return
     toast({
-      title: 'Funds withdrawn successfully',
+      title: 'Funds withdrawn successfully!',
       variant: 'default',
     })
   }, [toast, transaction.isSuccess])
 
-  const hasBalance = Boolean(projectBalance && projectBalance > 0n)
+  const hasBalance = Boolean(_balance && _balance > 0n)
 
   const disabled = fundingInProgress || !hasBalance
 

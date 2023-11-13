@@ -1,9 +1,7 @@
 import {
-  JBCurrency,
   JB_CURRENCIES,
   useEthPaymentTerminalDistributePayouts,
   useJBContractContext,
-  useProjectDistributionLimit,
 } from 'juice-hooks'
 import { useJbProject } from './useJbProject'
 
@@ -17,17 +15,13 @@ export type UseWithdrawTxProps = {
 
 export const useWithdrawTx = ({ amountWei }: UseWithdrawTxProps) => {
   const { projectId } = useJbProject()
-  const { data: distributionLimit } = useProjectDistributionLimit()
-
-  const currency =
-    distributionLimit.distributionLimitCurrency ??
-    (JB_CURRENCIES.ETH as JBCurrency)
-
   const {
     contracts: {
       primaryTerminalEth: { data: primaryTerminalEth },
     },
   } = useJBContractContext()
+
+  const currency = JB_CURRENCIES.ETH // TODO: get from distributionLimitOf juice-hooks
 
   const { contractWrite, prepare, transaction } =
     useEthPaymentTerminalDistributePayouts({

@@ -16,7 +16,7 @@ export const CoverPhoto = () => {
     <div
       className={twMerge(
         'relative w-full',
-        hasCoverImage ? 'h-72 bg-orange-200' : 'h-[168px]',
+        hasCoverImage ? 'h-56 bg-orange-200 md:h-72' : 'h-[168px]',
       )}
     >
       {coverImageUrl && (

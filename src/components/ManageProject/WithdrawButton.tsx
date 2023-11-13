@@ -72,6 +72,7 @@ export function WithdrawButton() {
               contractWrite.isLoading
             }
             onClick={handleWithdraw}
+            className="w-full"
           >
             Withdraw funds
           </LoadingButton>

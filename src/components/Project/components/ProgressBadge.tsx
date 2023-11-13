@@ -5,7 +5,7 @@ export function ProgressBadge() {
   const { isComplete } = useCampaignEndDate()
 
   return (
-    <Badge variant={isComplete ? 'success' : 'warn'}>
+    <Badge variant={isComplete ? 'success' : 'warn'} className="w-min">
       {isComplete ? 'Complete' : 'In progress'}
     </Badge>
   )

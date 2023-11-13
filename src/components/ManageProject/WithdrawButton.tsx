@@ -6,13 +6,14 @@ import {
   TooltipTrigger,
 } from '@/components/ui/Tooltip'
 import { useToast } from '@/components/ui/useToast'
+import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
 import { useWithdrawTx } from '@/hooks/useWithdrawTx'
 import { useEthTerminalBalance } from 'juice-hooks'
 import { useCallback, useEffect } from 'react'
 
 export function WithdrawButton() {
-  // TODO: Get real isComplete data based on cycle end
-  const fundingInProgress = false
+  const { isComplete } = useCampaignEndDate()
+  const fundingInProgress = !isComplete
 
   const { data: projectBalance } = useEthTerminalBalance()
 
@@ -71,6 +72,7 @@ export function WithdrawButton() {
               contractWrite.isLoading
             }
             onClick={handleWithdraw}
+            className="w-full"
           >
             Withdraw funds
           </LoadingButton>

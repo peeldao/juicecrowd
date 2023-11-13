@@ -1,5 +1,5 @@
 import { useJbProject } from '@/hooks/useJbProject'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import ProjectLogo from '../ProjectLogo'
 import { YouTubeEmbed } from '../YouTubeEmbed'
@@ -11,6 +11,8 @@ import { Rewards } from './components/Rewards'
 import { RewardsPanel } from './components/RewardsPanel'
 import { Stats } from './components/Stats'
 import { TitleBlock } from './components/TitleBlock'
+import Image from 'next/image'
+import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
 
 export const ProjectPage = () => {
   const { logoUri, name, projectId } = useJbProject()
@@ -128,7 +130,26 @@ type HeroVideoProps = {
 }
 
 const HeroVideo: React.FC<HeroVideoProps> = ({ className }) => {
-  const { introVideoUrl } = useJbProject()
-  if (!introVideoUrl) return null
-  return <YouTubeEmbed className={className} url={introVideoUrl} />
+  const { introVideoUrl, introImageUri } = useJbProject()
+  const imageUrl = useMemo(() => {
+    if (!introImageUri) return null
+    return ipfsUriToGatewayUrl(introImageUri)
+  }, [introImageUri])
+  if (introVideoUrl) {
+    return <YouTubeEmbed className={className} url={introVideoUrl} />
+  }
+  if (imageUrl) {
+    return (
+      <div
+        className={twMerge(
+          'relative w-full overflow-hidden rounded-lg pt-[56.25%]',
+          className,
+        )}
+      >
+        <Image src={imageUrl} alt="Project intro image" fill />
+      </div>
+    )
+  }
+
+  return null
 }

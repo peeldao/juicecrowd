@@ -20,7 +20,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
   const { remainingText } = useNftRemainingQuantity(nft)
   return (
     <Dialog>
-      <PayCardBase {...props}>
+      <PayCardBase className="overflow-hidden" {...props}>
         <div className="relative h-16 w-16 flex-shrink-0 rounded-lg">
           <Image
             className="rounded-lg"
@@ -31,14 +31,14 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
         </div>
 
         {/* Mobile */}
-        <div className="block md:hidden">
+        <div className="block overflow-hidden md:hidden">
           <div className="ml-4 flex flex-1 flex-col gap-3">
             <div className="text-base font-medium">{nft.metadata.name}</div>
             <CurrencyAmount
               className="text-base font-medium"
               amount={nft.price}
             />
-            <div className="flex h-5 gap-4 text-sm">
+            <div className="flex h-5 gap-4 overflow-hidden text-sm">
               <DialogTrigger onClick={e => e.stopPropagation()}>
                 <Button
                   className="whitespace-nowrap"
@@ -49,7 +49,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
                 </Button>
               </DialogTrigger>
               <Separator orientation="vertical" />
-              <span className="whitespace-nowrap text-gray-400">
+              <span className="truncate whitespace-nowrap text-gray-400">
                 {remainingText}
               </span>
             </div>
@@ -57,10 +57,10 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
         </div>
 
         {/* Desktop */}
-        <div className="hidden flex-1 md:flex">
+        <div className="hidden flex-1 gap-4 overflow-hidden md:flex">
           <div className="ml-4 flex flex-1 flex-col gap-3">
             <div className="text-base font-medium">{nft.metadata.name}</div>
-            <div className="flex h-5 gap-4 text-sm">
+            <div className="flex h-5 gap-4 overflow-hidden text-sm">
               <DialogTrigger onClick={e => e.stopPropagation()}>
                 <Button
                   className="whitespace-nowrap"
@@ -71,7 +71,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
                 </Button>
               </DialogTrigger>
               <Separator orientation="vertical" />
-              <span className="whitespace-nowrap text-gray-400">
+              <span className="truncate whitespace-nowrap text-gray-400">
                 {remainingText}
               </span>
             </div>

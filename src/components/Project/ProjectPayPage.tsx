@@ -61,7 +61,7 @@ export const ProjectPayPage = () => {
       <FormProvider {...form}>
         <div className="block md:flex">
           {/* Left panel */}
-          <div className="mt-32 flex-1 px-4 pb-14 md:mt-10 md:px-8">
+          <div className="flex-1 px-4 pb-14 pt-32 md:px-8 md:pt-10">
             <div className="md:mx-auto md:max-w-lg">
               <BackButton className="hidden md:flex" />
               <div className="md:mt-12">

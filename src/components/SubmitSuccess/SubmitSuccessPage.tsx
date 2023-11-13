@@ -1,9 +1,9 @@
+import { DISCORD_INVITE_URL } from '@/lib/constants/urls'
 import Image from 'next/image'
 import { Link } from '../Link'
 import DiscordLogo from '../icon/DiscordLogo'
 import { Button } from '../ui/Button'
 import DeploySuccessHero from '/public/assets/images/create-success-hero.webp'
-import { DISCORD_INVITE_URL } from '../layout/Footer'
 
 export const SubmitJc01SuccessPage = () => {
   return (

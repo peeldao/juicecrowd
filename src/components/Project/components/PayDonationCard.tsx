@@ -1,5 +1,5 @@
-import { Currency } from '@/components/CurrencyAmount'
 import { FormField } from '@/components/ui/Form'
+import { JBCurrency } from 'juice-hooks'
 import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
@@ -18,7 +18,7 @@ export const PayDonationCard: React.FC<PayDonationCardProps> = ({
   const form = useFormContext<z.infer<typeof ProjectPayFormSchema>>()
   const currency = form.watch('paymentCurrency')
   const setCurrency = useCallback(
-    (currency: Currency) => {
+    (currency: JBCurrency) => {
       form.setValue('paymentCurrency', currency)
     },
     [form],

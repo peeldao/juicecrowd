@@ -1,9 +1,8 @@
 import Logo from '@/components/Logo'
 import { twMerge } from 'tailwind-merge'
-import { DISCORD_INVITE_URL } from '../Footer'
 import { CopyrightBanner } from './CopyrightBanner'
 import { LinkColProps, LinkColumn } from './LinkColumn'
-import { JB_X_URL } from '@/lib/constants/urls'
+import { DISCORD_INVITE_URL, JB_X_URL } from '@/lib/constants/urls'
 
 export type FullFooterProps = {
   className?: string

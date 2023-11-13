@@ -1,12 +1,15 @@
 import { ensAvatarUrlForAddress } from '@/lib/ens'
 import { formatEthAddress } from 'juice-hooks'
 import Image from 'next/image'
-import { useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { useEnsName } from 'wagmi'
 import { Link } from './Link'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/HoverCard'
 import { Skeleton } from './ui/Skeleton'
+import { Button } from './ui/Button'
+import { DocumentDuplicateIcon } from '@heroicons/react/24/outline'
+import { useToast } from './ui/useToast'
 
 export type EthereumAddressProps = {
   className?: string
@@ -78,19 +81,48 @@ export const EthereumAddress: React.FC<EthereumAddressProps> = ({
           )}
           <div className="space-y-1 font-medium">
             <div>{ensName}</div>
-            <div>
-              <Link
-                className="text-gray-500"
-                href={`https://etherscan.io/address/${address}`}
-              >
-                {address
-                  ? formatEthAddress(address, { truncateTo: 8 })
-                  : undefined}
-              </Link>
-            </div>
+            {address ? (
+              <div className="flex items-center gap-1">
+                <Link
+                  className="leading-none text-gray-500"
+                  href={`https://etherscan.io/address/${address}`}
+                >
+                  {formatEthAddress(address, { truncateTo: 8 })}
+                </Link>
+                <CopyButton className="text-gray-500" textToCopy={address} />
+              </div>
+            ) : null}
           </div>
         </div>
       </HoverCardContent>
     </HoverCard>
+  )
+}
+
+const CopyButton = ({
+  className,
+  textToCopy,
+}: {
+  className?: string
+  textToCopy: string
+}) => {
+  const { toast } = useToast()
+  const onClick = useCallback(() => {
+    navigator.clipboard.writeText(textToCopy)
+    toast({
+      title: 'Copied to clipboard',
+      duration: 2000,
+    })
+  }, [textToCopy, toast])
+
+  return (
+    <Button
+      className={twMerge('hover:text-bluebs-500', className)}
+      size="child"
+      variant="link"
+      onClick={onClick}
+    >
+      <DocumentDuplicateIcon className="h-4 w-4" />
+    </Button>
   )
 }

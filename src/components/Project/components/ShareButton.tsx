@@ -25,7 +25,10 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ className }) => {
   return (
     <Dialog>
       <DialogTrigger asChild className={className}>
-        <Button variant="outline" className="flex h-14 w-full gap-2 md:h-fit">
+        <Button
+          variant="outline"
+          className="flex h-14 w-full gap-2 text-sm md:h-fit"
+        >
           <ShareIcon className="h-5 w-5" />
           Share
         </Button>

@@ -2,11 +2,12 @@ import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { Button } from '@/components/ui/Button'
 import { Dialog, DialogTrigger } from '@/components/ui/Dialog'
 import { Separator } from '@/components/ui/Separator'
+import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
+import { JB721DelegateTier } from 'juice-hooks'
 import Image from 'next/image'
 import React from 'react'
+import { PayCardBase, PayCardBaseProps } from './PayCardBase'
 import { RewardDialogContent } from './RewardDialogContent'
-import { PayCardBaseProps, PayCardBase } from './PayCardBase'
-import { JB721DelegateTier } from 'juice-hooks'
 
 export interface PayRewardCardProps extends PayCardBaseProps {
   nft: JB721DelegateTier
@@ -16,7 +17,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
   nft,
   ...props
 }) => {
-  const remaining = nft.remainingQuantity.toString()
+  const { remainingText } = useNftRemainingQuantity(nft)
   return (
     <Dialog>
       <PayCardBase {...props}>
@@ -49,7 +50,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
               </DialogTrigger>
               <Separator orientation="vertical" />
               <span className="whitespace-nowrap text-gray-400">
-                {remaining} remaining
+                {remainingText}
               </span>
             </div>
           </div>
@@ -71,7 +72,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
               </DialogTrigger>
               <Separator orientation="vertical" />
               <span className="whitespace-nowrap text-gray-400">
-                {remaining} remaining
+                {remainingText}
               </span>
             </div>
           </div>

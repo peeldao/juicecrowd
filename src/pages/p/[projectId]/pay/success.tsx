@@ -2,6 +2,7 @@ import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { ProjectPaySuccessPage } from '@/components/Project/ProjectPaySuccessPage'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
+import { AppProvider } from '@/components/layout/AppProvider'
 import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
@@ -25,15 +26,11 @@ export function Page({
         title={`${name} paid successfully`}
         description={`You have successfully paid ${name}!`}
       />
-      <Layout footer="none" navbar="minimal">
-        <EthUsdPriceProvider>
-          <JBProjectProvider projectId={pid}>
-            <JBProjectMetadataProvider metadata={metadata}>
-              <ProjectPaySuccessPage />
-            </JBProjectMetadataProvider>
-          </JBProjectProvider>
-        </EthUsdPriceProvider>
-      </Layout>
+      <AppProvider projectId={pid} metadata={metadata}>
+        <Layout footer="none" navbar="minimal">
+          <ProjectPaySuccessPage />
+        </Layout>
+      </AppProvider>
     </>
   )
 }

@@ -2,6 +2,7 @@ import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { ProjectPage } from '@/components/Project'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
+import { AppProvider } from '@/components/layout/AppProvider'
 import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
@@ -26,15 +27,11 @@ export default function Page({
           metadata.description ? metadata.description.slice(0, 160) : ''
         }
       />
-      <Layout navbar="minimal" footer="minimal" projectId={pid}>
-        <EthUsdPriceProvider>
-          <JBProjectProvider projectId={pid}>
-            <JBProjectMetadataProvider metadata={metadata}>
-              <ProjectPage />
-            </JBProjectMetadataProvider>
-          </JBProjectProvider>
-        </EthUsdPriceProvider>
-      </Layout>
+      <AppProvider projectId={pid} metadata={metadata}>
+        <Layout navbar="minimal" footer="minimal">
+          <ProjectPage />
+        </Layout>
+      </AppProvider>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import { useJbProject } from '@/hooks/useJbProject'
 import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { JB_CURRENCIES } from 'juice-hooks'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -15,7 +16,6 @@ import {
 import { ProjectPayRewards } from './components/ProjectPayRewards'
 import { ProjectPayContext } from './providers/ProjectPayContext'
 import { projectPayReducer } from './providers/projectPayReducer'
-import { CURRENCY_ETH } from '../CurrencyAmount'
 
 export const ProjectPayPage = () => {
   const { name } = useJbProject()
@@ -29,7 +29,7 @@ export const ProjectPayPage = () => {
     resolver: zodResolver(ProjectPayFormSchema),
     defaultValues: {
       paymentAmount: '',
-      paymentCurrency: CURRENCY_ETH,
+      paymentCurrency: JB_CURRENCIES.ETH,
       beneficiary: undefined,
       email: undefined,
       message: '',

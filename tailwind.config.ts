@@ -18,6 +18,10 @@ module.exports = {
       },
     },
     extend: {
+      boxShadow: {
+        card: '0 4px 14px 0 rgba(0, 0, 0, 0.03)',
+        nav: '0 4px 12px 0 rgba(0, 0, 0, 0.06)',
+      },
       fontFamily: {
         display: ['var(--font-agrandir-wide)', ...defaultTheme.fontFamily.sans],
         heading: ['var(--font-agrandir)', ...defaultTheme.fontFamily.sans],

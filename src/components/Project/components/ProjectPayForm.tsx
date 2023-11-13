@@ -1,18 +1,18 @@
-import {
-  CURRENCY_ETH,
-  CURRENCY_USD,
-  CurrencyAmount,
-} from '@/components/CurrencyAmount'
+import { CurrencyAmount } from '@/components/CurrencyAmount'
+import { useEthUsdPrice } from '@/components/EthUsdPriceProvider'
 import { Input } from '@/components/Input'
 import { LoadingButton } from '@/components/LoadingButton'
 import { Form, FormField } from '@/components/ui/Form'
 import { useToast } from '@/components/ui/useToast'
 import { useJbProject } from '@/hooks/useJbProject'
 import { usePayProjectTx } from '@/hooks/usePayProjectTx'
+import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
+import { featureFlagEnabled } from '@/lib/featureFlags'
 import {
   EnvelopeIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline'
+import { JB_CURRENCIES } from 'juice-hooks'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
@@ -23,9 +23,6 @@ import { useProjectPay } from '../providers/ProjectPayContext'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
 import { ProjectPayFormItem } from './ProjectPayFormItem'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
-import { useEthUsdPrice } from '@/components/EthUsdPriceProvider'
-import { featureFlagEnabled } from '@/lib/featureFlags'
-import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
 
 const WEI = 1e-18
 
@@ -38,7 +35,10 @@ export const ProjectPayFormSchema = z.object({
       .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
     z.literal(''),
   ]),
-  paymentCurrency: z.union([z.literal(CURRENCY_ETH), z.literal(CURRENCY_USD)]),
+  paymentCurrency: z.union([
+    z.literal(JB_CURRENCIES.ETH),
+    z.literal(JB_CURRENCIES.USD),
+  ]),
   beneficiary: z
     .string()
     .optional()
@@ -87,7 +87,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     if (!paymentAmount || isNaN(paymentAmount)) return 0n
     const bigUnitPay = parseEther(`${paymentAmount}`)
 
-    if (paymentCurrency === CURRENCY_ETH) return bigUnitPay
+    if (paymentCurrency === JB_CURRENCIES.ETH) return bigUnitPay
 
     // payment is in usd so we need to convert to real wei
     return usdToEth(bigUnitPay)

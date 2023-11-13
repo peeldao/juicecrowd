@@ -16,7 +16,7 @@ import {
 } from 'juice-hooks'
 import { PropsWithChildren, createContext, useContext } from 'react'
 
-type _JBProjectMetadata = JBProjectMetadata & {
+export type _JBProjectMetadata = JBProjectMetadata & {
   // TODO: Remove once added to juice-hooks
   infoUri: string | undefined
   introVideoUrl: string | undefined
@@ -72,6 +72,7 @@ export const JBProjectMetadataProvider: React.FC<
     fundingCycleMetadata?.data?.dataSource,
     {
       ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
+      requestTimeout: 5000,
     },
   )
 

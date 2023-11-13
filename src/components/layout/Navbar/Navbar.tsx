@@ -11,7 +11,6 @@ export type NavbarProps = {
   className?: string
   title?: string
   separator?: boolean
-  projectId?: bigint
 }
 
 export const Navbar: React.FC<NavbarProps> = ({

@@ -49,6 +49,38 @@ export const timestampToDateString = (timestamp: number) => {
 }
 
 /**
+ * Formats a date to a countdown string.
+ *
+ * Formats in the form of: 7d 5h 3m 2s
+ * @param date
+ */
+export const dateToCountdownString = (date: Date) => {
+  const now = new Date()
+  const diff = date.getTime() - now.getTime()
+  if (diff <= 0) {
+    return '0s'
+  }
+  const days = Math.floor(diff / DAY_MS)
+  const hours = Math.floor((diff % DAY_MS) / HOUR_MS)
+  const minutes = Math.floor((diff % HOUR_MS) / MINUTE_MS)
+  const seconds = Math.floor((diff % MINUTE_MS) / 1000)
+  const parts = []
+  if (days > 0) {
+    parts.push(`${days}d`)
+  }
+  if (hours > 0) {
+    parts.push(`${hours}h`)
+  }
+  if (minutes > 0) {
+    parts.push(`${minutes}m`)
+  }
+  if (seconds > 0) {
+    parts.push(`${seconds}s`)
+  }
+  return parts.join(' ')
+}
+
+/**
  * Formats the distance between two dates to a human readable string.
  * @param date1 The first date
  * @param date2 The second date

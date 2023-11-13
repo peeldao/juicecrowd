@@ -17,7 +17,7 @@ export const PayCardBase: React.FC<PropsWithChildren<PayCardBaseProps>> = ({
   return (
     <div
       className={twMerge(
-        'flex cursor-pointer items-center rounded-[10px] border border-gray-200 p-3 pr-5 shadow-sm transition-all hover:border-gray-300 hover:shadow-md',
+        'flex cursor-pointer items-center rounded-[10px] border border-gray-200 p-3 pr-5 shadow-card transition-all hover:border-gray-300 hover:shadow-md',
         isSelected &&
           '-m-[1px] border-2 border-bluebs-500 shadow-md hover:border-bluebs-500',
       )}

@@ -8,7 +8,14 @@ import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { ReactNode, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ShareButton } from './ShareButton'
-import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
+import { useCampaignEndDate } from '@/hooks/'
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/Tooltip'
 
 export type StatsProps = {
   className?: string
@@ -48,7 +55,7 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
               currency={softTarget.currency}
               amount={softTarget.amount}
             />{' '}
-            flexible goal
+            <FlexibleTooltip /> goal
           </span>
         </div>
       </div>
@@ -92,5 +99,21 @@ const StatBlock: React.FC<StatBlockProps> = ({ className, title, value }) => {
       <div className="text-sm text-gray-500">{title}</div>
       <div className="text-lg font-medium">{value}</div>
     </div>
+  )
+}
+
+const FlexibleTooltip: React.FC = () => {
+  return (
+    <TooltipProvider delayDuration={150}>
+      <Tooltip>
+        <TooltipTrigger className="underline">flexible</TooltipTrigger>
+        <TooltipContent>
+          <p>
+            Project owners will receive all funds regardless of whether the
+            target is met.
+          </p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   )
 }

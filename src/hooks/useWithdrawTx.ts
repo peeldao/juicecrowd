@@ -15,8 +15,6 @@ export type UseWithdrawTxProps = {
   amountWei: bigint
 }
 
-const DISTRIBUTION_LIMIT_CURRENCY_INDEX = 1
-
 export const useWithdrawTx = ({ amountWei }: UseWithdrawTxProps) => {
   const { projectId } = useJbProject()
   const {
@@ -28,14 +26,14 @@ export const useWithdrawTx = ({ amountWei }: UseWithdrawTxProps) => {
     },
   } = useJBContractContext()
 
-  const { data: distributionLimit } = useEthDistributionLimit({
+  const { data: distributionLimitData } = useEthDistributionLimit({
     projectId,
     configuration: data?.configuration!,
-    terminal: primaryTerminalEth!,
+    terminalAddress: primaryTerminalEth!,
   })
 
-  const currency =
-    distributionLimit?.[DISTRIBUTION_LIMIT_CURRENCY_INDEX] ?? JB_CURRENCIES.ETH
+  const { distributionLimitCurrency } = distributionLimitData ?? {}
+  const currency = distributionLimitCurrency ?? JB_CURRENCIES.ETH
 
   const { contractWrite, prepare, transaction } =
     useEthPaymentTerminalDistributePayouts({

@@ -21,21 +21,20 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
   return (
     <Dialog>
       <PayCardBase className="overflow-hidden" {...props}>
-        <div className="relative h-16 w-16 flex-shrink-0 rounded-lg">
+        <div className="relative h-14 w-14 flex-shrink-0 rounded-lg md:h-20 md:w-20">
           <Image
-            className="rounded-lg"
+            className="rounded-md"
             fill
             src={nft.metadata.image}
             alt={`${nft.metadata.name}`}
           />
         </div>
 
-        {/* Mobile */}
-        <div className="block overflow-hidden md:hidden">
-          <div className="ml-4 flex flex-1 flex-col gap-3">
+        <div className="overflow-hidden">
+          <div className="ml-4 flex flex-1 flex-col gap-3 md:gap-2">
             <div className="text-base font-medium">{nft.metadata.name}</div>
             <CurrencyAmount
-              className="text-base font-medium"
+              className="text-base font-medium leading-none"
               amount={nft.price}
             />
             <div className="flex h-5 gap-4 overflow-hidden text-sm">
@@ -54,33 +53,6 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
               </span>
             </div>
           </div>
-        </div>
-
-        {/* Desktop */}
-        <div className="hidden flex-1 gap-4 overflow-hidden md:flex">
-          <div className="ml-4 flex flex-1 flex-col gap-3">
-            <div className="text-base font-medium">{nft.metadata.name}</div>
-            <div className="flex h-5 gap-4 overflow-hidden text-sm">
-              <DialogTrigger onClick={e => e.stopPropagation()}>
-                <Button
-                  className="whitespace-nowrap"
-                  size="child"
-                  variant="link"
-                >
-                  View details
-                </Button>
-              </DialogTrigger>
-              <Separator orientation="vertical" />
-              <span className="truncate whitespace-nowrap text-gray-400">
-                {remainingText}
-              </span>
-            </div>
-          </div>
-
-          <CurrencyAmount
-            className="mr-5 text-base font-medium"
-            amount={nft.price}
-          />
         </div>
       </PayCardBase>
 

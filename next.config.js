@@ -47,6 +47,7 @@ const IMG_SRC = [
   'https://gateway.pinata.cloud',
   'https://cdn.stamp.fyi',
   'https://ipfs.io',
+  'https://cdn.usefathom.com',
   '*.walletconnect.com',
 ]
 

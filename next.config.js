@@ -29,6 +29,7 @@ const INFURA_IPFS_URLS = [
 const SCRIPT_SRC = [
   'https://*.juicebox.money',
   'https://*.juicecrowd.gg',
+  'https://cdn.usefathom.com',
   `'unsafe-eval'`,
 ]
 

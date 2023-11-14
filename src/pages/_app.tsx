@@ -1,5 +1,6 @@
 import { Head } from '@/components/Head'
 import { Toaster } from '@/components/ui/Toaster'
+import { useFathom } from '@/lib/fathom'
 import { installJuicecrowdWindowObject } from '@/lib/featureFlags'
 import { fonts } from '@/lib/fonts'
 import { AppProps } from 'next/app'
@@ -10,6 +11,8 @@ export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     installJuicecrowdWindowObject()
   }, [])
+
+  useFathom()
 
   return (
     <>

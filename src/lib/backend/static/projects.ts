@@ -17,6 +17,10 @@ interface ProjectPageProps {
 }
 
 const getStaticPaths: GetStaticPaths = async () => {
+  if (process.env.CI) {
+    return { paths: [], fallback: 'blocking' }
+  }
+
   const paths = CROWDS.flatMap(c => c.projectIds).map(projectId => ({
     params: { projectId: String(projectId) },
   }))

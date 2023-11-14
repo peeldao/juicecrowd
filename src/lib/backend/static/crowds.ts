@@ -19,6 +19,10 @@ interface CrowdPageProps {
 }
 
 const getStaticPaths: GetStaticPaths = async () => {
+  if (process.env.CI) {
+    return { paths: [], fallback: 'blocking' }
+  }
+
   const paths = CROWDS.map(({ id: crowdId }) => ({
     params: { crowdId: String(crowdId) },
   }))

@@ -56,7 +56,7 @@ export function WithdrawButton() {
   useEffect(() => {
     if (!transaction.isSuccess) return
     toast({
-      title: 'Funds withdrawn successfully',
+      title: 'Funds withdrawn successfully!',
       variant: 'default',
     })
   }, [toast, transaction.isSuccess])

@@ -19,7 +19,7 @@ export function useFathom() {
       //  - Do not include https://
       //  - This must be an exact match of your domain.
       //  - If you're using www. for your domain, make sure you include that here.
-      Fathom.load('ERYRRJSV', {
+      Fathom.load('JTIYQZCF', {
         includedDomains: ['juicecrowd.gg', 'www.juicecrowd.gg'],
       })
 

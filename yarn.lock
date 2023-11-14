@@ -6518,10 +6518,10 @@ jsonparse@^1.2.0:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
-juice-hooks@10.15.2-beta:
-  version "10.15.2-beta"
-  resolved "https://registry.yarnpkg.com/juice-hooks/-/juice-hooks-10.15.2-beta.tgz#9ace76d5f0eb7691a6087d069bebaf1034e561cd"
-  integrity sha512-3ssrpFAh4pZOeVDmTLN/YiKdVzvPiEpWPWEhtT03f0tfUSWx2vOY3DHdRSOp7DCtyfgO9Two3hGvjsWX5ihC5A==
+juice-hooks@11.2.2-beta:
+  version "11.2.2-beta"
+  resolved "https://registry.yarnpkg.com/juice-hooks/-/juice-hooks-11.2.2-beta.tgz#f6b28629533aadd37a3864b8b4b7da2bc744e2f7"
+  integrity sha512-ncHjFG7mKOjvcaF5RU7CXlc9aggRlf7DQx2w4f22MqqwOz9gSChswi0XOFsP+Y70+aLOTuZon9o8F/niabm1EQ==
   dependencies:
     bs58 "^5.0.0"
     fpnum "^0.0.13"

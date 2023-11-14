@@ -28,7 +28,7 @@ export const PayDonationCard: React.FC<PayDonationCardProps> = ({
       className={twMerge('flex-col gap-2 p-2', className)}
       {...props}
     >
-      <div className="font-medium">Donate without a reward ❤️</div>
+      <div className="text-base font-medium">Donate without a reward ❤️</div>
       <div className="text-sm text-gray-500">
         You understand that this is purely a donation.
       </div>

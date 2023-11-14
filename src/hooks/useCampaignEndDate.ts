@@ -1,10 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useJbProject } from './useJbProject'
 import { distanceBetweenDates } from '@/lib/date/format'
+import { JC01_DATES } from '@/lib/constants'
 
-export function useCampaignEndDate() {
-  const { endDate } = useJbProject()
+export function useCampaignEndDate(useFundingCycleEndDate = false) {
+  const { endDate: fundingCycleEndDate } = useJbProject()
   const [now, setNow] = useState(new Date())
+
+  const endDate = useMemo(() => {
+    if (useFundingCycleEndDate) return fundingCycleEndDate
+
+    return JC01_DATES.PROJECTS_RUN
+  }, [fundingCycleEndDate, useFundingCycleEndDate])
 
   useEffect(() => {
     if (!endDate) return

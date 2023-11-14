@@ -8,6 +8,8 @@ export const JC01_DATE_STRINGS = {
 
 export const JC01_DATES = {
   SUBMISSIONS_CLOSE: new Date(1699506000000),
+  PROJECTS_LAUNCH: new Date(1700488853000),
+  PROJECTS_RUN: new Date(1702648800000),
 }
 
 export const JC01SubmissionsClosed = () =>

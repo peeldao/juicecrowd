@@ -27,5 +27,8 @@ jobs:
       run: yarn lint
       env:
         NEXT_PUBLIC_INFURA_IPFS_HOSTNAME: makelinterpass.com
+
     - name: Build
       run: yarn build
+      env:
+        NEXT_PUBLIC_INFURA_IPFS_HOSTNAME: makelinterpass.com

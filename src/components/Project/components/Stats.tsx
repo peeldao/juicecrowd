@@ -3,12 +3,12 @@ import { Link } from '@/components/Link'
 import { Button } from '@/components/ui/Button'
 import { Progress } from '@/components/ui/Progress'
 import { Separator } from '@/components/ui/Separator'
+import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
 import { useJbProject } from '@/hooks/useJbProject'
 import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { ReactNode, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ShareButton } from './ShareButton'
-import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
 
 import {
   Tooltip,
@@ -39,7 +39,7 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
     <div className={twMerge('flex flex-col gap-12', className)}>
       <div>
         <Progress className="h-1.5" value={progress} />
-        <div className="mt-5 flex items-center gap-3">
+        <div className="mt-5 flex flex-wrap items-center gap-3">
           <span className="font-heading text-xl font-medium md:text-2xl">
             {totalRaised ? (
               <CurrencyAmount
@@ -48,7 +48,7 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
               />
             ) : null}
           </span>
-          <span className="flex items-center gap-1 text-sm text-gray-500">
+          <span className="flex items-center gap-1 whitespace-nowrap text-sm text-gray-500">
             raised of{' '}
             <CurrencyAmount
               hideCurrencyIcon
@@ -60,11 +60,10 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
         </div>
       </div>
 
-      <div className="flex w-full flex-wrap items-center justify-between gap-y-8 md:flex-nowrap">
-        <div className="flex h-12 w-full flex-shrink-0 space-x-6 md:flex-shrink">
+      <div className="flex w-full flex-wrap items-center justify-between gap-y-8">
+        <div className="flex flex-wrap gap-6">
           <StatBlock
             className={twMerge(
-              'w-[112px]',
               isComplete
                 ? 'text-green-500'
                 : lessThanOneMinuteLeft
@@ -74,7 +73,7 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
             title="Time left"
             value={timeLeftFormatted}
           />
-          <Separator orientation="vertical" />
+          <Separator orientation="vertical" className="h-12" />
           <StatBlock title="Supporters" value={contributorsCount} />
         </div>
 

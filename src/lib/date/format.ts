@@ -4,6 +4,8 @@ export const timestampToDate = (timestamp: number) => {
   return new Date(timestamp * 1000)
 }
 
+export const MS_PER_MINUTE = 1000
+
 const MINUTE_MS = 60 * 1000
 const HOUR_MS = 60 * MINUTE_MS
 const DAY_MS = 24 * HOUR_MS
@@ -111,11 +113,17 @@ const plural = (count: number, singular: string, plural?: string) => {
  * @param duration - The duration in seconds to format.
  * @returns A human-readable string representing the duration.
  */
-export function formatDuration({ duration }: { duration: bigint | undefined }) {
+export function formatDuration({
+  duration,
+}: {
+  duration: bigint | number | undefined
+}) {
   if (!duration) return '-'
   const durationNumber = parseInt(duration.toString())
   const base = new Date(0)
-  const dateWithSeconds = new Date(base.getTime() + durationNumber * 1000)
+  const dateWithSeconds = new Date(
+    base.getTime() + durationNumber * MS_PER_MINUTE,
+  )
   return formatDistanceStrict(new Date(0), dateWithSeconds, {
     roundingMethod: 'round',
   })

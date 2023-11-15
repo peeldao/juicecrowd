@@ -14,6 +14,7 @@ import {
 import { ReactNode } from 'react'
 import { ManageCard } from './ManageCard'
 import { useEthUsdPrice } from '../EthUsdPriceProvider'
+import { JC01CampaignLengthSeconds } from '@/lib/constants'
 
 interface CardData {
   name: ReactNode
@@ -45,9 +46,9 @@ export function ManageCardsGrid() {
   const totalSupporters = useTotalSupporters()
   const totalRaised = useProjectVolume()
   const { timeLeftFormatted } = useCampaignEndDate()
-
-  const duration = data?.duration
-  const durationFormatted = formatDuration({ duration })
+  const durationFormatted = formatDuration({
+    duration: JC01CampaignLengthSeconds,
+  })
 
   const cardData: CardData[] = [
     {

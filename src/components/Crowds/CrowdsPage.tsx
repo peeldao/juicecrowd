@@ -1,7 +1,7 @@
 import {
   JC01SubmissionsClosed,
-  JC01_DATES,
   JC01_DATE_STRINGS,
+  JC01CampaignLengthString,
 } from '@/lib/constants/crowds'
 import React, { ReactNode } from 'react'
 import { Breadcrumbs } from '../Breadcrumbs'
@@ -108,7 +108,7 @@ export const CrowdsPage: React.FC = () => {
                 </span>
               </li>
               <li>
-                Project campaigns run for 30 days, ending on{' '}
+                Project campaigns run for {JC01CampaignLengthString}, ending on{' '}
                 <span className="font-medium">
                   {JC01_DATE_STRINGS.PROJECTS_RUN}
                 </span>

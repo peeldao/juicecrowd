@@ -1,0 +1,51 @@
+.ql-toolbar.ql-snow {
+  @apply rounded-t-lg;
+}
+
+.ql-container.ql-snow {
+  @apply overflow-y-scroll;
+  @apply rounded-b-lg;
+  @apply flex flex-1 flex-col;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.ql-container.ql-snow::-webkit-scrollbar {
+  display: none;
+}
+
+.ql-editor {
+  @apply rounded-b-lg;
+  @apply h-full flex-1;
+  h1,
+  h2 {
+    @apply font-heading;
+  }
+  p,
+  li {
+    @apply text-base;
+  }
+}
+
+.ql-toolbar .ql-stroke {
+  @apply fill-none stroke-gray-400;
+}
+
+.ql-toolbar .ql-fill {
+  @apply fill-gray-400 stroke-none;
+}
+
+.ql-toolbar .ql-picker {
+  @apply text-gray-400;
+}
+
+.ql-snow .ql-stroke.ql-fill {
+  @apply fill-gray-400 stroke-gray-400;
+}
+
+.ql-tooltip {
+  @apply z-10;
+  @apply rounded-lg;
+}

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button'
+import { Button } from '@/components/ui/Button'
 import { FormField } from '@/components/FormField'
 import { Input } from '@/components/Input'
 import { UploadCard } from '@/components/UploadCard'

@@ -37,6 +37,7 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           hover: 'hsl(var(--primary-hover))',
+          disabled: 'hsl(var(--primary-disabled))',
           foreground: 'hsl(var(--primary-foreground))',
         },
         secondary: {
@@ -53,6 +54,7 @@ module.exports = {
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
+          hover: 'hsl(var(--accent-hover))',
           foreground: 'hsl(var(--accent-foreground))',
         },
         popover: {
@@ -70,14 +72,14 @@ module.exports = {
 
         bluebs: {
           25: '#EEF1FD',
-          50: '#E3E9FF',
+          50: '#E5EBFF',
           100: '#CFD9FA',
           200: '#BBC8F6',
           300: '#9AAEF5',
           400: '#748EED',
           500: '#5777EB',
-          600: '#4864C8',
-          700: '#3A52A6',
+          600: '#405Ec8',
+          700: '#2F49A3',
           800: '#233575',
           900: '#152254',
           950: '#11172D',

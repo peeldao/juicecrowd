@@ -19,16 +19,18 @@
     --tooltip-foreground: 0, 0%, 100%; /* white */
 
     --primary: 227, 79%, 63%; /* bluebs-500 */
-    --primary-hover: 227, 54%, 53%; /* bluebs-600 */
+    --primary-hover: 227, 55%, 52%; /* bluebs-600 */
+    --primary-disabled: 227, 77%, 85%; /* bluebs-300 */
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 227, 100%, 94.5%; /* bluebs-50 */
-    --secondary-foreground: 227, 48.2%, 43.9%; /* bluebs-700 */
+    --secondary: 226, 100%, 95%; /* bluebs-50 */
+    --secondary-foreground: 227, 55%, 41%; /* bluebs-700 */
 
     --muted: 220 14.3% 95.9%; /* gray-100 */
     --muted-foreground: 0 0% 45.1%;
 
     --accent: 0 0% 96.1%;
+    --accent-hover: 210, 20%, 98%; /* gray-50 */
     --accent-foreground: 0 0% 9%;
 
     --destructive: 0 84.2% 60.2%;

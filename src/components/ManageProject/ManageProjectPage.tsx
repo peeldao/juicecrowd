@@ -1,11 +1,11 @@
-import { ManageHeader } from './ManageHeader'
-import { ManageProjectDetails } from './ManageProjectDetails'
-import { ManageCardsGrid } from './ManageCardsGrid'
+import { ManageHeader } from './components/ManageHeader'
+import { ManageProjectDetails } from './components/ManageProjectDetails'
+import { ManageCardsGrid } from './components/ManageCardsGrid'
 import { Link } from '@/components/Link'
-import { WithdrawButton } from './WithdrawButton'
+import { WithdrawButton } from './components/WithdrawButton'
 import { DISCORD_INVITE_URL } from '@/lib/constants/urls'
 
-export function ManageDashboard() {
+export function ManageProjectPage() {
   return (
     <>
       <ManageHeader />

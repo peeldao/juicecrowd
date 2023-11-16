@@ -1,14 +1,11 @@
-import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
-import { ManageDashboard } from '@/components/ManageProject/ManageDashboard'
+import { ManageProjectPage } from '@/components/ManageProject'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
 import { AppProvider } from '@/components/layout/AppProvider'
-import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
   projectGetStaticProps,
 } from '@/lib/backend/static/projects'
-import { JBProjectProvider } from 'juice-hooks'
 import { InferGetStaticPropsType } from 'next'
 
 export const getStaticPaths = projectGetStaticPaths
@@ -27,7 +24,7 @@ export default function Page({
       />
       <AppProvider projectId={pid} metadata={metadata}>
         <Layout navbar="none" footer="minimal">
-          <ManageDashboard />
+          <ManageProjectPage />
         </Layout>
       </AppProvider>
     </>

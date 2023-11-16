@@ -1,6 +1,6 @@
 import ProjectLogo from '@/components/ProjectLogo'
-import { ProjectHeaderMetadata } from '../Project/components/ProjectHeaderMetadata'
-import { ProgressBadge } from '../Project/components/ProgressBadge'
+import { ProjectHeaderMetadata } from '../../Project/components/ProjectHeaderMetadata'
+import { ProgressBadge } from '../../Project/components/ProgressBadge'
 import { useJbProject } from '@/hooks/useJbProject'
 
 export function ManageProjectDetails() {

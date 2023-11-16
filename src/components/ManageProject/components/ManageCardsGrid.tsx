@@ -13,7 +13,7 @@ import {
 } from 'juice-hooks'
 import { ReactNode } from 'react'
 import { ManageCard } from './ManageCard'
-import { useEthUsdPrice } from '../EthUsdPriceProvider'
+import { useEthUsdPrice } from '../../EthUsdPriceProvider'
 
 interface CardData {
   name: ReactNode

@@ -1,15 +1,14 @@
 import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { Button } from '@/components/ui/Button'
+import { Dialog, DialogTrigger } from '@/components/ui/Dialog'
+import { Skeleton } from '@/components/ui/Skeleton'
+import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
+import { JB721DelegateTier, JB_CURRENCIES } from 'juice-hooks'
+import { useRouter } from 'next/router'
+import { useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { RewardDialogContent } from './RewardDialogContent'
 import { RewardImage } from './RewardImage'
-import { DialogTrigger, Dialog } from '@/components/ui/Dialog'
-import { Skeleton } from '@/components/ui/Skeleton'
-import { JB721DelegateTier } from 'juice-hooks'
-import { useRouter } from 'next/router'
-import { useCallback, useMemo } from 'react'
-import { NFT_MAX_SUPPLY } from '@/lib/constants/nfts'
-import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
 
 export type RewardCardProps = {
   className?: string
@@ -52,6 +51,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
             <CurrencyAmount
               className="text-base font-medium"
               amount={nft.price}
+              currency={JB_CURRENCIES.USD}
             />
             <div className="text-end text-gray-400">{remainingText}</div>
           </div>

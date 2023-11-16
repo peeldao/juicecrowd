@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/Button'
 import { Dialog, DialogTrigger } from '@/components/ui/Dialog'
 import { Separator } from '@/components/ui/Separator'
 import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
-import { JB721DelegateTier } from 'juice-hooks'
+import { JB721DelegateTier, JB_CURRENCIES } from 'juice-hooks'
 import Image from 'next/image'
 import React from 'react'
 import { PayCardBase, PayCardBaseProps } from './PayCardBase'
@@ -36,6 +36,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
             <CurrencyAmount
               className="text-base font-medium leading-none"
               amount={nft.price}
+              currency={JB_CURRENCIES.USD}
             />
             <div className="flex h-5 gap-4 overflow-hidden text-sm">
               <DialogTrigger onClick={e => e.stopPropagation()}>

@@ -20,8 +20,8 @@ import { twMerge } from 'tailwind-merge'
 import { Address, isAddress, parseEther } from 'viem'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
+import { LabeledFormControl } from './LabeledFormControl'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
-import { ProjectPayFormItem } from './ProjectPayFormItem'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
 
 const WEI = 1e-18
@@ -167,12 +167,12 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           control={form.control}
           name="beneficiary"
           render={({ field }) => (
-            <ProjectPayFormItem
+            <LabeledFormControl
               className="mt-6"
               label="NFTs and rewards will be sent to"
             >
               <ProjectPayBeneficiaryInput {...field} />
-            </ProjectPayFormItem>
+            </LabeledFormControl>
           )}
         />
 
@@ -181,7 +181,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
             control={form.control}
             name="email"
             render={({ field }) => (
-              <ProjectPayFormItem
+              <LabeledFormControl
                 label="Email"
                 description="Enter email to receive confirmation & updates"
               >
@@ -193,7 +193,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
                   }
                   {...field}
                 />
-              </ProjectPayFormItem>
+              </LabeledFormControl>
             )}
           />
         ) : null}
@@ -202,13 +202,13 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           control={form.control}
           name="message"
           render={({ field }) => (
-            <ProjectPayFormItem label="Message (Optional)">
+            <LabeledFormControl label="Message (Optional)">
               <ProjectPayMessageInput
                 attachedUrl={attachedUrl}
                 setAttachedUrl={setAttachedUrl}
                 {...field}
               />
-            </ProjectPayFormItem>
+            </LabeledFormControl>
           )}
         />
 

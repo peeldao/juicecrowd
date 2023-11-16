@@ -7,14 +7,14 @@ import {
 } from '@/components/ui/Form'
 import { PropsWithChildren } from 'react'
 
-export type ProjectPayFormItemProps = {
+export type LabeledFormControlProps = {
   className?: string
   label: string
   description?: string
 }
 
-export const ProjectPayFormItem: React.FC<
-  PropsWithChildren<ProjectPayFormItemProps>
+export const LabeledFormControl: React.FC<
+  PropsWithChildren<LabeledFormControlProps>
 > = ({ className, label, description, children }) => {
   return (
     <FormItem className={className}>

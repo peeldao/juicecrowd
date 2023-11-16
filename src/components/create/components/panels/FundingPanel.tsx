@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button'
+import { Button } from '@/components/ui/Button'
 import { FormField } from '@/components/FormField'
 import { Input } from '@/components/Input'
 import { InfoCallout } from '@/components/callouts'
@@ -27,7 +27,7 @@ export const FundingPanel: React.FC = () => {
         </InfoCallout>
       </div>
 
-      <Button className="mt-12 self-end w-fit">Next: Details</Button>
+      <Button className="mt-12 w-fit self-end">Next: Details</Button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button'
+import { Button } from '@/components/ui/Button'
 import { HaloEmphasisIcon } from '@/components/HaloEmphasis'
 import { InfoBadge } from '@/components/badges'
 import { PlusIcon } from '@heroicons/react/24/outline'

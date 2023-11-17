@@ -11,14 +11,18 @@ export type LabeledFormControlProps = {
   className?: string
   label: string
   description?: string
+  required?: boolean
 }
 
 export const LabeledFormControl: React.FC<
   PropsWithChildren<LabeledFormControlProps>
-> = ({ className, label, description, children }) => {
+> = ({ className, label, description, required, children }) => {
   return (
     <FormItem className={className}>
-      <FormLabel className="text-gray-700">{label}</FormLabel>
+      <FormLabel className="text-gray-700">
+        {label}
+        {required && <span className="text-red-600">*</span>}
+      </FormLabel>
       <FormControl>{children}</FormControl>
       <FormDescription className="text-xs text-gray-500">
         {description}

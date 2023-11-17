@@ -6,12 +6,12 @@ import { JBCurrency, JB_CURRENCIES } from 'juice-hooks'
 import { useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export type ProjectPayAmountInputProps = {
+export type PayAmountInputProps = {
   currency: JBCurrency
   setCurrency: (currency: JBCurrency) => void
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'>
 
-export const ProjectPayAmountInput: React.FC<ProjectPayAmountInputProps> = ({
+export const PayAmountInput: React.FC<PayAmountInputProps> = ({
   className,
   currency,
   setCurrency,

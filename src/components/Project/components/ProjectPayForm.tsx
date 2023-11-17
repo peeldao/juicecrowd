@@ -64,13 +64,13 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     projectId,
   } = useJbProject()
 
-  const { usdToEth } = useEthUsdPrice()
+  const { usdToEth, ethToUsd } = useEthUsdPrice()
 
   const form = useFormContext<z.infer<typeof ProjectPayFormSchema>>()
 
   const { nftRewardIds } = useProjectPay()
 
-  const totalNftSelectionPrice = useMemo(
+  const totalNftSelectionPriceUsd = useMemo(
     () =>
       nftRewardIds.reduce((acc, nftId) => {
         if (!nfts) return acc
@@ -80,6 +80,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
       }, 0n),
     [nftRewardIds, nfts],
   )
+  const totalNftSelectionPriceEth = usdToEth(totalNftSelectionPriceUsd)
 
   const paymentAmount = form.watch('paymentAmount')
   const paymentCurrency = form.watch('paymentCurrency')
@@ -93,9 +94,9 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     return usdToEth(bigUnitPay)
   }, [paymentAmount, paymentCurrency, usdToEth])
 
-  const totalPayment = useMemo(() => {
-    return totalNftSelectionPrice + etherPayment
-  }, [etherPayment, totalNftSelectionPrice])
+  const totalPaymentWei = useMemo(() => {
+    return totalNftSelectionPriceEth + etherPayment
+  }, [etherPayment, totalNftSelectionPriceEth])
 
   const [attachedUrl, setAttachedUrl] = useState<string | undefined>(undefined)
   const formMessage = form.watch('message')
@@ -114,7 +115,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
   const beneficiaryAddress = form.watch('beneficiary')
 
   const { prepare, contractWrite, transaction } = usePayProjectTx({
-    amountWei: totalPayment,
+    amountWei: totalPaymentWei,
     memo,
     tiersToMint,
     beneficiaryAddress,
@@ -141,9 +142,15 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     if (!transaction.isSuccess) return
 
     router.push(
-      `/p/${projectId.toString()}/pay/success?amount-eth=${totalPayment}&currency=${paymentCurrency}`,
+      `/p/${projectId.toString()}/pay/success?amount-eth=${totalPaymentWei}&currency=${paymentCurrency}`,
     )
-  }, [transaction.isSuccess, projectId, router, totalPayment, paymentCurrency])
+  }, [
+    transaction.isSuccess,
+    projectId,
+    router,
+    totalPaymentWei,
+    paymentCurrency,
+  ])
 
   /**
    * Displays error toast if contract write fails or is terminated.
@@ -214,14 +221,21 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
 
         <div className="mt-6 flex justify-between font-medium">
           <div className="text-base">Total to pay</div>
-          <CurrencyAmount amount={totalPayment} />
+          <div className="flex items-center gap-2">
+            <CurrencyAmount amount={totalPaymentWei} />
+            <CurrencyAmount
+              amount={ethToUsd(totalPaymentWei)}
+              currency={JB_CURRENCIES.USD}
+              className="text-xs text-gray-500"
+            />
+          </div>
         </div>
 
         <LoadingButton
           className="mt-2 h-14 w-full"
           type="submit"
           disabled={
-            !form.formState.isValid || prepare.isError || totalPayment === 0n
+            !form.formState.isValid || prepare.isError || totalPaymentWei === 0n
           }
           loading={
             prepare.isLoading ||

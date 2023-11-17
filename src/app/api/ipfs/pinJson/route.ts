@@ -1,4 +1,6 @@
+import { apiWrapper } from '@/lib/backend/api/apiWrapper'
 import { NextRequest } from 'next/server'
+import { z } from 'zod'
 
 export type InfuraPinResponse = {
   Hash: string
@@ -37,20 +39,9 @@ async function pinFile(file: string | Blob): Promise<InfuraPinResponse> {
   return res
 }
 
-export async function POST(req: NextRequest) {
-  try {
-    const data = await req.json()
+const pinJsonSchema = z.any()
 
-    console.info('api::ipfs::pinJson::pinning', data)
-
-    const pinJson = await pinFile(JSON.stringify(data))
-    console.info('api::ipfs::pinJson::success', pinJson)
-
-    return Response.json(pinJson)
-  } catch (error) {
-    console.error(error)
-    return new Response(JSON.stringify({ error: 'failed to pin data' }), {
-      status: 500,
-    })
-  }
-}
+export const POST = apiWrapper(pinJsonSchema, async data => {
+  const pinJson = await pinFile(JSON.stringify(data))
+  return Response.json(pinJson)
+})

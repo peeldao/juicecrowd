@@ -28,26 +28,29 @@ import { useToast } from '../ui/useToast'
 
 const JUICEBOX_MONEY_METADATA_DOMAIN = 0n
 
-const ProjectGeneralSettingsFormSchema = z.object({
-  name: z.string().max(256),
-  introVideo: z.string().url(),
-  introImage: z.string().url(),
-  description: z.string(),
-  logo: z.string().url(),
-  coverPhoto: z.string().url(),
-  softTargetAmount: z.union([
-    z.coerce
+const ProjectGeneralSettingsFormSchema = z
+  .object({
+    name: z.string().max(256).min(1, 'Name must be at least 1 character'),
+    introVideo: z.union([z.string().url().optional(), z.literal('')]),
+    introImage: z.union([z.string().url().optional(), z.literal('')]),
+    description: z.string(),
+    logo: z.union([z.string().url().optional(), z.literal('')]),
+    coverPhoto: z.union([z.string().url().optional(), z.literal('')]),
+    softTargetAmount: z.coerce
       .number({
         errorMap: () => ({ message: 'Invalid payment' }),
       })
       .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
-    z.literal(''),
-  ]),
-  softTargetCurrency: z.union([
-    z.literal(JB_CURRENCIES.ETH),
-    z.literal(JB_CURRENCIES.USD),
-  ]),
-})
+
+    softTargetCurrency: z.union([
+      z.literal(JB_CURRENCIES.ETH),
+      z.literal(JB_CURRENCIES.USD),
+    ]),
+  })
+  .refine(data => data.introVideo || data.introImage, {
+    path: ['introVideo'],
+    message: 'Either Campaign YouTube Video or Campaign Image must be included',
+  })
 
 export const ManageProjectGeneralSettingsPage = () => {
   const projectData = useJbProject()

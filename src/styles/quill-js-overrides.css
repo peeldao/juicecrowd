@@ -19,6 +19,7 @@
 .ql-editor {
   @apply rounded-b-lg;
   @apply h-full flex-1;
+  @apply font-body;
   h1,
   h2 {
     @apply font-heading;

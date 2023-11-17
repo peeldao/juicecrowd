@@ -25,6 +25,7 @@ import { YouTubeEmbed } from '../YouTubeEmbed'
 import { Form, FormField } from '../ui/Form'
 import { ManageHeader } from './components/ManageHeader'
 import { useToast } from '../ui/useToast'
+import { _JBProjectMetadata } from '@/contexts/ProjectMetadata'
 
 const JUICEBOX_MONEY_METADATA_DOMAIN = 0n
 
@@ -58,7 +59,7 @@ export const ManageProjectGeneralSettingsPage = () => {
 
   const contractWrite = useJbProjectsSetMetadataOf()
   const mutation = useMutation({
-    mutationFn: async (data: JBProjectMetadata) => {
+    mutationFn: async (data: _JBProjectMetadata) => {
       const ipfsRes = axios.post<InfuraPinResponse>('/api/ipfs/pinJson', data)
       const cid = (await ipfsRes).data.Hash
 
@@ -105,6 +106,7 @@ export const ManageProjectGeneralSettingsPage = () => {
       name: projectData.name,
       description: projectData.description,
       introVideo: projectData.introVideoUrl,
+      introImage: projectData.introImageUri,
       logo: projectData.logoUri,
       coverPhoto: projectData.coverImageUri,
       softTargetAmount: parseFloat(formatEther(projectData.softTarget.amount)),
@@ -116,26 +118,27 @@ export const ManageProjectGeneralSettingsPage = () => {
   const introVideo = form.watch('introVideo')
 
   const submitMetadata = useCallback(
-    async (data: z.infer<typeof ProjectGeneralSettingsFormSchema>) => {
+    (data: z.infer<typeof ProjectGeneralSettingsFormSchema>) => {
       const softTargetAmount = data.softTargetAmount
         ? Ether.parse(data.softTargetAmount.toString(), 18).val
         : undefined
       const softTargetCurrency = data.softTargetCurrency
 
-      // TODO: might not be exactly correct
-      const metadata = {
+      const metadata: _JBProjectMetadata = {
+        ...projectData._metadata,
         name: data.name,
         description: data.description,
         introVideoUrl: data.introVideo,
+        introImageUri: data.introImage,
         logoUri: data.logo,
         coverImageUri: data.coverPhoto,
         softTargetAmount: softTargetAmount?.toString(),
         softTargetCurrency: softTargetCurrency.toString(),
       }
-      // TODO: Send it
-      await mutation.mutate(metadata)
+
+      mutation.mutate(metadata)
     },
-    [mutation],
+    [mutation, projectData._metadata],
   )
 
   return (

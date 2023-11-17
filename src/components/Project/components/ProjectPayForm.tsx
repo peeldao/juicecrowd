@@ -23,8 +23,7 @@ import { useProjectPay } from '../providers/ProjectPayContext'
 import { LabeledFormControl } from './LabeledFormControl'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
-
-const WEI = 1e-18
+import { WEI } from '@/lib/constants/currency'
 
 export const ProjectPayFormSchema = z.object({
   paymentAmount: z.union([

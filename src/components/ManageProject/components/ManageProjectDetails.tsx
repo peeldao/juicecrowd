@@ -1,7 +1,7 @@
 import ProjectLogo from '@/components/ProjectLogo'
-import { ProjectHeaderMetadata } from '../../Project/components/ProjectHeaderMetadata'
-import { ProgressBadge } from '../../Project/components/ProgressBadge'
 import { useJbProject } from '@/hooks/useJbProject'
+import { ProgressBadge } from '../../Project/components/ProgressBadge'
+import { ProjectHeaderMetadata } from '../../Project/components/ProjectHeaderMetadata'
 
 export function ManageProjectDetails() {
   const { logoUri, name, projectId } = useJbProject()
@@ -15,7 +15,7 @@ export function ManageProjectDetails() {
       />
       <div className="flex h-16 flex-col justify-between">
         <h1 className="font-heading text-2xl font-medium">{name}</h1>
-        <div className="flex flex-col gap-5 md:flex-row md:items-center">
+        <div className="flex flex-col items-center gap-5 md:flex-row">
           <ProjectHeaderMetadata />
           <ProgressBadge />
         </div>

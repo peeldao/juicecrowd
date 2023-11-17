@@ -1,9 +1,10 @@
+import { Link } from '@/components/Link'
+import { useJbProject } from '@/hooks/useJbProject'
+import { PencilIcon } from '@heroicons/react/24/outline'
+import { ManageCardsGrid } from './components/ManageCardsGrid'
 import { ManageHeader } from './components/ManageHeader'
 import { ManageProjectDetails } from './components/ManageProjectDetails'
-import { ManageCardsGrid } from './components/ManageCardsGrid'
-import { Link } from '@/components/Link'
 import { WithdrawButton } from './components/WithdrawButton'
-import { DISCORD_INVITE_URL } from '@/lib/constants/urls'
 
 export function ManageProjectPage() {
   return (
@@ -15,11 +16,21 @@ export function ManageProjectPage() {
           <WithdrawButton />
         </div>
         <ManageCardsGrid />
-        <div className="pb-10 pt-5 text-gray-600 md:pb-0">
-          Need to make changes to your project? Please{' '}
-          <Link href={DISCORD_INVITE_URL}>contact us</Link>.
-        </div>
+        <EditProjectSettingsButton />
       </div>
     </>
+  )
+}
+
+const EditProjectSettingsButton = () => {
+  const { projectId } = useJbProject()
+  return (
+    <Link
+      href={`/p/${projectId}/manage/general`}
+      className="flex gap-1 font-medium text-bluebs-500 hover:text-bluebs-400"
+    >
+      <PencilIcon className="h-4 w-4 stroke-2" />
+      Edit project settings
+    </Link>
   )
 }

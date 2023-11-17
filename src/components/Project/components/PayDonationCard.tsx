@@ -6,7 +6,7 @@ import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
 import { LabeledFormControl } from './LabeledFormControl'
 import { PayCardBase, PayCardBaseProps } from './PayCardBase'
-import { ProjectPayAmountInput } from './ProjectPayAmountInput'
+import { PayAmountInput } from '../../PayAmountInput'
 import { ProjectPayFormSchema } from './ProjectPayForm'
 
 export interface PayDonationCardProps extends PayCardBaseProps {}
@@ -44,7 +44,7 @@ export const PayDonationCard: React.FC<PayDonationCardProps> = ({
           name="paymentAmount"
           render={({ field }) => (
             <LabeledFormControl label="Donation amount">
-              <ProjectPayAmountInput
+              <PayAmountInput
                 currency={currency}
                 setCurrency={setCurrency}
                 placeholder="0"

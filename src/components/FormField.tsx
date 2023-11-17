@@ -8,6 +8,9 @@ export type FormFieldProps = {
   required?: boolean
 }
 
+/**
+ * @deprecated Use LabeledFormControl instead
+ */
 export const FormField: React.FC<PropsWithChildren<FormFieldProps>> = ({
   className,
   label,

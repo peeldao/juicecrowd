@@ -4,10 +4,10 @@ import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { z } from 'zod'
+import { LabeledFormControl } from './LabeledFormControl'
 import { PayCardBase, PayCardBaseProps } from './PayCardBase'
 import { ProjectPayAmountInput } from './ProjectPayAmountInput'
 import { ProjectPayFormSchema } from './ProjectPayForm'
-import { ProjectPayFormItem } from './ProjectPayFormItem'
 
 export interface PayDonationCardProps extends PayCardBaseProps {}
 
@@ -43,14 +43,14 @@ export const PayDonationCard: React.FC<PayDonationCardProps> = ({
           control={form.control}
           name="paymentAmount"
           render={({ field }) => (
-            <ProjectPayFormItem label="Donation amount">
+            <LabeledFormControl label="Donation amount">
               <ProjectPayAmountInput
                 currency={currency}
                 setCurrency={setCurrency}
                 placeholder="0"
                 {...field}
               />
-            </ProjectPayFormItem>
+            </LabeledFormControl>
           )}
         />
       </div>

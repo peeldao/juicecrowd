@@ -10,7 +10,7 @@ import {
   formatEther,
   useJbProjectsSetMetadataOf,
 } from 'juice-hooks'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation, useWaitForTransaction } from 'wagmi'
 import { z } from 'zod'
@@ -24,6 +24,9 @@ import { UploadCard } from '../UploadCard'
 import { YouTubeEmbed } from '../YouTubeEmbed'
 import { Form, FormField } from '../ui/Form'
 import { ManageHeader } from './components/ManageHeader'
+import { useToast } from '../ui/useToast'
+
+const JUICEBOX_MONEY_METADATA_DOMAIN = 0n
 
 const ProjectGeneralSettingsFormSchema = z.object({
   name: z.string().max(256),
@@ -48,27 +51,50 @@ const ProjectGeneralSettingsFormSchema = z.object({
 
 export const ManageProjectGeneralSettingsPage = () => {
   const projectData = useJbProject()
-  const contractWrite = useJbProjectsSetMetadataOf()
+  const { toast } = useToast()
 
+  const contractWrite = useJbProjectsSetMetadataOf()
   const mutation = useMutation({
     mutationFn: async (data: JBProjectMetadata) => {
       const ipfsRes = axios.post<InfuraPinResponse>('/api/ipfs/pinJson', data)
       const cid = (await ipfsRes).data.Hash
 
       contractWrite.write({
-        args: [projectData.projectId, { domain: 0n, content: cid }],
+        args: [
+          projectData.projectId,
+          { domain: JUICEBOX_MONEY_METADATA_DOMAIN, content: cid },
+        ],
       })
     },
   })
-
   const transaction = useWaitForTransaction({
     hash: contractWrite.data?.hash,
   })
-
   const isLoading =
-    mutation.isLoading ||
-    contractWrite.isLoading ||
-    !(!transaction.isLoading && transaction.isSuccess)
+    mutation.isLoading || contractWrite.isLoading || transaction.isLoading
+
+  /**
+   * Displays error toast if contract write fails or is terminated.
+   */
+  useEffect(() => {
+    if (!contractWrite.error || !contractWrite.isError) return
+    toast({
+      title: 'Failed to edit project details.',
+      description: (contractWrite.error?.cause as any)?.shortMessage,
+      variant: 'destructive',
+    })
+  }, [toast, contractWrite.error, contractWrite.isError])
+
+  /**
+   * Displays success toast if withdraw tx is successful.
+   */
+  useEffect(() => {
+    if (!transaction.isSuccess) return
+    toast({
+      title: 'Project details were changed.',
+      variant: 'default',
+    })
+  }, [toast, transaction.isSuccess])
 
   const form = useForm<z.infer<typeof ProjectGeneralSettingsFormSchema>>({
     resolver: zodResolver(ProjectGeneralSettingsFormSchema),

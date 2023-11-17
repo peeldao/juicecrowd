@@ -1,20 +1,29 @@
 import { useJbProject } from '@/hooks/useJbProject'
 import { WEI } from '@/lib/constants/currency'
+import { InfuraPinResponse } from '@/lib/ipfs'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Ether, JB_CURRENCIES, formatEther } from 'juice-hooks'
+import axios from 'axios'
+import {
+  Ether,
+  JBProjectMetadata,
+  JB_CURRENCIES,
+  formatEther,
+  useJbProjectsSetMetadataOf,
+} from 'juice-hooks'
+import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
+import { useMutation, useWaitForTransaction } from 'wagmi'
 import { z } from 'zod'
 import { Breadcrumbs } from '../Breadcrumbs'
 import { Input } from '../Input'
+import { LoadingButton } from '../LoadingButton'
 import { PayAmountInput } from '../PayAmountInput'
 import { LabeledFormControl } from '../Project/components/LabeledFormControl'
 import { RichEditor } from '../RichEditor'
 import { UploadCard } from '../UploadCard'
+import { YouTubeEmbed } from '../YouTubeEmbed'
 import { Form, FormField } from '../ui/Form'
 import { ManageHeader } from './components/ManageHeader'
-import { Button } from '../ui/Button'
-import { YouTubeEmbed } from '../YouTubeEmbed'
-import { useCallback } from 'react'
 
 const ProjectGeneralSettingsFormSchema = z.object({
   name: z.string().max(256),
@@ -39,6 +48,28 @@ const ProjectGeneralSettingsFormSchema = z.object({
 
 export const ManageProjectGeneralSettingsPage = () => {
   const projectData = useJbProject()
+  const contractWrite = useJbProjectsSetMetadataOf()
+
+  const mutation = useMutation({
+    mutationFn: async (data: JBProjectMetadata) => {
+      const ipfsRes = axios.post<InfuraPinResponse>('/api/ipfs/pinJson', data)
+      const cid = (await ipfsRes).data.Hash
+
+      contractWrite.write({
+        args: [projectData.projectId, { domain: 0n, content: cid }],
+      })
+    },
+  })
+
+  const transaction = useWaitForTransaction({
+    hash: contractWrite.data?.hash,
+  })
+
+  const isLoading =
+    mutation.isLoading ||
+    contractWrite.isLoading ||
+    !(!transaction.isLoading && transaction.isSuccess)
+
   const form = useForm<z.infer<typeof ProjectGeneralSettingsFormSchema>>({
     resolver: zodResolver(ProjectGeneralSettingsFormSchema),
     defaultValues: {
@@ -69,12 +100,13 @@ export const ManageProjectGeneralSettingsPage = () => {
         introVideoUrl: data.introVideo,
         logoUri: data.logo,
         coverImageUri: data.coverPhoto,
-        softTargetAmount,
-        softTargetCurrency,
+        softTargetAmount: softTargetAmount?.toString(),
+        softTargetCurrency: softTargetCurrency.toString(),
       }
       // TODO: Send it
+      await mutation.mutate(metadata)
     },
-    [],
+    [mutation],
   )
 
   return (
@@ -176,9 +208,13 @@ export const ManageProjectGeneralSettingsPage = () => {
               )}
             />
 
-            <Button type="submit" className="h-14 md:w-fit md:self-end">
+            <LoadingButton
+              type="submit"
+              className="h-14 md:w-fit md:self-end"
+              loading={isLoading}
+            >
               Submit
-            </Button>
+            </LoadingButton>
           </form>
         </Form>
       </div>

@@ -6,14 +6,14 @@ import { useTotalSupporters } from '@/hooks/useTotalSupporters'
 import { formatDuration } from '@/lib/date/format'
 import {
   Ether,
+  JB_CURRENCIES,
   useEthTerminalBalance,
   useJBContractContext,
   useJBFundingCycleContext,
-  JB_CURRENCIES,
 } from 'juice-hooks'
 import { ReactNode } from 'react'
-import { ManageCard } from './ManageCard'
 import { useEthUsdPrice } from '../../EthUsdPriceProvider'
+import { ManageCard } from './ManageCard'
 
 interface CardData {
   name: ReactNode

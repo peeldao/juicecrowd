@@ -23,7 +23,7 @@ export default function Page({
         description="Manage your Juicecrowd project"
       />
       <AppProvider projectId={pid} metadata={metadata}>
-        <Layout navbar="none" footer="minimal">
+        <Layout navbar="none" footer="none">
           <ManageProjectPage />
         </Layout>
       </AppProvider>

@@ -1,16 +1,16 @@
 import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { EthereumAddress } from '@/components/EthereumAddress'
 import { Link } from '@/components/Link'
+import { RichNote } from '@/components/RichNote'
 import { Timestamp } from '@/components/Timestamp'
 import { Button } from '@/components/ui/Button'
+import { Skeleton } from '@/components/ui/Skeleton'
 import { ensAvatarUrlForAddress } from '@/lib/ens'
 import { etherscanUrlForTx } from '@/lib/etherscan'
 import { PayEvent } from '@/lib/graphql/hooks'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
-import { Skeleton } from '@/components/ui/Skeleton'
-import { RichNote } from '@/components/RichNote'
 
 type ActivityEvent = Pick<
   PayEvent,

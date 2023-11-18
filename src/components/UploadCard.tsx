@@ -24,8 +24,7 @@ export const UploadCard: React.FC<UploadCardProps> = ({
   value,
   onChange,
 }) => {
-  const acceptedFileTypes =
-    'image/jpeg,image/png,image/gif,video/mp4,video/quicktime,video/x-m4v,video/webm'
+  const acceptedFileTypes = 'image/jpeg,image/png,image/gif'
   const {
     isUploading,
     uploadProgress,

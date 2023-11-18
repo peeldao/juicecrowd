@@ -39,12 +39,11 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
               currency={JB_CURRENCIES.USD}
             />
             <div className="flex h-5 gap-4 overflow-hidden text-sm">
-              <DialogTrigger onClick={e => e.stopPropagation()}>
+              <DialogTrigger onClick={e => e.stopPropagation()} asChild>
                 <Button
                   className="whitespace-nowrap"
                   size="child"
                   variant="link"
-                  asChild
                 >
                   View details
                 </Button>

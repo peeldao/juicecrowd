@@ -15,7 +15,7 @@ const LoadingButton = React.forwardRef<
     <Button {...props} disabled={props.disabled || loading} ref={ref}>
       {loading && (
         <div className="mr-2">
-          <Spinner className="h-5 w-5 text-gray-900" />
+          <Spinner className="h-5 w-5 text-white" />
         </div>
       )}
       {children}
@@ -23,6 +23,6 @@ const LoadingButton = React.forwardRef<
   )
 })
 
-LoadingButton.displayName = 'Button'
+LoadingButton.displayName = 'LoadingButton'
 
 export { LoadingButton }

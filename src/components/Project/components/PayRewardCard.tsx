@@ -44,6 +44,7 @@ export const PayRewardCard: React.FC<PayRewardCardProps> = ({
                   className="whitespace-nowrap"
                   size="child"
                   variant="link"
+                  asChild
                 >
                   View details
                 </Button>

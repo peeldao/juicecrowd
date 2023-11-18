@@ -6,7 +6,7 @@ import {
   DialogHeader,
 } from '@/components/ui/Dialog'
 import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
-import { JB721DelegateTier } from 'juice-hooks'
+import { JB721DelegateTier, JB_CURRENCIES } from 'juice-hooks'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { RewardImage } from './RewardImage'
@@ -49,6 +49,7 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
         <CurrencyAmount
           className="text-xl font-medium text-gray-800"
           amount={nft.price}
+          currency={JB_CURRENCIES.USD}
         />
       </div>
 

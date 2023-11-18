@@ -37,6 +37,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             className={twMerge(
               'w-full bg-transparent py-2 pl-2 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none',
+              className,
             )}
             {...props}
           />

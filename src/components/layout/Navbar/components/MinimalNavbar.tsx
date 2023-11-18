@@ -60,7 +60,7 @@ export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
       >
         <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger>
-            <Button size="child" variant="ghost">
+            <Button size="child" variant="ghost" asChild>
               {!open ? (
                 <Bars3BottomLeftIcon className="h-6 w-6" />
               ) : (

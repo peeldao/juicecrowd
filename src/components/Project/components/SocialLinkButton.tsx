@@ -36,7 +36,7 @@ export const SocialLinkButton = ({
 
   return (
     <Link className="flex items-center gap-2 font-medium" href={href}>
-      <Icon className="h-4 w-4 fill-bluebs-500 text-lg text-bluebs-500" />
+      <Icon className="inline-block h-4 w-4 text-bluebs-500" />
       <span className="text-sm">{text}</span>
     </Link>
   )

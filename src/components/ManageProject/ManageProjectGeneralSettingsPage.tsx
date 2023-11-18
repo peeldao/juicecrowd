@@ -1,50 +1,112 @@
 import { useJbProject } from '@/hooks/useJbProject'
 import { WEI } from '@/lib/constants/currency'
+import { InfuraPinResponse } from '@/lib/ipfs'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Ether, JB_CURRENCIES, formatEther } from 'juice-hooks'
+import axios from 'axios'
+import {
+  Ether,
+  JBProjectMetadata,
+  JB_CURRENCIES,
+  formatEther,
+  useJbProjectsSetMetadataOf,
+} from 'juice-hooks'
+import { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useMutation, useWaitForTransaction } from 'wagmi'
 import { z } from 'zod'
 import { Breadcrumbs } from '../Breadcrumbs'
 import { Input } from '../Input'
+import { LoadingButton } from '../LoadingButton'
 import { PayAmountInput } from '../PayAmountInput'
 import { LabeledFormControl } from '../Project/components/LabeledFormControl'
 import { RichEditor } from '../RichEditor'
 import { UploadCard } from '../UploadCard'
+import { YouTubeEmbed } from '../YouTubeEmbed'
 import { Form, FormField } from '../ui/Form'
 import { ManageHeader } from './components/ManageHeader'
-import { Button } from '../ui/Button'
-import { YouTubeEmbed } from '../YouTubeEmbed'
-import { useCallback } from 'react'
+import { useToast } from '../ui/useToast'
+import { _JBProjectMetadata } from '@/contexts/ProjectMetadata'
 
-const ProjectGeneralSettingsFormSchema = z.object({
-  name: z.string().max(256),
-  introVideo: z.string().url(),
-  introImage: z.string().url(),
-  description: z.string(),
-  logo: z.string().url(),
-  coverPhoto: z.string().url(),
-  softTargetAmount: z.union([
-    z.coerce
+const JUICEBOX_MONEY_METADATA_DOMAIN = 0n
+
+const ProjectGeneralSettingsFormSchema = z
+  .object({
+    name: z.string().max(256).min(1, 'Name must be at least 1 character'),
+    introVideo: z.union([z.string().url().optional(), z.literal('')]),
+    introImage: z.union([z.string().url().optional(), z.literal('')]),
+    description: z.string(),
+    logo: z.union([z.string().url().optional(), z.literal('')]),
+    coverPhoto: z.union([z.string().url().optional(), z.literal('')]),
+    softTargetAmount: z.coerce
       .number({
         errorMap: () => ({ message: 'Invalid payment' }),
       })
       .min(WEI, 'Payment amount must be greater than 1e-18 (1 wei)'),
-    z.literal(''),
-  ]),
-  softTargetCurrency: z.union([
-    z.literal(JB_CURRENCIES.ETH),
-    z.literal(JB_CURRENCIES.USD),
-  ]),
-})
+
+    softTargetCurrency: z.union([
+      z.literal(JB_CURRENCIES.ETH),
+      z.literal(JB_CURRENCIES.USD),
+    ]),
+  })
+  .refine(data => data.introVideo || data.introImage, {
+    path: ['introVideo'],
+    message: 'Either Campaign YouTube Video or Campaign Image must be included',
+  })
 
 export const ManageProjectGeneralSettingsPage = () => {
   const projectData = useJbProject()
+  const { toast } = useToast()
+
+  const contractWrite = useJbProjectsSetMetadataOf()
+  const mutation = useMutation({
+    mutationFn: async (data: _JBProjectMetadata) => {
+      const ipfsRes = axios.post<InfuraPinResponse>('/api/ipfs/pinJson', data)
+      const cid = (await ipfsRes).data.Hash
+
+      contractWrite.write({
+        args: [
+          projectData.projectId,
+          { domain: JUICEBOX_MONEY_METADATA_DOMAIN, content: cid },
+        ],
+      })
+    },
+  })
+  const transaction = useWaitForTransaction({
+    hash: contractWrite.data?.hash,
+  })
+  const isLoading =
+    mutation.isLoading || contractWrite.isLoading || transaction.isLoading
+
+  /**
+   * Displays error toast if contract write fails or is terminated.
+   */
+  useEffect(() => {
+    if (!contractWrite.error || !contractWrite.isError) return
+    toast({
+      title: 'Failed to edit project details.',
+      description: (contractWrite.error?.cause as any)?.shortMessage,
+      variant: 'destructive',
+    })
+  }, [toast, contractWrite.error, contractWrite.isError])
+
+  /**
+   * Displays success toast if withdraw tx is successful.
+   */
+  useEffect(() => {
+    if (!transaction.isSuccess) return
+    toast({
+      title: 'Project details were changed.',
+      variant: 'default',
+    })
+  }, [toast, transaction.isSuccess])
+
   const form = useForm<z.infer<typeof ProjectGeneralSettingsFormSchema>>({
     resolver: zodResolver(ProjectGeneralSettingsFormSchema),
     defaultValues: {
       name: projectData.name,
       description: projectData.description,
       introVideo: projectData.introVideoUrl,
+      introImage: projectData.introImageUri,
       logo: projectData.logoUri,
       coverPhoto: projectData.coverImageUri,
       softTargetAmount: parseFloat(formatEther(projectData.softTarget.amount)),
@@ -56,25 +118,27 @@ export const ManageProjectGeneralSettingsPage = () => {
   const introVideo = form.watch('introVideo')
 
   const submitMetadata = useCallback(
-    async (data: z.infer<typeof ProjectGeneralSettingsFormSchema>) => {
+    (data: z.infer<typeof ProjectGeneralSettingsFormSchema>) => {
       const softTargetAmount = data.softTargetAmount
         ? Ether.parse(data.softTargetAmount.toString(), 18).val
         : undefined
       const softTargetCurrency = data.softTargetCurrency
 
-      // TODO: might not be exactly correct
-      const metadata = {
+      const metadata: _JBProjectMetadata = {
+        ...projectData._metadata,
         name: data.name,
         description: data.description,
         introVideoUrl: data.introVideo,
+        introImageUri: data.introImage,
         logoUri: data.logo,
         coverImageUri: data.coverPhoto,
-        softTargetAmount,
-        softTargetCurrency,
+        softTargetAmount: softTargetAmount?.toString(),
+        softTargetCurrency: softTargetCurrency.toString(),
       }
-      // TODO: Send it
+
+      mutation.mutate(metadata)
     },
-    [],
+    [mutation, projectData._metadata],
   )
 
   return (
@@ -176,9 +240,13 @@ export const ManageProjectGeneralSettingsPage = () => {
               )}
             />
 
-            <Button type="submit" className="h-14 md:w-fit md:self-end">
+            <LoadingButton
+              type="submit"
+              className="h-14 md:w-fit md:self-end"
+              loading={isLoading}
+            >
               Submit
-            </Button>
+            </LoadingButton>
           </form>
         </Form>
       </div>

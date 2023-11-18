@@ -99,8 +99,10 @@ export function RichNote({
                     height={56}
                   />
                   <div className="text-sm font-medium">
-                    {url.searchParams.get('name') ?? 'NFT Reward'} x{' '}
-                    {url.searchParams.get('quantity') ?? '1'}
+                    {decodeURIComponent(
+                      url.searchParams.get('name') ?? 'NFT Reward',
+                    ) ?? 'NFT Reward'}{' '}
+                    x {url.searchParams.get('quantity') ?? '1'}
                   </div>
                 </div>
               ))}

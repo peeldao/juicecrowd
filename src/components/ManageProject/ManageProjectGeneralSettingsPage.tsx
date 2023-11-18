@@ -31,7 +31,8 @@ const JUICEBOX_MONEY_METADATA_DOMAIN = 0n
 
 const ProjectGeneralSettingsFormSchema = z
   .object({
-    name: z.string().max(256).min(1, 'Name must be at least 1 character'),
+    name: z.string().max(256).min(1, "Name can't be empty"),
+    projectTagline: z.string().max(256).min(1, "Tagline can't be empty"),
     introVideo: z.union([z.string().url().optional(), z.literal('')]),
     introImage: z.union([z.string().url().optional(), z.literal('')]),
     description: z.string(),
@@ -104,6 +105,7 @@ export const ManageProjectGeneralSettingsPage = () => {
     resolver: zodResolver(ProjectGeneralSettingsFormSchema),
     defaultValues: {
       name: projectData.name,
+      projectTagline: projectData.projectTagline,
       description: projectData.description,
       introVideo: projectData.introVideoUrl,
       introImage: projectData.introImageUri,
@@ -127,6 +129,7 @@ export const ManageProjectGeneralSettingsPage = () => {
       const metadata: _JBProjectMetadata = {
         ...projectData._metadata,
         name: data.name,
+        projectTagline: data.projectTagline,
         description: data.description,
         introVideoUrl: data.introVideo,
         introImageUri: data.introImage,
@@ -159,6 +162,16 @@ export const ManageProjectGeneralSettingsPage = () => {
               name="name"
               render={({ field }) => (
                 <LabeledFormControl label="Name">
+                  <Input {...field} />
+                </LabeledFormControl>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="projectTagline"
+              render={({ field }) => (
+                <LabeledFormControl label="Tagline">
                   <Input {...field} />
                 </LabeledFormControl>
               )}

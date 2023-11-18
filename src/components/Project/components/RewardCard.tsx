@@ -46,10 +46,12 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
           />
         </DialogTrigger>
         <div className="flex flex-col gap-4 p-4 pb-5">
-          <div className="text-base font-medium">{nft.metadata.name}</div>
+          <div className="text-base font-medium text-gray-900">
+            {nft.metadata.name}
+          </div>
           <div className="flex items-center justify-between gap-5">
             <CurrencyAmount
-              className="text-base font-medium"
+              className="text-base font-medium text-gray-800"
               amount={nft.price}
               currency={JB_CURRENCIES.USD}
             />

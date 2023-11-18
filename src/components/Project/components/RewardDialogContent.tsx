@@ -1,15 +1,15 @@
 import { CurrencyAmount } from '@/components/CurrencyAmount'
+import { Button } from '@/components/ui/Button'
 import {
   DialogContent,
   DialogDescription,
   DialogHeader,
 } from '@/components/ui/Dialog'
-import { RewardImage } from './RewardImage'
+import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
 import { JB721DelegateTier } from 'juice-hooks'
-import { Button } from '@/components/ui/Button'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
+import { RewardImage } from './RewardImage'
 
 export type RewardDialogProps = {
   nft: JB721DelegateTier
@@ -63,7 +63,7 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
             'Unlimited'
           ) : (
             <>
-              Remaining: {remaining.remaining.toString()}/{initialQuantity}
+              {remaining.remaining.toString()}/{initialQuantity} remaining
             </>
           )}
         </div>

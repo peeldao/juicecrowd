@@ -79,7 +79,12 @@ export const ProjectPayMessageInput: React.FC<ProjectPayMessageInputProps> = ({
         selectedFile && (
           <div className="mt-4 flex">
             <div className="relative h-12 w-12 overflow-hidden rounded-md">
-              <Image fill src={uploadedUrl} alt={selectedFile.name} />
+              <Image
+                fill
+                className="absolute h-full w-full object-cover"
+                src={uploadedUrl}
+                alt={selectedFile.name}
+              />
             </div>
             <button
               type="button"

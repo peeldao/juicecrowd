@@ -79,12 +79,12 @@ export const EthereumAddress: React.FC<EthereumAddressProps> = ({
           ) : (
             <Skeleton className="h-10 w-10 rounded-full" />
           )}
-          <div className="space-y-1 font-medium">
-            <div>{ensName}</div>
+          <div className="space-y-1">
+            <div className="font-medium">{ensName}</div>
             {address ? (
               <div className="flex items-center gap-1">
                 <Link
-                  className="leading-none text-gray-500"
+                  className="text-sm leading-none text-gray-500"
                   href={`https://etherscan.io/address/${address}`}
                 >
                   {formatEthAddress(address, { truncateTo: 8 })}

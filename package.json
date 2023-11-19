@@ -38,7 +38,7 @@
     "fathom-client": "^3.6.0",
     "googleapis": "^126.0.1",
     "graphql": "^16.8.1",
-    "juice-hooks": "12.3.0-beta",
+    "juice-hooks": "12.2.2-beta",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.284.0",

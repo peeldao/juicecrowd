@@ -1,13 +1,13 @@
-import {
-  ethToUsdSync,
-  fetchEthInUsd,
-  usdToEth,
-  usdToEthSync,
-} from '@/lib/currency'
-import axios from 'axios'
-import { Ether, formatEther } from 'juice-hooks'
-import React, { useCallback, useContext } from 'react'
-import { PropsWithChildren, useEffect, useMemo, useState } from 'react'
+import { ethToUsdSync, fetchEthInUsd, usdToEthSync } from '@/lib/currency'
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
+import { parseEther } from 'viem'
 
 export const EthUsdPriceContext = React.createContext<{
   /**
@@ -38,7 +38,7 @@ export const EthUsdPriceContext = React.createContext<{
   usdToEth: (usd: bigint) => 0n,
 })
 
-const PRICE_REFRESH_INTERVAL_SECONDS = 60 * 5 // 5 minutes in seconds
+const PRICE_REFRESH_INTERVAL_SECONDS = 5
 
 export const EthUsdPriceProvider: React.FC<PropsWithChildren> = ({
   children,
@@ -47,10 +47,14 @@ export const EthUsdPriceProvider: React.FC<PropsWithChildren> = ({
 
   useEffect(() => {
     const getAndSetEthInUsd = async () => {
-      const ethInUsd = await fetchEthInUsd()
-      setEthInUsd(Ether.parse(ethInUsd.toString(), 18).val)
+      const ethInUsdRes = await fetchEthInUsd()
+      const ethInUsdNew = parseEther(ethInUsdRes.toString())
+      console.info('updating USD price::', ethInUsdNew)
+      setEthInUsd(ethInUsdNew)
     }
-    const interval = setTimeout(
+
+    // Refresh price every PRICE_REFRESH_INTERVAL_SECONDS seconds
+    const interval = setInterval(
       () => getAndSetEthInUsd(),
       PRICE_REFRESH_INTERVAL_SECONDS * 1000,
     )

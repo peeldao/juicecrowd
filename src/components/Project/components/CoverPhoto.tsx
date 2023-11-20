@@ -16,20 +16,23 @@ export const CoverPhoto = () => {
     <div
       className={twMerge(
         'relative w-full',
-        hasCoverImage ? 'h-56 bg-orange-200 md:h-72' : 'h-[168px]',
+        hasCoverImage ? 'h-72 bg-orange-200 md:h-72' : 'h-[168px]',
       )}
     >
       {coverImageUrl && (
-        <Image
-          fill
-          src={coverImageUrl}
-          className={twMerge(
-            'w-full object-cover',
-            hasCoverImage ? 'h-72' : 'h-[168px]',
-          )}
-          crossOrigin="anonymous"
-          alt={coverImageAltText}
-        />
+        <>
+          <Image
+            fill
+            src={coverImageUrl}
+            className={twMerge(
+              'w-full object-cover',
+              hasCoverImage ? 'h-72' : 'h-[168px]',
+            )}
+            crossOrigin="anonymous"
+            alt={coverImageAltText}
+          />
+          <div className="absolute h-72 w-full bg-black opacity-30" />
+        </>
       )}
     </div>
   )

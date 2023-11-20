@@ -1,4 +1,5 @@
 import { NETWORK } from './backend/config'
+import { FEATURE_FLAGS } from './constants/featureFlags'
 
 export enum NetworkName {
   localhost = 'localhost',
@@ -16,7 +17,12 @@ export enum NetworkName {
  */
 const FEATURE_FLAG_DEFAULTS: {
   [featureFlag: string]: { [networkName in NetworkName]?: boolean }
-} = {}
+} = {
+  [FEATURE_FLAGS.JC01_HARDCODE_START_DATE]: {
+    mainnet: true,
+    goerli: true,
+  },
+}
 
 const featureFlagKey = (baseKey: string) => {
   return `${baseKey}_${NETWORK ?? 'mainnet'}`

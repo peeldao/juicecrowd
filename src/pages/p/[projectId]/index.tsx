@@ -1,14 +1,11 @@
-import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { ProjectPage } from '@/components/Project'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
 import { AppProvider } from '@/components/layout/AppProvider'
-import { JBProjectMetadataProvider } from '@/contexts/ProjectMetadata'
 import {
   projectGetStaticPaths,
   projectGetStaticProps,
 } from '@/lib/backend/static/projects'
-import { JBProjectProvider } from 'juice-hooks'
 import { InferGetStaticPropsType } from 'next'
 
 export const getStaticPaths = projectGetStaticPaths

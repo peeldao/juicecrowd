@@ -17,24 +17,6 @@ export type JuicecrowdCTAProps = {
 
 export const JuicecrowdCTA: React.FC<JuicecrowdCTAProps> = ({ className }) => {
   const submissionsAreLocked = JC01SubmissionsClosed()
-  const [countdownString, setCountdownString] = useState<string | undefined>(
-    undefined,
-  )
-
-  useEffect(() => {
-    if (!submissionsAreLocked) return
-
-    const getAndSetCountdownString = () => {
-      const countdown = dateToCountdownString(
-        new Date(JC01_DATES.PROJECTS_LAUNCH),
-      )
-      setCountdownString(countdown)
-    }
-
-    getAndSetCountdownString()
-
-    const interval = setInterval(getAndSetCountdownString, 1000)
-  }, [submissionsAreLocked])
 
   return (
     <div
@@ -101,12 +83,8 @@ export const JuicecrowdCTA: React.FC<JuicecrowdCTAProps> = ({ className }) => {
               className="w-full min-w-[200px] gap-2 whitespace-nowrap bg-gray-800 opacity-100 disabled:bg-gray-800 disabled:opacity-100"
               disabled
             >
-              <span>🚀</span>
-              {countdownString ? countdownString : null}
+              <span>🚀 Launching soon</span>
             </Button>
-            <div className="whitespace-nowrap text-center text-xs text-gray-400">
-              Until launch
-            </div>
           </>
         )}
       </div>

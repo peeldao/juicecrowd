@@ -16,8 +16,7 @@ export const ProjectPayMessageInput: React.FC<ProjectPayMessageInputProps> = ({
   setAttachedUrl,
   ...props
 }) => {
-  const acceptedFileTypes =
-    'image/jpeg,image/png,image/gif,video/mp4,video/quicktime,video/x-m4v,video/webm'
+  const acceptedFileTypes = 'image/jpeg,image/png,image/gif'
   const {
     uploadedUrl,
     isUploading,

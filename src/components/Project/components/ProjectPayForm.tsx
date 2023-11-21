@@ -6,12 +6,12 @@ import { Form, FormField } from '@/components/ui/Form'
 import { useToast } from '@/components/ui/useToast'
 import { useJbProject } from '@/hooks/useJbProject'
 import { usePayProjectTx } from '@/hooks/usePayProjectTx'
-import { FEATURE_FLAGS } from '@/lib/constants/featureFlags'
-import { featureFlagEnabled } from '@/lib/featureFlags'
+import { WEI } from '@/lib/constants/currency'
 import {
   EnvelopeIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline'
+import axios from 'axios'
 import { JB_CURRENCIES } from 'juice-hooks'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo, useState } from 'react'
@@ -23,7 +23,6 @@ import { useProjectPay } from '../providers/ProjectPayContext'
 import { LabeledFormControl } from './LabeledFormControl'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
-import { WEI } from '@/lib/constants/currency'
 
 export const ProjectPayFormSchema = z.object({
   paymentAmount: z.union([
@@ -122,13 +121,17 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
 
   const { toast } = useToast()
 
+  const [submittedEmail, setSubmittedEmail] = useState<string | undefined>()
+
   const onSubmit = useCallback(
     async (values: z.infer<typeof ProjectPayFormSchema>) => {
-      // TODO: Send email although maybe after transaction successful
       contractWrite.write?.()
+      setSubmittedEmail(values.email)
     },
     [contractWrite],
   )
+
+  const [pushingToSuccess, setPushingToSuccess] = useState(false)
 
   /**************
    * Use Effects
@@ -138,17 +141,36 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
    * Determines if the transaction is successful and redirects to success page.
    */
   useEffect(() => {
-    if (!transaction.isSuccess) return
+    const routerPush = () => {
+      router.push(
+        `/p/${projectId.toString()}/pay/success?amount-eth=${totalPaymentWei}&currency=${paymentCurrency}`,
+      )
+    }
+    const payEmailSuccess = async () => {
+      if (!transaction.data) return
+      await axios.post('/api/pay/success', {
+        email: submittedEmail,
+        walletAddress: transaction.data.from,
+        transactionHash: transaction.data.transactionHash,
+        projectId: projectId.toString(),
+      })
+    }
 
-    router.push(
-      `/p/${projectId.toString()}/pay/success?amount-eth=${totalPaymentWei}&currency=${paymentCurrency}`,
-    )
+    if (!transaction.isSuccess) return
+    setPushingToSuccess(true)
+    if (submittedEmail) {
+      payEmailSuccess().finally(() => routerPush())
+    } else {
+      routerPush()
+    }
   }, [
     transaction.isSuccess,
     projectId,
     router,
     totalPaymentWei,
     paymentCurrency,
+    transaction.data,
+    submittedEmail,
   ])
 
   /**
@@ -182,27 +204,25 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           )}
         />
 
-        {featureFlagEnabled(FEATURE_FLAGS.PROJECT_EMAILS) ? (
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <LabeledFormControl
-                label="Email"
-                description="Enter email to receive confirmation & updates"
-              >
-                <Input
-                  placeholder="banny@juicebox.com"
-                  prefix={<EnvelopeIcon className="h-5 w-5 text-gray-500" />}
-                  suffix={
-                    <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" />
-                  }
-                  {...field}
-                />
-              </LabeledFormControl>
-            )}
-          />
-        ) : null}
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <LabeledFormControl
+              label="Email"
+              description="Enter email to receive confirmation & updates"
+            >
+              <Input
+                placeholder="banny@juicebox.com"
+                prefix={<EnvelopeIcon className="h-5 w-5 text-gray-500" />}
+                suffix={
+                  <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" />
+                }
+                {...field}
+              />
+            </LabeledFormControl>
+          )}
+        />
 
         <FormField
           control={form.control}
@@ -239,7 +259,8 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           loading={
             prepare.isLoading ||
             transaction.isLoading ||
-            contractWrite.isLoading
+            contractWrite.isLoading ||
+            pushingToSuccess
           }
         >
           Pay project

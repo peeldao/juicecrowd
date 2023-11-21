@@ -42,7 +42,14 @@ const getStaticProps: GetStaticProps<ProjectPageProps> = async context => {
         ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
       },
     )
+
+    console.info('getStaticProps::metadata', metadata)
+
     if (!metadata) {
+      return { notFound: true }
+    }
+
+    if (metadata.domain !== 'juicecrowd') {
       return { notFound: true }
     }
 

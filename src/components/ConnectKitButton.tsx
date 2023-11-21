@@ -1,3 +1,5 @@
+'use client'
+
 import { ConnectKitButton as _ConnectKitButton } from 'connectkit'
 import { Button, buttonVariants } from './ui/Button'
 import { VariantProps } from 'class-variance-authority'

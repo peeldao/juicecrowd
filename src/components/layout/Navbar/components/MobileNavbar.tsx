@@ -1,3 +1,5 @@
+'use client'
+
 import { Link } from '@/components/Link'
 import Logo from '@/components/Logo'
 import { CoinLogo } from '@/components/icon/CoinLogo'

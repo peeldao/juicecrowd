@@ -46,6 +46,10 @@ const getStaticProps: GetStaticProps<ProjectPageProps> = async context => {
       return { notFound: true }
     }
 
+    if (metadata.domain !== 'juicecrowd') {
+      return { notFound: true }
+    }
+
     return {
       props: {
         metadata,

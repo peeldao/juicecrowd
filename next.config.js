@@ -31,6 +31,7 @@ const SCRIPT_SRC = [
   'https://*.juicecrowd.gg',
   'https://cdn.usefathom.com',
   `'unsafe-eval'`,
+  `'unsafe-inline'`,
 ]
 
 const STYLE_SRC = [

@@ -1,8 +1,7 @@
 import { Input } from '@/components/Input'
 import { Link } from '@/components/Link'
-import { Button } from '@/components/ui/Button'
 import { useIpfsFilePicker } from '@/hooks/useIpfsFilePicker/useIpfsFilePicker'
-import { PhotoIcon, XCircleIcon } from '@heroicons/react/24/outline'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 
 export type ProjectPayMessageInputProps = {
@@ -36,16 +35,16 @@ export const ProjectPayMessageInput: React.FC<ProjectPayMessageInputProps> = ({
       <Input
         className="text-sm"
         placeholder="Attach an onchain message to this payment"
-        suffix={
-          <Button
-            type="button"
-            size="child"
-            variant="link"
-            onClick={openFilePicker}
-          >
-            <PhotoIcon className="h-6 w-6 text-bluebs-500" />
-          </Button>
-        }
+        // suffix={
+        //   <Button
+        //     type="button"
+        //     size="child"
+        //     variant="link"
+        //     onClick={openFilePicker}
+        //   >
+        //     <PhotoIcon className="h-6 w-6 text-bluebs-500" />
+        //   </Button>
+        // }
         {...props}
       />
 

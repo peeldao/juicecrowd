@@ -213,11 +213,8 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
               description="Enter email to receive confirmation & updates"
             >
               <Input
-                placeholder="banny@juicebox.com"
+                placeholder="example@juicecrowd.gg"
                 prefix={<EnvelopeIcon className="h-5 w-5 text-gray-500" />}
-                suffix={
-                  <QuestionMarkCircleIcon className="h-4 w-4 text-gray-400" />
-                }
                 {...field}
               />
             </LabeledFormControl>
@@ -271,9 +268,15 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           </div>
         )}
 
-        <div className="text-center text-xs leading-5 text-gray-400 md:mt-8">
-          All transactions are paid in Ethereum (ETH). Payments are
-          non-refundable.
+        <div className="text-center text-xs leading-5 text-gray-400">
+          <p>
+            Transactions are paid in Ethereum (ETH). Payments are
+            non-refundable.
+          </p>
+          <p>
+            Rewards are minted as NFTs. Claim your reward by contacting the
+            project using the links provided.
+          </p>
         </div>
       </form>
     </Form>

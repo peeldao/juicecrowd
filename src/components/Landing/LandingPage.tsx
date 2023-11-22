@@ -87,7 +87,7 @@ const PoweredByTheBestSection: React.FC<PoweredByTheBestSectionProps> = ({
         <div className="mt-5 text-base md:text-lg">
           Brought to you by the team at Juicebox, responsible for helping over
           1,200 projects raise over{' '}
-          <span className="font-semibold">US$177,000,000</span>.
+          <span className="font-semibold">$177,000,000</span>.
         </div>
         <Image
           className="mt-12 md:hidden"

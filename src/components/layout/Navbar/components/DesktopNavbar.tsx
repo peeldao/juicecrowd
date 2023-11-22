@@ -33,6 +33,9 @@ export const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
           )}
         </Link>
         <div className="flex items-center gap-8">
+          <Link className="text-gray-700" href="/jc/1">
+            JC01
+          </Link>
           <Link className="text-gray-700" href="https://docs.juicecrowd.gg">
             Learn more
           </Link>

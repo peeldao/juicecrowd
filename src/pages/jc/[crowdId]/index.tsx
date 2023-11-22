@@ -1,5 +1,4 @@
 import { CrowdPage } from '@/components/Crowd'
-import { EthUsdPriceProvider } from '@/components/EthUsdPriceProvider'
 import { SEO } from '@/components/SEO'
 import { Layout } from '@/components/layout'
 import { AppProvider } from '@/components/layout/AppProvider'

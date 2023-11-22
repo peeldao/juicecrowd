@@ -33,7 +33,6 @@ export const ProjectPayMessageInput: React.FC<ProjectPayMessageInputProps> = ({
     <>
       {FileInput}
       <Input
-        className="text-sm"
         placeholder="Attach an onchain message to this payment"
         // suffix={
         //   <Button

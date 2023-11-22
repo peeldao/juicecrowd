@@ -270,12 +270,12 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
 
         <div className="text-center text-xs leading-5 text-gray-400">
           <p>
-            Transactions are paid in Ethereum (ETH). Payments are
-            non-refundable.
+            Payments in Ether (ETH) and are non-refundable. Rewards are minted
+            as NFTs.
           </p>
           <p>
-            Rewards are minted as NFTs. Claim your reward by contacting the
-            project using the links provided.
+            Claim your reward by contacting the project using the links
+            provided.
           </p>
         </div>
       </form>

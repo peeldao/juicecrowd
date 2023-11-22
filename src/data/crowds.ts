@@ -11,6 +11,6 @@ export const CROWDS: Crowd[] = [
     name: 'Juicecrowd 01',
     description:
       "Introducing JC01, Juicecrowd's first cohort focused on web3 and blockchain projects.",
-    projectIds: [590, 589, 588, 587, 586, 585, 584, 583, 582, 581],
+    projectIds: [599, 598, 597, 596, 595, 594, 593],
   },
 ]

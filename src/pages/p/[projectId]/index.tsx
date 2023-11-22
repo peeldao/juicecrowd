@@ -25,7 +25,7 @@ export default function Page({
           metadata.description ? metadata.description.slice(0, 160) : ''
         }
         twitter={{
-          card: 'summary_large_image',
+          card: 'summary',
           creator: metadata.twitter,
           handle: metadata.twitter,
           image: metadata.logoUri

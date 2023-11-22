@@ -6,6 +6,7 @@ import {
   projectGetStaticPaths,
   projectGetStaticProps,
 } from '@/lib/backend/static/projects'
+import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
 import { InferGetStaticPropsType } from 'next'
 
 export const getStaticPaths = projectGetStaticPaths
@@ -23,6 +24,14 @@ export default function Page({
         description={
           metadata.description ? metadata.description.slice(0, 160) : ''
         }
+        twitter={{
+          card: 'summary_large_image',
+          creator: metadata.twitter,
+          handle: metadata.twitter,
+          image: metadata.coverImageUri
+            ? ipfsUriToGatewayUrl(metadata.coverImageUri)
+            : undefined,
+        }}
       />
       <AppProvider projectId={pid} metadata={metadata}>
         <Layout navbar="minimal" footer="minimal">

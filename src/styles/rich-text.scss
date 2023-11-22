@@ -8,12 +8,15 @@
     @apply text-primary;
     @apply hover:text-primary-hover;
   }
-  h1 {
+  h1,
+  h2 {
     @apply font-heading;
+    @apply mb-2;
+  }
+  h1 {
     @apply text-2xl;
   }
   h2 {
-    @apply font-heading;
     @apply text-xl;
   }
   blockquote {
@@ -24,8 +27,12 @@
     @apply list-inside list-decimal;
   }
   ul {
-    @apply ml-2;
-    @apply list-inside list-disc;
+    @apply list-outside list-disc;
+    @apply ml-8;
+    @apply space-y-4;
+    li {
+      @apply pl-2;
+    }
   }
   pre {
     @apply my-2;

@@ -28,8 +28,8 @@ export default function Page({
           card: 'summary_large_image',
           creator: metadata.twitter,
           handle: metadata.twitter,
-          image: metadata.coverImageUri
-            ? ipfsUriToGatewayUrl(metadata.coverImageUri)
+          image: metadata.logoUri
+            ? ipfsUriToGatewayUrl(metadata.logoUri)
             : undefined,
         }}
       />

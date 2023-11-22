@@ -19,7 +19,8 @@ export const RewardImage: React.FC<RewardImageProps> = ({
         className,
       )}
     >
-      <Image className="object-cover" fill src={src} alt={alt} />
+      <Image className="object-cover blur" fill src={src} alt={alt} />
+      <Image className="object-contain" fill src={src} alt={alt} />
     </div>
   )
 }

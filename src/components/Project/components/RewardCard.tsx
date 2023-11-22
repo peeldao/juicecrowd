@@ -54,6 +54,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
               className="text-base font-medium text-gray-800"
               amount={nft.price}
               currency={JB_CURRENCIES.USD}
+              withSecondaryCurrency
             />
             <div className="text-end text-gray-400">{remainingText}</div>
           </div>

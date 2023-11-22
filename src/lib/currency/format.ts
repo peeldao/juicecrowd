@@ -32,7 +32,7 @@ export const formatUsd = (usd: bigint) => {
     formatted += `.${dec}`
   }
 
-  return `US$${formatted}`
+  return `$${formatted}`
 }
 
 /**
@@ -50,5 +50,5 @@ export const formatEth = (eth: bigint) => {
   if (dec) {
     formatted += `.${dec}`
   }
-  return `${formatted} ETH`
+  return `${formatted}`
 }

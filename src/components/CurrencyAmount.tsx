@@ -1,4 +1,5 @@
 import { formatEth, formatUsd } from '@/lib/currency/format'
+import { cnTextHw } from '@/lib/utils'
 import { JBCurrency, JB_CURRENCIES } from 'juice-hooks'
 import { useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
@@ -10,13 +11,40 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './ui/Tooltip'
-import { cnTextHw } from '@/lib/utils'
 
 export type CurrencyAmountProps = {
   className?: string
   amount: bigint
   currency?: JBCurrency
   hideCurrencyIcon?: boolean
+  withSecondaryCurrency?: boolean
+}
+
+const EthIcon = ({ className }: { className?: string }) => {
+  return (
+    <EthereumIconFilled
+      className={twMerge(
+        'inline-block text-bluebs-500',
+        'h-5 w-5', // default size
+        ...cnTextHw(className),
+        className,
+      )}
+    />
+  )
+}
+
+const CurrencyIcon = ({
+  currency,
+  className,
+}: {
+  currency: JBCurrency
+  className?: string
+}) => {
+  if (currency === JB_CURRENCIES.ETH) {
+    return <EthIcon className={className} />
+  }
+
+  return null
 }
 
 /**
@@ -32,8 +60,12 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
   amount,
   currency = JB_CURRENCIES.ETH,
   hideCurrencyIcon,
+  withSecondaryCurrency = false,
 }) => {
   const { ethToUsd, usdToEth } = useEthUsdPrice()
+
+  const secondaryCurrency =
+    currency === JB_CURRENCIES.ETH ? JB_CURRENCIES.USD : JB_CURRENCIES.ETH
 
   const formattedAmounts = useMemo(() => {
     const amounts = []
@@ -57,37 +89,30 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
     return amounts
   }, [amount, currency, ethToUsd, usdToEth])
 
-  const currencyIcon = useMemo(() => {
-    if (hideCurrencyIcon) return null
-
-    const ethIcon = (
-      <EthereumIconFilled
-        className={twMerge(
-          'inline-block text-bluebs-500',
-          'h-5 w-5', // default size
-          ...cnTextHw(className),
-        )}
-      />
-    )
-    if (currency === JB_CURRENCIES.ETH) {
-      return ethIcon
-    }
-
-    return null
-  }, [className, currency, hideCurrencyIcon])
-
   return (
     <TooltipProvider delayDuration={150}>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div
-            className={twMerge(
-              'inline-flex w-fit items-center whitespace-nowrap',
-              className,
-            )}
-          >
-            {currencyIcon}
-            {formattedAmounts[0]}
+          <div className="flex flex-col">
+            <span
+              className={twMerge(
+                'inline-flex w-fit justify-center whitespace-nowrap',
+                className,
+              )}
+            >
+              <CurrencyIcon currency={currency} />
+              {formattedAmounts[0]}
+            </span>
+
+            {withSecondaryCurrency ? (
+              <span className="text-xs font-normal text-gray-400">
+                <CurrencyIcon
+                  currency={secondaryCurrency}
+                  className="text-xs font-normal text-gray-400"
+                />
+                {formattedAmounts[1]}
+              </span>
+            ) : null}
           </div>
         </TooltipTrigger>
         <TooltipContent className="flex items-center">

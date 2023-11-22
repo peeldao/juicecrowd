@@ -9,17 +9,23 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/Dialog'
+import { useJbProject } from '@/hooks/useJbProject'
 import { twitterShare } from '@/lib/twitter'
 import { template } from 'lodash'
 import { useCallback, useState } from 'react'
 
 export type ShareButtonProps = {
+  projectName: string
   className?: string
 }
 
 const twitterMessage = template('Check out <%= projectName %> on Juicecrowd:')
 
-export const ShareButton: React.FC<ShareButtonProps> = ({ className }) => {
+export const ShareButton: React.FC<ShareButtonProps> = ({
+  className,
+  projectName,
+}) => {
+  const { name } = useJbProject()
   const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
 
   return (
@@ -47,7 +53,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ className }) => {
               onClick={() => {
                 twitterShare(
                   twitterMessage({
-                    projectName: 'Project Name',
+                    projectName,
                   }),
                   currentUrl,
                 )

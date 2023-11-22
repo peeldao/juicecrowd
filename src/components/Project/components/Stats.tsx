@@ -22,7 +22,7 @@ export type StatsProps = {
 }
 
 export const Stats: React.FC<StatsProps> = ({ className }) => {
-  const { projectId, contributorsCount, softTarget } = useJbProject()
+  const { projectId, contributorsCount, softTarget, name } = useJbProject()
 
   const totalRaised = useProjectVolume()
   const { timeLeftFormatted, timeLeftSeconds, isComplete } =
@@ -77,7 +77,10 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
           <StatBlock title="Supporters" value={contributorsCount} />
         </div>
 
-        <ShareButton className="h-14 w-full md:h-12 md:w-fit" />
+        <ShareButton
+          className="h-14 w-full md:h-12 md:w-fit"
+          projectName={name}
+        />
       </div>
 
       <Link href={`/p/${projectId}/pay`} className="-mt-8 md:mt-0">

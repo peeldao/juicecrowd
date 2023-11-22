@@ -23,6 +23,7 @@
   h1,
   h2 {
     @apply font-heading;
+    @apply mb-2;
   }
   p,
   li {

@@ -19,7 +19,7 @@ export const RewardImage: React.FC<RewardImageProps> = ({
         className,
       )}
     >
-      <Image className=" object-cover" fill src={src} alt={alt} />
+      <Image className="object-cover" fill src={src} alt={alt} />
     </div>
   )
 }

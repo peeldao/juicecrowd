@@ -7,10 +7,7 @@ import { useToast } from '@/components/ui/useToast'
 import { useJbProject } from '@/hooks/useJbProject'
 import { usePayProjectTx } from '@/hooks/usePayProjectTx'
 import { WEI } from '@/lib/constants/currency'
-import {
-  EnvelopeIcon,
-  QuestionMarkCircleIcon,
-} from '@heroicons/react/24/outline'
+import { EnvelopeIcon } from '@heroicons/react/24/outline'
 import axios from 'axios'
 import { JB_CURRENCIES } from 'juice-hooks'
 import { useRouter } from 'next/router'
@@ -45,7 +42,7 @@ export const ProjectPayFormSchema = z.object({
       return isAddress(value)
     }, 'Invalid wallet address')
     .transform(value => (value ? (value as Address) : undefined)),
-  email: z.string().email('Invalid email address').optional().or(z.literal('')),
+  email: z.string().email('Invalid email address'),
   message: z.string().max(256).optional(),
 })
 
@@ -209,8 +206,9 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           name="email"
           render={({ field }) => (
             <LabeledFormControl
+              required
               label="Email"
-              description="Enter email to receive confirmation & updates"
+              description="Enter email to receive reward confirmation & updates"
             >
               <Input
                 placeholder="example@juicecrowd.gg"
@@ -250,9 +248,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
         <LoadingButton
           className="mt-2 h-14 w-full"
           type="submit"
-          disabled={
-            !form.formState.isValid || prepare.isError || totalPaymentWei === 0n
-          }
+          disabled={prepare.isError || totalPaymentWei === 0n}
           loading={
             prepare.isLoading ||
             transaction.isLoading ||

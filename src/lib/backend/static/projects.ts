@@ -49,7 +49,10 @@ const getStaticProps: GetStaticProps<ProjectPageProps> = async context => {
       return { notFound: true }
     }
 
-    if (metadata.domain !== 'juicecrowd') {
+    if (
+      metadata.domain !== 'juicecrowd' &&
+      process.env.NODE_ENV !== 'development'
+    ) {
       return { notFound: true }
     }
 

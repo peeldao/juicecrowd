@@ -21,7 +21,7 @@ export const LabeledFormControl: React.FC<
     <FormItem className={className}>
       <FormLabel className="text-gray-700">
         {label}
-        {required && <span className="text-red-600">*</span>}
+        {required && <span className="ml-1 text-red-600">*</span>}
       </FormLabel>
       <FormControl>{children}</FormControl>
       <FormDescription className="text-xs text-gray-500">

@@ -20,7 +20,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
 import { DISCORD_INVITE_URL } from '@/lib/constants/urls'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 export type MinimalNavbarProps = {
   className?: string
@@ -28,7 +28,11 @@ export type MinimalNavbarProps = {
 export const MinimalNavbar: React.FC<MinimalNavbarProps> = ({ className }) => {
   const { owner, projectId } = useJbProject()
   const { address } = useAccount()
-  const showManagePageLink = projectId && address && owner && address === owner
+  const showManagePageLink = useMemo(() => {
+    // Always show in development
+    if (process.env.NODE_ENV === 'development') return true
+    return projectId && address && owner && address === owner
+  }, [address, owner, projectId])
 
   const ref = React.useRef<HTMLDivElement>(null)
   const [width, setWidth] = React.useState(0)

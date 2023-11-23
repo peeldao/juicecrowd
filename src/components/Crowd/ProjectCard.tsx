@@ -1,6 +1,6 @@
 import { CrowdPageProject } from '@/lib/backend/static/crowds'
 import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
-import { formatEther, useFormattedEthAddress } from 'juice-hooks'
+import { formatEther } from 'juice-hooks'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -9,13 +9,11 @@ import { Badge } from '../ui/badge'
 export function ProjectCard({
   id,
   name,
-  ownerAddress,
+  tagline,
   logoUri,
   volumeUsd,
 }: CrowdPageProject) {
   const [imgError, setImgError] = useState<boolean>(false)
-
-  const { data: formattedOwnerAddress } = useFormattedEthAddress(ownerAddress)
 
   return (
     <Link href={`/p/${id}`}>
@@ -43,7 +41,9 @@ export function ProjectCard({
           </div>
           <div className="text-white">
             <div className="mb-1 font-medium">{name}</div>
-            <div className="text-xs opacity-70">{formattedOwnerAddress}</div>
+            <div className="overflow-hidden text-ellipsis whitespace-nowrap text-xs opacity-70">
+              {tagline}
+            </div>
           </div>
         </div>
       </div>

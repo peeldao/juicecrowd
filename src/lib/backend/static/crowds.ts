@@ -1,15 +1,14 @@
 import { CROWDS, Crowd } from '@/data/crowds'
 import { OPEN_IPFS_GATEWAY_HOSTNAME } from '@/lib/ipfs'
 import { publicClient } from '@/lib/viem/publicClient'
-import { getProjectMetadata, readJbProjects } from 'juice-hooks'
+import { getProjectMetadata } from 'juice-hooks'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { Address } from 'viem'
 
 export interface CrowdPageProject {
   id: number
   name: string
   logoUri: string
-  ownerAddress: Address
+  tagline: string
   volumeUsd?: bigint
 }
 
@@ -43,29 +42,22 @@ const getStaticProps: GetStaticProps<CrowdPageProps> = async context => {
 
   const projects = await Promise.all(
     crowd.projectIds.map(async projectId => {
-      const [metadata, ownerAddress] = await Promise.all([
-        getProjectMetadata(
-          publicClient,
-          {
-            projectId: BigInt(projectId),
-            domain: 0n,
-          },
-          {
-            ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
-          },
-        ),
-        readJbProjects({
-          chainId: publicClient.chain.id,
-          functionName: 'ownerOf',
-          args: [BigInt(projectId)],
-        }),
-      ])
+      const metadata = await getProjectMetadata(
+        publicClient,
+        {
+          projectId: BigInt(projectId),
+          domain: 0n,
+        },
+        {
+          ipfsGatewayHostname: OPEN_IPFS_GATEWAY_HOSTNAME!,
+        },
+      )
 
       return {
         id: projectId,
         name: metadata.name,
+        tagline: metadata.projectTagline ?? null,
         logoUri: metadata.logoUri,
-        ownerAddress,
       }
     }),
   )

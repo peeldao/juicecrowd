@@ -16,6 +16,16 @@ interface ProjectPageProps {
   projectId: number
 }
 
+const DREAM_DAO = 600
+
+const ALLOWLIST_PROJECT_IDS = [
+  /**
+   * DREAM DAO is required for hard code due to a bug in juicebox that
+   * accidentally wiped out its domain metadata.
+   */
+  DREAM_DAO,
+]
+
 const getStaticPaths: GetStaticPaths = async () => {
   if (process.env.CI) {
     return { paths: [], fallback: 'blocking' }
@@ -51,7 +61,8 @@ const getStaticProps: GetStaticProps<ProjectPageProps> = async context => {
 
     if (
       metadata.domain !== 'juicecrowd' &&
-      process.env.NODE_ENV !== 'development'
+      process.env.NODE_ENV !== 'development' &&
+      !ALLOWLIST_PROJECT_IDS.includes(projectId)
     ) {
       return { notFound: true }
     }

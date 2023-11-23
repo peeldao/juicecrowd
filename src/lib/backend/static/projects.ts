@@ -16,14 +16,14 @@ interface ProjectPageProps {
   projectId: number
 }
 
-const DREAM_DAO = 600
+export const DREAM_DAO = 600n
 
 const ALLOWLIST_PROJECT_IDS = [
   /**
    * DREAM DAO is required for hard code due to a bug in juicebox that
    * accidentally wiped out its domain metadata.
    */
-  DREAM_DAO,
+  Number(DREAM_DAO),
 ]
 
 const getStaticPaths: GetStaticPaths = async () => {

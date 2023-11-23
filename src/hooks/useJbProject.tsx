@@ -1,4 +1,5 @@
 import { useJBProjectMetadata } from '@/contexts/ProjectMetadata'
+import { DREAM_DAO } from '@/lib/backend/static/projects'
 import { useProjectsQuery } from '@/lib/graphql/hooks'
 import {
   Ether,
@@ -90,6 +91,13 @@ export const useJbProject = ({
   ])
 
   const softTarget = useMemo(() => {
+    // TODO: Remove this once DREAM DAO has rectified metadata
+    if (projectId === DREAM_DAO) {
+      return {
+        amount: Ether.parse('50000', 18).val,
+        currency: JB_CURRENCIES.USD,
+      }
+    }
     if (metadata.softTargetAmount) {
       return {
         amount: Ether.parse(metadata.softTargetAmount, 0).val,
@@ -102,7 +110,7 @@ export const useJbProject = ({
       amount: 0n,
       currency: JB_CURRENCIES.USD,
     }
-  }, [metadata.softTargetAmount, metadata.softTargetCurrency])
+  }, [metadata.softTargetAmount, metadata.softTargetCurrency, projectId])
 
   const endDate = useMemo(() => {
     if (!fundingCycleData.data) return undefined
@@ -114,9 +122,19 @@ export const useJbProject = ({
     return new Date((start + duration) * 1000)
   }, [fundingCycleData.data])
 
+  const introVideoUrl = useMemo(() => {
+    // TODO: Remove this once DREAM DAO has rectified metadata
+    if (projectId === DREAM_DAO) {
+      return 'https://www.youtube.com/watch?v=r603LXdSQjY'
+    }
+
+    return metadata.introVideoUrl
+  }, [metadata.introVideoUrl, projectId])
+
   return {
     ...(pick(_graphqlProject, ['handle', 'contributorsCount']) ?? {}),
     ...metadata,
+    introVideoUrl,
     softTarget,
     endDate,
     socialLinks,

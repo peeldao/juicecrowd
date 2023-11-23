@@ -7,6 +7,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 interface ProjectPageProps {
   metadata: JBProjectMetadata & {
     // TODO: add to juice-hooks
+    domain: string | undefined
     infoUri: string
     introImageUri: string | undefined
     introVideoUrl: string | undefined

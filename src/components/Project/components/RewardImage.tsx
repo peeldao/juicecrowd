@@ -13,13 +13,8 @@ export const RewardImage: React.FC<RewardImageProps> = ({
   alt,
 }) => {
   return (
-    <div
-      className={twMerge(
-        'relative h-72 w-full overflow-hidden bg-gray-100',
-        className,
-      )}
-    >
-      <Image className="object-cover" fill src={src} alt={alt} />
+    <div className={twMerge('relative h-72 w-full overflow-hidden', className)}>
+      <Image className="object-contain" fill src={src} alt={alt} />
     </div>
   )
 }

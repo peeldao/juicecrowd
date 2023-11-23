@@ -53,7 +53,7 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
         />
       </div>
 
-      <DialogDescription className="max-h-28 overflow-auto text-base text-gray-600">
+      <DialogDescription className="text-base text-gray-600">
         {nft.metadata.description?.split('\n').map((line, i) => (
           <p className="mb-2" key={i}>
             {line}

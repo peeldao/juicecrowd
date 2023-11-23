@@ -18,6 +18,7 @@ import { PropsWithChildren, createContext, useContext } from 'react'
 
 export type _JBProjectMetadata = JBProjectMetadata & {
   // TODO: Remove once added to juice-hooks
+  domain: string | undefined
   infoUri: string | undefined
   introImageUri: string | undefined
   introVideoUrl: string | undefined
@@ -45,6 +46,7 @@ export const JBProjectMetadataContext = createContext<JBProjectMetadataContext>(
     introVideoUrl: undefined,
     softTargetAmount: undefined,
     softTargetCurrency: undefined,
+    domain: undefined,
     nftData: AsyncDataNone,
     payEventsData: QueryResultNone,
   },

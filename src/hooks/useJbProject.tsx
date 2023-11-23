@@ -92,7 +92,8 @@ export const useJbProject = ({
 
   const softTarget = useMemo(() => {
     // TODO: Remove this once DREAM DAO has rectified metadata
-    if (projectId === DREAM_DAO) {
+    // checking for undefined domain allows dream dao to update eventually with no interruption
+    if (projectId === DREAM_DAO && metadata.domain === undefined) {
       return {
         amount: Ether.parse('50000', 18).val,
         currency: JB_CURRENCIES.USD,
@@ -110,7 +111,12 @@ export const useJbProject = ({
       amount: 0n,
       currency: JB_CURRENCIES.USD,
     }
-  }, [metadata.softTargetAmount, metadata.softTargetCurrency, projectId])
+  }, [
+    metadata.domain,
+    metadata.softTargetAmount,
+    metadata.softTargetCurrency,
+    projectId,
+  ])
 
   const endDate = useMemo(() => {
     if (!fundingCycleData.data) return undefined
@@ -124,12 +130,13 @@ export const useJbProject = ({
 
   const introVideoUrl = useMemo(() => {
     // TODO: Remove this once DREAM DAO has rectified metadata
-    if (projectId === DREAM_DAO) {
+    // checking for undefined domain allows dream dao to update eventually with no interruption
+    if (projectId === DREAM_DAO && metadata.domain === undefined) {
       return 'https://www.youtube.com/watch?v=r603LXdSQjY'
     }
 
     return metadata.introVideoUrl
-  }, [metadata.introVideoUrl, projectId])
+  }, [metadata.domain, metadata.introVideoUrl, projectId])
 
   return {
     ...(pick(_graphqlProject, ['handle', 'contributorsCount']) ?? {}),

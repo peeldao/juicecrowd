@@ -1,3 +1,4 @@
+import { _JBProjectMetadata } from '@/contexts/ProjectMetadata'
 import { useJbProject } from '@/hooks/useJbProject'
 import { WEI } from '@/lib/constants/currency'
 import { InfuraPinResponse } from '@/lib/ipfs'
@@ -5,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import {
   Ether,
-  JBProjectMetadata,
   JB_CURRENCIES,
   formatEther,
   useJbProjectsSetMetadataOf,
@@ -23,11 +23,26 @@ import { RichEditor } from '../RichEditor'
 import { UploadCard } from '../UploadCard'
 import { YouTubeEmbed } from '../YouTubeEmbed'
 import { Form, FormField } from '../ui/Form'
-import { ManageHeader } from './components/ManageHeader'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '../ui/Accordion'
 import { useToast } from '../ui/useToast'
-import { _JBProjectMetadata } from '@/contexts/ProjectMetadata'
+import { ManageHeader } from './components/ManageHeader'
 
 const JUICEBOX_MONEY_METADATA_DOMAIN = 0n
+
+const partialUrlSchema = z.string().transform(url => {
+  if (url.startsWith('https://')) {
+    return url.replace('https://', '')
+  }
+  if (url.startsWith('http://')) {
+    return url.replace('http://', '')
+  }
+  return url
+})
 
 const ProjectGeneralSettingsFormSchema = z
   .object({
@@ -48,6 +63,10 @@ const ProjectGeneralSettingsFormSchema = z
       z.literal(JB_CURRENCIES.ETH),
       z.literal(JB_CURRENCIES.USD),
     ]),
+    websiteUrl: z.union([partialUrlSchema.optional(), z.literal('')]),
+    twitterHandle: z.union([z.string().optional(), z.literal('')]),
+    discordUrl: z.union([partialUrlSchema.optional(), z.literal('')]),
+    telegramUrl: z.union([partialUrlSchema.optional(), z.literal('')]),
   })
   .refine(data => data.introVideo || data.introImage, {
     path: ['introVideo'],
@@ -113,6 +132,10 @@ export const ManageProjectGeneralSettingsPage = () => {
       coverPhoto: projectData.coverImageUri,
       softTargetAmount: parseFloat(formatEther(projectData.softTarget.amount)),
       softTargetCurrency: projectData.softTarget.currency,
+      websiteUrl: projectData.infoUri,
+      twitterHandle: projectData.twitter,
+      discordUrl: projectData.discord,
+      telegramUrl: projectData.telegram,
     },
   })
 
@@ -201,6 +224,57 @@ export const ManageProjectGeneralSettingsPage = () => {
                 </LabeledFormControl>
               )}
             />
+
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  <span>
+                    Project links{' '}
+                    <span className="font-normal text-gray-600">
+                      (optional)
+                    </span>
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="grid grid-cols-2 gap-5">
+                  <FormField
+                    control={form.control}
+                    name="websiteUrl"
+                    render={({ field }) => (
+                      <LabeledFormControl label="Website">
+                        <Input prefix="https://" {...field} />
+                      </LabeledFormControl>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="twitterHandle"
+                    render={({ field }) => (
+                      <LabeledFormControl label="Twitter Handle">
+                        <Input prefix="@" {...field} />
+                      </LabeledFormControl>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="discordUrl"
+                    render={({ field }) => (
+                      <LabeledFormControl label="Discord">
+                        <Input prefix="https://" {...field} />
+                      </LabeledFormControl>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="telegramUrl"
+                    render={({ field }) => (
+                      <LabeledFormControl label="Telegram">
+                        <Input prefix="https://" {...field} />
+                      </LabeledFormControl>
+                    )}
+                  />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
 
             <FormField
               control={form.control}

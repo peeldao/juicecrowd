@@ -69,6 +69,7 @@ const getStaticProps: GetStaticProps<ProjectPageProps> = async context => {
     }
 
     return {
+      revalidate: 60,
       props: {
         metadata,
         projectId,

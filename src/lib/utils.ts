@@ -21,3 +21,26 @@ export function cnTextHw(className: string | undefined) {
     className.includes('text-xs') && 'h-3 w-3',
   ]
 }
+
+/**
+ * Removes headers and HTML tags from a string for use in e.g. meta og:description tags.
+ * @param description - The description to sanitize.
+ * @returns The sanitized description.
+ */
+export function sanitizeDescriptionContent(description: string) {
+  // If there are no HTML tags, return the text as-is.
+  const containsHtml = /<[^>]*>?/m.test(description)
+  if (!containsHtml) return description
+
+  // Remove headers and text within them. Headers don't make sense in descriptions.
+  const headerRegex = /<h[1-3]>(.*?)<\/h[1-3]>/g
+  let headerMatch
+  while ((headerMatch = headerRegex.exec(description)) !== null) {
+    description = description.replace(headerMatch[0], '')
+  }
+
+  // Remove all HTML tags from the description.
+  description = description.replace(/<[^>]*>?/gm, '')
+
+  return description
+}

@@ -7,6 +7,7 @@ import {
   projectGetStaticProps,
 } from '@/lib/backend/static/projects'
 import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
+import { sanitizeDescriptionContent } from '@/lib/utils'
 import { InferGetStaticPropsType } from 'next'
 
 export const getStaticPaths = projectGetStaticPaths
@@ -17,13 +18,16 @@ export default function Page({
   metadata,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const pid = projectId ? BigInt(projectId) : 0n
+  // Sanitize before slicing to prevent partial HTML tags at the end.
+  const sanitizedDescription = metadata?.description
+    ? sanitizeDescriptionContent(metadata.description).slice(0, 160)
+    : ''
+
   return (
     <>
       <SEO
         title={metadata.name ? metadata.name : 'Juicecrowd Project'}
-        description={
-          metadata.description ? metadata.description.slice(0, 160) : ''
-        }
+        description={sanitizedDescription}
         twitter={{
           card: 'summary',
           creator: metadata.twitter,

@@ -35,7 +35,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
     <Dialog>
       <div
         className={twMerge(
-          'w-72 rounded-lg border border-gray-200 shadow-card',
+          'group w-72 rounded-lg border border-gray-200 shadow-card transition-all hover:-translate-y-1 hover:shadow-cardHover',
           className,
         )}
       >
@@ -49,12 +49,12 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
         <div className="group flex flex-col gap-4 p-4 pb-5">
           <DialogTrigger className="flex w-full flex-col gap-4">
             <div className="flex w-full items-center justify-between gap-5">
-              <div className="text-start text-base font-medium text-gray-900">
+              <div className="text-start text-base font-medium text-gray-900 group-hover:underline">
                 {nft.metadata.name}
               </div>
               <div className="flex items-center gap-0.5 text-end text-gray-400 group-hover:text-blue-500">
                 <InformationCircleIcon className="h-5 w-5" />
-                Details
+                Perks
               </div>
             </div>
             <div className="flex w-full items-center justify-between gap-5">

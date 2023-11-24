@@ -59,9 +59,9 @@ export const ProjectPayPage = () => {
   return (
     <ProjectPayContext.Provider value={{ ...state, dispatch }}>
       <FormProvider {...form}>
-        <div className="block md:flex">
+        <div className="block min-h-screen grid-cols-2 md:grid">
           {/* Left panel */}
-          <div className="flex-1 px-4 pb-14 pt-32 md:px-8 md:pt-10">
+          <div className="px-4 pb-14 pt-32 md:px-8 md:pt-10">
             <div className="md:mx-auto md:max-w-lg">
               <BackButton className="hidden md:flex" />
               <div className="md:mt-12">
@@ -89,7 +89,7 @@ export const ProjectPayPage = () => {
           </div>
 
           {/* Right panel */}
-          <div className="flex-1 bg-gray-50 px-4 pb-24 pt-12 md:px-8 md:pt-36">
+          <div className="h-full bg-gray-50 px-4 pb-24 pt-12 md:px-8 md:pt-36">
             <ProjectPayForm className="md:max-w-lg" />
           </div>
         </div>

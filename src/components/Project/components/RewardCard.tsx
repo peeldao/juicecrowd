@@ -54,7 +54,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
             <DialogTrigger>
               <div className="flex items-center gap-0.5 text-end text-gray-400 hover:text-blue-400">
                 <InformationCircleIcon className="h-5 w-5" />
-                Perks
+                Details
               </div>
             </DialogTrigger>
           </div>

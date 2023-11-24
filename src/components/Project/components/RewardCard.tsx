@@ -52,7 +52,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
               {nft.metadata.name}
             </div>
             <DialogTrigger>
-              <div className="flex items-center gap-0.5 text-end text-gray-400 hover:text-blue-400">
+              <div className="flex items-center gap-0.5 text-end text-gray-400 group-hover:text-blue-400">
                 <InformationCircleIcon className="h-5 w-5" />
                 Details
               </div>

@@ -46,7 +46,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
             alt={nft.metadata.name}
           />
         </DialogTrigger>
-        <div className="group flex flex-col gap-4 p-4 pb-5">
+        <div className="flex flex-col gap-4 p-4 pb-5">
           <DialogTrigger className="flex w-full flex-col gap-4">
             <div className="flex w-full items-center justify-between gap-5">
               <div className="text-start text-base font-medium text-gray-900 group-hover:underline">

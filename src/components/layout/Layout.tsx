@@ -18,9 +18,9 @@ export const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({
 
   return (
     <>
-      <div className="min-h-screen">
+      <div className="flex min-h-screen flex-col">
         <Navbar type={navbar} />
-        <main>{children}</main>
+        <main className="flex flex-grow flex-col">{children}</main>
       </div>
       {footerStyle !== 'none' ? <Footer type={footerStyle} /> : null}
     </>

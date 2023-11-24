@@ -59,7 +59,7 @@ export const ProjectPayPage = () => {
   return (
     <ProjectPayContext.Provider value={{ ...state, dispatch }}>
       <FormProvider {...form}>
-        <div className="block md:flex">
+        <div className="block md:flex md:flex-grow">
           {/* Left panel */}
           <div className="flex-1 px-4 pb-14 pt-32 md:px-8 md:pt-10">
             <div className="md:mx-auto md:max-w-lg">

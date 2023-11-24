@@ -20,6 +20,7 @@ module.exports = {
     extend: {
       boxShadow: {
         card: '0 4px 14px 0 rgba(0, 0, 0, 0.03)',
+        cardHover: '0 6px 14px 0 rgba(0, 0, 0, 0.05)',
         nav: '0 4px 12px 0 rgba(0, 0, 0, 0.06)',
       },
       fontFamily: {

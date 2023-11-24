@@ -9,6 +9,7 @@ import { useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { RewardDialogContent } from './RewardDialogContent'
 import { RewardImage } from './RewardImage'
+import { InformationCircleIcon } from '@heroicons/react/24/outline'
 
 export type RewardCardProps = {
   className?: string
@@ -46,8 +47,16 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
           />
         </DialogTrigger>
         <div className="flex flex-col gap-4 p-4 pb-5">
-          <div className="text-base font-medium text-gray-900">
-            {nft.metadata.name}
+          <div className="flex items-center justify-between gap-5">
+            <div className="text-base font-medium text-gray-900">
+              {nft.metadata.name}
+            </div>
+            <DialogTrigger>
+              <div className="flex items-center gap-1 text-end text-gray-400 hover:text-blue-400">
+                <InformationCircleIcon className="h-5 w-5" />
+                Perks
+              </div>
+            </DialogTrigger>
           </div>
           <div className="flex items-center justify-between gap-5">
             <CurrencyAmount

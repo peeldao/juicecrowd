@@ -18,20 +18,11 @@ export default function Page({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const pid = projectId ? BigInt(projectId) : 0n
 
-  let croppedTagline = ''
-  if (metadata.projectTagline) {
-    croppedTagline = metadata.projectTagline.substring(0, 160)
-    if (croppedTagline !== metadata.projectTagline) {
-      croppedTagline =
-        croppedTagline.substring(0, croppedTagline.lastIndexOf(' ')) + '...'
-    }
-  }
-
   return (
     <>
       <SEO
         title={metadata.name ? metadata.name : 'Juicecrowd Project'}
-        description={croppedTagline}
+        description={metadata.projectTagline ? metadata.projectTagline : ''}
         twitter={{
           card: 'summary',
           creator: metadata.twitter,

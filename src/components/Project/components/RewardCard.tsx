@@ -34,7 +34,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
     <Dialog>
       <div
         className={twMerge(
-          'group w-72 rounded-lg border border-gray-200 shadow-card transition-all hover:-translate-y-1 hover:shadow-cardHover',
+          'w-72 rounded-lg border border-gray-200 shadow-card',
           className,
         )}
       >
@@ -46,7 +46,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
           />
         </DialogTrigger>
         <div className="flex flex-col gap-4 p-4 pb-5">
-          <div className="text-base font-medium text-gray-900 group-hover:underline">
+          <div className="text-base font-medium text-gray-900">
             {nft.metadata.name}
           </div>
           <div className="flex items-center justify-between gap-5">
@@ -57,17 +57,28 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
             />
             <div className="text-end text-gray-400">{remainingText}</div>
           </div>
-          <Button
-            variant="outline"
-            size="xs"
-            className="text-gray-700"
-            onClick={e => {
-              e.stopPropagation()
-              goToPayPage()
-            }}
-          >
-            Claim reward
-          </Button>
+          <div className="flex w-full items-center gap-3">
+            <DialogTrigger className="w-full outline-none">
+              <Button
+                variant="outline"
+                size="xs"
+                className="w-full text-gray-700"
+              >
+                Details
+              </Button>
+            </DialogTrigger>
+            <Button
+              variant="default"
+              size="xs"
+              className="w-full text-white"
+              onClick={e => {
+                e.stopPropagation()
+                goToPayPage()
+              }}
+            >
+              Claim
+            </Button>
+          </div>
         </div>
       </div>
 

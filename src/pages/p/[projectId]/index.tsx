@@ -17,13 +17,12 @@ export default function Page({
   metadata,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const pid = projectId ? BigInt(projectId) : 0n
+
   return (
     <>
       <SEO
         title={metadata.name ? metadata.name : 'Juicecrowd Project'}
-        description={
-          metadata.description ? metadata.description.slice(0, 160) : ''
-        }
+        description={metadata.projectTagline ? metadata.projectTagline : ''}
         twitter={{
           card: 'summary',
           creator: metadata.twitter,

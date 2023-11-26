@@ -55,7 +55,7 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
 
       <DialogDescription className="text-base text-gray-600">
         {nft.metadata.description?.split('\n').map((line, i) => (
-          <p className="mb-2 hyphens-auto" key={i}>
+          <p className="mb-2 hyphens-auto break-words break-all" key={i}>
             {line}
           </p>
         ))}

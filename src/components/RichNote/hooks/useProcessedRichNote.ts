@@ -1,14 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { loadAllMediaLinks } from './loadAllMediaLinks'
 import { ipfsUriToGatewayUrl } from '@/lib/ipfs'
+import { URLRegex } from '@/lib/constants/regex/url'
 
 const IPFS_LINK_REGEX = new RegExp(
   /((?:ipfs?):\/\/(?:\w+:?\w*)?(?:\S+)(:\d+)?(?:\/|\/([\w#!:.?+=&%!\-/]))?)/gi,
-)
-
-// Gets strings that start with 'https'
-const URLRegex = new RegExp(
-  /((?:https?):\/\/(?:\w+:?\w*)?(?:\S+)(:\d+)?(?:\/|\/([\w#!:.?+=&%!\-/]))?)/gi,
 )
 
 /**

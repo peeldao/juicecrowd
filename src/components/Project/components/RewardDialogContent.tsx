@@ -1,4 +1,5 @@
 import { CurrencyAmount } from '@/components/CurrencyAmount'
+import { Link } from '@/components/Link'
 import { Button } from '@/components/ui/Button'
 import {
   DialogContent,
@@ -6,9 +7,10 @@ import {
   DialogHeader,
 } from '@/components/ui/Dialog'
 import { useNftRemainingQuantity } from '@/hooks/useNftRemainingQuantity'
+import { URLRegex } from '@/lib/constants/regex/url'
 import { JB721DelegateTier, JB_CURRENCIES } from 'juice-hooks'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { RewardImage } from './RewardImage'
 
 export type RewardDialogProps = {
@@ -39,6 +41,27 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
     })
   }, [nft.id, router])
 
+  const description = useMemo(() => {
+    if (!nft.metadata.description) return []
+
+    return nft.metadata.description.split('\n').map(line => {
+      // Check for URL and process accordingly
+      if (URLRegex.test(line)) {
+        const url = line.match(URLRegex)?.[0]
+        return {
+          children: line.split(URLRegex).map((text, index) => ({
+            children: text,
+            type: index % 2 === 0 ? 'text' : 'a',
+            href: index % 2 === 0 ? undefined : url,
+          })),
+        }
+      }
+
+      // Return line as a paragraph if no URL
+      return { children: line, type: 'p' }
+    })
+  }, [nft.metadata.description])
+
   return (
     <DialogContent className="py-8" onClick={e => e.stopPropagation()}>
       <RewardImage src={nft.metadata.image} alt={nft.metadata.name} />
@@ -54,9 +77,25 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
       </div>
 
       <DialogDescription className="text-base text-gray-600">
-        {nft.metadata.description?.split('\n').map((line, i) => (
-          <p className="mb-2 hyphens-auto break-words break-all" key={i}>
-            {line}
+        {description?.map((line, i) => (
+          <p className="mb-2 hyphens-auto" key={i}>
+            {typeof line.children === 'string'
+              ? line.children
+              : line.children.map((child, i) => {
+                  if (child.type === 'text') {
+                    return child.children
+                  } else {
+                    return (
+                      <Link
+                        key={i}
+                        className="break-all text-blue-500 hover:underline"
+                        href={child.href ?? child.children}
+                      >
+                        {child.children}
+                      </Link>
+                    )
+                  }
+                })}
           </p>
         ))}
       </DialogDescription>

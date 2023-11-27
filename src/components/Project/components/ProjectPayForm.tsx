@@ -20,6 +20,8 @@ import { useProjectPay } from '../providers/ProjectPayContext'
 import { LabeledFormControl } from './LabeledFormControl'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
+import { useAccount } from 'wagmi'
+import { ConnectKitButton } from '@/components/ConnectKitButton'
 
 export const ProjectPayFormSchema = z.object({
   paymentAmount: z.union([
@@ -58,6 +60,7 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     nftData: { data: nfts },
     projectId,
   } = useJbProject()
+  const { isConnecting, isConnected } = useAccount()
 
   const { usdToEth, ethToUsd } = useEthUsdPrice()
 
@@ -245,19 +248,27 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           </div>
         </div>
 
-        <LoadingButton
-          className="mt-2 h-14 w-full"
-          type="submit"
-          disabled={prepare.isError || totalPaymentWei === 0n}
-          loading={
-            prepare.isLoading ||
-            transaction.isLoading ||
-            contractWrite.isLoading ||
-            pushingToSuccess
-          }
-        >
-          Pay project
-        </LoadingButton>
+        {isConnected ? (
+          <LoadingButton
+            className="mt-2 h-14 w-full"
+            type="submit"
+            disabled={prepare.isError || totalPaymentWei === 0n}
+            loading={
+              prepare.isLoading ||
+              transaction.isLoading ||
+              contractWrite.isLoading ||
+              pushingToSuccess
+            }
+          >
+            Pay project
+          </LoadingButton>
+        ) : (
+          <ConnectKitButton
+            disabled={totalPaymentWei === 0n || isConnecting}
+            variant="default"
+            connectText="Connect wallet to pay"
+          />
+        )}
         {prepare.error && (
           <div className="text-red-500">
             {(prepare.error as any).cause.shortMessage}

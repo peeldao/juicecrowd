@@ -17,7 +17,7 @@ export function ProjectCard({
 
   return (
     <Link href={`/p/${id}`}>
-      <div className="group relative mx-auto flex aspect-square w-[163px] overflow-hidden rounded-xl sm:w-72">
+      <div className="group relative mx-auto flex aspect-square w-[163px] overflow-hidden rounded-xl border border-gray-100 sm:w-72">
         {!imgError ? (
           <Image
             src={ipfsUriToGatewayUrl(logoUri)}

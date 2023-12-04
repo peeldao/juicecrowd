@@ -6,14 +6,15 @@ import {
   TooltipTrigger,
 } from '@/components/ui/Tooltip'
 import { useToast } from '@/components/ui/useToast'
-import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
+import { useCountdown } from '@/hooks/useCountdown'
 import { useJbProject } from '@/hooks/useJbProject'
 import { useWithdrawTx } from '@/hooks/useWithdrawTx'
+import { JC01_DATES } from '@/lib/constants'
 import { Ether, useEthTerminalBalance, useJBContractContext } from 'juice-hooks'
 import { useCallback, useEffect } from 'react'
 
 export function WithdrawButton() {
-  const { isComplete } = useCampaignEndDate()
+  const { isComplete } = useCountdown(JC01_DATES.PROJECTS_RUN)
   const fundingInProgress = !isComplete
 
   const { projectId } = useJbProject()

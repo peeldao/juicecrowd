@@ -1,8 +1,9 @@
 import { CurrencyAmount } from '@/components/CurrencyAmount'
-import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
+import { useCountdown } from '@/hooks/useCountdown'
 import { useJbProject } from '@/hooks/useJbProject'
 import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { useTotalSupporters } from '@/hooks/useTotalSupporters'
+import { JC01_DATES } from '@/lib/constants'
 import { formatDuration } from '@/lib/date/format'
 import {
   Ether,
@@ -44,7 +45,7 @@ export function ManageCardsGrid() {
 
   const totalSupporters = useTotalSupporters()
   const totalRaised = useProjectVolume()
-  const { timeLeftFormatted } = useCampaignEndDate()
+  const { timeLeftFormatted } = useCountdown(JC01_DATES.PROJECTS_RUN)
 
   const duration = data?.duration
   const durationFormatted = formatDuration({ duration })

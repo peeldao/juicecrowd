@@ -3,7 +3,7 @@ import { Link } from '@/components/Link'
 import { Button } from '@/components/ui/Button'
 import { Progress } from '@/components/ui/Progress'
 import { Separator } from '@/components/ui/Separator'
-import { useCampaignEndDate } from '@/hooks/useCampaignEndDate'
+import { useCountdown } from '@/hooks/useCountdown'
 import { useJbProject } from '@/hooks/useJbProject'
 import { useProjectVolume } from '@/hooks/useProjectVolume'
 import { ReactNode, useMemo } from 'react'
@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/Tooltip'
+import { JC01_DATES } from '@/lib/constants'
 
 export type StatsProps = {
   className?: string
@@ -25,8 +26,9 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
   const { projectId, contributorsCount, softTarget, name } = useJbProject()
 
   const totalRaised = useProjectVolume()
-  const { timeLeftFormatted, timeLeftSeconds, isComplete } =
-    useCampaignEndDate()
+  const { timeLeftFormatted, timeLeftSeconds, isComplete } = useCountdown(
+    JC01_DATES.PROJECTS_RUN,
+  )
 
   const lessThanOneMinuteLeft = timeLeftSeconds && timeLeftSeconds < 60
 

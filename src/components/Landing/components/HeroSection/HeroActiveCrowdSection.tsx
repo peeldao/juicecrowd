@@ -52,7 +52,7 @@ export function HeroActiveCrowdSection({ crowd, projects }: CrowdProps) {
   }, 0n)
 
   return (
-    <div className="mb-36 px-4 md:mb-64 md:px-6">
+    <div className="mb-6 px-4 md:mb-8 md:px-6">
       <h1 className="mb-3 text-center font-heading text-4xl font-bold text-gray-900 md:text-6xl">
         Introducing {crowd.shortName}
       </h1>
@@ -79,7 +79,7 @@ export function HeroActiveCrowdSection({ crowd, projects }: CrowdProps) {
         </Badge>
       </div>
 
-      <div className="mx-auto flex max-w-7xl flex-row flex-wrap justify-center gap-3 md:gap-6">
+      <div className="mx-auto flex max-w-[100vw] gap-3 overflow-auto px-6 md:max-w-7xl md:flex-wrap md:justify-center md:gap-6 md:px-0">
         {projectsWithVolume.map(project => (
           <ProjectCard {...project} key={project.id} />
         ))}

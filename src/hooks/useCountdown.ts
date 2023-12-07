@@ -21,7 +21,7 @@ export function useCountdown(endDate: Date) {
   const timeLeftFormatted = !endDate
     ? 'No limit'
     : isComplete
-    ? 'Complete'
+    ? 'Funding closed'
     : distanceBetweenDates(now, endDate)
 
   return {

@@ -6,12 +6,17 @@ import { Link } from '../Link'
 import { JuiceboxLogo } from '../icon/JuiceboxLogo'
 import { Button } from '../ui/Button'
 import { GradientBackground } from './components/GradientBackground'
-import { HeroSection } from './components/HeroSection'
+import { CrowdProps } from './components/HeroSection/HeroActiveCrowdSection'
+import { HeroSection } from './components/HeroSection/HeroSection'
 import { HowItWorksSection } from './components/HowItWorksSection'
 import { StayInLoopSection } from './components/StayInLoopSection'
 import { YourProjectSection } from './components/YourProjectSection'
 
-export function LandingPage() {
+export function LandingPage({
+  activeCrowd,
+}: {
+  activeCrowd: CrowdProps | undefined
+}) {
   return (
     <>
       <div className="relative mt-14 flex flex-col items-center overflow-hidden text-base md:mt-32">
@@ -20,7 +25,7 @@ export function LandingPage() {
         <GradientBackground className="absolute left-1/2 top-full -translate-x-1/2 -translate-y-full" />
 
         <div className="flex w-full flex-col items-center px-4 md:px-5">
-          <HeroSection />
+          <HeroSection activeCrowd={activeCrowd} />
 
           <HowItWorksSection className="mt-20 md:mt-32" />
 

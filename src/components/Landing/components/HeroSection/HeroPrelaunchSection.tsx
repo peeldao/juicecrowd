@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import { JuicecrowdCTA } from './JuicecrowdCTA'
+import { JuicecrowdCTA } from '../JuicecrowdCTA'
 
-export const HeroSection: React.FC = () => {
+export const HeroPrelaunchSection: React.FC = () => {
   return (
     <>
       <h1 className="max-w-xl text-center font-heading text-4xl font-bold md:text-6xl">

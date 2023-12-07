@@ -17,6 +17,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/Tooltip'
 import { JC01_DATES } from '@/lib/constants'
+import { Ether } from 'juice-hooks'
 
 export type StatsProps = {
   className?: string
@@ -34,7 +35,10 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
 
   const progress = useMemo(() => {
     if (!softTarget.amount) return 100
-    return Number((Number(totalRaised) / Number(softTarget.amount)) * 100)
+    if (!totalRaised) return 0
+    const normalTarget = new Ether(softTarget.amount).toFloat()
+    const normalRaised = totalRaised.toFloat()
+    return Number(normalRaised / normalTarget) * 100
   }, [totalRaised, softTarget])
 
   return (

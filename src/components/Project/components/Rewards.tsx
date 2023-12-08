@@ -1,8 +1,6 @@
 import { useJbProject } from '@/hooks/useJbProject'
-import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
 import { RewardCard, RewardCardSkeleton } from './RewardCard'
-import { useEffect, useMemo, useState } from 'react'
 
 export type RewardsProps = {
   className?: string
@@ -10,15 +8,8 @@ export type RewardsProps = {
 
 export const Rewards: React.FC<RewardsProps> = ({ className }) => {
   const { nftData } = useJbProject()
-  const [initialNftDataLoaded, setInitialNftDataLoaded] = useState(false)
 
-  useEffect(() => {
-    // This is making assumption that nftData.isLoading is initially false
-    if (!nftData.isLoading) return
-    setInitialNftDataLoaded(true)
-  }, [nftData.isLoading])
-
-  if (nftData.isLoading || !initialNftDataLoaded) {
+  if (nftData.isLoading) {
     return (
       <div
         className={twMerge(

@@ -6,10 +6,8 @@ export function LedgerWarningBanner() {
     <Banner
       body={
         <>
-          <strong>Warning:</strong> Connecting to Juicecrowd is disabled due to
-          an ongoing Ledger Connect vulnerability.{' '}
-          <strong>Clear your cache before using Juicecrowd.</strong> Exercise
-          caution.{' '}
+          <strong>Warning:</strong> An ongoing Ledger Connect vulnerability may
+          affect Juicecrowd users. <strong>Exercise caution.</strong>
           <Link href="https://cointelegraph.com/news/multiple-dapps-using-ledger-connector-compromised">
             Learn more
           </Link>

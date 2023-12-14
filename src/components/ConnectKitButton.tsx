@@ -16,8 +16,8 @@ export const ConnectKitButton: React.FC<ConnectKitButtonProps> = ({
   variant,
   connectText = 'Connect Wallet',
 }) => {
-  return (
-    <_ConnectKitButton.Custom>
+  return <Button disabled>Disabled</Button>
+  /*<_ConnectKitButton.Custom>
       {({ isConnected, isConnecting, show, address, ensName }) => {
         variant = variant ?? (isConnected ? 'secondary' : 'outline-primary')
         address = address
@@ -43,5 +43,5 @@ export const ConnectKitButton: React.FC<ConnectKitButtonProps> = ({
         )
       }}
     </_ConnectKitButton.Custom>
-  )
+  )*/
 }

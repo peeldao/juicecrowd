@@ -9,7 +9,7 @@ export function LedgerWarningBanner() {
           <strong>Warning:</strong> An ongoing Ledger Connect vulnerability
           could affect many dapps. Juicecrowd should be safe, but{' '}
           <strong>exercise caution.</strong>{' '}
-          <Link href="https://cointelegraph.com/news/multiple-dapps-using-ledger-connector-compromised">
+          <Link href="https://twitter.com/Ledger/status/1735326240658100414">
             Learn more
           </Link>
         </>

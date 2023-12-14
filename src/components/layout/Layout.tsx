@@ -2,7 +2,6 @@ import { PropsWithChildren } from 'react'
 import { AppProvider } from './AppProvider'
 import { Footer } from './Footer/'
 import { NavBarType, Navbar } from './Navbar'
-import { LedgerWarningBanner } from '../ui/LedgerWarningBanner'
 
 export type LayoutProps = {
   footer?: 'default' | 'minimal' | 'none'
@@ -20,7 +19,6 @@ export const Layout: React.FC<PropsWithChildren<LayoutProps>> = ({
   return (
     <>
       <div className="min-h-screen">
-        <LedgerWarningBanner />
         <Navbar type={navbar} />
         <main>{children}</main>
       </div>

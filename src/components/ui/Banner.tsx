@@ -20,9 +20,8 @@ export default function Banner({
     [k in BannerVariant]: { textClasses: string; backgroundClasses: string }
   } = {
     warning: {
-      textClasses: 'text-warning-800  dark:text-warning-200',
-      backgroundClasses:
-        'bg-warning-200 dark:bg-warning-800 border border-warning-800 dark:border-warning-200',
+      textClasses: 'text-split-800',
+      backgroundClasses: 'bg-split-200 border border-split-800',
     },
     info: {
       textClasses: '',

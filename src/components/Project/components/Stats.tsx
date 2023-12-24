@@ -38,7 +38,8 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
     if (!totalRaised) return 0
     const normalTarget = new Ether(softTarget.amount).toFloat()
     const normalRaised = totalRaised.toFloat()
-    return Number(normalRaised / normalTarget) * 100
+
+    return Math.min(Number(normalRaised / normalTarget) * 100, 100)
   }, [totalRaised, softTarget])
 
   return (

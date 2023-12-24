@@ -1,11 +1,15 @@
+import { ConnectKitButton } from '@/components/ConnectKitButton'
 import { CurrencyAmount } from '@/components/CurrencyAmount'
 import { useEthUsdPrice } from '@/components/EthUsdPriceProvider'
 import { Input } from '@/components/Input'
 import { LoadingButton } from '@/components/LoadingButton'
+import { Button } from '@/components/ui/Button'
 import { Form, FormField } from '@/components/ui/Form'
 import { useToast } from '@/components/ui/useToast'
+import { useCountdown } from '@/hooks/useCountdown'
 import { useJbProject } from '@/hooks/useJbProject'
 import { usePayProjectTx } from '@/hooks/usePayProjectTx'
+import { JC01_DATES } from '@/lib/constants'
 import { WEI } from '@/lib/constants/currency'
 import { EnvelopeIcon } from '@heroicons/react/24/outline'
 import axios from 'axios'
@@ -15,13 +19,12 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 import { Address, isAddress, parseEther } from 'viem'
+import { useAccount } from 'wagmi'
 import { z } from 'zod'
 import { useProjectPay } from '../providers/ProjectPayContext'
 import { LabeledFormControl } from './LabeledFormControl'
 import { ProjectPayBeneficiaryInput } from './ProjectPayBeneficiaryInput'
 import { ProjectPayMessageInput } from './ProjectPayMessageInput'
-import { useAccount } from 'wagmi'
-import { ConnectKitButton } from '@/components/ConnectKitButton'
 
 export const ProjectPayFormSchema = z.object({
   paymentAmount: z.union([
@@ -61,6 +64,8 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
     projectId,
   } = useJbProject()
   const { isConnecting, isConnected } = useAccount()
+
+  const { isComplete } = useCountdown(JC01_DATES.PROJECTS_RUN)
 
   const { usdToEth, ethToUsd } = useEthUsdPrice()
 
@@ -125,10 +130,11 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
 
   const onSubmit = useCallback(
     async (values: z.infer<typeof ProjectPayFormSchema>) => {
+      if (isComplete) return
       contractWrite.write?.()
       setSubmittedEmail(values.email)
     },
-    [contractWrite],
+    [contractWrite, isComplete],
   )
 
   const [pushingToSuccess, setPushingToSuccess] = useState(false)
@@ -248,26 +254,32 @@ export const ProjectPayForm: React.FC<ProjectPayFormProps> = ({
           </div>
         </div>
 
-        {isConnected ? (
-          <LoadingButton
-            className="mt-2 h-14 w-full"
-            type="submit"
-            disabled={prepare.isError || totalPaymentWei === 0n}
-            loading={
-              prepare.isLoading ||
-              transaction.isLoading ||
-              contractWrite.isLoading ||
-              pushingToSuccess
-            }
-          >
-            Pay project
-          </LoadingButton>
+        {!isComplete ? (
+          isConnected ? (
+            <LoadingButton
+              className="mt-2 h-14 w-full"
+              type="submit"
+              disabled={prepare.isError || totalPaymentWei === 0n}
+              loading={
+                prepare.isLoading ||
+                transaction.isLoading ||
+                contractWrite.isLoading ||
+                pushingToSuccess
+              }
+            >
+              Pay project
+            </LoadingButton>
+          ) : (
+            <ConnectKitButton
+              disabled={totalPaymentWei === 0n || isConnecting}
+              variant="default"
+              connectText="Connect wallet to pay"
+            />
+          )
         ) : (
-          <ConnectKitButton
-            disabled={totalPaymentWei === 0n || isConnecting}
-            variant="default"
-            connectText="Connect wallet to pay"
-          />
+          <Button className="mt-2 h-14 w-full" disabled>
+            Project finished
+          </Button>
         )}
         {prepare.error && (
           <div className="text-red-500">

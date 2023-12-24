@@ -1,5 +1,5 @@
 import { distanceBetweenDates } from '@/lib/date/format'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 export function useCountdown(endDate: Date) {
   const [now, setNow] = useState(new Date())
@@ -12,7 +12,10 @@ export function useCountdown(endDate: Date) {
     return () => clearInterval(interval)
   }, [endDate])
 
-  const isComplete = endDate && endDate.getTime() < now.getTime()
+  const isComplete = useMemo(
+    () => endDate && endDate.getTime() < now.getTime(),
+    [endDate, now],
+  )
 
   const timeLeftSeconds = endDate
     ? endDate.getTime() - now.getTime() / 1000

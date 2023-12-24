@@ -89,9 +89,15 @@ export const Stats: React.FC<StatsProps> = ({ className }) => {
         />
       </div>
 
-      <Link href={`/p/${projectId}/pay`} className="-mt-8 md:mt-0">
-        <Button className="h-14 w-full md:h-12">Support this project</Button>
-      </Link>
+      {!isComplete ? (
+        <Link href={`/p/${projectId}/pay`} className="-mt-8 md:mt-0">
+          <Button className="h-14 w-full md:h-12">Support this project</Button>
+        </Link>
+      ) : (
+        <Button className="h-14 w-full md:h-12" disabled>
+          Project finished
+        </Button>
+      )}
     </div>
   )
 }

@@ -12,6 +12,8 @@ import { JB721DelegateTier, JB_CURRENCIES } from 'juice-hooks'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 import { RewardImage } from './RewardImage'
+import { useCountdown } from '@/hooks/useCountdown'
+import { JC01_DATES } from '@/lib/constants'
 
 export type RewardDialogProps = {
   nft: JB721DelegateTier
@@ -30,6 +32,8 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
   const initialQuantity = nft.initialQuantity.toString()
 
   const router = useRouter()
+
+  const { isComplete } = useCountdown(JC01_DATES.PROJECTS_RUN)
 
   const goToPayPage = React.useCallback(() => {
     router.push({
@@ -112,7 +116,11 @@ export const RewardDialogContent: React.FC<RewardDialogProps> = ({
           )}
         </div>
         {showClaimButton ? (
-          <Button className="flex-1" onClick={goToPayPage}>
+          <Button
+            className="flex-1"
+            disabled={isComplete}
+            onClick={goToPayPage}
+          >
             Claim reward
           </Button>
         ) : null}

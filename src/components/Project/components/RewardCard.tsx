@@ -9,6 +9,8 @@ import { useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { RewardDialogContent } from './RewardDialogContent'
 import { RewardImage } from './RewardImage'
+import { useCountdown } from '@/hooks/useCountdown'
+import { JC01_DATES } from '@/lib/constants'
 
 export type RewardCardProps = {
   className?: string
@@ -27,6 +29,8 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
       },
     })
   }, [nft.id, router])
+
+  const { isComplete } = useCountdown(JC01_DATES.PROJECTS_RUN)
 
   const { remainingText } = useNftRemainingQuantity(nft)
 
@@ -70,6 +74,7 @@ export const RewardCard: React.FC<RewardCardProps> = ({ className, nft }) => {
             <Button
               className="flex-1 whitespace-nowrap"
               size="xs"
+              disabled={isComplete}
               onClick={e => {
                 e.stopPropagation()
                 goToPayPage()
